@@ -3,7 +3,7 @@ Making art from code: How the magic works, and the practical skills it teaches
 
 ### rstudio::conf 2022
 
-by INSTRUCTOR_NAME
+by Danielle Navarro
 
 -----
 
