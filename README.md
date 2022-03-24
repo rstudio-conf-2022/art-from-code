@@ -33,7 +33,7 @@ The assumed background is that you’re reasonably comfortable using R and RStud
 
 ## Learning objectives
 
-LEARNING_OBJECTIVES
+[ADD AN ITEMIZED LIST OF LEARNING OBJECTIVES.]
 
 ## Is this course for me?
 
