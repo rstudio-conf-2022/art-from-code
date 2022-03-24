@@ -37,7 +37,11 @@ LEARNING_OBJECTIVES
 
 ## Is this course for me?
 
-THREE_QUESTIONS
+- Do you want to learn more about creating art in R? 
+- Do you want to be able to make connections between art and data science skills? 
+- Are you fairly comfortable with R and tidyverse but keen to learn more?
+
+If your answer is yes to all three, this workshop might be for you!
 
 ## Prework
 
