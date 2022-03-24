@@ -25,7 +25,11 @@ can remove these instructions from the README.
 
 ## Overview
 
-ABSTRACT
+Computer-generated artwork has been around for quite a while. The idea of using R for this purpose, however, is a little more recent. Designed originally as a programming language for academic statistical computing, R is now a mainstream language for data science and analytics. Can it also work as an artistic medium? Is there an overlap between our familiar data science workflows and the artistic process? Perhaps we can become better data scientists through art, and vice versa.
+
+This workshop provides a hands-on introduction to generative art in R. You’ll learn artistic techniques that generative artists use regularly in their work including flow fields, iterative function systems, and more. You’ll also learn about R packages that are specialized for generative art including jasmines, ambient, and ggfx. But more than that, you’ll learn how to reuse skills you already have as part of an artistic process: with a little work, ggplot2, dplyr, and Rcpp can become an artist's best friends. Finally, I’ll talk about how generative art helped me learn new programming skills and turned out to be valuable to me in the workplace.
+
+The assumed background is that you’re reasonably comfortable using R and RStudio, and have experience with tidyverse. There are places where C++, git/github, and blogdown are used, but these aren’t major parts of the workshop.
 
 ## Learning objectives
 
