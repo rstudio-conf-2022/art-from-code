@@ -1,4 +1,5 @@
-Making art from code: How the magic works, and the practical skills it teaches
+MakingDanielle Navarro is a generative artist, data scientist, professional educator, mathematical psychologist, academic professor in recovery, open source R developer, and coauthor of “ggplot2: Elegant Graphics for Data Analysis” (3rd edition). She is currently a developer advocate at Voltron Data working with the Apache Arrow ecosystem. You can find her art at https://art.djnavarro.net, and other professional details at https://djnavarro.net. Danielle lives in Sydney, Australia with her two children and her Netflix subscription.
+art from code: How the magic works, and the practical skills it teaches
 ================
 
 ### rstudio::conf 2022
