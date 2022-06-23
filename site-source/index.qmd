@@ -1,7 +1,147 @@
 ---
-title: "art-from-code"
+title: "ART FROM CODE"
+subtitle: "rstudio :: conf(2022)"
+author: "danielle navarro"
 ---
 
-This is a Quarto website.
+<br> 
 
-To learn more about Quarto websites visit <https://quarto.org/docs/websites>.
+## DAY ONE :: July 25
+
+::: {.grid}
+
+::: {.g-col-6}
+
+<br> 
+
+![](img/day-1-session-1.jpg)
+
+### [session one](day-1/session-1/index.html) :: 09:00 - 10:30
+
+Hands on introduction to generative art. Make your own pieces using {flametree}, {jasmines}, and more
+
+:::
+
+::: {.g-col-6}
+
+<br> 
+
+![](img/day-1-session-2.png)
+
+### [session two](day-1/session-2/index.html) :: 11:00 - 12:30
+
+Multidimensional noise generators. Flow fields, fractals, and more using the {ambient} package
+
+:::
+
+::: {.g-col-6}
+
+<br> 
+
+![](img/day-1-session-3.png)
+
+### [session three](day-1/session-3/index.html) :: 13:30 - 15:00
+
+Make the most of your {magick}. Programmatic image editing for art and profit
+
+:::
+
+::: {.g-col-6}
+
+<br> 
+
+![](img/day-1-session-4.jpg)
+
+### [session four](day-1/session-4/index.html) :: 15:30 - 17:00
+
+Genuary in July. An exercise in taking an idea and running with it, 
+
+:::
+
+:::
+
+
+<br> 
+
+
+## DAY TWO :: July 26
+
+::: {.grid}
+
+::: {.g-col-6}
+
+<br> 
+
+![](img/day-2-session-1.jpg)
+
+### [session one](day-2/session-1/index.html) :: 09:00 - 10:30
+
+Iterative function systems. Embrace the chaotic joy of the fractal flame and render quickly with {Rcpp} 
+
+:::
+
+::: {.g-col-6}
+
+<br> 
+
+![](img/day-2-session-2.jpg)
+
+### [session two](day-2/session-2/index.html) :: 11:00 - 12:30
+
+Other tricks?
+
+:::
+
+::: {.g-col-6}
+
+<br> 
+
+![](img/day-2-session-3.jpg)
+
+### [session three](day-2/session-3/index.html) :: 13:30 - 15:00
+
+Beyond R: Generative art in other languages, hybrid systems that are only partly code-based, etc
+
+:::
+
+::: {.g-col-6}
+
+<br> 
+
+![](img/day-2-session-4.png)
+
+### [session four](day-2/session-4/index.html) :: 15:30 - 17:00
+
+Creativity in art, code, and written expression: A surprisingly marketable skill
+
+:::
+  
+:::
+
+
+
+
+<!-- ### Day 1 -->
+
+<!-- | Time          | Activity         | -->
+<!-- | :------------ | :--------------- | -->
+<!-- | 09:00 - 10:30 | Session 1        | -->
+<!-- | 10:30 - 11:00 | *Coffee break*   | -->
+<!-- | 11:00 - 12:30 | Session 2        | -->
+<!-- | 12:30 - 13:30 | *Lunch break*    | -->
+<!-- | 13:30 - 15:00 | Session 3        | -->
+<!-- | 15:00 - 15:30 | *Coffee break*   | -->
+<!-- | 15:30 - 17:00 | Session 4        | -->
+
+<!-- ### Day 2 -->
+
+<!-- | Time          | Activity         | -->
+<!-- | :------------ | :--------------- | -->
+<!-- | 09:00 - 10:30 | Session 1        | -->
+<!-- | 10:30 - 11:00 | *Coffee break*   | -->
+<!-- | 11:00 - 12:30 | Session 2        | -->
+<!-- | 12:30 - 13:30 | *Lunch break*    | -->
+<!-- | 13:30 - 15:00 | Session 3        | -->
+<!-- | 15:00 - 15:30 | *Coffee break*   | -->
+<!-- | 15:30 - 17:00 | Session 4        | -->
+

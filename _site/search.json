@@ -1,16 +1,16 @@
 [
   {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "art-from-code",
-    "section": "",
-    "text": "To learn more about Quarto websites visit https://quarto.org/docs/websites."
+    "objectID": "index.html#day-one-july-25",
+    "href": "index.html#day-one-july-25",
+    "title": "ART FROM CODE",
+    "section": "DAY ONE :: July 25",
+    "text": "DAY ONE :: July 25\n\n\n\n\n\nsession one :: 09:00 - 10:30\nHands on introduction to generative art. Make your own pieces using {flametree}, {jasmines}, and more\n\n\n\n\n\n\nsession two :: 11:00 - 12:30\nMultidimensional noise generators. Flow fields, fractals, and more using the {ambient} package\n\n\n\n\n\n\nsession three :: 13:30 - 15:00\nMake the most of your {magick}. Programmatic image editing for art and profit\n\n\n\n\n\n\nsession four :: 15:30 - 17:00\nGenuary in July. An exercise in taking an idea and running with it,"
   },
   {
-    "objectID": "about.html",
-    "href": "about.html",
-    "title": "About",
-    "section": "",
-    "text": "About this site"
+    "objectID": "index.html#day-two-july-26",
+    "href": "index.html#day-two-july-26",
+    "title": "ART FROM CODE",
+    "section": "DAY TWO :: July 26",
+    "text": "DAY TWO :: July 26\n\n\n\n\n\nsession one :: 09:00 - 10:30\nIterative function systems. Embrace the chaotic joy of the fractal flame and render quickly with {Rcpp}\n\n\n\n\n\n\nsession two :: 11:00 - 12:30\nOther tricks?\n\n\n\n\n\n\nsession three :: 13:30 - 15:00\nBeyond R: Generative art in other languages, hybrid systems that are only partly code-based, etc\n\n\n\n\n\n\nsession four :: 15:30 - 17:00\nCreativity in art, code, and written expression: A surprisingly marketable skill"
   }
 ]
