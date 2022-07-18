@@ -94,7 +94,7 @@ The ability to flip back and forth between a tibble-like representation and a ma
 #| fig-align: center
 #| cache: true
 circle_array |> 
-  image(axes = FALSE, asp = 1)
+  image(axes = FALSE, asp = 1, useRaster = TRUE)
 ```
 
 
@@ -203,6 +203,7 @@ ridge_art(1234) |>
   image(
     axes = FALSE, 
     asp = 1, 
+    useRaster = TRUE, 
     col = sample_canva2(seed = 1234, n = 256)
   ) 
 ```
@@ -356,6 +357,7 @@ ice_floe(170) |>
   image(
     axes = FALSE, 
     asp = 1, 
+    useRaster = TRUE, 
     col = sample_canva2(seed = 170, n = 256)
   )
 ```

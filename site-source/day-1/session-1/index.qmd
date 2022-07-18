@@ -252,7 +252,8 @@ Here's what those colours look like as a smooth palette:
 #| fig-align: center
 image(
   x = matrix(1:100, ncol = 1), 
-  col = palette_fn(100), 
+  col = palette_fn(100),
+  useRaster = TRUE,
   axes = FALSE
 )
 ```

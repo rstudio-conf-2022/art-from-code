@@ -61,9 +61,9 @@ Again, this isn't the most complicated example, but it's an illustration of the 
 #| column: screen-inset
 #| layout-ncol: 3
 #| cache: true
-image(sample_cross_matrix(n = 50), axes = FALSE)
-image(sample_cross_matrix(n = 50), axes = FALSE)
-image(sample_cross_matrix(n = 50), axes = FALSE)
+image(sample_cross_matrix(n = 50), axes = FALSE, useRaster = TRUE)
+image(sample_cross_matrix(n = 50), axes = FALSE, useRaster = TRUE)
+image(sample_cross_matrix(n = 50), axes = FALSE, useRaster = TRUE)
 ```
 
 I'll concede that a generative art system that draws a cross at a random location in the image isn't the most exciting or innovative thing I've ever written, but the core idea is clear I hope. And you would probably be unsurprised to learn that there are a number of more sophisticated tools you can use to generate random spatial patterns. 
