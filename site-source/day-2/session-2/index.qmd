@@ -1,0 +1,434 @@
+---
+title: "TILES AND TESSELATIONS"
+---
+
+```{r, message=FALSE}
+library(dplyr)
+library(tibble)
+library(ggplot2)
+library(ggforce) # inc deldir
+library(ggthemes)
+library(voronoise) # github: djnavarro/voronoise
+library(tictoc)
+library(ambient)
+library(purrr)
+library(tidyr)
+library(stringr)
+library(truchet)
+library(sf)
+```
+
+
+## Rectangle subdivision
+
+Example inspired by work by Ijeamaka Anyene (she has a [blog post](https://ijeamaka-anyene.netlify.app/posts/2021-09-07-so-you-want-to-subdivide-a-rectangle/) on her approach)
+
+```{r rectangle-subdivision, dev.args=list(bg="#222222")}
+#| fig-width: 6
+#| fig-height: 6
+#| fig-dpi: 300
+#| fig-align: center
+#| cache: true
+subdivision <- function(ncol, nrow, splits) {
+  base <- tibble(
+    left = 1,
+    right = ncol,
+    bottom = 1,
+    top = nrow,
+    width = right - left,
+    height = top - bottom,
+    area = width * height,
+    val = 0
+  )
+  divide <- function(x, i) {
+    r <- sample(nrow(x), 1, prob = x$area) # select a rectangle
+    rect <- x[r, ]
+    if(runif(1) < .5) { # horizontal split
+      loc <- round(rect$width * runif(1))
+      insert <- tibble(
+        left = rect$left + c(0, loc),
+        right = c(rect$left + loc, rect$right),
+        bottom = rect$bottom,
+        top = rect$top
+      )
+    } else { # vertical split
+      loc <- round(rect$height * runif(1))
+      insert <- tibble(
+        left = rect$left,
+        right = rect$right,
+        bottom = rect$bottom + c(0, loc),
+        top = c(rect$bottom + loc, rect$top)
+      )
+    }
+    insert <- insert |> 
+      mutate(
+        width = right - left,
+        height = top - bottom,
+        area = width * height,
+        val = i
+      )
+    return(bind_rows(x[-r, ], insert))
+  }
+  for(i in 1:splits) base <- divide(base, i)
+  return(base)
+}
+
+develop <- function(div) {
+  div |> 
+    ggplot(aes(
+      xmin = left, 
+      xmax = right, 
+      ymin = bottom, 
+      ymax = top,
+      fill = val
+    )) +
+    geom_rect(
+      colour = "#ffffff", 
+      size = 3,
+      show.legend = FALSE
+    ) +
+    coord_equal() +
+    scale_fill_gradientn(colours = sample(canva_palettes, 1)[[1]]) +
+    theme_void() +
+    theme(plot.background = element_rect(fill = "#ffffff")) 
+}
+
+set.seed(1); subdivision(1000, 1000, 20) |> develop()
+```
+
+```{r subdivision-extras, dev.args=list(bg="#222222")}
+#| fig-width: 6
+#| fig-height: 6
+#| fig-dpi: 300
+#| fig-align: center
+#| column: screen-inset
+#| layout-ncol: 3
+#| cache: true
+set.seed(123); subdivision(1000, 1000, 100) |> develop()
+set.seed(102); subdivision(1000, 1000, 200) |> develop()
+set.seed(103); subdivision(1000, 1000, 500) |> develop()
+```
+
+
+## Melancholia
+
+```{r simple-melancholia, dev.args=list(bg="#222222")}
+#| fig-width: 6
+#| fig-height: 6
+#| fig-dpi: 300
+#| fig-align: center
+#| cache: true
+boxx <- function(left, right, bottom, top, width, 
+                 height, area, val, nshades = 100) {
+  
+  set.seed(val)
+  fractals <- list(billow, fbm, ridged)
+  generators <- list(gen_simplex, gen_worley)
+  
+  long_grid(
+    x = left:right, 
+    y = bottom:top, 
+  ) |>
+    mutate(
+      fill = 10 * val + fracture(
+        x = x,
+        y = y,
+        noise = sample(generators, 1)[[1]],
+        fractal = sample(fractals, 1)[[1]],
+        octaves = sample(10, 1),
+        frequency = sample(10, 1) / 1000,
+        value = "distance2"
+      ) |>
+        normalise(to = c(1, nshades)) |> 
+        round()
+    )
+}
+
+draw <- function(dat, shades) {
+  dat |>
+    ggplot(aes(x, y, fill = fill)) +
+    geom_tile(show.legend = FALSE) +
+    scale_x_continuous(expand = c(0,0), breaks = NULL) +
+    scale_y_continuous(expand = c(0,0), breaks = NULL) +
+    scale_size_identity() +
+    scale_colour_gradientn(colours = shades) +
+    scale_fill_gradientn(colours = shades) +
+    theme_void() +
+    theme(plot.background = element_rect(fill = "#222222")) 
+}
+
+melancholia <- function(seed) {
+  set.seed(seed)
+  shades <- sample(canva_palettes, 1)[[1]] 
+  base <- subdivision(100, 100, 30) 
+  dat <- pmap_dfr(base, boxx) 
+  draw(dat, shades)
+}
+
+melancholia(1302)
+```
+
+```{r melancholia-extras, dev.args=list(bg="#222222")}
+#| fig-width: 6
+#| fig-height: 6
+#| fig-dpi: 300
+#| fig-align: center
+#| column: screen-inset
+#| layout-ncol: 3
+#| cache: true
+melancholia(9999)
+melancholia(1066)
+melancholia(1969)
+```
+
+
+## Voronoi tesselation
+
+```{r unboxer}
+unboxy <- function(iterations, layers) {
+  
+  coeffs <- array(
+    data = runif(9 * layers, min = -1, max = 1), 
+    dim = c(3, 3, layers)
+  )
+  
+  point0 <- matrix(
+    data = runif(3, min = -1, max = 1), 
+    nrow = 1,
+    ncol = 3
+  )
+  
+  funs <- list(
+    function(point) point + (sum(point ^ 2)) ^ (1/3),
+    function(point) sin(point),
+    function(point) 2 * sin(point)
+  )
+  
+  update <- function(point, t) {
+    l <- sample(layers, 1)
+    f <- sample(funs, 1)[[1]]
+    z <- point[3]
+    point[3] <- 1
+    point <- f(point %*% coeffs[,,l])
+    point[3] <- (point[3] + z)/2
+    return(point)
+  }
+  
+  points <- accumulate(1:iterations, update, .init = point0)
+  points <- matrix(unlist(points), ncol = 3, byrow = TRUE)
+  points <- as_tibble(as.data.frame(points)) 
+  names(points) <- c("x", "y", "c")
+  return(points)
+}
+```
+
+
+```{r voronoi-boxy, dev.args=list(bg="#222222")}
+#| fig-width: 6
+#| fig-height: 6
+#| fig-dpi: 300
+#| fig-align: center
+#| cache: true
+set.seed(1)
+data <- unboxy(iterations = 1000, layers = 5) 
+
+shades <- c( # canva: easter-egg-nest
+  "#bbe7fe", # Baby Blue 
+  "#d3b5e5", # Lilac
+  "#ffd4db", # Rose Quartz
+  "#eff1db"  #Cream
+)
+
+ggplot(data, aes(x, y, fill = c)) +
+  geom_voronoi_tile(
+    max.radius = NULL,
+    radius = 0,
+    expand = 0,
+    colour = "#222222",
+    size = .2, 
+    show.legend = FALSE
+  ) +
+  theme_void() + 
+  coord_equal(xlim = c(-3, 3), ylim = c(-3, 3)) + 
+  scale_fill_gradientn(colours = shades) + 
+  scale_x_continuous(expand = c(0, 0)) +
+  scale_y_continuous(expand = c(0, 0)) +
+  theme(panel.background = element_rect(
+    fill = "#222222", colour = "#222222"
+  ))
+```
+
+
+```{r voronoise-boxy, dev.args=list(bg="#222222")}
+#| fig-width: 6
+#| fig-height: 6
+#| fig-dpi: 300
+#| fig-align: center
+#| cache: true
+
+sift <- function(grain = .025) {
+  function(data) {
+    data <- data |>
+      group_by(group) |>
+      mutate(tilesize = (max(x) - min(x)) * (max(y) - min(y))) |>
+      ungroup()
+    data$tilealpha <- .5
+    data$tilealpha[data$tilesize < grain^2] <- 1
+    return(data)
+  }
+}
+
+make_voronoise_art <- function(data, mapping, shades, perturb, ...) {
+  ggplot(data, mapping) +
+    geom_voronoise(
+      perturb = perturb,
+      ...,
+      show.legend = FALSE
+    ) +
+    theme_void() + 
+    coord_equal(xlim = c(-3, 3), ylim = c(-3, 3)) + 
+    scale_fill_gradientn(colours = shades) + 
+    scale_alpha_identity() +
+    scale_x_continuous(expand = c(0, 0)) +
+    scale_y_continuous(expand = c(0, 0)) +
+    theme(panel.background = element_rect(
+      fill = "#222222", colour = "#222222"
+    ))
+}
+
+set.seed(1)
+make_voronoise_art(
+  data = unboxy(iterations = 10000, layers = 5),
+  mapping = aes(x, y, fill = c, alpha = after_stat(tilealpha)),
+  max.radius = NULL,
+  radius = 0,
+  expand = 0,
+  shades = sample(canva_palettes, 1)[[1]],
+  perturb = sift(.2)
+)
+```
+
+
+
+```{r boxy-style, dev.args=list(bg="#222222")}
+#| fig-width: 6
+#| fig-height: 6
+#| fig-dpi: 300
+#| column: screen-inset
+#| layout-ncol: 3
+#| cache: true
+
+that_boxy_style <- function(seed) {
+  set.seed(seed)
+  make_voronoise_art(
+    data = unboxy(iterations = 10000, layers = 5),
+    mapping = aes(x, y, fill = c, alpha = after_stat(tilealpha)),
+    max.radius = NULL,
+    radius = 0,
+    expand = 0,
+    shades = sample(canva_palettes, 1)[[1]],
+    perturb = sift(.2)
+  )
+}
+
+that_boxy_style(1234)
+that_boxy_style(4000)
+that_boxy_style(2468)
+```
+
+
+```{r jittery, dev.args=list(bg="#222222")}
+#| fig-width: 6
+#| fig-height: 6
+#| fig-dpi: 300
+#| fig-align: center
+#| cache: true
+set.seed(42)
+
+ggplot(
+  data = unboxy(10000, 5), 
+  mapping = aes(
+    x = x,
+    y = y, 
+    fill = c
+  )
+) +
+  geom_voronoise(
+    perturb = function(data) {
+      data |> 
+        group_by(group) |>
+        mutate(
+          x = x + runif(1)/10, 
+          y = y + runif(1)/10
+        ) |>
+        ungroup()
+    },
+    max.radius = NULL,
+    radius = 0,
+    expand = 0,
+    colour = "#222222",
+    size = .2, 
+    show.legend = FALSE
+  ) +
+  theme_void() + 
+  coord_equal(xlim = c(-3, 3), ylim = c(-3, 3)) + 
+  scale_fill_gradientn(
+    colours = sample(canva_palettes, 1)[[1]]
+  ) + 
+  scale_x_continuous(expand = c(0, 0)) +
+  scale_y_continuous(expand = c(0, 0)) +
+  theme(panel.background = element_rect(
+    fill = "#222222", colour = "#222222"
+  ))
+```
+
+## Truchet tiles
+
+https://paezha.github.io/truchet/
+
+```{r first-truchet, dev.args=list(bg="#222222")}
+#| fig-width: 6
+#| fig-height: 6
+#| fig-dpi: 300
+#| fig-align: center
+#| cache: true
+set.seed(123)
+mosaic <- st_truchet_ms(
+  tiles = c("dr", "tn", "ane"), 
+  p1 = 0.2, # scale 1 
+  p2 = 0.6, # scale 2
+  p3 = 0.2, # scale 3
+  xlim = c(1, 6),
+  ylim = c(1, 6)
+)
+mosaic
+
+mosaic |> 
+  ggplot(aes(fill = color)) +
+  geom_sf(color = NA, show.legend = FALSE) + 
+  scale_fill_gradientn(colours = c("#222222", "#ffffff")) + 
+  theme_void()
+```
+
+
+```{r second-truchet, dev.args=list(bg="#222222")}
+#| fig-width: 9
+#| fig-height: 6
+#| fig-dpi: 300
+#| fig-align: center
+set.seed(123)
+st_truchet_ss(
+  tiles = c(
+    "silk_1", "silk_2", 
+    "rainbow_1", "rainbow_2",
+    "cloud_1", "cloud_2"
+  ),
+  xlim = c(1, 9),
+  ylim = c(1, 6)
+) |>
+  ggplot() +
+  geom_sf(colour = "white") +
+  scale_x_continuous(expand = c(0, 0)) +
+  scale_y_continuous(expand = c(0, 0)) +
+  theme_void()
+```

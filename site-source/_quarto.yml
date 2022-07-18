@@ -1,0 +1,52 @@
+project:
+  type: website
+  output-dir: ../_site
+
+website:
+  title: "ART FROM CODE"
+  site-url: https://art-from-code.netlify.app
+  repo-url: https://github.com/rstudio-conf-2022/art-from-code
+  open-graph: 
+    image: "http://art-from-code.netlify.app/img/banner.png"
+    description: "An rstudio::conf workshop on generative art with R"
+  twitter-card:
+    creator: "@djnavarro"
+    card-style: summary_large_image
+    image: "http://art-from-code.netlify.app/img/banner.png"
+    description: "An rstudio::conf workshop on generative art with R"
+
+  navbar:
+    left:
+      - href: index.qmd
+        text: Home
+      - text: Sessions
+        menu: 
+          - href: day-1/session-1/index.html
+            text: "Get started"
+          - href: day-1/session-2/index.html
+            text: "Spatial noise tricks"
+          - href: day-1/session-3/index.html
+            text: "Polygon tricks"
+          - href: day-1/session-4/index.html
+            text: "Shading tricks"
+          - href: day-2/session-1/index.html
+            text: "Iterated function systems"
+          - href: day-2/session-2/index.html
+            text: "Tiles and tesselations"
+          - href: day-2/session-3/index.html
+            text: "Pixel filters"
+          - href: day-2/session-4/index.html
+            text: "Wrap up"
+
+
+format:
+  html:
+    theme:
+      - darkly
+      - darkish.scss
+    css: styles.css
+    toc: true
+    include-after-body: plausible.html
+
+
+
