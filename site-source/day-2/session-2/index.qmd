@@ -18,10 +18,95 @@ library(truchet)
 library(sf)
 ```
 
+```{r sample-canva-2}
+sample_canva2 <- function(seed = NULL, n = 4) {
+  if(!is.null(seed)) set.seed(seed)
+  sample(ggthemes::canva_palettes, 1)[[1]] |>
+    (\(x) colorRampPalette(x)(n))()  
+}
+```
+
 
 ## Rectangle subdivision
 
 Example inspired by work by Ijeamaka Anyene (she has a [blog post](https://ijeamaka-anyene.netlify.app/posts/2021-09-07-so-you-want-to-subdivide-a-rectangle/) on her approach)
+
+```{r choose-rectangle}
+choose_rectangle <- function(x) {
+  sample(nrow(x), 1, prob = x$area)
+}
+```
+
+```{r choose-break}
+choose_break <- function(lower, upper) {
+  round((upper - lower) * runif(1))
+}
+```
+
+```{r split-rectangle-x}
+split_rectangle_x <- function(rectangle, new_value) {
+  
+  with(rectangle, {
+    split <- choose_break(left, right)
+    new_left <- c(left, left + split)
+    new_right <- c(left + split, right)
+    new_value <- c(value, new_value)
+    
+    tibble(
+      left   = new_left,
+      right  = new_right,
+      bottom = bottom,
+      top    = top,
+      width  = right - left,
+      height = top - bottom,
+      area   = width * height,
+      value  = new_value
+    )
+  })
+}
+```
+
+```{r split-rectangle-y}
+split_rectangle_y <- function(rectangle, new_value) {
+  
+  with(rectangle, {
+    split <- choose_break(bottom, top)
+    new_bottom <- c(bottom, bottom + split)
+    new_top <- c(bottom + split, top)
+    new_value <- c(value, new_value)
+    
+    tibble(
+      left   = left,
+      right  = right,
+      bottom = new_bottom,
+      top    = new_top,
+      width  = right - left,
+      height = top - bottom,
+      area   = width * height,
+      value  = new_value
+    )
+  })
+}
+```
+
+
+```{r split-rectangle}
+split_rectangle <- function(rectangle, value) {
+  if(runif(1) < .5) {
+    return(split_rectangle_x(rectangle, value))
+  }
+  split_rectangle_y(rectangle, value)
+}
+```
+
+
+```{r split-block}
+split_block <- function(blocks, value) {
+  old <- choose_rectangle(blocks) 
+  new <- split_rectangle(blocks[old, ], value)
+  bind_rows(blocks[-old, ], new)
+}
+```
 
 ```{r rectangle-subdivision, dev.args=list(bg="#222222")}
 #| fig-width: 6
@@ -29,8 +114,14 @@ Example inspired by work by Ijeamaka Anyene (she has a [blog post](https://ijeam
 #| fig-dpi: 300
 #| fig-align: center
 #| cache: true
-subdivision <- function(ncol, nrow, splits) {
-  base <- tibble(
+subdivision <- function(ncol = 1000, 
+                        nrow = 1000, 
+                        nsplits = 50, 
+                        seed = NULL) {
+  
+  if(!is.null(seed)) set.seed(seed)
+  
+  blocks <- tibble(
     left = 1,
     right = ncol,
     bottom = 1,
@@ -38,62 +129,40 @@ subdivision <- function(ncol, nrow, splits) {
     width = right - left,
     height = top - bottom,
     area = width * height,
-    val = 0
+    value = 0
   )
-  divide <- function(x, i) {
-    r <- sample(nrow(x), 1, prob = x$area) # select a rectangle
-    rect <- x[r, ]
-    if(runif(1) < .5) { # horizontal split
-      loc <- round(rect$width * runif(1))
-      insert <- tibble(
-        left = rect$left + c(0, loc),
-        right = c(rect$left + loc, rect$right),
-        bottom = rect$bottom,
-        top = rect$top
-      )
-    } else { # vertical split
-      loc <- round(rect$height * runif(1))
-      insert <- tibble(
-        left = rect$left,
-        right = rect$right,
-        bottom = rect$bottom + c(0, loc),
-        top = c(rect$bottom + loc, rect$top)
-      )
-    }
-    insert <- insert |> 
-      mutate(
-        width = right - left,
-        height = top - bottom,
-        area = width * height,
-        val = i
-      )
-    return(bind_rows(x[-r, ], insert))
-  }
-  for(i in 1:splits) base <- divide(base, i)
-  return(base)
+  
+  reduce(1:nsplits, split_block, .init = blocks)
 }
 
-develop <- function(div) {
+develop <- function(div, seed = NULL) {
+  
   div |> 
     ggplot(aes(
       xmin = left, 
       xmax = right, 
       ymin = bottom, 
       ymax = top,
-      fill = val
+      fill = value
     )) +
     geom_rect(
       colour = "#ffffff", 
       size = 3,
       show.legend = FALSE
     ) +
+    scale_fill_gradientn(
+      colours = sample_canva2(seed)
+    ) +
     coord_equal() +
-    scale_fill_gradientn(colours = sample(canva_palettes, 1)[[1]]) +
     theme_void() +
-    theme(plot.background = element_rect(fill = "#ffffff")) 
+    theme(
+      plot.background = element_rect(
+        fill = "#ffffff"
+        )
+      ) 
 }
 
-set.seed(1); subdivision(1000, 1000, 20) |> develop()
+subdivision(seed = 1) |> develop()
 ```
 
 ```{r subdivision-extras, dev.args=list(bg="#222222")}
@@ -104,9 +173,9 @@ set.seed(1); subdivision(1000, 1000, 20) |> develop()
 #| column: screen-inset
 #| layout-ncol: 3
 #| cache: true
-set.seed(123); subdivision(1000, 1000, 100) |> develop()
-set.seed(102); subdivision(1000, 1000, 200) |> develop()
-set.seed(103); subdivision(1000, 1000, 500) |> develop()
+subdivision(nsplits = 100, seed = 123) |> develop()
+subdivision(nsplits = 200, seed = 102) |> develop()
+subdivision(nsplits = 500, seed = 103) |> develop()
 ```
 
 
