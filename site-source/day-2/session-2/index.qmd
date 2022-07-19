@@ -9,7 +9,7 @@ library(ggplot2)
 library(ggforce)
 library(deldir)
 library(ggthemes)
-library(voronoise) # github: djnavarro/voronoise
+library(voronoise)
 library(tictoc)
 library(ambient)
 library(purrr)
@@ -610,132 +610,151 @@ The possibilities are surprisingly rich, and quite a lot of fun to play around w
 
 ## Studies in Voronoi baroque: Part II
 
+Okay, I need to confess something. Voronoi tiling art was the thing that finally pushed me to learn the [ggproto object oriented programming system](https://ggplot2.tidyverse.org/articles/extending-ggplot2.html) used by ggplot2. It's not because I'm a masochist and enjoy the pain of learning an OOP system that isn't used for anything except ggplot2. No-one is that much of a masochist, surely. No, it was because I wanted the ability to intercept and modify the Voronoi tiles during the plot construction process. Because... yeah, I don't even remember why I wanted that. Evil reasons, probably.
 
-```{r voronoise-boxy, dev.args=list(bg="#222222")}
+Enter stage left, the [voronoise package](https://voronoise.djnavarro.net/). It's not on CRAN -- because I can't think of a single good reason to send it to CRAN -- but you can install it from GitHub with
+
+``` r
+remotes::install_github("djnavarro/voronoise")
+```
+
+The voronoise package only does one thing: it supplies `geom_voronoise()`, a geom that behaves just like `geom_voronoi_tile()` except for the fact you can pass it a "perturbing function" that modifies the tiles. Annoyingly -- because I was not a very good software developer at the time and I was not thinking about what someone else (i.e., future me) would use it for later -- the default arguments to `geom_voronoise()` aren't the same as the defaults for `geom_voronoi_tile()`, which means it's a good idea to explicitly specify things like `max.radius` etc even if you're "just going to use the defaults". Sorry. That was my mistake. I cannot stress enough that voronoise is not a good package. But... it'll do for my purposes today.
+
+Here's a simple example where the `perturb` argument is used to shift all the tiles to the right by a random offset:
+
+```{r geom-voronoise, dev.args=list(bg="#222222")}
 #| fig-width: 6
 #| fig-height: 6
 #| fig-dpi: 300
 #| fig-align: center
 #| cache: true
-sift <- function(grain = .025) {
-  function(data) {
-    data <- data |>
-      group_by(group) |>
-      mutate(tilesize = (max(x) - min(x)) * (max(y) - min(y))) |>
-      ungroup()
-    data$tilealpha <- .5
-    data$tilealpha[data$tilesize < grain^2] <- 1
-    return(data)
-  }
-}
+pic +
+  geom_voronoi_tile( # original tiling in grey
+    max.radius = .1,
+    radius = .01,
+    expand = -.0001,
+    fill = "#444444",
+    colour = "#222222",
+    size = .2, 
+    show.legend = FALSE
+  ) +
+  voronoise::geom_voronoise( # perturbed tiling
+    max.radius = .1,
+    radius = .01,
+    expand = -.0002,
+    perturb = \(data) data |> 
+      group_by(group) |> 
+      mutate(x = x + runif(1, min = 0, max = .2)), 
+    show.legend = FALSE
+  )
+```
 
-make_voronoise_art <- function(data, mapping, perturb, ...) {
-  ggplot(data, mapping) +
-    geom_voronoise(
-      perturb = perturb,
-      ...,
-      show.legend = FALSE
-    ) +
-    theme_void() + 
-    coord_equal(xlim = c(-3, 3), ylim = c(-3, 3)) + 
-    scale_fill_gradientn(colours = sample_canva2()) + 
-    scale_alpha_identity() +
-    scale_x_continuous(expand = c(0, 0)) +
-    scale_y_continuous(expand = c(0, 0))
-}
+That's kind of neat. Another approach I've been fond of in the past is to use something like this `sift()` function, which computes a crude approximation to the area of each tile and perturbs only those tiles smaller than a certain size:
 
-set.seed(1)
-make_voronoise_art(
-  data = unboxy(iterations = 10000, layers = 5),
-  mapping = aes(x, y, fill = val, alpha = after_stat(tilealpha)),
-  max.radius = NULL,
-  radius = 0,
-  expand = 0,
-  perturb = sift(.2)
-)
+```{r def-sift}
+sift <- function(data) {
+  data <- data |>
+    group_by(group) |>
+    mutate(
+      tilesize = (max(x) - min(x)) * (max(y) - min(y)),
+      x = if_else(tilesize > .02, x, x + rnorm(1)/10), 
+      y = if_else(tilesize > .02, y, y + rnorm(1)/10)
+    ) |>
+    ungroup()
+  return(data)
+}
 ```
 
 
+```{r voronoi-baroque, dev.args=list(bg="#222222")}
+#| fig-width: 6
+#| fig-height: 6
+#| fig-dpi: 300
+#| fig-align: center
+voronoi_baroque <- function(
+    seed, 
+    perturb, 
+    max.radius = NULL, 
+    radius = 0, 
+    expand = 0,
+    ...
+) {
+  
+  set.seed(seed)
+  
+  blank <- ggplot(mapping = aes(x, y, fill = val)) +
+    theme_void() + 
+    coord_equal(xlim = c(-2.75, 2.75), ylim = c(-2.75, 2.75)) + 
+    guides(fill = guide_none(), alpha = guide_none()) +
+    scale_fill_gradientn(colours = sample_canva2(seed)) + 
+    scale_alpha_identity() + 
+    scale_x_continuous(expand = c(0, 0)) +
+    scale_y_continuous(expand = c(0, 0))
+  
+  blank + 
+    geom_voronoise(
+      data = unboxy(iterations = 10000, layers = 5),
+      perturb = perturb,
+      max.radius = max.radius,
+      radius = radius,
+      expand = expand,
+      ...,
+      show.legend = FALSE
+    )
+}
+```
 
-```{r boxy-style, dev.args=list(bg="#222222")}
+
+```{r voronoi-baroque-sift, dev.args=list(bg="#222222")}
 #| fig-width: 6
 #| fig-height: 6
 #| fig-dpi: 300
 #| column: screen-inset
 #| layout-ncol: 3
 #| cache: true
-
-that_boxy_style <- function(seed) {
-  set.seed(seed)
-  make_voronoise_art(
-    data = unboxy(iterations = 10000, layers = 5),
-    mapping = aes(x, y, fill = val, alpha = after_stat(tilealpha)),
-    max.radius = NULL,
-    radius = 0,
-    expand = 0,
-    perturb = sift(.2)
-  )
-}
-
-that_boxy_style(1234)
-that_boxy_style(4000)
-that_boxy_style(2468)
+voronoi_baroque(1234, sift)
+voronoi_baroque(4000, sift)
+voronoi_baroque(2468, sift)
 ```
 
+The fun thing about `voronoi_baroque()` is that you can write whatever perturbation function you like... up to a point, of course. I cannot stress enough that the voronoise package is not particularly reliable! 
 
-```{r jittery, dev.args=list(bg="#222222")}
+```{r shake}
+shake <- function(data) {
+  data |> 
+    group_by(group) |>
+    mutate(
+      x = x + runif(1)/10, 
+      y = y + runif(1)/10
+    ) |>
+    ungroup()
+}
+```
+
+```{r voronoi-baroque-shake, dev.args=list(bg="#222222")}
 #| fig-width: 6
 #| fig-height: 6
 #| fig-dpi: 300
 #| fig-align: center
+#| column: screen-inset
+#| layout-ncol: 3
 #| cache: true
-set.seed(42)
-
-ggplot(
-  data = unboxy(10000, 5), 
-  mapping = aes(
-    x = x,
-    y = y, 
-    fill = val
-  )
-) +
-  geom_voronoise(
-    perturb = function(data) {
-      data |> 
-        group_by(group) |>
-        mutate(
-          x = x + runif(1)/10, 
-          y = y + runif(1)/10
-        ) |>
-        ungroup()
-    },
-    max.radius = NULL,
-    radius = 0,
-    expand = 0,
-    colour = "#222222",
-    size = .2, 
-    show.legend = FALSE
-  ) +
-  theme_void() + 
-  coord_equal(xlim = c(-3, 3), ylim = c(-3, 3)) + 
-  scale_fill_gradientn(colours = sample_canva2()) + 
-  scale_x_continuous(expand = c(0, 0)) +
-  scale_y_continuous(expand = c(0, 0)) +
-  theme(panel.background = element_rect(
-    fill = "#222222", colour = "#222222"
-  ))
+voronoi_baroque(21, shake)
+voronoi_baroque(43, shake)
+voronoi_baroque(17, shake)
 ```
 
 ## Truchet tiles
 
-https://paezha.github.io/truchet/
+One final topic to mention before: [truchet tiles](https://en.wikipedia.org/wiki/Truchet_tiles). Truchet tiles are square tiles decorated with asymmetric patterns, designed so that whenever you lay them out randomly, the patterns will connect up in aesthetically pleasing ways. To be honest, I've not explore them much myself but Antonio Páez has written the [truchet package](https://paezha.github.io/truchet/) that you can use to play with these. It's not currently on CRAN, but you can install from GitHub with:
 
-```{r first-truchet, dev.args=list(bg="#222222")}
-#| fig-width: 6
-#| fig-height: 6
-#| fig-dpi: 300
-#| fig-align: center
-#| cache: true
+``` r
+remotes::install_github("paezha/truchet")
+```
+
+The basic idea in the truchet package is to represent the patterns compactly as a geometry column. If you're  familiar with the [sf package](https://r-spatial.github.io/sf/) this sort of output will be familiar to you:
+
+```{r mosaics-as-sf}
 set.seed(123)
 mosaic <- st_truchet_ms(
   tiles = c("dr", "tn", "ane"), 
@@ -746,7 +765,16 @@ mosaic <- st_truchet_ms(
   ylim = c(1, 6)
 )
 mosaic
+```
 
+If you're not familiar, the key things to note are that the `geometry` column stores the pattern as a polygon (or collection of polygons), and that `geom_sf()` understands this geometry column. So you can use code like this to plot your truchet tiling:
+
+```{r first-truchet, dev.args=list(bg="#222222")}
+#| fig-width: 6
+#| fig-height: 6
+#| fig-dpi: 300
+#| fig-align: center
+#| cache: true
 mosaic |> 
   ggplot(aes(fill = color)) +
   geom_sf(color = NA, show.legend = FALSE) + 
@@ -754,6 +782,9 @@ mosaic |>
   theme_void()
 ```
 
+In this example you'll notice that I don't actually specify a mapping for `geometry`. That's a little unusual for ggplot2, but it is standard to name the column containing a "simple features geometry" as `geometry`, so `geom_sf()` will look for a column by that name. 
+
+That's about all I wanted to mention about the truchet package. It makes pretty things and you can check out the package website for more information :)
 
 ```{r second-truchet, dev.args=list(bg="#222222")}
 #| fig-width: 9
