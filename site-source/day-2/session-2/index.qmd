@@ -483,7 +483,11 @@ pic +
 
 
 
-## Studies in Voronoi baroque
+## Studies in Voronoi baroque: Part I
+
+When I first started playing around with Voronoi tesselations the pieces I made looked a lot like the worked example: the [Voronoise](https://art.djnavarro.net/gallery/voronoise/) series I posted on my art site contains pieces that look like the one above, generated from random collections of points. What I started realising a little later is that if you feed a structured set of points into your Voronoi tesselations, you can create some very elaborate patterns. I've played around with this idea in a few series (my favourite so far is [Sadists Kiss](https://art.djnavarro.net/gallery/sadists-kiss/)).
+
+I'll illustrate the approach by reusing an earlier system. The `unboxy()` function shown below reimplements the "unboxing" system that I talked about in the section on iterated function systems:
 
 ```{r unboxer}
 unboxy <- function(iterations, layers) {
@@ -518,11 +522,30 @@ unboxy <- function(iterations, layers) {
   points <- accumulate(1:iterations, update, .init = point0)
   points <- matrix(unlist(points), ncol = 3, byrow = TRUE)
   points <- as_tibble(as.data.frame(points)) 
-  names(points) <- c("x", "y", "c")
+  names(points) <- c("x", "y", "val")
   return(points)
 }
 ```
 
+I'm not going to explain the inner workings of this function here (because they're already discussed elsewhere), but in case you need a refresher or haven't read the relevant page, here's a look at the kinds of data this function produces, and a scatterplot showing the very non-random spatial patterns it generates:
+
+```{r scatterplot-boxy, dev.args=list(bg="#222222")}
+#| fig-width: 4
+#| fig-height: 4
+#| fig-dpi: 300
+#| fig-align: center
+#| layout-ncol: 2
+set.seed(1)
+dat <- unboxy(iterations = 1000, layers = 5) 
+
+dat
+ggplot(dat, aes(x, y)) + 
+  geom_point(colour = "white", show.legend = FALSE) +
+  coord_equal(xlim = c(-2.5, 2.5), ylim = c(-2.5, 2.5)) + 
+  theme_void()
+```
+
+Now let's plot the Voronoi tesselation corresponding to these points, once again relying on our old friend `sample_canva2()` to generate the palette:
 
 ```{r voronoi-boxy, dev.args=list(bg="#222222")}
 #| fig-width: 6
@@ -530,24 +553,62 @@ unboxy <- function(iterations, layers) {
 #| fig-dpi: 300
 #| fig-align: center
 #| cache: true
-set.seed(1)
-data <- unboxy(iterations = 1000, layers = 5) 
-
-ggplot(data, aes(x, y, fill = c)) +
-  geom_voronoi_tile(
-    max.radius = NULL,
-    radius = 0,
-    expand = 0,
-    colour = "#222222",
-    size = .2, 
-    show.legend = FALSE
-  ) +
+pic <- ggplot(dat, aes(x, y, fill = val)) +
   theme_void() + 
-  coord_equal(xlim = c(-3, 3), ylim = c(-3, 3)) + 
+  coord_equal(xlim = c(-2.5, 2.5), ylim = c(-2.5, 2.5)) + 
   scale_fill_gradientn(colours = sample_canva2()) + 
   scale_x_continuous(expand = c(0, 0)) +
   scale_y_continuous(expand = c(0, 0))
+
+pic +
+  geom_voronoi_tile(
+    colour = "#222222",
+    size = .2, 
+    show.legend = FALSE
+  )
 ```
+
+Rounding the corners and expanding the tiles gives the piece a different feel...
+
+```{r voronoi-boxy-2, dev.args=list(bg="#222222")}
+#| fig-width: 6
+#| fig-height: 6
+#| fig-dpi: 300
+#| fig-align: center
+#| cache: true
+pic +
+  geom_voronoi_tile(
+    radius = .01,
+    expand = .01,
+    colour = "#222222",
+    size = .2, 
+    show.legend = FALSE
+  )
+```
+
+So does this...
+
+```{r voronoi-boxy-3, dev.args=list(bg="#222222")}
+#| fig-width: 6
+#| fig-height: 6
+#| fig-dpi: 300
+#| fig-align: center
+#| cache: true
+pic +
+  geom_voronoi_tile(
+    max.radius = .1,
+    radius = .01,
+    expand = -.0001,
+    colour = "#222222",
+    size = .2, 
+    show.legend = FALSE
+  )
+```
+
+The possibilities are surprisingly rich, and quite a lot of fun to play around with!
+
+
+## Studies in Voronoi baroque: Part II
 
 
 ```{r voronoise-boxy, dev.args=list(bg="#222222")}
@@ -556,7 +617,6 @@ ggplot(data, aes(x, y, fill = c)) +
 #| fig-dpi: 300
 #| fig-align: center
 #| cache: true
-
 sift <- function(grain = .025) {
   function(data) {
     data <- data |>
@@ -587,7 +647,7 @@ make_voronoise_art <- function(data, mapping, perturb, ...) {
 set.seed(1)
 make_voronoise_art(
   data = unboxy(iterations = 10000, layers = 5),
-  mapping = aes(x, y, fill = c, alpha = after_stat(tilealpha)),
+  mapping = aes(x, y, fill = val, alpha = after_stat(tilealpha)),
   max.radius = NULL,
   radius = 0,
   expand = 0,
@@ -609,7 +669,7 @@ that_boxy_style <- function(seed) {
   set.seed(seed)
   make_voronoise_art(
     data = unboxy(iterations = 10000, layers = 5),
-    mapping = aes(x, y, fill = c, alpha = after_stat(tilealpha)),
+    mapping = aes(x, y, fill = val, alpha = after_stat(tilealpha)),
     max.radius = NULL,
     radius = 0,
     expand = 0,
@@ -636,7 +696,7 @@ ggplot(
   mapping = aes(
     x = x,
     y = y, 
-    fill = c
+    fill = val
   )
 ) +
   geom_voronoise(
