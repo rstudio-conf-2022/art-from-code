@@ -234,15 +234,11 @@ subdivision(nsplits = 500, seed = 103) |> develop()
 
 ## Mosaica
 
-```{r mosaica, dev.args=list(bg="#222222")}
-#| fig-width: 20
-#| fig-height: 10
-#| fig-dpi: 300
-#| fig-align: center
-#| column: screen-inset
-#| cache: true
-boxx <- function(left, right, bottom, top, width, 
-                 height, area, value, nshades = 100) {
+Remember earlier when I said I have this compulsive tendency to make my generative art systems unnecessarily elaborate? I was not lying. Now that I've created this simple and clean `subdivision()` system my first instinct is to use it as the basis for something more complicated. The `fill_rectangle()` function below takes a single rectangle as input, divides it into a grid of squares with edge length 1, and then assigns each of those squares a `fill` value generated with a randomly sampled fractal (using the ambient package to do the work):
+
+```{r fill-rectangle}
+fill_rectangle <- function(left, right, bottom, top, width, 
+                           height, area, value, nshades = 100) {
   
   set.seed(value)
   fractals <- list(billow, fbm, ridged)
@@ -266,8 +262,12 @@ boxx <- function(left, right, bottom, top, width,
         round()
     )
 }
+```
 
-draw <- function(dat, palette) {
+I'll also write a `draw_mosaic()` function that plots a collection of these unit-square sized tiles:
+
+```{r draw-mosaic}
+draw_mosaic <- function(dat, palette) {
   background <- sample(palette, 1)
   dat |>
     ggplot(aes(x, y, fill = fill)) +
@@ -281,21 +281,33 @@ draw <- function(dat, palette) {
     theme_void() +
     theme(plot.background = element_rect(fill = background)) 
 }
+```
 
+When combined with the original `subdivision()` function I can now write a generative art system called `mosaica()` that uses `subdivision()` to partition a grid into rectangular units, then applies `fill_rectangle()` to separate each of these rectangles into unit squares and fill each of these squares with a colour based on a spatial noise pattern generated using ambient. Then it draws a picture:
+
+```{r mosaica, dev.args=list(bg="#222222")}
+#| fig-width: 20
+#| fig-height: 10
+#| fig-dpi: 300
+#| fig-align: center
+#| column: screen-inset
+#| cache: true
 mosaica <- function(ncol = 60, 
                     nrow = 60, 
                     nsplits = 30, 
                     seed = NULL) {
   
   subdivision(ncol, nrow, nsplits, seed) |>
-    pmap_dfr(boxx) |> 
+    pmap_dfr(fill_rectangle) |> 
     slice_sample(prop = .995) |>
     filter(!is.na(fill)) |>
-    draw(palette = sample_canva2(seed))
+    draw_mosaic(palette = sample_canva2(seed))
 }
 
 mosaica(ncol = 200, nrow = 100, nsplits = 200, seed = 1302)
 ```
+
+It makes me happy :)
 
 ```{r mosaica-extras, dev.args=list(bg="#222222")}
 #| fig-width: 6
