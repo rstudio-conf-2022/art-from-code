@@ -29,13 +29,27 @@ sample_canva2 <- function(seed = NULL, n = 4) {
 
 ## Rectangle subdivision
 
-Example inspired by work by Ijeamaka Anyene (she has a [blog post](https://ijeamaka-anyene.netlify.app/posts/2021-09-07-so-you-want-to-subdivide-a-rectangle/) on her approach)
+One of my favourite generative artists in the R community is [Ijeamaka Anyene](https://ijeamaka-anyene.netlify.app/), partly because she's fabulous but also partly because her approach is so different to mine and she makes things I'd never think to try. She has a talent for designing colourful pieces in a minimalist, geometric style. Minimalism in art is not something I'm good at: I have a habit of overcomplicating my pieces! However, in this first section I'm going to resist the temptation to add complexity, and build a system inspired by Ijeamaka's recursive rectangle subdivision art. She has a [blog post](https://ijeamaka-anyene.netlify.app/posts/2021-09-07-so-you-want-to-subdivide-a-rectangle/) on her approach, by the way.
+
+Recursive rectangle subdivisions come up a lot in real life. Suppose you have a parcel of land and want to divide it in two parts A and B. In doing so you create a boundary. Later, land unit A wants to divide: this adds a new boundary, splitting A into A1 and A2, but leaving unit B untouched. If this process repeats often enough, you end up with subdivisions that have a very recognisable structure. Here's a subdivision depicting a [1939 land use survey map for a part of the San Fernando valley in Los Angeles](https://picryl.com/media/wpa-land-use-survey-map-for-the-city-of-los-angeles-book-3-san-fernando-valley-00c11b)
+
+```{r wpa-land-use-map}
+#| echo: false
+#| fig-align: center
+knitr::include_graphics("wpa-land-use-survey-map.jpg")
+```
+
+Let's design a generative art system that mimics this process. Suppose we have some data frame `blocks` where each row represents one rectangular block, and one of the columns it stores is the `area` of that rectangle. Now imagine that our subdivision process deliberately targets larger blocks: the probability of choosing the a block for subdivision is proportional to its area. The `choose_rectangle()` function below takes the `blocks` data frame as input, and randomly selects a row with probability proportional to `blocks$area`. It returns the row number for the selected rectangle:
 
 ```{r choose-rectangle}
-choose_rectangle <- function(x) {
-  sample(nrow(x), 1, prob = x$area)
+choose_rectangle <- function(blocks) {
+  sample(nrow(blocks), 1, prob = blocks$area)
 }
 ```
+
+For this system we assume that you can only subdivide a rectangle in one of two ways: horizontally, or vertically. We aren't going to allow diagonal lines or anything that would produce other kinds of polygons. The input to a subdivision is a rectangle, and the output should be two rectangles. 
+
+If we're going to do that, we need to select a "break point". The `choose_break()` function will do that for us. It takes a `lower` and `upper` value as input, and returns a value (expressed as the distance from the `lower` boundary) specifying where the break is inserted:
 
 ```{r choose-break}
 choose_break <- function(lower, upper) {
@@ -43,52 +57,67 @@ choose_break <- function(lower, upper) {
 }
 ```
 
+Notice that I've called `round()` here to ensure that the outputs will always be integer value. As a consequence, all of our subdivisions will line up on a grid of some kind: that comes in handy later if, for example, we want to plot the result as a bitmap or a raster object. 
+
+Next, we need a function that can subdivide a rectangle! For the moment, let's assume that we're splitting horizontally, so in a moment we'll write a function called `split_rectangle_x()` to do this for us. It's going to take a `rectangle` as the main argument, which is presumably going to be a tibble that contains columns that define a rectangle. To make life a little simpler, here's a convenience function `create_rectangles()` that creates this tibble for us:
+
+```{r construct-rectangle}
+create_rectangles <- function(left, right, bottom, top, value) {
+  tibble(
+    left = left,
+    right = right,
+    bottom = bottom,
+    top = top,
+    width = right - left,
+    height = top - bottom,
+    area = width * height,
+    value = value
+  )
+}
+```
+
+Note that this function can create multiple rectangles. It doesn't check to see if the rectangles overlap, though. If I wanted to write rigorous code I would probably prevent it from allowing rectangles to overlap, but I'm not being super rigorous here. It's not production code!
+
+Anyway, here are a couple of rectangles that represent a vertical split, where one of them sits above the other:
+
+```{r}
+rect <- create_rectangles(
+  left = 1, 
+  right = 10, 
+  bottom = c(1, 4), 
+  top = c(4, 10),
+  value = 1:2
+)
+rect
+```
+
+Now we can write our horizontal subdivision function, `split_rectangle_x()`, and it's vertical counterpart  `split_rectangle_y()`. Each of these takes a single `rectangle` as input, calls `choose_break()` to determine where the break point should be, and then creates two new rectangles that will replace the old one. When called, they'll automatically recalculate the width, height, and areas for both rectangles. The `value` of the first rectangle (the one to the left or on the lower side) remains unchanged, and and the `new_value` argument is used to assign a value to the second rectangle:
+
 ```{r split-rectangle-x}
 split_rectangle_x <- function(rectangle, new_value) {
-  
   with(rectangle, {
     split <- choose_break(left, right)
-    new_left <- c(left, left + split)
+    new_left  <- c(left, left + split)
     new_right <- c(left + split, right)
     new_value <- c(value, new_value)
-    
-    tibble(
-      left   = new_left,
-      right  = new_right,
-      bottom = bottom,
-      top    = top,
-      width  = right - left,
-      height = top - bottom,
-      area   = width * height,
-      value  = new_value
-    )
+    create_rectangles(new_left, new_right, bottom, top, new_value)
   })
 }
 ```
 
 ```{r split-rectangle-y}
 split_rectangle_y <- function(rectangle, new_value) {
-  
   with(rectangle, {
     split <- choose_break(bottom, top)
     new_bottom <- c(bottom, bottom + split)
     new_top <- c(bottom + split, top)
     new_value <- c(value, new_value)
-    
-    tibble(
-      left   = left,
-      right  = right,
-      bottom = new_bottom,
-      top    = new_top,
-      width  = right - left,
-      height = top - bottom,
-      area   = width * height,
-      value  = new_value
-    )
+    create_rectangles(left, right, new_bottom, new_top, new_value)
   })
 }
 ```
 
+While we are here, we can write a `split_rectangle()` function that randomly decides whether to split horizontally or vertically, and then calls the relevant function to do the splitting:
 
 ```{r split-rectangle}
 split_rectangle <- function(rectangle, value) {
@@ -99,6 +128,15 @@ split_rectangle <- function(rectangle, value) {
 }
 ```
 
+Here it is in action:
+
+```{r split-a-rectangle}
+split_rectangle(rectangle = rect[1, ], value = 3)
+```
+
+Notice that it is possible to create a block with zero area. That's okay: that block will never be selected for later subdivision. We could filter out all zero-area rectangles if we wanted to, but I'm too lazy to bother!
+
+Now we are in a position to define a function called `split_block()` that takes `block`, a tibble of one or more rectangles as input, selects one to be subdivided using `choose_rectangle()`, and then splits it with `split_rectangle()`. The old, now-subdivided rectangle is removed from the `block`, the two new ones are added, and the updated block of rectangles is returned:
 
 ```{r split-block}
 split_block <- function(blocks, value) {
@@ -108,33 +146,44 @@ split_block <- function(blocks, value) {
 }
 ```
 
-```{r rectangle-subdivision, dev.args=list(bg="#222222")}
-#| fig-width: 6
-#| fig-height: 6
-#| fig-dpi: 300
-#| fig-align: center
-#| cache: true
+Here it is at work:
+
+```{r split-a-block}
+split_block(rect, value = 3)
+```
+
+Now that we have a `create_rectangles()` function that can generate a new rectangle and a `split_block()` function that can pick one rectangle and split it, we can write `subdivision()` function quite succinctly. We repeatedly apply the `split_block()` function until it has created enough splits for us. I could write this as a loop, but it feels more elegant to me to use the `reduce()` function from the purrr package to do this:
+
+```{r subdivision}
 subdivision <- function(ncol = 1000, 
                         nrow = 1000, 
                         nsplits = 50, 
                         seed = NULL) {
   
   if(!is.null(seed)) set.seed(seed)
-  
-  blocks <- tibble(
-    left = 1,
-    right = ncol,
-    bottom = 1,
-    top = nrow,
-    width = right - left,
-    height = top - bottom,
-    area = width * height,
+  blocks <- create_rectangles(
+    left = 1, 
+    right = ncol, 
+    bottom = 1, 
+    top = nrow, 
     value = 0
   )
-  
   reduce(1:nsplits, split_block, .init = blocks)
 }
 
+subdivision(nsplits = 5)
+```
+
+As you can see, in this version of the system I've arranged it so that the `value` column represents the iteration number upon which the corresponding rectangle was created.
+
+Finally we get to the part where we make art! The `develop()` function below uses `geom_rect()` to draw the rectangles, mapping the `value` to the fill aesthetic:
+
+```{r rectangle-subdivision, dev.args=list(bg="#222222")}
+#| fig-width: 6
+#| fig-height: 6
+#| fig-dpi: 300
+#| fig-align: center
+#| cache: true
 develop <- function(div, seed = NULL) {
   
   div |> 
@@ -162,8 +211,12 @@ develop <- function(div, seed = NULL) {
     ) 
 }
 
-subdivision(seed = 1) |> develop()
+subdivision(seed = 1) |> develop() 
 ```
+
+The uneven spacing here is not accidental. Because the rectangles are plotted with a thick white border, and plotted against a white background, very thin rectangles are invisible. That leads to a slightly irregular pattern among the visible rectangles. I quite like it!
+
+Here are a few more outputs from the system:
 
 ```{r subdivision-extras, dev.args=list(bg="#222222")}
 #| fig-width: 6
