@@ -6,7 +6,8 @@ title: "TILES AND TESSELATIONS"
 library(dplyr)
 library(tibble)
 library(ggplot2)
-library(ggforce) # inc deldir
+library(ggforce)
+library(deldir)
 library(ggthemes)
 library(voronoise) # github: djnavarro/voronoise
 library(tictoc)
@@ -131,6 +132,7 @@ split_rectangle <- function(rectangle, value) {
 Here it is in action:
 
 ```{r split-a-rectangle}
+set.seed(1)
 split_rectangle(rectangle = rect[1, ], value = 3)
 ```
 
@@ -316,6 +318,7 @@ It makes me happy :)
 #| fig-align: center
 #| column: screen-inset
 #| layout-ncol: 3
+#| cache: true
 mosaica(seed = 1977)
 mosaica(seed = 2022)
 mosaica(seed = 1969)
@@ -329,6 +332,7 @@ mosaica(seed = 1969)
 #| fig-align: center
 #| column: screen-inset
 #| layout-ncol: 3
+#| cache: true
 mosaica(nrow = 100, seed = 1)
 mosaica(nrow = 100, seed = 2)
 mosaica(nrow = 100, seed = 3)
@@ -336,6 +340,150 @@ mosaica(nrow = 100, seed = 3)
 
 
 ## Voronoi tesselation
+
+Let's switch gears a little. So far we've only looked at rectangular tilings, but there are many other ways to tile a two dimensional plane. One method for constructing an irregular tiling -- one that generative artists are especially fond of -- is to generate a collection of points and then computing the [Voronoi tesselation](https://en.wikipedia.org/wiki/Voronoi_diagram) (also known as a Voronoi diagram) of those points. Wikipedia definitions are, once again, helpful:
+
+> A Voronoi diagram is a partition of a plane into regions close to each of a given set of objects. In the simplest case, these objects are just finitely many points in the plane (called seeds, sites, or generators). For each seed there is a corresponding region, called a Voronoi cell, consisting of all points of the plane closer to that seed than to any other.
+
+Extremely conveniently for our purposes, the ggforce package provides two handy geom functions -- `geom_voronoi_segment()` and `geom_voronoi_tile()` -- that plot the Voronoi tesselation for a set of points. All you have to do as the user is specify the `x` and `y` aesthetics (corresponding to the coordinate values of the points), and ggplot2 will do all the work for you. Let's see what we can do using these tools!
+
+In the beginning there were points...
+
+```{r voronoi-points, dev.args=list(bg="#222222")}
+#| fig-width: 6
+#| fig-height: 6
+#| fig-dpi: 300
+#| fig-align: center
+set.seed(61)
+dat <- tibble(
+  x = runif(20),
+  y = runif(20),
+  val = runif(20)
+)
+
+pic <- ggplot(dat, aes(x, y, fill = val)) +
+  coord_equal(xlim = c(-.3, 1.3), ylim = c(-.3, 1.3)) +
+  guides(fill = guide_none()) +
+  theme_void()
+
+pic + geom_point(colour = "white", size = 3)
+```
+
+The points themselves are not very artistically impressive, but we can make something more interesting if we add the Voronoi tesselation. The minimal way to do this is with `geom_voronoi_segment()`
+
+```{r voronoi-segments, dev.args=list(bg="#222222")}
+#| fig-width: 6
+#| fig-height: 6
+#| fig-dpi: 300
+#| fig-align: center
+pic + 
+  geom_voronoi_segment(colour = "white") + 
+  geom_point(colour = "white", size = 3)
+```
+
+We can already see the beginnings of something pleasing. I mean, if I'm being honest this is already quite pretty in a minimalist way but -- as I keep saying -- I have an urge to tinker and see what elaborations we can add. First, let's switch from `geom_voronoi_segment()` to `geom_voronoi_tile()`:  
+
+```{r voronoi-tiles, dev.args=list(bg="#222222")}
+#| fig-width: 6
+#| fig-height: 6
+#| fig-dpi: 300
+#| fig-align: center
+pic + 
+  geom_voronoi_tile(colour = "white") + 
+  geom_point(colour = "white", size = 3)
+```
+
+Setting the `max.radius` argument prevents any tile extending beyond a fixed distance from the point generating the tile, giving the image as a whole a "bubbly" look:
+
+```{r voronoi-tiles-max-size, dev.args=list(bg="#222222")}
+#| fig-width: 6
+#| fig-height: 6
+#| fig-dpi: 300
+#| fig-align: center
+pic + 
+  geom_voronoi_tile(colour = "white", max.radius = .2) + 
+  geom_point(colour = "white", size = 3)
+```
+
+Hm. Those sharp corners between tiles aren't the prettiest thing I've ever seen. Let's round those corners a little bit, shall we? The `radius` argument lets us do that:
+
+```{r voronoi-tiles-round-corners, dev.args=list(bg="#222222")}
+#| fig-width: 6
+#| fig-height: 6
+#| fig-dpi: 300
+#| fig-align: center
+pic + 
+  geom_voronoi_tile(
+    colour = "white", 
+    max.radius = .2, 
+    radius = .02 
+  ) + 
+  geom_point(colour = "white", size = 3)
+```
+
+Next, let's shrink all the tiles a tiny bit to create small gaps between adjacent tiles:
+
+```{r voronoi-tiles-shrink, dev.args=list(bg="#222222")}
+#| fig-width: 6
+#| fig-height: 6
+#| fig-dpi: 300
+#| fig-align: center
+pic + 
+  geom_voronoi_tile(
+    colour = "white", 
+    max.radius = .2, 
+    radius = .02,
+    expand = -.005
+  ) + 
+  geom_point(colour = "white", size = 3)
+```
+
+Let's remove the points themselves, leaving only the rounded tiles:
+
+```{r voronoi-tiles-only, dev.args=list(bg="#222222")}
+#| fig-width: 6
+#| fig-height: 6
+#| fig-dpi: 300
+#| fig-align: center
+pic + 
+  geom_voronoi_tile(
+    colour = "white", 
+    max.radius = .2, 
+    radius = .02,
+    expand = -.005
+  )
+```
+
+Finally, we'll create another tiling and use it as a background texture:
+
+```{r voronoi-tiles-double, dev.args=list(bg="#222222")}
+#| fig-width: 6
+#| fig-height: 6
+#| fig-dpi: 300
+#| fig-align: center
+
+bg_dat <- tibble(
+  x = runif(500, min = -.5, max = 1.5),
+  y = runif(500, min = -.5, max = 1.5)
+)
+pic + 
+  geom_voronoi_tile(
+    data = bg_dat,
+    fill = "#333333", 
+    radius = .01,
+    expand = -.0025
+  ) +
+  geom_voronoi_tile(
+    colour = "white", 
+    max.radius = .2, 
+    radius = .02,
+    expand = -.005
+  )
+```
+
+
+
+## Studies in Voronoi baroque
 
 ```{r unboxer}
 unboxy <- function(iterations, layers) {
