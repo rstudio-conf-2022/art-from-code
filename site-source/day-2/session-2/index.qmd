@@ -385,13 +385,6 @@ unboxy <- function(iterations, layers) {
 set.seed(1)
 data <- unboxy(iterations = 1000, layers = 5) 
 
-shades <- c( # canva: easter-egg-nest
-  "#bbe7fe", # Baby Blue 
-  "#d3b5e5", # Lilac
-  "#ffd4db", # Rose Quartz
-  "#eff1db"  #Cream
-)
-
 ggplot(data, aes(x, y, fill = c)) +
   geom_voronoi_tile(
     max.radius = NULL,
@@ -403,12 +396,9 @@ ggplot(data, aes(x, y, fill = c)) +
   ) +
   theme_void() + 
   coord_equal(xlim = c(-3, 3), ylim = c(-3, 3)) + 
-  scale_fill_gradientn(colours = shades) + 
+  scale_fill_gradientn(colours = sample_canva2()) + 
   scale_x_continuous(expand = c(0, 0)) +
-  scale_y_continuous(expand = c(0, 0)) +
-  theme(panel.background = element_rect(
-    fill = "#222222", colour = "#222222"
-  ))
+  scale_y_continuous(expand = c(0, 0))
 ```
 
 
@@ -431,7 +421,7 @@ sift <- function(grain = .025) {
   }
 }
 
-make_voronoise_art <- function(data, mapping, shades, perturb, ...) {
+make_voronoise_art <- function(data, mapping, perturb, ...) {
   ggplot(data, mapping) +
     geom_voronoise(
       perturb = perturb,
@@ -440,13 +430,10 @@ make_voronoise_art <- function(data, mapping, shades, perturb, ...) {
     ) +
     theme_void() + 
     coord_equal(xlim = c(-3, 3), ylim = c(-3, 3)) + 
-    scale_fill_gradientn(colours = shades) + 
+    scale_fill_gradientn(colours = sample_canva2()) + 
     scale_alpha_identity() +
     scale_x_continuous(expand = c(0, 0)) +
-    scale_y_continuous(expand = c(0, 0)) +
-    theme(panel.background = element_rect(
-      fill = "#222222", colour = "#222222"
-    ))
+    scale_y_continuous(expand = c(0, 0))
 }
 
 set.seed(1)
@@ -456,7 +443,6 @@ make_voronoise_art(
   max.radius = NULL,
   radius = 0,
   expand = 0,
-  shades = sample(canva_palettes, 1)[[1]],
   perturb = sift(.2)
 )
 ```
@@ -479,7 +465,6 @@ that_boxy_style <- function(seed) {
     max.radius = NULL,
     radius = 0,
     expand = 0,
-    shades = sample(canva_palettes, 1)[[1]],
     perturb = sift(.2)
   )
 }
@@ -525,9 +510,7 @@ ggplot(
   ) +
   theme_void() + 
   coord_equal(xlim = c(-3, 3), ylim = c(-3, 3)) + 
-  scale_fill_gradientn(
-    colours = sample(canva_palettes, 1)[[1]]
-  ) + 
+  scale_fill_gradientn(colours = sample_canva2()) + 
   scale_x_continuous(expand = c(0, 0)) +
   scale_y_continuous(expand = c(0, 0)) +
   theme(panel.background = element_rect(
