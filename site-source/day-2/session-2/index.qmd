@@ -158,8 +158,8 @@ develop <- function(div, seed = NULL) {
     theme(
       plot.background = element_rect(
         fill = "#ffffff"
-        )
-      ) 
+      )
+    ) 
 }
 
 subdivision(seed = 1) |> develop()
@@ -179,33 +179,34 @@ subdivision(nsplits = 500, seed = 103) |> develop()
 ```
 
 
-## Melancholia
+## Mosaica
 
-```{r simple-melancholia, dev.args=list(bg="#222222")}
-#| fig-width: 6
-#| fig-height: 6
+```{r mosaica, dev.args=list(bg="#222222")}
+#| fig-width: 20
+#| fig-height: 10
 #| fig-dpi: 300
 #| fig-align: center
+#| column: screen-inset
 #| cache: true
 boxx <- function(left, right, bottom, top, width, 
-                 height, area, val, nshades = 100) {
+                 height, area, value, nshades = 100) {
   
-  set.seed(val)
+  set.seed(value)
   fractals <- list(billow, fbm, ridged)
-  generators <- list(gen_simplex, gen_worley)
+  generators <- list(gen_simplex, gen_perlin, gen_worley)
   
-  long_grid(
+  expand_grid(
     x = left:right, 
     y = bottom:top, 
   ) |>
     mutate(
-      fill = 10 * val + fracture(
-        x = x,
-        y = y,
+      fill = 10 * value + fracture(
+        x = x * sample(-3:3, 1),
+        y = y * sample(-3:3, 1),
         noise = sample(generators, 1)[[1]],
         fractal = sample(fractals, 1)[[1]],
         octaves = sample(10, 1),
-        frequency = sample(10, 1) / 1000,
+        frequency = sample(10, 1) / 20,
         value = "distance2"
       ) |>
         normalise(to = c(1, nshades)) |> 
@@ -213,41 +214,59 @@ boxx <- function(left, right, bottom, top, width,
     )
 }
 
-draw <- function(dat, shades) {
+draw <- function(dat, palette) {
+  background <- sample(palette, 1)
   dat |>
     ggplot(aes(x, y, fill = fill)) +
-    geom_tile(show.legend = FALSE) +
-    scale_x_continuous(expand = c(0,0), breaks = NULL) +
-    scale_y_continuous(expand = c(0,0), breaks = NULL) +
+    geom_tile(show.legend = FALSE, colour = background, size = .2) +
     scale_size_identity() +
-    scale_colour_gradientn(colours = shades) +
-    scale_fill_gradientn(colours = shades) +
+    scale_colour_gradientn(colours = palette) +
+    scale_fill_gradientn(colours = palette) +
+    scale_x_continuous(expand = expansion(add = 5)) +
+    scale_y_continuous(expand = expansion(add = 5)) +
+    coord_equal() +
     theme_void() +
-    theme(plot.background = element_rect(fill = "#222222")) 
+    theme(plot.background = element_rect(fill = background)) 
 }
 
-melancholia <- function(seed) {
-  set.seed(seed)
-  shades <- sample(canva_palettes, 1)[[1]] 
-  base <- subdivision(100, 100, 30) 
-  dat <- pmap_dfr(base, boxx) 
-  draw(dat, shades)
+mosaica <- function(ncol = 60, 
+                    nrow = 60, 
+                    nsplits = 30, 
+                    seed = NULL) {
+  
+  subdivision(ncol, nrow, nsplits, seed) |>
+    pmap_dfr(boxx) |> 
+    slice_sample(prop = .995) |>
+    filter(!is.na(fill)) |>
+    draw(palette = sample_canva2(seed))
 }
 
-melancholia(1302)
+mosaica(ncol = 200, nrow = 100, nsplits = 200, seed = 1302)
 ```
 
-```{r melancholia-extras, dev.args=list(bg="#222222")}
+```{r mosaica-extras, dev.args=list(bg="#222222")}
 #| fig-width: 6
 #| fig-height: 6
 #| fig-dpi: 300
 #| fig-align: center
 #| column: screen-inset
 #| layout-ncol: 3
-#| cache: true
-melancholia(9999)
-melancholia(1066)
-melancholia(1969)
+mosaica(seed = 1977)
+mosaica(seed = 2022)
+mosaica(seed = 1969)
+```
+
+
+```{r even-more-mosaica, dev.args=list(bg="#222222")}
+#| fig-width: 6
+#| fig-height: 10
+#| fig-dpi: 300
+#| fig-align: center
+#| column: screen-inset
+#| layout-ncol: 3
+mosaica(nrow = 100, seed = 1)
+mosaica(nrow = 100, seed = 2)
+mosaica(nrow = 100, seed = 3)
 ```
 
 
@@ -485,6 +504,7 @@ mosaic |>
 #| fig-height: 6
 #| fig-dpi: 300
 #| fig-align: center
+#| cache: true
 set.seed(123)
 st_truchet_ss(
   tiles = c(
