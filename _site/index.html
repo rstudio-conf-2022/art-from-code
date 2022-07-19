@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-0.9.613">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="danielle navarro">
+
+<title>ART FROM CODE</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+span.underline{text-decoration: underline;}
+div.column{display: inline-block; vertical-align: top; width: 50%;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+
+
+<link rel="stylesheet" href="styles.css">
+<meta property="og:title" content="ART FROM CODE">
+<meta property="og:description" content="An rstudio::conf workshop on generative art with R">
+<meta property="og:image" content="http://art-from-code.netlify.app/img/banner.png">
+<meta property="og:site-name" content="ART FROM CODE">
+<meta name="twitter:title" content="ART FROM CODE">
+<meta name="twitter:description" content="An rstudio::conf workshop on generative art with R">
+<meta name="twitter:image" content="http://art-from-code.netlify.app/img/banner.png">
+<meta name="twitter:creator" content="@djnavarro">
+<meta name="twitter:card" content="summary_large_image">
+</head>
+
+<body class="nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
+      <div class="navbar-container container-fluid">
+      <a class="navbar-brand" href="./index.html">
+    <span class="navbar-title">ART FROM CODE</span>
+  </a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link active" href="./index.html" aria-current="page">Home</a>
+  </li>  
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-sessions" role="button" data-bs-toggle="dropdown" aria-expanded="false">Sessions</a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-sessions">    
+        <li>
+    <a class="dropdown-item" href="./day-1/session-1/index.html">
+ <span class="dropdown-text">Get started</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./day-1/session-2/index.html">
+ <span class="dropdown-text">Spatial noise tricks</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./day-1/session-3/index.html">
+ <span class="dropdown-text">Polygon tricks</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./day-1/session-4/index.html">
+ <span class="dropdown-text">Shading tricks</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./day-2/session-1/index.html">
+ <span class="dropdown-text">Iterated function systems</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./day-2/session-2/index.html">
+ <span class="dropdown-text">Tiles and tesselations</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./day-2/session-3/index.html">
+ <span class="dropdown-text">Pixel filters</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./day-2/session-4/index.html">
+ <span class="dropdown-text">Wrap up</span></a>
+  </li>  
+    </ul>
+  </li>
+</ul>
+              <div id="quarto-search" class="" title="Search"></div>
+          </div> <!-- /navcollapse -->
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#welcome" id="toc-welcome" class="nav-link active" data-scroll-target="#welcome">Welcome!</a>
+  <ul class="collapse">
+  <li><a href="#about-the-workshop" id="toc-about-the-workshop" class="nav-link" data-scroll-target="#about-the-workshop">About the workshop</a></li>
+  <li><a href="#about-the-instructor" id="toc-about-the-instructor" class="nav-link" data-scroll-target="#about-the-instructor">About the instructor</a></li>
+  </ul></li>
+  <li><a href="#day-1-july-25" id="toc-day-1-july-25" class="nav-link" data-scroll-target="#day-1-july-25">Day 1: July 25</a>
+  <ul class="collapse">
+  <li><a href="#get-started" id="toc-get-started" class="nav-link" data-scroll-target="#get-started"><span>Get started</span></a></li>
+  <li><a href="#spatial-noise-tricks" id="toc-spatial-noise-tricks" class="nav-link" data-scroll-target="#spatial-noise-tricks"><span>Spatial noise tricks</span></a></li>
+  <li><a href="#polygon-tricks" id="toc-polygon-tricks" class="nav-link" data-scroll-target="#polygon-tricks"><span>Polygon tricks</span></a></li>
+  <li><a href="#shading-tricks" id="toc-shading-tricks" class="nav-link" data-scroll-target="#shading-tricks"><span>Shading tricks</span></a></li>
+  </ul></li>
+  <li><a href="#day-2-july-26" id="toc-day-2-july-26" class="nav-link" data-scroll-target="#day-2-july-26">Day 2: July 26</a>
+  <ul class="collapse">
+  <li><a href="#iterated-function-systems" id="toc-iterated-function-systems" class="nav-link" data-scroll-target="#iterated-function-systems"><span>Iterated function systems</span></a></li>
+  <li><a href="#tiles-and-tesselations" id="toc-tiles-and-tesselations" class="nav-link" data-scroll-target="#tiles-and-tesselations"><span>Tiles and tesselations</span></a></li>
+  <li><a href="#pixel-filters" id="toc-pixel-filters" class="nav-link" data-scroll-target="#pixel-filters"><span>Pixel filters</span></a></li>
+  <li><a href="#wrapping-up" id="toc-wrapping-up" class="nav-link" data-scroll-target="#wrapping-up"><span>Wrapping up</span></a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content page-columns page-full" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">ART FROM CODE</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>danielle navarro </p>
+          </div>
+  </div>
+    
+    
+  </div>
+  
+
+</header>
+
+<div class="column-page-left">
+<p><img src="img/banner.png" class="img-fluid"></p>
+</div>
+<p><br></p>
+<section id="welcome" class="level2">
+<h2 class="anchored" data-anchor-id="welcome">Welcome!</h2>
+<section id="about-the-workshop" class="level3">
+<h3 class="anchored" data-anchor-id="about-the-workshop">About the workshop</h3>
+<p>Computer-generated artwork has been around for quite a while. The idea of using R for this purpose, however, is a little more recent. Designed originally as a programming language for academic statistical computing, R is now a mainstream language for data science and analytics. Can it also work as an artistic medium? Is there an overlap between our familiar data science workflows and the artistic process? Perhaps we can become better data scientists through art, and vice versa.</p>
+<p>This workshop provides a hands-on introduction to generative art in R. You’ll learn artistic techniques that generative artists use regularly in their work including flow fields, iterative function systems, and more. You’ll also learn about R packages specialised for generative art. But more than that, you’ll learn how to reuse skills you already have as part of an artistic process: with a little work, ggplot2, dplyr, and Rcpp can become an artist’s best friends. The assumed background is that you’re reasonably comfortable using R and RStudio, and have experience with tidyverse.</p>
+</section>
+<section id="about-the-instructor" class="level3">
+<h3 class="anchored" data-anchor-id="about-the-instructor">About the instructor</h3>
+<p>Danielle Navarro is a generative artist, data scientist, professional educator, mathematical psychologist, academic professor in recovery, open source R developer, and coauthor of “ggplot2: Elegant Graphics for Data Analysis” (3rd edition). She is currently a developer advocate at Voltron Data working with the Apache Arrow ecosystem. You can find her art at <a href="https://art.djnavarro.net">art.djnavarro.net</a>, and other professional details at <a href="https://djnavarro.net">djnavarro.net</a>. Danielle lives in Sydney, Australia with her two children and her Netflix subscription.</p>
+<p><br></p>
+</section>
+</section>
+<section id="day-1-july-25" class="level2">
+<h2 class="anchored" data-anchor-id="day-1-july-25">Day 1: July 25</h2>
+<p><br></p>
+<section id="get-started" class="level3">
+<h3 class="anchored" data-anchor-id="get-started"><a href="day-1/session-1/index.html">Get started</a></h3>
+<p><br></p>
+<div class="grid">
+<div class="g-col-12 g-col-md-8">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="day-1/session-1/index.html"><img src="img/day-1-session-1.png" class="img-fluid figure-img"></a></p>
+</figure>
+</div>
+</div>
+<div class="g-col-12 g-col-md-4">
+<ul>
+<li><strong>Time</strong>: 09:00 - 10:30</li>
+<li><strong>Description</strong>: Hands on introduction to generative art. Make your own pieces using {ggplot2} and {dplyr}</li>
+</ul>
+</div>
+</div>
+<p><br></p>
+</section>
+<section id="spatial-noise-tricks" class="level3">
+<h3 class="anchored" data-anchor-id="spatial-noise-tricks"><a href="day-1/session-2/index.html">Spatial noise tricks</a></h3>
+<p><br></p>
+<div class="grid">
+<div class="g-col-12 g-col-md-8">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="day-1/session-2/index.html"><img src="img/day-1-session-2.png" class="img-fluid figure-img"></a></p>
+</figure>
+</div>
+</div>
+<div class="g-col-12 g-col-md-4">
+<ul>
+<li><strong>Time</strong>: 11:00 - 12:30</li>
+<li><strong>Description</strong>: Multidimensional noise generators. Flow fields, fractals, and more using the {ambient} package</li>
+</ul>
+</div>
+</div>
+<p><br></p>
+</section>
+<section id="polygon-tricks" class="level3">
+<h3 class="anchored" data-anchor-id="polygon-tricks"><a href="day-1/session-3/index.html">Polygon tricks</a></h3>
+<p><br></p>
+<div class="grid">
+<div class="g-col-12 g-col-md-8">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="day-1/session-3/index.html"><img src="img/day-1-session-3.png" class="img-fluid figure-img"></a></p>
+</figure>
+</div>
+</div>
+<div class="g-col-12 g-col-md-4">
+<ul>
+<li><strong>Time</strong>: 13:30 - 15:00</li>
+<li><strong>Description</strong>: Learn how to create textures with recursive polygon deformation, draw wonky hearts as animated gifs, and convert boring lines to textured strokes</li>
+</ul>
+</div>
+</div>
+<p><br></p>
+</section>
+<section id="shading-tricks" class="level3">
+<h3 class="anchored" data-anchor-id="shading-tricks"><a href="day-1/session-4/index.html">Shading tricks</a></h3>
+<p><br></p>
+<div class="grid">
+<div class="g-col-12 g-col-md-8">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="day-1/session-4/index.html"><img src="img/day-1-session-4.png" class="img-fluid figure-img"></a></p>
+</figure>
+</div>
+</div>
+<div class="g-col-12 g-col-md-4">
+<ul>
+<li><strong>Time</strong>: 15:30 - 17:00</li>
+<li><strong>Description</strong>: Learn how to use {rayshader} to add depth to 2D plots, and generate 3D graphics from generative art</li>
+</ul>
+</div>
+</div>
+<p><br></p>
+</section>
+</section>
+<section id="day-2-july-26" class="level2">
+<h2 class="anchored" data-anchor-id="day-2-july-26">Day 2: July 26</h2>
+<p><br></p>
+<section id="iterated-function-systems" class="level3">
+<h3 class="anchored" data-anchor-id="iterated-function-systems"><a href="day-2/session-1/index.html">Iterated function systems</a></h3>
+<p><br></p>
+<div class="grid">
+<div class="g-col-12 g-col-md-8">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="day-2/session-1/index.html"><img src="img/day-2-session-1.png" class="img-fluid figure-img"></a></p>
+</figure>
+</div>
+</div>
+<div class="g-col-12 g-col-md-4">
+<ul>
+<li><strong>Time</strong>: 09:00 - 10:30</li>
+<li><strong>Description</strong>: Iterated function systems. Embrace the chaotic joy of the fractal flame and render quickly with {Rcpp}. This one is a bit technical</li>
+</ul>
+</div>
+</div>
+<p><br></p>
+</section>
+<section id="tiles-and-tesselations" class="level3">
+<h3 class="anchored" data-anchor-id="tiles-and-tesselations"><a href="day-2/session-2/index.html">Tiles and tesselations</a></h3>
+<p><br></p>
+<div class="grid">
+<div class="g-col-12 g-col-md-8">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="day-2/session-2/index.html"><img src="img/day-2-session-2.png" class="img-fluid figure-img"></a></p>
+</figure>
+</div>
+</div>
+<div class="g-col-12 g-col-md-4">
+<ul>
+<li><strong>Time</strong>: 11:00 - 12:30</li>
+<li><strong>Description</strong>:</li>
+</ul>
+</div>
+</div>
+<p><br></p>
+</section>
+<section id="pixel-filters" class="level3">
+<h3 class="anchored" data-anchor-id="pixel-filters"><a href="day-2/session-3/index.html">Pixel filters</a></h3>
+<p><br></p>
+<div class="grid">
+<div class="g-col-12 g-col-md-8">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="day-2/session-3/index.html"><img src="img/day-2-session-3.png" class="img-fluid figure-img"></a></p>
+</figure>
+</div>
+</div>
+<div class="g-col-12 g-col-md-4">
+<ul>
+<li><strong>Time</strong>: 13:30 - 15:00</li>
+<li><strong>Description</strong>:</li>
+</ul>
+</div>
+</div>
+<p><br></p>
+</section>
+<section id="wrapping-up" class="level3">
+<h3 class="anchored" data-anchor-id="wrapping-up"><a href="day-2/session-4/index.html">Wrapping up</a></h3>
+<p><br></p>
+<div class="grid">
+<div class="g-col-12 g-col-md-8">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="day-2/session-2/index.html"><img src="img/day-2-session-4.png" class="img-fluid figure-img"></a></p>
+</figure>
+</div>
+</div>
+<div class="g-col-12 g-col-md-4">
+<ul>
+<li><strong>Time</strong>: 15:30 - 17:00</li>
+<li><strong>Description</strong>: Creativity in art and code: A surprisingly useful skill</li>
+</ul>
+</div>
+</div>
+<!-- ### Day 1 -->
+<!-- | Time          | Activity         | -->
+<!-- | :------------ | :--------------- | -->
+<!-- | 09:00 - 10:30 | Session 1        | -->
+<!-- | 10:30 - 11:00 | *Coffee break*   | -->
+<!-- | 11:00 - 12:30 | Session 2        | -->
+<!-- | 12:30 - 13:30 | *Lunch break*    | -->
+<!-- | 13:30 - 15:00 | Session 3        | -->
+<!-- | 15:00 - 15:30 | *Coffee break*   | -->
+<!-- | 15:30 - 17:00 | Session 4        | -->
+<!-- ### Day 2 -->
+<!-- | Time          | Activity         | -->
+<!-- | :------------ | :--------------- | -->
+<!-- | 09:00 - 10:30 | Session 1        | -->
+<!-- | 10:30 - 11:00 | *Coffee break*   | -->
+<!-- | 11:00 - 12:30 | Session 2        | -->
+<!-- | 12:30 - 13:30 | *Lunch break*    | -->
+<!-- | 13:30 - 15:00 | Session 3        | -->
+<!-- | 15:00 - 15:30 | *Coffee break*   | -->
+<!-- | 15:30 - 17:00 | Session 4        | -->
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script defer="" data-domain="art-from-code.netlify.app" src="https://plausible.io/js/plausible.js"></script>
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    setTimeout(function() {
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      let href = ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const cites = ref.parentNode.getAttribute('data-cites').split(' ');
+    tippyHover(ref, function() {
+      var popup = window.document.createElement('div');
+      cites.forEach(function(cite) {
+        var citeDiv = window.document.createElement('div');
+        citeDiv.classList.add('hanging-indent');
+        citeDiv.classList.add('csl-entry');
+        var biblioDiv = window.document.getElementById('ref-' + cite);
+        if (biblioDiv) {
+          citeDiv.innerHTML = biblioDiv.innerHTML;
+        }
+        popup.appendChild(citeDiv);
+      });
+      return popup.innerHTML;
+    });
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>

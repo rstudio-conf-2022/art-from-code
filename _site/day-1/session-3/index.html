@@ -1,0 +1,1520 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-0.9.613">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>ART FROM CODE - POLYGON TRICKS</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+span.underline{text-decoration: underline;}
+div.column{display: inline-block; vertical-align: top; width: 50%;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<link rel="stylesheet" href="../../styles.css">
+<meta property="og:title" content="ART FROM CODE - POLYGON TRICKS">
+<meta property="og:description" content="An rstudio::conf workshop on generative art with R">
+<meta property="og:image" content="http://art-from-code.netlify.app/img/banner.png">
+<meta property="og:site-name" content="ART FROM CODE">
+<meta name="twitter:title" content="ART FROM CODE - POLYGON TRICKS">
+<meta name="twitter:description" content="An rstudio::conf workshop on generative art with R">
+<meta name="twitter:image" content="http://art-from-code.netlify.app/img/banner.png">
+<meta name="twitter:creator" content="@djnavarro">
+<meta name="twitter:card" content="summary_large_image">
+</head>
+
+<body class="nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
+      <div class="navbar-container container-fluid">
+      <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title">ART FROM CODE</span>
+  </a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../index.html">Home</a>
+  </li>  
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-sessions" role="button" data-bs-toggle="dropdown" aria-expanded="false">Sessions</a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-sessions">    
+        <li>
+    <a class="dropdown-item" href="../../day-1/session-1/index.html">
+ <span class="dropdown-text">Get started</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../day-1/session-2/index.html">
+ <span class="dropdown-text">Spatial noise tricks</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../day-1/session-3/index.html">
+ <span class="dropdown-text">Polygon tricks</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../day-1/session-4/index.html">
+ <span class="dropdown-text">Shading tricks</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../day-2/session-1/index.html">
+ <span class="dropdown-text">Iterated function systems</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../day-2/session-2/index.html">
+ <span class="dropdown-text">Tiles and tesselations</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../day-2/session-3/index.html">
+ <span class="dropdown-text">Pixel filters</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../day-2/session-4/index.html">
+ <span class="dropdown-text">Wrap up</span></a>
+  </li>  
+    </ul>
+  </li>
+</ul>
+              <div id="quarto-search" class="" title="Search"></div>
+          </div> <!-- /navcollapse -->
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#semi-transparent-polygons" id="toc-semi-transparent-polygons" class="nav-link active" data-scroll-target="#semi-transparent-polygons">Semi-transparent polygons</a></li>
+  <li><a href="#growing-polygons-faster" id="toc-growing-polygons-faster" class="nav-link" data-scroll-target="#growing-polygons-faster">Growing polygons faster</a></li>
+  <li><a href="#using-the-method-splotches" id="toc-using-the-method-splotches" class="nav-link" data-scroll-target="#using-the-method-splotches">Using the method: splotches</a></li>
+  <li><a href="#using-the-method-smudged-hexagons" id="toc-using-the-method-smudged-hexagons" class="nav-link" data-scroll-target="#using-the-method-smudged-hexagons">Using the method: Smudged hexagons</a></li>
+  <li><a href="#slightly-misshapen-objects" id="toc-slightly-misshapen-objects" class="nav-link" data-scroll-target="#slightly-misshapen-objects">Slightly misshapen objects</a></li>
+  <li><a href="#perlin-blobs" id="toc-perlin-blobs" class="nav-link" data-scroll-target="#perlin-blobs">Perlin blobs</a></li>
+  <li><a href="#perlin-hearts" id="toc-perlin-hearts" class="nav-link" data-scroll-target="#perlin-hearts">Perlin hearts</a></li>
+  <li><a href="#animated-perlin-hearts" id="toc-animated-perlin-hearts" class="nav-link" data-scroll-target="#animated-perlin-hearts">Animated perlin hearts</a></li>
+  <li><a href="#textured-lines" id="toc-textured-lines" class="nav-link" data-scroll-target="#textured-lines">Textured lines</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content page-columns page-full" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">POLYGON TRICKS</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+    
+  </div>
+  
+
+</header>
+
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(purrr)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyr)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tibble)</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ambient)</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tictoc)</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggthemes)</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(gifski)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<section id="semi-transparent-polygons" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="semi-transparent-polygons">Semi-transparent polygons</h2>
+<p>A commonly used trick in generative art is to simulate graded textures by plotting many slightly-different and mostly-transparent polygons over the top of one another. I showed an example of this at the end of the previous section, in fact. However, it was all tangled up in the discussion of fractals and spatial noise patterns, so it might be useful to revisit it here.</p>
+<p>In this section I’m going to adapt the recursive polygon-deformation technique described in Tyler Hobbes’ <a href="https://tylerxhobbs.com/essays/2017/a-generative-approach-to-simulating-watercolor-paints">guide to simulating water colour paint</a>. It’s a simple method and works surprisingly well sometimes. The approach I take here isn’t precisely identical to his, but it’s pretty close.</p>
+<p>Let’s start by creating a <code>square</code> tibble that contains <code>x</code> and <code>y</code> columns specifying the coordinates for a square, and a <code>seg_len</code> column that specifies the length of that of the edge connecting that point to the next one (i.e., the point specified by the next row):</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>square <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">x =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">0</span>),</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">y =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">0</span>),</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">seg_len =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">0</span>)</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>This representation defines a closed path: the fifth and final point is the same location as the first one. You don’t technically need this for <code>geom_polygon()</code>, but it’s convenient for other reasons to set it up so that the final “segment” has length 0.</p>
+<p>Next let’s write a simple plotting function to display a polygon:</p>
+<div class="cell" data-layout-align="center" data-fig.dpi="300" data-hash="index_cache/html/square_cd4ac0781d5211560074af461a57ba5d">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>show_polygon <span class="ot">&lt;-</span> <span class="cf">function</span>(polygon, <span class="at">show_vertices =</span> <span class="cn">TRUE</span>, ...) {</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  pic <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(polygon, <span class="fu">aes</span>(x, y)) <span class="sc">+</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_polygon</span>(<span class="at">colour =</span> <span class="st">"white"</span>, <span class="at">fill =</span> <span class="cn">NA</span>, <span class="at">show.legend =</span> <span class="cn">FALSE</span>, ...) <span class="sc">+</span> </span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">coord_equal</span>() <span class="sc">+</span> </span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme_void</span>()</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span>(show_vertices <span class="sc">==</span> <span class="cn">TRUE</span>) {</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>    pic <span class="ot">&lt;-</span> pic <span class="sc">+</span> <span class="fu">geom_point</span>(<span class="at">colour =</span> <span class="st">"white"</span>, <span class="at">size =</span> <span class="dv">2</span>)</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(pic)</span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a><span class="fu">show_polygon</span>(square)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="index_files/figure-html/square-1.png" class="img-fluid figure-img" width="384"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Yes, that is indeed a square.</p>
+<p>The next step in our process is to think about ways that we can deform this polygon. A simple method would be to insert a new vertex: we select one of the edges and split it in half by creating a new point in between the two endpoints. If we then add a little noise to perturb the location of the new point, the polygon will be slightly deformed.</p>
+<p>How should we select the edge to break in two? One possibility is to select completely at random, but I’m going to try something slightly different and choose edges with probability proportional to their length. A bias to break longer edges will help ensure we don’t end up with polygons with one or two very long edges and many tiny edges. Here’s a function that does this:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>sample_edge <span class="ot">&lt;-</span> <span class="cf">function</span>(polygon) {</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sample</span>(<span class="fu">nrow</span>(polygon), <span class="dv">1</span>, <span class="at">prob =</span> polygon<span class="sc">$</span>seg_len)</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>As a side bonus, this algorithm will never select the “edge” that starts with the final point (e.g., the “fifth” point in <code>square</code> never gets selected) because the corresponding edge has length zero. Thanks to this we can safely assume that no matter which row gets selected by <code>sample_edge()</code>, it can’t be the last one. For every possible row <code>ind</code> it can return, there will always be a row <code>ind + 1</code> in the polygon.</p>
+<p>Next step is to realise that if we break an edge into two edges, we’ll need to compute the length of these two new edges: so we might as well have a helper function that takes the co-ordinates of two points as input, and returns the length of an edge connecting them.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>edge_length <span class="ot">&lt;-</span> <span class="cf">function</span>(x1, y1, x2, y2) {</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sqrt</span>((x1 <span class="sc">-</span> x2)<span class="sc">^</span><span class="dv">2</span> <span class="sc">+</span> (y1 <span class="sc">-</span> y2)<span class="sc">^</span><span class="dv">2</span>)</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Finally, as a convenience, here’s a function that takes a <code>size</code> argument and returns a random number between <code>-size/2</code> and <code>size/2</code>. It’s just a wrapper around <code>runif()</code> but I find it helps me remember <em>why</em> I’m using the random number generator and it makes my code a little easier for me to read:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>edge_noise <span class="ot">&lt;-</span> <span class="cf">function</span>(size) {</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">runif</span>(<span class="dv">1</span>, <span class="at">min =</span> <span class="sc">-</span>size<span class="sc">/</span><span class="dv">2</span>, <span class="at">max =</span> size<span class="sc">/</span><span class="dv">2</span>)</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Now that I’ve got my helper functions, here’s the code for an <code>insert_edge()</code> function that selects an edge and breaks it into two edges. In addition to expecting a <code>polygon</code> as input (a tibble like <code>square</code> that has columns <code>x</code>, <code>y</code>, and <code>seg_len</code>), it takes a <code>noise</code> argument: a number used to scale the amount of noise added when <code>edge_noise()</code> is called:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>insert_edge <span class="ot">&lt;-</span> <span class="cf">function</span>(polygon, noise) {</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>  <span class="co"># sample and edge and remember its length</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>  ind <span class="ot">&lt;-</span> <span class="fu">sample_edge</span>(polygon)</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>  len <span class="ot">&lt;-</span> polygon<span class="sc">$</span>seg_len[ind]</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>  <span class="co"># one endpoint of the old edge</span></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>  last_x <span class="ot">&lt;-</span> polygon<span class="sc">$</span>x[ind]</span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>  last_y <span class="ot">&lt;-</span> polygon<span class="sc">$</span>y[ind]</span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>  <span class="co"># the other endpoint of the old edge</span></span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>  next_x <span class="ot">&lt;-</span> polygon<span class="sc">$</span>x[ind <span class="sc">+</span> <span class="dv">1</span>]</span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>  next_y <span class="ot">&lt;-</span> polygon<span class="sc">$</span>y[ind <span class="sc">+</span> <span class="dv">1</span>]</span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a>  <span class="co"># location of the new point to be inserted: noise </span></span>
+<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a>  <span class="co"># is scaled proportional to the length of the old edge</span></span>
+<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a>  new_x <span class="ot">&lt;-</span> (last_x <span class="sc">+</span> next_x) <span class="sc">/</span> <span class="dv">2</span> <span class="sc">+</span> <span class="fu">edge_noise</span>(len <span class="sc">*</span> noise)</span>
+<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a>  new_y <span class="ot">&lt;-</span> (last_y <span class="sc">+</span> next_y) <span class="sc">/</span> <span class="dv">2</span> <span class="sc">+</span> <span class="fu">edge_noise</span>(len <span class="sc">*</span> noise)</span>
+<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb7-20"><a href="#cb7-20" aria-hidden="true" tabindex="-1"></a>  <span class="co"># the new row for insertion into the tibble, </span></span>
+<span id="cb7-21"><a href="#cb7-21" aria-hidden="true" tabindex="-1"></a>  <span class="co"># containing coords and length of the 'new' edge</span></span>
+<span id="cb7-22"><a href="#cb7-22" aria-hidden="true" tabindex="-1"></a>  new_row <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
+<span id="cb7-23"><a href="#cb7-23" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> new_x,</span>
+<span id="cb7-24"><a href="#cb7-24" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> new_y,</span>
+<span id="cb7-25"><a href="#cb7-25" aria-hidden="true" tabindex="-1"></a>    <span class="at">seg_len =</span> <span class="fu">edge_length</span>(new_x, new_y, next_x, next_y)</span>
+<span id="cb7-26"><a href="#cb7-26" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb7-27"><a href="#cb7-27" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb7-28"><a href="#cb7-28" aria-hidden="true" tabindex="-1"></a>  <span class="co"># update the length of the 'old' edge</span></span>
+<span id="cb7-29"><a href="#cb7-29" aria-hidden="true" tabindex="-1"></a>  polygon<span class="sc">$</span>seg_len[ind] <span class="ot">&lt;-</span> <span class="fu">edge_length</span>(</span>
+<span id="cb7-30"><a href="#cb7-30" aria-hidden="true" tabindex="-1"></a>    last_x, last_y, new_x, new_y</span>
+<span id="cb7-31"><a href="#cb7-31" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb7-32"><a href="#cb7-32" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb7-33"><a href="#cb7-33" aria-hidden="true" tabindex="-1"></a>  <span class="co"># insert a row into the tibble</span></span>
+<span id="cb7-34"><a href="#cb7-34" aria-hidden="true" tabindex="-1"></a>  <span class="fu">bind_rows</span>(</span>
+<span id="cb7-35"><a href="#cb7-35" aria-hidden="true" tabindex="-1"></a>    polygon[<span class="dv">1</span><span class="sc">:</span>ind, ],</span>
+<span id="cb7-36"><a href="#cb7-36" aria-hidden="true" tabindex="-1"></a>    new_row,</span>
+<span id="cb7-37"><a href="#cb7-37" aria-hidden="true" tabindex="-1"></a>    polygon[<span class="sc">-</span>(<span class="dv">1</span><span class="sc">:</span>ind), ]</span>
+<span id="cb7-38"><a href="#cb7-38" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb7-39"><a href="#cb7-39" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Here’s the function in action:</p>
+<div class="page-columns page-full">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">2</span>)</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>polygon <span class="ot">&lt;-</span> square </span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>polygon <span class="ot">&lt;-</span> <span class="fu">insert_edge</span>(polygon, <span class="at">noise =</span> .<span class="dv">5</span>); <span class="fu">show_polygon</span>(polygon)</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>polygon <span class="ot">&lt;-</span> <span class="fu">insert_edge</span>(polygon, <span class="at">noise =</span> .<span class="dv">5</span>); <span class="fu">show_polygon</span>(polygon)</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>polygon <span class="ot">&lt;-</span> <span class="fu">insert_edge</span>(polygon, <span class="at">noise =</span> .<span class="dv">5</span>); <span class="fu">show_polygon</span>(polygon)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell column-screen-inset quarto-layout-panel" data-fig.dpi="300" data-hash="index_cache/html/polygon-insertion_740ce6f001a8073df1a4a9298e7ebae1">
+<div class="quarto-layout-row quarto-layout-valign-top">
+<div class="cell-output-display quarto-layout-cell" style="flex-basis: 33.3%;justify-content: center;">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="index_files/figure-html/polygon-insertion-1.png" class="img-fluid figure-img" width="384"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output-display quarto-layout-cell" style="flex-basis: 33.3%;justify-content: center;">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="index_files/figure-html/polygon-insertion-2.png" class="img-fluid figure-img" width="384"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output-display quarto-layout-cell" style="flex-basis: 33.3%;justify-content: center;">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="index_files/figure-html/polygon-insertion-3.png" class="img-fluid figure-img" width="384"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div>
+<p>I’ve no intention of manually calling <code>insert_edge()</code> over and over, so the time has come to write a <code>grow_polygon()</code> function that sequentially inserts edges into a <code>polygon</code> for a fixed number of <code>iterations</code>, and at a specific <code>noise</code> level. I’ll also set it up so the user can optionally elect to specify the <code>seed</code> used to generate random numbers. If the user doesn’t specify a seed, the random number generator state is left as-is:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>grow_polygon <span class="ot">&lt;-</span> <span class="cf">function</span>(polygon, iterations, noise, <span class="at">seed =</span> <span class="cn">NULL</span>) {</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span>(<span class="sc">!</span><span class="fu">is.null</span>(seed)) <span class="fu">set.seed</span>(seed)</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>iterations) polygon <span class="ot">&lt;-</span> <span class="fu">insert_edge</span>(polygon, noise)</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(polygon)</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>The images below show what our recursively deformed polygon looks like after 30, 100, and 1000 iterations:</p>
+<div class="page-columns page-full">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>square <span class="sc">|&gt;</span> </span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">grow_polygon</span>(<span class="at">iterations =</span> <span class="dv">30</span>, <span class="at">noise =</span> .<span class="dv">5</span>, <span class="at">seed =</span> <span class="dv">2</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">show_polygon</span>(<span class="at">show_vertices =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>square <span class="sc">|&gt;</span> </span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">grow_polygon</span>(<span class="at">iterations =</span> <span class="dv">100</span>, <span class="at">noise =</span> .<span class="dv">5</span>, <span class="at">seed =</span> <span class="dv">2</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">show_polygon</span>(<span class="at">show_vertices =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>square <span class="sc">|&gt;</span> </span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">grow_polygon</span>(<span class="at">iterations =</span> <span class="dv">1000</span>, <span class="at">noise =</span> .<span class="dv">5</span>, <span class="at">seed =</span> <span class="dv">2</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">show_polygon</span>(<span class="at">show_vertices =</span> <span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell column-screen-inset quarto-layout-panel" data-fig.dpi="300">
+<div class="quarto-layout-row quarto-layout-valign-top">
+<div class="cell-output-display quarto-layout-cell" style="flex-basis: 33.3%;justify-content: center;">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="index_files/figure-html/polygon-generation-1.png" class="img-fluid figure-img" width="384"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output-display quarto-layout-cell" style="flex-basis: 33.3%;justify-content: center;">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="index_files/figure-html/polygon-generation-2.png" class="img-fluid figure-img" width="384"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output-display quarto-layout-cell" style="flex-basis: 33.3%;justify-content: center;">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="index_files/figure-html/polygon-generation-3.png" class="img-fluid figure-img" width="384"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div>
+<p>Now that we have functions <code>grow_polygon()</code> and <code>show_polygon()</code> that will create and display a single deformed polygon, let’s generalise them. The <code>grow_multipolygon()</code> function below creates many deformed polygons by calling <code>grow_polygon()</code> repeatedly, and the <code>show_multipolygon()</code> function is a minor variation on <code>show_polygon()</code> that plots many polygons with a low opacity:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>grow_multipolygon <span class="ot">&lt;-</span> <span class="cf">function</span>(base_shape, n, <span class="at">seed =</span> <span class="cn">NULL</span>, ...) {</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span>(<span class="sc">!</span><span class="fu">is.null</span>(seed)) <span class="fu">set.seed</span>(seed)</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>  polygons <span class="ot">&lt;-</span> <span class="fu">list</span>()</span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>n) {</span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>    polygons[[i]] <span class="ot">&lt;-</span> <span class="fu">grow_polygon</span>(base_shape, ...)</span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>  polygons <span class="ot">&lt;-</span> <span class="fu">bind_rows</span>(polygons, <span class="at">.id =</span> <span class="st">"id"</span>)</span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>  polygons</span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a>show_multipolygon <span class="ot">&lt;-</span> <span class="cf">function</span>(polygon, fill, <span class="at">alpha =</span> .<span class="dv">02</span>, ...) {</span>
+<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(polygon, <span class="fu">aes</span>(x, y, <span class="at">group =</span> id)) <span class="sc">+</span></span>
+<span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_polygon</span>(<span class="at">colour =</span> <span class="cn">NA</span>, <span class="at">alpha =</span> alpha, <span class="at">fill =</span> fill, ...) <span class="sc">+</span> </span>
+<span id="cb11-14"><a href="#cb11-14" aria-hidden="true" tabindex="-1"></a>    <span class="fu">coord_equal</span>() <span class="sc">+</span> </span>
+<span id="cb11-15"><a href="#cb11-15" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme_void</span>()</span>
+<span id="cb11-16"><a href="#cb11-16" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>So now here’s what we do. We take the original <code>square</code> and deform it a moderate amount. Running <code>grow_polygon()</code> for about 100 iterations seems to do the trick. This then becomes the <code>base_shape</code> to be passed to <code>grow_multipolygon()</code>, which we then use to create many polygons (say, <code>n = 50</code>) that are all derived from this base shape. Finally, we use <code>show_multipolygon()</code> to plot all 50 polygons. Each individual polygon is plotted with very low opacity, so the overall effect is to create a graded look:</p>
+<div class="cell" data-layout-align="center" data-fig.dpi="300" data-hash="index_cache/html/polygon-layering_f91145b70ecce020a499321b9880c125">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tic</span>()</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>dat <span class="ot">&lt;-</span> square <span class="sc">|&gt;</span> </span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">grow_polygon</span>(<span class="at">iterations =</span> <span class="dv">100</span>, <span class="at">noise =</span> .<span class="dv">5</span>, <span class="at">seed =</span> <span class="dv">2</span>) <span class="sc">|&gt;</span></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">grow_multipolygon</span>(<span class="at">n =</span> <span class="dv">50</span>, <span class="at">iterations =</span> <span class="dv">1000</span>, <span class="at">noise =</span> <span class="dv">1</span>, <span class="at">seed =</span> <span class="dv">2</span>)</span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a><span class="fu">toc</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>38.597 sec elapsed</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">show_multipolygon</span>(dat, <span class="at">fill =</span> <span class="st">"#d43790"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="index_files/figure-html/polygon-layering-1.png" class="img-fluid figure-img" width="384"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>It’s a little slow to produce results, but at least the results are pretty!</p>
+</section>
+<section id="growing-polygons-faster" class="level2">
+<h2 class="anchored" data-anchor-id="growing-polygons-faster">Growing polygons faster</h2>
+<p>As an aside, you may have noticed that the code I’ve written here is inefficient: I’ve got vectors growing in a loop, which is very inefficient in R. There’s a few ways we could speed this up. The most time consuming would be to rewrite the resource intensive loops in C++ and then call it from R using a package like <code>Rcpp</code> or <code>cpp11</code>. I’ll show an example of this technique later in the workshop, but in this case I’ll do something a little simpler.</p>
+<p>The big problem with the previous code is that I’ve got atomic vectors (numeric vectors in this case) growing inside the loop, which tends to cause the entire vector to be copied at every iteration. One solution to this is to store each point as its own list, and treat the polygon as a list of points. That way, when I modify the polygon to add a new point, R will alter the container object (the list), but the objects representing the points themselves don’t get copied. Happily, only a few minor modifications of the code are needed to switch to this “list of points” representation:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>square_l <span class="ot">&lt;-</span> <span class="fu">transpose</span>(square)</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>sample_edge_l <span class="ot">&lt;-</span> <span class="cf">function</span>(polygon) {</span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sample</span>(<span class="fu">length</span>(polygon), <span class="dv">1</span>, <span class="at">prob =</span> <span class="fu">map_dbl</span>(polygon, <span class="sc">~</span> .x<span class="sc">$</span>seg_len))</span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>insert_edge_l <span class="ot">&lt;-</span> <span class="cf">function</span>(polygon, noise) {</span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a>  ind <span class="ot">&lt;-</span> <span class="fu">sample_edge_l</span>(polygon)</span>
+<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a>  len <span class="ot">&lt;-</span> polygon[[ind]]<span class="sc">$</span>seg_len</span>
+<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a>  last_x <span class="ot">&lt;-</span> polygon[[ind]]<span class="sc">$</span>x</span>
+<span id="cb15-13"><a href="#cb15-13" aria-hidden="true" tabindex="-1"></a>  last_y <span class="ot">&lt;-</span> polygon[[ind]]<span class="sc">$</span>y</span>
+<span id="cb15-14"><a href="#cb15-14" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb15-15"><a href="#cb15-15" aria-hidden="true" tabindex="-1"></a>  next_x <span class="ot">&lt;-</span> polygon[[ind <span class="sc">+</span> <span class="dv">1</span>]]<span class="sc">$</span>x</span>
+<span id="cb15-16"><a href="#cb15-16" aria-hidden="true" tabindex="-1"></a>  next_y <span class="ot">&lt;-</span> polygon[[ind <span class="sc">+</span> <span class="dv">1</span>]]<span class="sc">$</span>y</span>
+<span id="cb15-17"><a href="#cb15-17" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb15-18"><a href="#cb15-18" aria-hidden="true" tabindex="-1"></a>  new_x <span class="ot">&lt;-</span> (last_x <span class="sc">+</span> next_x) <span class="sc">/</span> <span class="dv">2</span> <span class="sc">+</span> <span class="fu">edge_noise</span>(len <span class="sc">*</span> noise)</span>
+<span id="cb15-19"><a href="#cb15-19" aria-hidden="true" tabindex="-1"></a>  new_y <span class="ot">&lt;-</span> (last_y <span class="sc">+</span> next_y) <span class="sc">/</span> <span class="dv">2</span> <span class="sc">+</span> <span class="fu">edge_noise</span>(len <span class="sc">*</span> noise)</span>
+<span id="cb15-20"><a href="#cb15-20" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb15-21"><a href="#cb15-21" aria-hidden="true" tabindex="-1"></a>  new_point <span class="ot">&lt;-</span> <span class="fu">list</span>(</span>
+<span id="cb15-22"><a href="#cb15-22" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> new_x,</span>
+<span id="cb15-23"><a href="#cb15-23" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> new_y,</span>
+<span id="cb15-24"><a href="#cb15-24" aria-hidden="true" tabindex="-1"></a>    <span class="at">seg_len =</span> <span class="fu">edge_length</span>(new_x, new_y, next_x, next_y)</span>
+<span id="cb15-25"><a href="#cb15-25" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb15-26"><a href="#cb15-26" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb15-27"><a href="#cb15-27" aria-hidden="true" tabindex="-1"></a>  polygon[[ind]]<span class="sc">$</span>seg_len <span class="ot">&lt;-</span> <span class="fu">edge_length</span>(</span>
+<span id="cb15-28"><a href="#cb15-28" aria-hidden="true" tabindex="-1"></a>    last_x, last_y, new_x, new_y</span>
+<span id="cb15-29"><a href="#cb15-29" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb15-30"><a href="#cb15-30" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb15-31"><a href="#cb15-31" aria-hidden="true" tabindex="-1"></a>  <span class="fu">c</span>(</span>
+<span id="cb15-32"><a href="#cb15-32" aria-hidden="true" tabindex="-1"></a>    polygon[<span class="dv">1</span><span class="sc">:</span>ind],</span>
+<span id="cb15-33"><a href="#cb15-33" aria-hidden="true" tabindex="-1"></a>    <span class="fu">list</span>(new_point),</span>
+<span id="cb15-34"><a href="#cb15-34" aria-hidden="true" tabindex="-1"></a>    polygon[<span class="sc">-</span>(<span class="dv">1</span><span class="sc">:</span>ind)]</span>
+<span id="cb15-35"><a href="#cb15-35" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb15-36"><a href="#cb15-36" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb15-37"><a href="#cb15-37" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-38"><a href="#cb15-38" aria-hidden="true" tabindex="-1"></a>grow_polygon_l <span class="ot">&lt;-</span> <span class="cf">function</span>(polygon, iterations, noise, <span class="at">seed =</span> <span class="cn">NULL</span>) {</span>
+<span id="cb15-39"><a href="#cb15-39" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span>(<span class="sc">!</span><span class="fu">is.null</span>(seed)) <span class="fu">set.seed</span>(seed)</span>
+<span id="cb15-40"><a href="#cb15-40" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>iterations) polygon <span class="ot">&lt;-</span> <span class="fu">insert_edge_l</span>(polygon, noise)</span>
+<span id="cb15-41"><a href="#cb15-41" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(polygon)</span>
+<span id="cb15-42"><a href="#cb15-42" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb15-43"><a href="#cb15-43" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-44"><a href="#cb15-44" aria-hidden="true" tabindex="-1"></a>grow_multipolygon_l <span class="ot">&lt;-</span> <span class="cf">function</span>(base_shape, n, <span class="at">seed =</span> <span class="cn">NULL</span>, ...) {</span>
+<span id="cb15-45"><a href="#cb15-45" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span>(<span class="sc">!</span><span class="fu">is.null</span>(seed)) <span class="fu">set.seed</span>(seed)</span>
+<span id="cb15-46"><a href="#cb15-46" aria-hidden="true" tabindex="-1"></a>  polygons <span class="ot">&lt;-</span> <span class="fu">list</span>()</span>
+<span id="cb15-47"><a href="#cb15-47" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>n) {</span>
+<span id="cb15-48"><a href="#cb15-48" aria-hidden="true" tabindex="-1"></a>    polygons[[i]] <span class="ot">&lt;-</span> <span class="fu">grow_polygon_l</span>(base_shape, ...) <span class="sc">|&gt;</span></span>
+<span id="cb15-49"><a href="#cb15-49" aria-hidden="true" tabindex="-1"></a>      <span class="fu">transpose</span>() <span class="sc">|&gt;</span></span>
+<span id="cb15-50"><a href="#cb15-50" aria-hidden="true" tabindex="-1"></a>      <span class="fu">as_tibble</span>() <span class="sc">|&gt;</span></span>
+<span id="cb15-51"><a href="#cb15-51" aria-hidden="true" tabindex="-1"></a>      <span class="fu">mutate</span>(<span class="fu">across</span>(<span class="at">.fn =</span> unlist))</span>
+<span id="cb15-52"><a href="#cb15-52" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb15-53"><a href="#cb15-53" aria-hidden="true" tabindex="-1"></a>  polygons <span class="ot">&lt;-</span> <span class="fu">bind_rows</span>(polygons, <span class="at">.id =</span> <span class="st">"id"</span>)</span>
+<span id="cb15-54"><a href="#cb15-54" aria-hidden="true" tabindex="-1"></a>  polygons</span>
+<span id="cb15-55"><a href="#cb15-55" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>That’s a fairly large code chunk, but if you compare each part to the earlier versions you can see that these functions have almost the same structure as the original ones. Most of the changes are little changes to the indexing, like using <code>polygon[[ind]]$x</code> to refer to coordinate rather than <code>polygon$x[ind]</code>.</p>
+<p>The code to generate images using the list-of-points version is almost identical to the original version. All we’re doing differently is using <code>square_l</code>, <code>grow_polygon_l()</code>, and <code>grow_multipolygon_l()</code> where previously we’d used <code>square</code>, <code>grow_polygon()</code>, and <code>grow_multipolygon()</code>:</p>
+<div class="cell" data-hash="index_cache/html/fast-polygon-layering-dat_1329bdce792dc91f6a9a360e438fd498">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tic</span>()</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>dat <span class="ot">&lt;-</span> square_l <span class="sc">|&gt;</span> </span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">grow_polygon_l</span>(<span class="at">iterations =</span> <span class="dv">100</span>, <span class="at">noise =</span> .<span class="dv">5</span>, <span class="at">seed =</span> <span class="dv">2</span>) <span class="sc">|&gt;</span></span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">grow_multipolygon_l</span>(<span class="at">n =</span> <span class="dv">50</span>, <span class="at">iterations =</span> <span class="dv">1000</span>, <span class="at">noise =</span> <span class="dv">1</span>, <span class="at">seed =</span> <span class="dv">2</span>) </span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a><span class="fu">toc</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>30.412 sec elapsed</code></pre>
+</div>
+</div>
+<p>That’s a pretty substantial improvement in performance relative to the original version, with only very minor rewriting of the code. And yes, it does produce the same result:</p>
+<div class="cell" data-layout-align="center" data-fig.dpi="300" data-hash="index_cache/html/fast-polygon-layering_1be47683d0db6ed883882bbcebfec903">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">show_multipolygon</span>(dat, <span class="at">fill =</span> <span class="st">"#d43790"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="index_files/figure-html/fast-polygon-layering-1.png" class="img-fluid figure-img" width="384"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="using-the-method-splotches" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="using-the-method-splotches">Using the method: splotches</h2>
+<p>Okay, so that’s the method. What I generally find when making art is that it’s a little awkward to play around and explore when it takes a long time to render pieces, so it’s handy to have a version of your generative art tools that will quickly produce results, even if those results aren’t quite as nice. It’s a little like having the ability to make rough sketches: something you can do easily before committing to doing something in detail. With that in mind, the <code>splotch()</code> function below wraps a slightly cruder version of the method than the one I showed earlier. It generates fewer polygons, and those polygons have fewer vertices.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>splotch <span class="ot">&lt;-</span> <span class="cf">function</span>(seed, <span class="at">layers =</span> <span class="dv">10</span>) {</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">set.seed</span>(seed)</span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>  square_l <span class="ot">&lt;-</span> <span class="fu">transpose</span>(<span class="fu">tibble</span>(</span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">0</span>),</span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">0</span>),</span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">seg_len =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">0</span>)</span>
+<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a>  ))</span>
+<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a>  square_l <span class="sc">|&gt;</span> </span>
+<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a>    <span class="fu">grow_polygon_l</span>(<span class="at">iterations =</span> <span class="dv">10</span>, <span class="at">noise =</span> .<span class="dv">5</span>, <span class="at">seed =</span> seed) <span class="sc">|&gt;</span></span>
+<span id="cb19-10"><a href="#cb19-10" aria-hidden="true" tabindex="-1"></a>    <span class="fu">grow_multipolygon_l</span>(<span class="at">n =</span> layers, <span class="at">iterations =</span> <span class="dv">500</span>, <span class="at">noise =</span> .<span class="dv">8</span>, <span class="at">seed =</span> seed) </span>
+<span id="cb19-11"><a href="#cb19-11" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>The results aren’t quite as nice as the full fledged version, but they are fast:</p>
+<div class="cell" data-hash="index_cache/html/splotch-timing_1eca9f0519f98c0605e7ed03de62cd18">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tic</span>()</span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>splotch_1 <span class="ot">&lt;-</span> <span class="fu">splotch</span>(<span class="at">seed =</span> <span class="dv">12</span>) </span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>splotch_2 <span class="ot">&lt;-</span> <span class="fu">splotch</span>(<span class="at">seed =</span> <span class="dv">34</span>)</span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>splotch_3 <span class="ot">&lt;-</span> <span class="fu">splotch</span>(<span class="at">seed =</span> <span class="dv">56</span>)</span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>splotch_4 <span class="ot">&lt;-</span> <span class="fu">splotch</span>(<span class="at">seed =</span> <span class="dv">78</span>)</span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a><span class="fu">toc</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>5.894 sec elapsed</code></pre>
+</div>
+</div>
+<p>Because <code>splotch()</code> is fast and a little crude, it can be a handy way to explore colour choices:</p>
+<div class="page-columns page-full">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">show_multipolygon</span>(splotch_1, <span class="st">"#f51720"</span>, <span class="at">alpha =</span> .<span class="dv">2</span>)</span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="fu">show_multipolygon</span>(splotch_2, <span class="st">"#f8d210"</span>, <span class="at">alpha =</span> .<span class="dv">2</span>)</span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a><span class="fu">show_multipolygon</span>(splotch_3, <span class="st">"#059dc0"</span>, <span class="at">alpha =</span> .<span class="dv">2</span>)</span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a><span class="fu">show_multipolygon</span>(splotch_4, <span class="st">"#81b622"</span>, <span class="at">alpha =</span> .<span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell column-screen-inset quarto-layout-panel" data-fig.dpi="300" data-hash="index_cache/html/splotch_4c2bb988f9b2c3b514b059200ca340e2">
+<div class="quarto-layout-row quarto-layout-valign-top">
+<div class="cell-output-display quarto-layout-cell" style="flex-basis: 25.0%;justify-content: center;">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="index_files/figure-html/splotch-1.png" class="img-fluid figure-img" width="384"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output-display quarto-layout-cell" style="flex-basis: 25.0%;justify-content: center;">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="index_files/figure-html/splotch-2.png" class="img-fluid figure-img" width="384"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output-display quarto-layout-cell" style="flex-basis: 25.0%;justify-content: center;">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="index_files/figure-html/splotch-3.png" class="img-fluid figure-img" width="384"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output-display quarto-layout-cell" style="flex-basis: 25.0%;justify-content: center;">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="index_files/figure-html/splotch-4.png" class="img-fluid figure-img" width="384"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="using-the-method-smudged-hexagons" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="using-the-method-smudged-hexagons">Using the method: Smudged hexagons</h2>
+<p>The goal of <code>splotch()</code> is to have a tool we can play around with and explore the method. That’s nice and all, but can we also use the method to make something fun? Here’s one example: since we are R users and love our hexagons, let’s write a function that paints hexagons using this recursive deformation method. The goal is to create a shape with a naturalistic look, as if it had been painted or coloured, with some of the edges smudged or blurred. The <code>smudged_hexagon()</code> function attempts to do that:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>smudged_hexagon <span class="ot">&lt;-</span> <span class="cf">function</span>(seed, <span class="at">noise1 =</span> <span class="dv">0</span>, <span class="at">noise2 =</span> <span class="dv">2</span>, <span class="at">noise3 =</span> <span class="fl">0.5</span>) {</span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">set.seed</span>(seed)</span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>  <span class="co"># define hexagonal base shape</span></span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>  theta <span class="ot">&lt;-</span> (<span class="dv">0</span><span class="sc">:</span><span class="dv">6</span>) <span class="sc">*</span> pi <span class="sc">/</span> <span class="dv">3</span></span>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a>  hexagon <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
+<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="fu">sin</span>(theta),</span>
+<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="fu">cos</span>(theta),</span>
+<span id="cb23-9"><a href="#cb23-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">seg_len =</span> <span class="fu">edge_length</span>(x, y, <span class="fu">lead</span>(x), <span class="fu">lead</span>(y))</span>
+<span id="cb23-10"><a href="#cb23-10" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb23-11"><a href="#cb23-11" aria-hidden="true" tabindex="-1"></a>  hexagon<span class="sc">$</span>seg_len[<span class="dv">7</span>] <span class="ot">&lt;-</span> <span class="dv">0</span></span>
+<span id="cb23-12"><a href="#cb23-12" aria-hidden="true" tabindex="-1"></a>  hexagon <span class="ot">&lt;-</span> <span class="fu">transpose</span>(hexagon)</span>
+<span id="cb23-13"><a href="#cb23-13" aria-hidden="true" tabindex="-1"></a>  base <span class="ot">&lt;-</span> hexagon <span class="sc">|&gt;</span> </span>
+<span id="cb23-14"><a href="#cb23-14" aria-hidden="true" tabindex="-1"></a>    <span class="fu">grow_polygon_l</span>(</span>
+<span id="cb23-15"><a href="#cb23-15" aria-hidden="true" tabindex="-1"></a>      <span class="at">iterations =</span> <span class="dv">60</span>, </span>
+<span id="cb23-16"><a href="#cb23-16" aria-hidden="true" tabindex="-1"></a>      <span class="at">noise =</span> noise1</span>
+<span id="cb23-17"><a href="#cb23-17" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb23-18"><a href="#cb23-18" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb23-19"><a href="#cb23-19" aria-hidden="true" tabindex="-1"></a>  <span class="co"># define intermediate-base-shapes in clusters</span></span>
+<span id="cb23-20"><a href="#cb23-20" aria-hidden="true" tabindex="-1"></a>  polygons <span class="ot">&lt;-</span> <span class="fu">list</span>()</span>
+<span id="cb23-21"><a href="#cb23-21" aria-hidden="true" tabindex="-1"></a>  ijk <span class="ot">&lt;-</span> <span class="dv">0</span></span>
+<span id="cb23-22"><a href="#cb23-22" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>) {</span>
+<span id="cb23-23"><a href="#cb23-23" aria-hidden="true" tabindex="-1"></a>    base_i <span class="ot">&lt;-</span> base <span class="sc">|&gt;</span> </span>
+<span id="cb23-24"><a href="#cb23-24" aria-hidden="true" tabindex="-1"></a>      <span class="fu">grow_polygon_l</span>(</span>
+<span id="cb23-25"><a href="#cb23-25" aria-hidden="true" tabindex="-1"></a>        <span class="at">iterations =</span> <span class="dv">50</span>, </span>
+<span id="cb23-26"><a href="#cb23-26" aria-hidden="true" tabindex="-1"></a>        <span class="at">noise =</span> noise2</span>
+<span id="cb23-27"><a href="#cb23-27" aria-hidden="true" tabindex="-1"></a>      )</span>
+<span id="cb23-28"><a href="#cb23-28" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb23-29"><a href="#cb23-29" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span>(j <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>) {</span>
+<span id="cb23-30"><a href="#cb23-30" aria-hidden="true" tabindex="-1"></a>      base_j <span class="ot">&lt;-</span> base_i <span class="sc">|&gt;</span> </span>
+<span id="cb23-31"><a href="#cb23-31" aria-hidden="true" tabindex="-1"></a>        <span class="fu">grow_polygon_l</span>(</span>
+<span id="cb23-32"><a href="#cb23-32" aria-hidden="true" tabindex="-1"></a>          <span class="at">iterations =</span> <span class="dv">50</span>, </span>
+<span id="cb23-33"><a href="#cb23-33" aria-hidden="true" tabindex="-1"></a>          <span class="at">noise =</span> noise2</span>
+<span id="cb23-34"><a href="#cb23-34" aria-hidden="true" tabindex="-1"></a>        )</span>
+<span id="cb23-35"><a href="#cb23-35" aria-hidden="true" tabindex="-1"></a>      </span>
+<span id="cb23-36"><a href="#cb23-36" aria-hidden="true" tabindex="-1"></a>      <span class="co"># grow 10 polygons per intermediate-base</span></span>
+<span id="cb23-37"><a href="#cb23-37" aria-hidden="true" tabindex="-1"></a>      <span class="cf">for</span>(k <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>) {</span>
+<span id="cb23-38"><a href="#cb23-38" aria-hidden="true" tabindex="-1"></a>        ijk <span class="ot">&lt;-</span> ijk <span class="sc">+</span> <span class="dv">1</span></span>
+<span id="cb23-39"><a href="#cb23-39" aria-hidden="true" tabindex="-1"></a>        polygons[[ijk]] <span class="ot">&lt;-</span> base_j <span class="sc">|&gt;</span></span>
+<span id="cb23-40"><a href="#cb23-40" aria-hidden="true" tabindex="-1"></a>          <span class="fu">grow_polygon_l</span>(</span>
+<span id="cb23-41"><a href="#cb23-41" aria-hidden="true" tabindex="-1"></a>            <span class="at">iterations =</span> <span class="dv">500</span>, </span>
+<span id="cb23-42"><a href="#cb23-42" aria-hidden="true" tabindex="-1"></a>            <span class="at">noise =</span> noise3</span>
+<span id="cb23-43"><a href="#cb23-43" aria-hidden="true" tabindex="-1"></a>          ) <span class="sc">|&gt;</span></span>
+<span id="cb23-44"><a href="#cb23-44" aria-hidden="true" tabindex="-1"></a>          <span class="fu">transpose</span>() <span class="sc">|&gt;</span></span>
+<span id="cb23-45"><a href="#cb23-45" aria-hidden="true" tabindex="-1"></a>          <span class="fu">as_tibble</span>() <span class="sc">|&gt;</span></span>
+<span id="cb23-46"><a href="#cb23-46" aria-hidden="true" tabindex="-1"></a>          <span class="fu">mutate</span>(<span class="fu">across</span>(<span class="at">.fn =</span> unlist))</span>
+<span id="cb23-47"><a href="#cb23-47" aria-hidden="true" tabindex="-1"></a>      }</span>
+<span id="cb23-48"><a href="#cb23-48" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb23-49"><a href="#cb23-49" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb23-50"><a href="#cb23-50" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb23-51"><a href="#cb23-51" aria-hidden="true" tabindex="-1"></a>  <span class="co"># return as data frame</span></span>
+<span id="cb23-52"><a href="#cb23-52" aria-hidden="true" tabindex="-1"></a>  <span class="fu">bind_rows</span>(polygons, <span class="at">.id =</span> <span class="st">"id"</span>)</span>
+<span id="cb23-53"><a href="#cb23-53" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Here it is in action:</p>
+<div class="cell" data-layout-align="center" data-fig.dpi="300" data-hash="index_cache/html/deeply-nested-polygon-layering_2f79f1323ecf2f081d2b2f2420672778">
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tic</span>()</span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>dat <span class="ot">&lt;-</span> <span class="fu">smudged_hexagon</span>(<span class="at">seed =</span> <span class="dv">1</span>)</span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a><span class="fu">toc</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>19.919 sec elapsed</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>dat <span class="sc">|&gt;</span> <span class="fu">show_multipolygon</span>(<span class="at">fill =</span> <span class="st">"#d4379005"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="index_files/figure-html/deeply-nested-polygon-layering-1.png" class="img-fluid figure-img" width="576"></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="page-columns page-full">
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="fu">smudged_hexagon</span>(<span class="at">seed =</span> <span class="dv">11</span>) <span class="sc">|&gt;</span> <span class="fu">show_multipolygon</span>(<span class="at">fill =</span> <span class="st">"#d4379005"</span>)</span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a><span class="fu">smudged_hexagon</span>(<span class="at">seed =</span> <span class="dv">44</span>) <span class="sc">|&gt;</span> <span class="fu">show_multipolygon</span>(<span class="at">fill =</span> <span class="st">"#d4379005"</span>)</span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a><span class="fu">smudged_hexagon</span>(<span class="at">seed =</span> <span class="dv">88</span>) <span class="sc">|&gt;</span> <span class="fu">show_multipolygon</span>(<span class="at">fill =</span> <span class="st">"#d4379005"</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell column-screen quarto-layout-panel" data-fig.dpi="300" data-hash="index_cache/html/smudged-hexagon-examples_14ab46868116d5f1e2c790179d0206f5">
+<div class="quarto-layout-row quarto-layout-valign-top">
+<div class="cell-output-display quarto-layout-cell" style="flex-basis: 33.3%;justify-content: center;">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="index_files/figure-html/smudged-hexagon-examples-1.png" class="img-fluid figure-img" width="576"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output-display quarto-layout-cell" style="flex-basis: 33.3%;justify-content: center;">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="index_files/figure-html/smudged-hexagon-examples-2.png" class="img-fluid figure-img" width="576"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output-display quarto-layout-cell" style="flex-basis: 33.3%;justify-content: center;">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="index_files/figure-html/smudged-hexagon-examples-3.png" class="img-fluid figure-img" width="576"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell page-columns page-full" data-layout-align="center" data-fig.dpi="300" data-hash="index_cache/html/layered-smudged-hexagon_eb0b1539f923dec4d75d5cae2db2d63d">
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>dat <span class="ot">&lt;-</span> <span class="fu">bind_rows</span>(</span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">smudged_hexagon</span>(<span class="at">seed =</span> <span class="dv">11</span>),</span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">smudged_hexagon</span>(<span class="at">seed =</span> <span class="dv">44</span>),</span>
+<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">smudged_hexagon</span>(<span class="at">seed =</span> <span class="dv">88</span>),</span>
+<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">.id =</span> <span class="st">"source"</span></span>
+<span id="cb28-6"><a href="#cb28-6" aria-hidden="true" tabindex="-1"></a>) <span class="sc">|&gt;</span></span>
+<span id="cb28-7"><a href="#cb28-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb28-8"><a href="#cb28-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">id =</span> <span class="fu">paste</span>(id, source),</span>
+<span id="cb28-9"><a href="#cb28-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> x <span class="sc">+</span> <span class="fu">as.numeric</span>(source)</span>
+<span id="cb28-10"><a href="#cb28-10" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
+<span id="cb28-11"><a href="#cb28-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(id)</span>
+<span id="cb28-12"><a href="#cb28-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-13"><a href="#cb28-13" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(dat, <span class="fu">aes</span>(x, y, <span class="at">group =</span> id, <span class="at">fill =</span> <span class="fu">factor</span>(source))) <span class="sc">+</span></span>
+<span id="cb28-14"><a href="#cb28-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_polygon</span>(<span class="at">alpha =</span> .<span class="dv">02</span>, <span class="at">show.legend =</span> <span class="cn">FALSE</span>) <span class="sc">+</span> </span>
+<span id="cb28-15"><a href="#cb28-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_void</span>() <span class="sc">+</span> </span>
+<span id="cb28-16"><a href="#cb28-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(</span>
+<span id="cb28-17"><a href="#cb28-17" aria-hidden="true" tabindex="-1"></a>    <span class="st">"#ff1b8d"</span>, <span class="st">"#ffda00"</span>, <span class="st">"#1bb3ff"</span></span>
+<span id="cb28-18"><a href="#cb28-18" aria-hidden="true" tabindex="-1"></a>  )) <span class="sc">+</span></span>
+<span id="cb28-19"><a href="#cb28-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_equal</span>() </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display column-screen-inset">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="index_files/figure-html/layered-smudged-hexagon-1.png" class="img-fluid figure-img" width="1344"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>This one makes me happy :-)</p>
+</section>
+<section id="slightly-misshapen-objects" class="level2">
+<h2 class="anchored" data-anchor-id="slightly-misshapen-objects">Slightly misshapen objects</h2>
+<p>The second case of polygon trickery that I want to talk about is adapted from an example kindly shared with me by <a href="https://www.williamrchase.com/">Will Chase</a>. Will posted some code on twitter showing how to very gently deform the outline of a shape to give it a slightly hand drawn look, and I’ll expand on that example here. Let’s suppose I want to draw the outline of a heart. I do a little googling and discover some formulas that I can use for that purpose. If I have a vector describing the <code>angle</code> around circle from 0 to 2<span class="math inline">\(\pi\)</span>, I can compute the x- and y-coordinates for a heart shape using these functions:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>heart_x <span class="ot">&lt;-</span> <span class="cf">function</span>(angle) {</span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>  x <span class="ot">&lt;-</span> (<span class="dv">16</span> <span class="sc">*</span> <span class="fu">sin</span>(angle) <span class="sc">^</span> <span class="dv">3</span>) <span class="sc">/</span> <span class="dv">17</span></span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(x <span class="sc">-</span> <span class="fu">mean</span>(x))</span>
+<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-6"><a href="#cb29-6" aria-hidden="true" tabindex="-1"></a>heart_y <span class="ot">&lt;-</span> <span class="cf">function</span>(angle) {</span>
+<span id="cb29-7"><a href="#cb29-7" aria-hidden="true" tabindex="-1"></a>  y <span class="ot">&lt;-</span> (<span class="dv">13</span> <span class="sc">*</span> <span class="fu">cos</span>(angle) <span class="sc">-</span> <span class="dv">5</span> <span class="sc">*</span> <span class="fu">cos</span>(<span class="dv">2</span> <span class="sc">*</span> angle) <span class="sc">-</span> <span class="dv">2</span> <span class="sc">*</span> <span class="fu">cos</span>(<span class="dv">3</span> <span class="sc">*</span> angle) <span class="sc">-</span></span>
+<span id="cb29-8"><a href="#cb29-8" aria-hidden="true" tabindex="-1"></a>          <span class="fu">cos</span>(<span class="dv">4</span> <span class="sc">*</span> angle)) <span class="sc">/</span> <span class="dv">17</span></span>
+<span id="cb29-9"><a href="#cb29-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(y <span class="sc">-</span> <span class="fu">mean</span>(y))</span>
+<span id="cb29-10"><a href="#cb29-10" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Here’s what it looks like when I draw a heart using these formulas:</p>
+<div class="cell" data-layout-align="center" data-fig.dpi="300" data-hash="index_cache/html/heart-polygon_62841085b088b601087ef01269ffca70">
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>heart_shape <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">angle =</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">2</span> <span class="sc">*</span> pi, <span class="at">length.out =</span> <span class="dv">50</span>),</span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">x =</span> <span class="fu">heart_x</span>(angle),</span>
+<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">y =</span> <span class="fu">heart_y</span>(angle)</span>
+<span id="cb30-5"><a href="#cb30-5" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb30-6"><a href="#cb30-6" aria-hidden="true" tabindex="-1"></a><span class="fu">show_polygon</span>(heart_shape)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="index_files/figure-html/heart-polygon-1.png" class="img-fluid figure-img" width="384"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>I use hearts drawn with these formulas quite frequently in my art. They’re easy to compute, the shape often produces interesting patterns when other processes are applied to it, and of course it’s meaningfully associated with positive emotions and affection! However, the problem with using this formula is that the hearts it draws are very precise and mechanical. Sometimes that’s fine: precise, crisp shapes are often exactly the look we’re going for. But other times we might want an outline that looks a little more naturalistic. For instance, I asked my 9 year old daughter to draw a few heart shapes for me that I could use as an example. Here’s what she drew:</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">include_graphics</span>(<span class="st">"hand-drawn-hearts.jpg"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="hand-drawn-hearts.jpg" class="img-fluid figure-img" width="666"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Setting aside the fact that in one case she decided that she actually wanted to draw a frog face rather than a heart – unlike <a href="https://openai.com/dall-e-2/">DALL-E</a>, humans have a tendency to flat out refuse to follow the text prompts when you ask them to make art for you – these hearts have a qualitatively different feel to the crisp and clean look of the artificial ones.</p>
+<p>What we’d like to do is gently and smoothly deform the outline of the original shape to produce something that captures some of the naturalistic feel that the hand-drawn hearts have. As always we’re not going to try to perfectly reproduce all the features of the original, just capture “the vibe”.</p>
+</section>
+<section id="perlin-blobs" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="perlin-blobs">Perlin blobs</h2>
+<p>Let’s start with a slightly simpler version of the problem: instead of deforming a heart shape we’ll deform a circle using Perlin noise. Our base shape is a circle that looks like this:</p>
+<div class="cell" data-layout-align="center" data-fig.dpi="300" data-hash="index_cache/html/basic-circle_0705b0c668c0895f19b27d1569aa43e1">
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>circle <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">angle =</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">2</span><span class="sc">*</span>pi, <span class="at">length.out =</span> <span class="dv">50</span>),</span>
+<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">x =</span> <span class="fu">cos</span>(angle),</span>
+<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">y =</span> <span class="fu">sin</span>(angle)</span>
+<span id="cb32-5"><a href="#cb32-5" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb32-6"><a href="#cb32-6" aria-hidden="true" tabindex="-1"></a><span class="fu">show_polygon</span>(circle)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="index_files/figure-html/basic-circle-1.png" class="img-fluid figure-img" width="384"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>We can create gently distorted circles using the <code>perlin_blob()</code> function shown below. Here’s how it works. First it defines coordinates in the shape of a perfect circle (that’s the variables <code>x_base</code> and <code>y_base</code>). Then we use <code>gen_perlin()</code> to calculate some spatially varying noise at each of those co-ordinates. Or, more precisely, we generate fractal noise at those coordinates using <code>gen_perlin()</code> as the generator and <code>fbm()</code> as the fractal function, but that’s not a super important detail rignt now. What is important is to realise that, although we want to use the numbers returned by our fractal generator to slightly modify the radius of the circle at that location, those numbers can be negative. So we’ll rescale them using the helper function <code>normalise_radius()</code> so that the minimum distance from the origin is <code>r_min</code> and the maximum distance from the origin is <code>r_max</code>. This rescaling helps to ensure that the output is regular.</p>
+<p>In any case, after computing the (Perlin-noise distorted) <code>radius</code> associated with each coordinate, we compute the final <code>x</code> and <code>y</code> values for the “Perlin blob” by multiplying the coordinates of the base shape by the radius. Here’s the code:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>normalise_radius <span class="ot">&lt;-</span> <span class="cf">function</span>(x, min, max) {</span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">normalise</span>(x, <span class="at">from =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="fl">0.5</span>, <span class="fl">0.5</span>), <span class="at">to =</span> <span class="fu">c</span>(min, max))</span>
+<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-5"><a href="#cb33-5" aria-hidden="true" tabindex="-1"></a>perlin_blob <span class="ot">&lt;-</span> <span class="cf">function</span>(<span class="at">n =</span> <span class="dv">100</span>, </span>
+<span id="cb33-6"><a href="#cb33-6" aria-hidden="true" tabindex="-1"></a>                        <span class="at">freq_init =</span> <span class="fl">0.3</span>,</span>
+<span id="cb33-7"><a href="#cb33-7" aria-hidden="true" tabindex="-1"></a>                        <span class="at">octaves =</span> <span class="dv">2</span>, </span>
+<span id="cb33-8"><a href="#cb33-8" aria-hidden="true" tabindex="-1"></a>                        <span class="at">r_min =</span> <span class="fl">0.5</span>, </span>
+<span id="cb33-9"><a href="#cb33-9" aria-hidden="true" tabindex="-1"></a>                        <span class="at">r_max =</span> <span class="dv">1</span>) {</span>
+<span id="cb33-10"><a href="#cb33-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tibble</span>(</span>
+<span id="cb33-11"><a href="#cb33-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">angle =</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">2</span><span class="sc">*</span>pi, <span class="at">length.out =</span> n),</span>
+<span id="cb33-12"><a href="#cb33-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">x_base =</span> <span class="fu">cos</span>(angle),</span>
+<span id="cb33-13"><a href="#cb33-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">y_base =</span> <span class="fu">sin</span>(angle),</span>
+<span id="cb33-14"><a href="#cb33-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">radius =</span> <span class="fu">fracture</span>(</span>
+<span id="cb33-15"><a href="#cb33-15" aria-hidden="true" tabindex="-1"></a>      <span class="at">x =</span> x_base, </span>
+<span id="cb33-16"><a href="#cb33-16" aria-hidden="true" tabindex="-1"></a>      <span class="at">y =</span> y_base, </span>
+<span id="cb33-17"><a href="#cb33-17" aria-hidden="true" tabindex="-1"></a>      <span class="at">freq_init =</span> freq_init,</span>
+<span id="cb33-18"><a href="#cb33-18" aria-hidden="true" tabindex="-1"></a>      <span class="at">noise =</span> gen_perlin, </span>
+<span id="cb33-19"><a href="#cb33-19" aria-hidden="true" tabindex="-1"></a>      <span class="at">fractal =</span> fbm, </span>
+<span id="cb33-20"><a href="#cb33-20" aria-hidden="true" tabindex="-1"></a>      <span class="at">octaves =</span> octaves</span>
+<span id="cb33-21"><a href="#cb33-21" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">|&gt;</span></span>
+<span id="cb33-22"><a href="#cb33-22" aria-hidden="true" tabindex="-1"></a>      <span class="fu">normalise_radius</span>(r_min, r_max),</span>
+<span id="cb33-23"><a href="#cb33-23" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> radius <span class="sc">*</span> x_base,</span>
+<span id="cb33-24"><a href="#cb33-24" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> radius <span class="sc">*</span> y_base</span>
+<span id="cb33-25"><a href="#cb33-25" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb33-26"><a href="#cb33-26" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Here are three outputs from our <code>perlin_blob()</code> function:</p>
+<div class="page-columns page-full">
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1</span>); <span class="fu">perlin_blob</span>() <span class="sc">|&gt;</span> <span class="fu">show_polygon</span>(<span class="cn">FALSE</span>)</span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">2</span>); <span class="fu">perlin_blob</span>() <span class="sc">|&gt;</span> <span class="fu">show_polygon</span>(<span class="cn">FALSE</span>)</span>
+<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">3</span>); <span class="fu">perlin_blob</span>() <span class="sc">|&gt;</span> <span class="fu">show_polygon</span>(<span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell column-screen-inset quarto-layout-panel" data-fig.dpi="300" data-hash="index_cache/html/show-perlin-blobs_61061b11907c0473e80b1652972b2fb0">
+<div class="quarto-layout-row quarto-layout-valign-top">
+<div class="cell-output-display quarto-layout-cell" style="flex-basis: 33.3%;justify-content: center;">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="index_files/figure-html/show-perlin-blobs-1.png" class="img-fluid figure-img" width="384"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output-display quarto-layout-cell" style="flex-basis: 33.3%;justify-content: center;">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="index_files/figure-html/show-perlin-blobs-2.png" class="img-fluid figure-img" width="384"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output-display quarto-layout-cell" style="flex-basis: 33.3%;justify-content: center;">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="index_files/figure-html/show-perlin-blobs-3.png" class="img-fluid figure-img" width="384"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div>
+<p>To give you a feel for how this function behaves, here’s a few images showing the effect of changing the <code>freq_init</code> parameter. This argument is used to set the overall noise level when generating fractal noise patterns:</p>
+<div class="page-columns page-full">
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1</span>); <span class="fu">perlin_blob</span>(<span class="at">freq_init =</span> .<span class="dv">2</span>) <span class="sc">|&gt;</span> <span class="fu">show_polygon</span>(<span class="cn">FALSE</span>)</span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1</span>); <span class="fu">perlin_blob</span>(<span class="at">freq_init =</span> .<span class="dv">4</span>) <span class="sc">|&gt;</span> <span class="fu">show_polygon</span>(<span class="cn">FALSE</span>)</span>
+<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1</span>); <span class="fu">perlin_blob</span>(<span class="at">freq_init =</span> .<span class="dv">8</span>) <span class="sc">|&gt;</span> <span class="fu">show_polygon</span>(<span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell column-screen-inset quarto-layout-panel" data-fig.dpi="300" data-hash="index_cache/html/show-perlin-blob-frequency_9325fd1653605cdd5d430390080debea">
+<div class="quarto-layout-row quarto-layout-valign-top">
+<div class="cell-output-display quarto-layout-cell" style="flex-basis: 33.3%;justify-content: center;">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="index_files/figure-html/show-perlin-blob-frequency-1.png" class="img-fluid figure-img" width="384"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output-display quarto-layout-cell" style="flex-basis: 33.3%;justify-content: center;">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="index_files/figure-html/show-perlin-blob-frequency-2.png" class="img-fluid figure-img" width="384"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output-display quarto-layout-cell" style="flex-basis: 33.3%;justify-content: center;">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="index_files/figure-html/show-perlin-blob-frequency-3.png" class="img-fluid figure-img" width="384"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div>
+<p>The effect of the radius parameters is slightly different to the effect of the noise parameter. Shifting the <code>r_min</code> and <code>r_max</code> arguments has the effect of “globally flattening” the pattern of variation because the overall shape can only vary within a narrow bound. But it’s quite possible to set a high value for <code>freq_init</code> (causing noticeable distortions to the radius to emerge even at small scales) while constraining the global shape to be almost perfectly circular. The result is a rough-edged but otherwise perfect circle:</p>
+<div class="page-columns page-full">
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1</span>); </span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a><span class="fu">perlin_blob</span>(</span>
+<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">n =</span> <span class="dv">1000</span>,</span>
+<span id="cb36-4"><a href="#cb36-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">freq_init =</span> <span class="dv">10</span>, </span>
+<span id="cb36-5"><a href="#cb36-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">r_min =</span> .<span class="dv">95</span>, </span>
+<span id="cb36-6"><a href="#cb36-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">r_max =</span> <span class="dv">1</span></span>
+<span id="cb36-7"><a href="#cb36-7" aria-hidden="true" tabindex="-1"></a>) <span class="sc">|&gt;</span> </span>
+<span id="cb36-8"><a href="#cb36-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">show_polygon</span>(<span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell column-screen-inset quarto-layout-panel" data-fig.dpi="300" data-hash="index_cache/html/show-perlin-blob-radius_84216dbf9461e0bd1f920bdf503f41b8">
+<div class="quarto-layout-row quarto-layout-valign-top">
+<div class="cell-output-display quarto-layout-cell" style="flex-basis: 100.0%;justify-content: center;">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="index_files/figure-html/show-perlin-blob-radius-1.png" class="img-fluid figure-img" width="384"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div>
+<p>At these parameter settings the output of <code>perlin_blob()</code> reminds me more of a cookie shape than a hand-drawn circle. I’ve never used those settings in art before, but I can imagine some tasty applications!</p>
+</section>
+<section id="perlin-hearts" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="perlin-hearts">Perlin hearts</h2>
+<p>Modifying this system so that it draws distorted heart shapes rather than distorted circles is not too difficult. There’s a few different ways we can do this, but the way I find most pleasing is to start with a distorted circle and then apply the <code>heart_x()</code> and <code>heart_y()</code> transformations:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a>perlin_heart <span class="ot">&lt;-</span> <span class="cf">function</span>(<span class="at">n =</span> <span class="dv">100</span>, </span>
+<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a>                         <span class="at">freq_init =</span> <span class="fl">0.3</span>,</span>
+<span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a>                         <span class="at">octaves =</span> <span class="dv">2</span>, </span>
+<span id="cb37-4"><a href="#cb37-4" aria-hidden="true" tabindex="-1"></a>                         <span class="at">r_min =</span> <span class="fl">0.5</span>, </span>
+<span id="cb37-5"><a href="#cb37-5" aria-hidden="true" tabindex="-1"></a>                         <span class="at">r_max =</span> <span class="dv">1</span>,</span>
+<span id="cb37-6"><a href="#cb37-6" aria-hidden="true" tabindex="-1"></a>                         <span class="at">x_shift =</span> <span class="dv">0</span>,</span>
+<span id="cb37-7"><a href="#cb37-7" aria-hidden="true" tabindex="-1"></a>                         <span class="at">y_shift =</span> <span class="dv">0</span>,</span>
+<span id="cb37-8"><a href="#cb37-8" aria-hidden="true" tabindex="-1"></a>                         <span class="at">id =</span> <span class="cn">NA</span>,</span>
+<span id="cb37-9"><a href="#cb37-9" aria-hidden="true" tabindex="-1"></a>                         <span class="at">seed =</span> <span class="cn">NULL</span>) {</span>
+<span id="cb37-10"><a href="#cb37-10" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span>(<span class="sc">!</span><span class="fu">is.null</span>(seed)) <span class="fu">set.seed</span>(seed)</span>
+<span id="cb37-11"><a href="#cb37-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tibble</span>(</span>
+<span id="cb37-12"><a href="#cb37-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">angle =</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">2</span><span class="sc">*</span>pi, <span class="at">length.out =</span> n),</span>
+<span id="cb37-13"><a href="#cb37-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">x_base =</span> <span class="fu">cos</span>(angle),</span>
+<span id="cb37-14"><a href="#cb37-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">y_base =</span> <span class="fu">sin</span>(angle),</span>
+<span id="cb37-15"><a href="#cb37-15" aria-hidden="true" tabindex="-1"></a>    <span class="at">radius =</span> <span class="fu">fracture</span>(</span>
+<span id="cb37-16"><a href="#cb37-16" aria-hidden="true" tabindex="-1"></a>      <span class="at">x =</span> x_base, </span>
+<span id="cb37-17"><a href="#cb37-17" aria-hidden="true" tabindex="-1"></a>      <span class="at">y =</span> y_base, </span>
+<span id="cb37-18"><a href="#cb37-18" aria-hidden="true" tabindex="-1"></a>      <span class="at">freq_init =</span> freq_init,</span>
+<span id="cb37-19"><a href="#cb37-19" aria-hidden="true" tabindex="-1"></a>      <span class="at">noise =</span> gen_perlin, </span>
+<span id="cb37-20"><a href="#cb37-20" aria-hidden="true" tabindex="-1"></a>      <span class="at">fractal =</span> fbm, </span>
+<span id="cb37-21"><a href="#cb37-21" aria-hidden="true" tabindex="-1"></a>      <span class="at">octaves =</span> octaves</span>
+<span id="cb37-22"><a href="#cb37-22" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">|&gt;</span></span>
+<span id="cb37-23"><a href="#cb37-23" aria-hidden="true" tabindex="-1"></a>      <span class="fu">normalise_radius</span>(r_min, r_max),</span>
+<span id="cb37-24"><a href="#cb37-24" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> radius <span class="sc">*</span> <span class="fu">heart_x</span>(angle) <span class="sc">+</span> x_shift,</span>
+<span id="cb37-25"><a href="#cb37-25" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> radius <span class="sc">*</span> <span class="fu">heart_y</span>(angle) <span class="sc">+</span> y_shift,</span>
+<span id="cb37-26"><a href="#cb37-26" aria-hidden="true" tabindex="-1"></a>    <span class="at">id =</span> id</span>
+<span id="cb37-27"><a href="#cb37-27" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb37-28"><a href="#cb37-28" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Here are three outputs from our <code>perlin_heart()</code> function:</p>
+<div class="page-columns page-full">
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="fu">perlin_heart</span>(<span class="at">seed =</span> <span class="dv">1</span>) <span class="sc">|&gt;</span> <span class="fu">show_polygon</span>(<span class="cn">FALSE</span>)</span>
+<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a><span class="fu">perlin_heart</span>(<span class="at">seed =</span> <span class="dv">2</span>) <span class="sc">|&gt;</span> <span class="fu">show_polygon</span>(<span class="cn">FALSE</span>)</span>
+<span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a><span class="fu">perlin_heart</span>(<span class="at">seed =</span> <span class="dv">3</span>) <span class="sc">|&gt;</span> <span class="fu">show_polygon</span>(<span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell column-screen-inset quarto-layout-panel" data-fig.dpi="300">
+<div class="quarto-layout-row quarto-layout-valign-top">
+<div class="cell-output-display quarto-layout-cell" style="flex-basis: 33.3%;justify-content: center;">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="index_files/figure-html/show-perlin-hearts-1.png" class="img-fluid figure-img" width="384"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output-display quarto-layout-cell" style="flex-basis: 33.3%;justify-content: center;">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="index_files/figure-html/show-perlin-hearts-2.png" class="img-fluid figure-img" width="384"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output-display quarto-layout-cell" style="flex-basis: 33.3%;justify-content: center;">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="index_files/figure-html/show-perlin-hearts-3.png" class="img-fluid figure-img" width="384"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div>
+<p>One of my favourite systems is a very simple one that draws many of these Perlin hearts on a grid, filling each one with a colour selected from a randomly sampled palette. To replicate that here I’ll need a palette generator and once again I’ll fall back on our old favourite <code>sample_canva()</code></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a>sample_canva <span class="ot">&lt;-</span> <span class="cf">function</span>(<span class="at">seed =</span> <span class="cn">NULL</span>) {</span>
+<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span>(<span class="sc">!</span><span class="fu">is.null</span>(seed)) <span class="fu">set.seed</span>(seed)</span>
+<span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sample</span>(ggthemes<span class="sc">::</span>canva_palettes, <span class="dv">1</span>)[[<span class="dv">1</span>]]</span>
+<span id="cb39-4"><a href="#cb39-4" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Now that we have a palette generator we can use the functional programming toolkit from <code>purrr</code> to do the work for us. In this case I’m using <code>pmap_dfr()</code> to call the <code>perlin_heart()</code> at a variety of different settings. I’ve included the <code>x_shift</code>, <code>y_shift</code> and <code>id</code> values among the settings to make it a little easier to plot the data:</p>
+<div class="page-columns page-full">
+<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a>perlin_heart_grid <span class="ot">&lt;-</span> <span class="cf">function</span>(<span class="at">nx =</span> <span class="dv">10</span>, <span class="at">ny =</span> <span class="dv">6</span>, <span class="at">seed =</span> <span class="cn">NULL</span>) {</span>
+<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span>(<span class="sc">!</span><span class="fu">is.null</span>(seed)) <span class="fu">set.seed</span>(seed)</span>
+<span id="cb40-3"><a href="#cb40-3" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb40-4"><a href="#cb40-4" aria-hidden="true" tabindex="-1"></a>  heart_settings <span class="ot">&lt;-</span> <span class="fu">expand_grid</span>(</span>
+<span id="cb40-5"><a href="#cb40-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">r_min =</span> .<span class="dv">3</span>, </span>
+<span id="cb40-6"><a href="#cb40-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">r_max =</span> .<span class="dv">4</span>, </span>
+<span id="cb40-7"><a href="#cb40-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">x_shift =</span> <span class="dv">1</span><span class="sc">:</span>nx, </span>
+<span id="cb40-8"><a href="#cb40-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">y_shift =</span> <span class="dv">1</span><span class="sc">:</span>ny</span>
+<span id="cb40-9"><a href="#cb40-9" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
+<span id="cb40-10"><a href="#cb40-10" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">id =</span> <span class="fu">row_number</span>()) </span>
+<span id="cb40-11"><a href="#cb40-11" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb40-12"><a href="#cb40-12" aria-hidden="true" tabindex="-1"></a>  heart_data <span class="ot">&lt;-</span>  <span class="fu">pmap_dfr</span>(heart_settings, perlin_heart)</span>
+<span id="cb40-13"><a href="#cb40-13" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb40-14"><a href="#cb40-14" aria-hidden="true" tabindex="-1"></a>  heart_data <span class="sc">|&gt;</span></span>
+<span id="cb40-15"><a href="#cb40-15" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ggplot</span>(<span class="fu">aes</span>(x, y, <span class="at">group =</span> id, <span class="at">fill =</span> <span class="fu">sample</span>(id))) <span class="sc">+</span></span>
+<span id="cb40-16"><a href="#cb40-16" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_polygon</span>(<span class="at">size =</span> <span class="dv">0</span>, <span class="at">show.legend =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
+<span id="cb40-17"><a href="#cb40-17" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme_void</span>() <span class="sc">+</span></span>
+<span id="cb40-18"><a href="#cb40-18" aria-hidden="true" tabindex="-1"></a>    <span class="fu">scale_fill_gradientn</span>(<span class="at">colours =</span> <span class="fu">sample_canva</span>(seed)) <span class="sc">+</span></span>
+<span id="cb40-19"><a href="#cb40-19" aria-hidden="true" tabindex="-1"></a>    <span class="fu">coord_equal</span>(<span class="at">xlim =</span> <span class="fu">c</span>(<span class="dv">0</span>, nx <span class="sc">+</span> <span class="dv">1</span>), <span class="at">ylim =</span> <span class="fu">c</span>(<span class="dv">0</span>, ny <span class="sc">+</span> <span class="dv">1</span>))</span>
+<span id="cb40-20"><a href="#cb40-20" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb40-21"><a href="#cb40-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-22"><a href="#cb40-22" aria-hidden="true" tabindex="-1"></a><span class="fu">perlin_heart_grid</span>(<span class="at">seed =</span> <span class="dv">451</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell column-screen-inset quarto-layout-panel" data-fig.dpi="300" data-hash="index_cache/html/perlin-hearts_33319e8342feea650294f22519e53d18">
+<div class="quarto-layout-row quarto-layout-valign-top">
+<div class="cell-output-display quarto-layout-cell" style="flex-basis: 100.0%;justify-content: center;">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="index_files/figure-html/perlin-hearts-1.png" class="img-fluid figure-img" width="1344"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div>
+<p>We can elaborate on this idea in various ways. For example, the <code>perlin_heart2()</code> function shown below modifies the original idea by adding a additional <code>width</code> variable computed in a similar way to <code>radius</code>:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a>perlin_heart2 <span class="ot">&lt;-</span> <span class="cf">function</span>(<span class="at">n =</span> <span class="dv">100</span>, </span>
+<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a>                          <span class="at">freq_init =</span> <span class="fl">0.3</span>,</span>
+<span id="cb41-3"><a href="#cb41-3" aria-hidden="true" tabindex="-1"></a>                          <span class="at">octaves =</span> <span class="dv">2</span>, </span>
+<span id="cb41-4"><a href="#cb41-4" aria-hidden="true" tabindex="-1"></a>                          <span class="at">r_min =</span> <span class="fl">0.5</span>, </span>
+<span id="cb41-5"><a href="#cb41-5" aria-hidden="true" tabindex="-1"></a>                          <span class="at">r_max =</span> <span class="dv">1</span>,</span>
+<span id="cb41-6"><a href="#cb41-6" aria-hidden="true" tabindex="-1"></a>                          <span class="at">w_min =</span> <span class="dv">0</span>,</span>
+<span id="cb41-7"><a href="#cb41-7" aria-hidden="true" tabindex="-1"></a>                          <span class="at">w_max =</span> <span class="dv">4</span>,</span>
+<span id="cb41-8"><a href="#cb41-8" aria-hidden="true" tabindex="-1"></a>                          <span class="at">rot =</span> <span class="dv">0</span>,</span>
+<span id="cb41-9"><a href="#cb41-9" aria-hidden="true" tabindex="-1"></a>                          <span class="at">x_shift =</span> <span class="dv">0</span>,</span>
+<span id="cb41-10"><a href="#cb41-10" aria-hidden="true" tabindex="-1"></a>                          <span class="at">y_shift =</span> <span class="dv">0</span>,</span>
+<span id="cb41-11"><a href="#cb41-11" aria-hidden="true" tabindex="-1"></a>                          <span class="at">id =</span> <span class="cn">NA</span>,</span>
+<span id="cb41-12"><a href="#cb41-12" aria-hidden="true" tabindex="-1"></a>                          <span class="at">seed =</span> <span class="cn">NULL</span>) {</span>
+<span id="cb41-13"><a href="#cb41-13" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span>(<span class="sc">!</span><span class="fu">is.null</span>(seed)) <span class="fu">set.seed</span>(seed)</span>
+<span id="cb41-14"><a href="#cb41-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tibble</span>(</span>
+<span id="cb41-15"><a href="#cb41-15" aria-hidden="true" tabindex="-1"></a>    <span class="at">angle =</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">2</span><span class="sc">*</span>pi, <span class="at">length.out =</span> n),</span>
+<span id="cb41-16"><a href="#cb41-16" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb41-17"><a href="#cb41-17" aria-hidden="true" tabindex="-1"></a>    <span class="at">radius =</span> <span class="fu">fracture</span>(</span>
+<span id="cb41-18"><a href="#cb41-18" aria-hidden="true" tabindex="-1"></a>      <span class="at">x =</span> <span class="fu">cos</span>(angle), </span>
+<span id="cb41-19"><a href="#cb41-19" aria-hidden="true" tabindex="-1"></a>      <span class="at">y =</span> <span class="fu">sin</span>(angle), </span>
+<span id="cb41-20"><a href="#cb41-20" aria-hidden="true" tabindex="-1"></a>      <span class="at">freq_init =</span> freq_init,</span>
+<span id="cb41-21"><a href="#cb41-21" aria-hidden="true" tabindex="-1"></a>      <span class="at">noise =</span> gen_perlin, </span>
+<span id="cb41-22"><a href="#cb41-22" aria-hidden="true" tabindex="-1"></a>      <span class="at">fractal =</span> fbm, </span>
+<span id="cb41-23"><a href="#cb41-23" aria-hidden="true" tabindex="-1"></a>      <span class="at">octaves =</span> octaves</span>
+<span id="cb41-24"><a href="#cb41-24" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">|&gt;</span></span>
+<span id="cb41-25"><a href="#cb41-25" aria-hidden="true" tabindex="-1"></a>      <span class="fu">normalise_radius</span>(r_min, r_max),</span>
+<span id="cb41-26"><a href="#cb41-26" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb41-27"><a href="#cb41-27" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> radius <span class="sc">*</span> <span class="fu">heart_x</span>(angle) <span class="sc">+</span> x_shift,</span>
+<span id="cb41-28"><a href="#cb41-28" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> radius <span class="sc">*</span> <span class="fu">heart_y</span>(angle) <span class="sc">+</span> y_shift,</span>
+<span id="cb41-29"><a href="#cb41-29" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb41-30"><a href="#cb41-30" aria-hidden="true" tabindex="-1"></a>    <span class="at">width =</span> <span class="fu">fracture</span>(</span>
+<span id="cb41-31"><a href="#cb41-31" aria-hidden="true" tabindex="-1"></a>      <span class="at">x =</span> <span class="fu">cos</span>(angle <span class="sc">+</span> rot), </span>
+<span id="cb41-32"><a href="#cb41-32" aria-hidden="true" tabindex="-1"></a>      <span class="at">y =</span> <span class="fu">sin</span>(angle <span class="sc">+</span> rot), </span>
+<span id="cb41-33"><a href="#cb41-33" aria-hidden="true" tabindex="-1"></a>      <span class="at">freq_init =</span> freq_init,</span>
+<span id="cb41-34"><a href="#cb41-34" aria-hidden="true" tabindex="-1"></a>      <span class="at">noise =</span> gen_perlin, </span>
+<span id="cb41-35"><a href="#cb41-35" aria-hidden="true" tabindex="-1"></a>      <span class="at">fractal =</span> fbm, </span>
+<span id="cb41-36"><a href="#cb41-36" aria-hidden="true" tabindex="-1"></a>      <span class="at">octaves =</span> octaves</span>
+<span id="cb41-37"><a href="#cb41-37" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">|&gt;</span></span>
+<span id="cb41-38"><a href="#cb41-38" aria-hidden="true" tabindex="-1"></a>      <span class="fu">normalise</span>(<span class="at">to =</span> <span class="fu">c</span>(w_min, w_max)),</span>
+<span id="cb41-39"><a href="#cb41-39" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb41-40"><a href="#cb41-40" aria-hidden="true" tabindex="-1"></a>    <span class="at">id =</span> id</span>
+<span id="cb41-41"><a href="#cb41-41" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb41-42"><a href="#cb41-42" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Here are three outputs from our <code>perlin_heart2()</code> function, showing the effect of varying the <code>rot</code> parameter. Because the width of outline varies, <code>rot</code> causes the whole pattern of variable thickness to rotate around the heart. As you might imagine, this is going to turn out to be very handy in a moment when we start animating these things!</p>
+<div class="page-columns page-full">
+<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a>show_width <span class="ot">&lt;-</span> <span class="cf">function</span>(polygon) {</span>
+<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(polygon, <span class="fu">aes</span>(x, y, <span class="at">size =</span> width)) <span class="sc">+</span></span>
+<span id="cb42-3"><a href="#cb42-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_path</span>(<span class="at">colour =</span> <span class="st">"white"</span>, <span class="at">fill =</span> <span class="cn">NA</span>, <span class="at">show.legend =</span> <span class="cn">FALSE</span>) <span class="sc">+</span> </span>
+<span id="cb42-4"><a href="#cb42-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">coord_equal</span>() <span class="sc">+</span> </span>
+<span id="cb42-5"><a href="#cb42-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">scale_size_identity</span>() <span class="sc">+</span></span>
+<span id="cb42-6"><a href="#cb42-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme_void</span>()</span>
+<span id="cb42-7"><a href="#cb42-7" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb42-8"><a href="#cb42-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-9"><a href="#cb42-9" aria-hidden="true" tabindex="-1"></a><span class="fu">perlin_heart2</span>(<span class="at">n =</span> <span class="dv">1000</span>, <span class="at">rot =</span> <span class="dv">0</span>, <span class="at">seed =</span> <span class="dv">2</span>) <span class="sc">|&gt;</span> <span class="fu">show_width</span>()</span>
+<span id="cb42-10"><a href="#cb42-10" aria-hidden="true" tabindex="-1"></a><span class="fu">perlin_heart2</span>(<span class="at">n =</span> <span class="dv">1000</span>, <span class="at">rot =</span> pi <span class="sc">/</span> <span class="dv">2</span>, <span class="at">seed =</span> <span class="dv">2</span>) <span class="sc">|&gt;</span> <span class="fu">show_width</span>()</span>
+<span id="cb42-11"><a href="#cb42-11" aria-hidden="true" tabindex="-1"></a><span class="fu">perlin_heart2</span>(<span class="at">n =</span> <span class="dv">1000</span>, <span class="at">rot =</span> pi, <span class="at">seed =</span> <span class="dv">2</span>) <span class="sc">|&gt;</span> <span class="fu">show_width</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell column-screen-inset quarto-layout-panel" data-fig.dpi="300">
+<div class="quarto-layout-row quarto-layout-valign-top">
+<div class="cell-output-display quarto-layout-cell" style="flex-basis: 33.3%;justify-content: center;">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="index_files/figure-html/show-perlin-hearts-2-1.png" class="img-fluid figure-img" width="384"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output-display quarto-layout-cell" style="flex-basis: 33.3%;justify-content: center;">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="index_files/figure-html/show-perlin-hearts-2-2.png" class="img-fluid figure-img" width="384"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output-display quarto-layout-cell" style="flex-basis: 33.3%;justify-content: center;">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="index_files/figure-html/show-perlin-hearts-2-3.png" class="img-fluid figure-img" width="384"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div>
+<p>Here’s an example where I plot several hearts at once courtesy of the magic of <code>pmap_dfr()</code>:</p>
+<div class="page-columns page-full">
+<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a>perlin_heart_grid2 <span class="ot">&lt;-</span> <span class="cf">function</span>(<span class="at">nx =</span> <span class="dv">4</span>, <span class="at">ny =</span> <span class="dv">2</span>, <span class="at">seed =</span> <span class="cn">NULL</span>) {</span>
+<span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span>(<span class="sc">!</span><span class="fu">is.null</span>(seed)) <span class="fu">set.seed</span>(seed)</span>
+<span id="cb43-3"><a href="#cb43-3" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb43-4"><a href="#cb43-4" aria-hidden="true" tabindex="-1"></a>  heart_settings <span class="ot">&lt;-</span> <span class="fu">expand_grid</span>(</span>
+<span id="cb43-5"><a href="#cb43-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">r_min =</span> .<span class="dv">3</span>, </span>
+<span id="cb43-6"><a href="#cb43-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">r_max =</span> .<span class="dv">4</span>, </span>
+<span id="cb43-7"><a href="#cb43-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">w_min =</span> .<span class="dv">01</span>,</span>
+<span id="cb43-8"><a href="#cb43-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">w_max =</span> <span class="dv">6</span>,</span>
+<span id="cb43-9"><a href="#cb43-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">x_shift =</span> <span class="dv">1</span><span class="sc">:</span>nx, </span>
+<span id="cb43-10"><a href="#cb43-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">y_shift =</span> <span class="dv">1</span><span class="sc">:</span>ny</span>
+<span id="cb43-11"><a href="#cb43-11" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
+<span id="cb43-12"><a href="#cb43-12" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(</span>
+<span id="cb43-13"><a href="#cb43-13" aria-hidden="true" tabindex="-1"></a>      <span class="at">n =</span> <span class="dv">200</span>,</span>
+<span id="cb43-14"><a href="#cb43-14" aria-hidden="true" tabindex="-1"></a>      <span class="at">x_shift =</span> x_shift <span class="sc">+</span> <span class="fu">runif</span>(<span class="fu">n</span>(), <span class="sc">-</span>.<span class="dv">1</span>, .<span class="dv">1</span>),</span>
+<span id="cb43-15"><a href="#cb43-15" aria-hidden="true" tabindex="-1"></a>      <span class="at">y_shift =</span> y_shift <span class="sc">+</span> <span class="fu">runif</span>(<span class="fu">n</span>(), <span class="sc">-</span>.<span class="dv">1</span>, .<span class="dv">1</span>),</span>
+<span id="cb43-16"><a href="#cb43-16" aria-hidden="true" tabindex="-1"></a>      <span class="at">rot =</span> <span class="fu">runif</span>(<span class="fu">n</span>(), <span class="sc">-</span>.<span class="dv">1</span>, .<span class="dv">1</span>),</span>
+<span id="cb43-17"><a href="#cb43-17" aria-hidden="true" tabindex="-1"></a>      <span class="at">id =</span> <span class="fu">row_number</span>()</span>
+<span id="cb43-18"><a href="#cb43-18" aria-hidden="true" tabindex="-1"></a>    ) </span>
+<span id="cb43-19"><a href="#cb43-19" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb43-20"><a href="#cb43-20" aria-hidden="true" tabindex="-1"></a>  heart_data <span class="ot">&lt;-</span>  <span class="fu">pmap_dfr</span>(heart_settings, perlin_heart2)</span>
+<span id="cb43-21"><a href="#cb43-21" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb43-22"><a href="#cb43-22" aria-hidden="true" tabindex="-1"></a>  heart_data <span class="sc">|&gt;</span></span>
+<span id="cb43-23"><a href="#cb43-23" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ggplot</span>(<span class="fu">aes</span>(x, y, <span class="at">group =</span> id, <span class="at">colour =</span> <span class="fu">sample</span>(id), <span class="at">size =</span> width)) <span class="sc">+</span></span>
+<span id="cb43-24"><a href="#cb43-24" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_path</span>(<span class="at">show.legend =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
+<span id="cb43-25"><a href="#cb43-25" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme_void</span>() <span class="sc">+</span></span>
+<span id="cb43-26"><a href="#cb43-26" aria-hidden="true" tabindex="-1"></a>    <span class="fu">scale_size_identity</span>() <span class="sc">+</span></span>
+<span id="cb43-27"><a href="#cb43-27" aria-hidden="true" tabindex="-1"></a>    <span class="fu">scale_colour_gradientn</span>(<span class="at">colours =</span> <span class="fu">sample_canva</span>(seed)) <span class="sc">+</span></span>
+<span id="cb43-28"><a href="#cb43-28" aria-hidden="true" tabindex="-1"></a>    <span class="fu">scale_x_continuous</span>(<span class="at">expand =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">0</span>)) <span class="sc">+</span></span>
+<span id="cb43-29"><a href="#cb43-29" aria-hidden="true" tabindex="-1"></a>    <span class="fu">scale_y_continuous</span>(<span class="at">expand =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">0</span>)) <span class="sc">+</span></span>
+<span id="cb43-30"><a href="#cb43-30" aria-hidden="true" tabindex="-1"></a>    <span class="fu">coord_fixed</span>(<span class="at">xlim =</span> <span class="fu">c</span>(<span class="dv">0</span>, nx <span class="sc">+</span> <span class="dv">1</span>), <span class="at">ylim =</span> <span class="fu">c</span>(<span class="dv">0</span>, ny <span class="sc">+</span> <span class="dv">1</span>))</span>
+<span id="cb43-31"><a href="#cb43-31" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb43-32"><a href="#cb43-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-33"><a href="#cb43-33" aria-hidden="true" tabindex="-1"></a><span class="fu">perlin_heart_grid2</span>(<span class="at">seed =</span> <span class="dv">666</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell column-screen-inset quarto-layout-panel" data-fig.dpi="300" data-hash="index_cache/html/perlin-heart-2_b8e78e7536fad4dac42182077d547bdb">
+<div class="quarto-layout-row quarto-layout-valign-top">
+<div class="cell-output-display quarto-layout-cell" style="flex-basis: 100.0%;justify-content: center;">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="index_files/figure-html/perlin-heart-2-1.png" class="img-fluid figure-img" width="1344"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="animated-perlin-hearts" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="animated-perlin-hearts">Animated perlin hearts</h2>
+<p>The final example for this session uses the <code>gifsky</code> package to create an animated version of the variable-width hearts from the last section, by “rotating” or “sliding” the variable-with curves along the contours of the Perlin hearts. The design of the functions in this system is very similar in spirit to that adopted in the static systems. The main difference is that the output is created by calling the <code>save_gif()</code> function. We pass it an expression that, in the normal course of events, would create many plots – that’s what the <code>generate_all_frames()</code> function does – and it captures these plots and turns them into a single animated gif:</p>
+<div class="cell" data-layout-align="center" data-fig.dpi="300" data-hash="index_cache/html/animated-perlin-hearts_f226773e12cb9303e7f83540b4783110">
+<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a>perlin_heart_data <span class="ot">&lt;-</span> <span class="cf">function</span>(<span class="at">nhearts =</span> <span class="dv">10</span>, <span class="at">scatter =</span> .<span class="dv">05</span>, <span class="at">seed =</span> <span class="cn">NULL</span>) {</span>
+<span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb44-3"><a href="#cb44-3" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span>(<span class="sc">!</span><span class="fu">is.null</span>(seed)) <span class="fu">set.seed</span>(seed)</span>
+<span id="cb44-4"><a href="#cb44-4" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb44-5"><a href="#cb44-5" aria-hidden="true" tabindex="-1"></a>  palette <span class="ot">&lt;-</span> <span class="fu">sample_canva</span>(seed) <span class="sc">|&gt;</span></span>
+<span id="cb44-6"><a href="#cb44-6" aria-hidden="true" tabindex="-1"></a>    (\(x) <span class="fu">colorRampPalette</span>(x)(nhearts))()</span>
+<span id="cb44-7"><a href="#cb44-7" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb44-8"><a href="#cb44-8" aria-hidden="true" tabindex="-1"></a>  heart_settings <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
+<span id="cb44-9"><a href="#cb44-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">id =</span> <span class="dv">1</span><span class="sc">:</span>nhearts,</span>
+<span id="cb44-10"><a href="#cb44-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">n =</span> <span class="dv">500</span>,</span>
+<span id="cb44-11"><a href="#cb44-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">r_min =</span> .<span class="dv">35</span>, </span>
+<span id="cb44-12"><a href="#cb44-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">r_max =</span> .<span class="dv">4</span>,</span>
+<span id="cb44-13"><a href="#cb44-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">w_min =</span> <span class="sc">-</span><span class="dv">10</span>, </span>
+<span id="cb44-14"><a href="#cb44-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">w_max =</span> <span class="dv">10</span>,</span>
+<span id="cb44-15"><a href="#cb44-15" aria-hidden="true" tabindex="-1"></a>    <span class="at">x_shift =</span> <span class="fu">runif</span>(nhearts, <span class="sc">-</span>scatter<span class="sc">/</span><span class="dv">2</span>, scatter<span class="sc">/</span><span class="dv">2</span>),</span>
+<span id="cb44-16"><a href="#cb44-16" aria-hidden="true" tabindex="-1"></a>    <span class="at">y_shift =</span> <span class="fu">runif</span>(nhearts, <span class="sc">-</span>scatter<span class="sc">/</span><span class="dv">2</span>, scatter<span class="sc">/</span><span class="dv">2</span>),</span>
+<span id="cb44-17"><a href="#cb44-17" aria-hidden="true" tabindex="-1"></a>    <span class="at">rot =</span> <span class="fu">runif</span>(nhearts, <span class="sc">-</span>pi, pi)</span>
+<span id="cb44-18"><a href="#cb44-18" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb44-19"><a href="#cb44-19" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb44-20"><a href="#cb44-20" aria-hidden="true" tabindex="-1"></a>  heart_settings <span class="sc">|&gt;</span></span>
+<span id="cb44-21"><a href="#cb44-21" aria-hidden="true" tabindex="-1"></a>    <span class="fu">pmap_dfr</span>(perlin_heart2) <span class="sc">|&gt;</span></span>
+<span id="cb44-22"><a href="#cb44-22" aria-hidden="true" tabindex="-1"></a>    <span class="fu">group_by</span>(id) <span class="sc">|&gt;</span></span>
+<span id="cb44-23"><a href="#cb44-23" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(</span>
+<span id="cb44-24"><a href="#cb44-24" aria-hidden="true" tabindex="-1"></a>      <span class="at">shade =</span> <span class="fu">sample</span>(palette, <span class="dv">1</span>),</span>
+<span id="cb44-25"><a href="#cb44-25" aria-hidden="true" tabindex="-1"></a>      <span class="at">width =</span> <span class="fu">abs</span>(width)</span>
+<span id="cb44-26"><a href="#cb44-26" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb44-27"><a href="#cb44-27" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb44-28"><a href="#cb44-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-29"><a href="#cb44-29" aria-hidden="true" tabindex="-1"></a>generate_one_frame <span class="ot">&lt;-</span> <span class="cf">function</span>(dat) {</span>
+<span id="cb44-30"><a href="#cb44-30" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb44-31"><a href="#cb44-31" aria-hidden="true" tabindex="-1"></a>  pic <span class="ot">&lt;-</span> dat <span class="sc">|&gt;</span></span>
+<span id="cb44-32"><a href="#cb44-32" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ggplot</span>(<span class="fu">aes</span>(x, y, <span class="at">group =</span> id, <span class="at">size =</span> width, <span class="at">colour =</span> shade)) <span class="sc">+</span></span>
+<span id="cb44-33"><a href="#cb44-33" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_path</span>(<span class="at">show.legend =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
+<span id="cb44-34"><a href="#cb44-34" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme_void</span>() <span class="sc">+</span></span>
+<span id="cb44-35"><a href="#cb44-35" aria-hidden="true" tabindex="-1"></a>    <span class="fu">scale_x_continuous</span>(<span class="at">expand =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">0</span>)) <span class="sc">+</span></span>
+<span id="cb44-36"><a href="#cb44-36" aria-hidden="true" tabindex="-1"></a>    <span class="fu">scale_y_continuous</span>(<span class="at">expand =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">0</span>)) <span class="sc">+</span></span>
+<span id="cb44-37"><a href="#cb44-37" aria-hidden="true" tabindex="-1"></a>    <span class="fu">scale_colour_identity</span>() <span class="sc">+</span></span>
+<span id="cb44-38"><a href="#cb44-38" aria-hidden="true" tabindex="-1"></a>    <span class="fu">scale_size_identity</span>() <span class="sc">+</span></span>
+<span id="cb44-39"><a href="#cb44-39" aria-hidden="true" tabindex="-1"></a>    <span class="fu">coord_fixed</span>(<span class="at">xlim =</span> <span class="fu">c</span>(<span class="sc">-</span>.<span class="dv">6</span>, .<span class="dv">6</span>), <span class="at">ylim =</span> <span class="fu">c</span>(<span class="sc">-</span>.<span class="dv">6</span>, .<span class="dv">6</span>))</span>
+<span id="cb44-40"><a href="#cb44-40" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb44-41"><a href="#cb44-41" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(pic)</span>
+<span id="cb44-42"><a href="#cb44-42" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb44-43"><a href="#cb44-43" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-44"><a href="#cb44-44" aria-hidden="true" tabindex="-1"></a>rotate_vector <span class="ot">&lt;-</span> <span class="cf">function</span>(x, percent) {</span>
+<span id="cb44-45"><a href="#cb44-45" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb44-46"><a href="#cb44-46" aria-hidden="true" tabindex="-1"></a>  len <span class="ot">&lt;-</span> <span class="fu">length</span>(x)</span>
+<span id="cb44-47"><a href="#cb44-47" aria-hidden="true" tabindex="-1"></a>  ind <span class="ot">&lt;-</span> <span class="fu">ceiling</span>(len <span class="sc">*</span> percent)</span>
+<span id="cb44-48"><a href="#cb44-48" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span>(ind <span class="sc">==</span> <span class="dv">0</span>) <span class="fu">return</span>(x)</span>
+<span id="cb44-49"><a href="#cb44-49" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span>(ind <span class="sc">==</span> len) <span class="fu">return</span>(x)</span>
+<span id="cb44-50"><a href="#cb44-50" aria-hidden="true" tabindex="-1"></a>  <span class="fu">c</span>(x[(ind<span class="sc">+</span><span class="dv">1</span>)<span class="sc">:</span>len], x[<span class="dv">1</span><span class="sc">:</span>ind])</span>
+<span id="cb44-51"><a href="#cb44-51" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb44-52"><a href="#cb44-52" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-53"><a href="#cb44-53" aria-hidden="true" tabindex="-1"></a>generate_all_frames <span class="ot">&lt;-</span> <span class="cf">function</span>(dat, <span class="at">nframes =</span> <span class="dv">100</span>) {</span>
+<span id="cb44-54"><a href="#cb44-54" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb44-55"><a href="#cb44-55" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span>(frame <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>nframes) {</span>
+<span id="cb44-56"><a href="#cb44-56" aria-hidden="true" tabindex="-1"></a>    dat <span class="sc">|&gt;</span></span>
+<span id="cb44-57"><a href="#cb44-57" aria-hidden="true" tabindex="-1"></a>      <span class="fu">group_by</span>(id) <span class="sc">|&gt;</span></span>
+<span id="cb44-58"><a href="#cb44-58" aria-hidden="true" tabindex="-1"></a>      <span class="fu">mutate</span>(<span class="at">width =</span> width <span class="sc">|&gt;</span> <span class="fu">rotate_vector</span>(frame <span class="sc">/</span> nframes)) <span class="sc">|&gt;</span></span>
+<span id="cb44-59"><a href="#cb44-59" aria-hidden="true" tabindex="-1"></a>      <span class="fu">generate_one_frame</span>()</span>
+<span id="cb44-60"><a href="#cb44-60" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb44-61"><a href="#cb44-61" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb44-62"><a href="#cb44-62" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-63"><a href="#cb44-63" aria-hidden="true" tabindex="-1"></a>animated_perlin_heart <span class="ot">&lt;-</span> <span class="cf">function</span>(seed, ...) {</span>
+<span id="cb44-64"><a href="#cb44-64" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb44-65"><a href="#cb44-65" aria-hidden="true" tabindex="-1"></a>  <span class="fu">save_gif</span>(</span>
+<span id="cb44-66"><a href="#cb44-66" aria-hidden="true" tabindex="-1"></a>    <span class="at">expr =</span> <span class="fu">perlin_heart_data</span>(<span class="at">seed =</span> seed, ...) <span class="sc">|&gt;</span> <span class="fu">generate_all_frames</span>(),</span>
+<span id="cb44-67"><a href="#cb44-67" aria-hidden="true" tabindex="-1"></a>    <span class="at">gif_file =</span> <span class="fu">paste0</span>(<span class="st">"animated-perlin-heart-"</span>, seed, <span class="st">".gif"</span>),</span>
+<span id="cb44-68"><a href="#cb44-68" aria-hidden="true" tabindex="-1"></a>    <span class="at">height =</span> <span class="dv">1000</span>,</span>
+<span id="cb44-69"><a href="#cb44-69" aria-hidden="true" tabindex="-1"></a>    <span class="at">width =</span> <span class="dv">1000</span>,</span>
+<span id="cb44-70"><a href="#cb44-70" aria-hidden="true" tabindex="-1"></a>    <span class="at">delay =</span> .<span class="dv">1</span>,</span>
+<span id="cb44-71"><a href="#cb44-71" aria-hidden="true" tabindex="-1"></a>    <span class="at">progress =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb44-72"><a href="#cb44-72" aria-hidden="true" tabindex="-1"></a>    <span class="at">bg =</span> <span class="st">"#222222"</span></span>
+<span id="cb44-73"><a href="#cb44-73" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb44-74"><a href="#cb44-74" aria-hidden="true" tabindex="-1"></a>  <span class="fu">invisible</span>(<span class="cn">NULL</span>)</span>
+<span id="cb44-75"><a href="#cb44-75" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb44-76"><a href="#cb44-76" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-77"><a href="#cb44-77" aria-hidden="true" tabindex="-1"></a><span class="fu">tic</span>()</span>
+<span id="cb44-78"><a href="#cb44-78" aria-hidden="true" tabindex="-1"></a><span class="fu">animated_perlin_heart</span>(<span class="at">seed =</span> <span class="dv">100</span>)</span>
+<span id="cb44-79"><a href="#cb44-79" aria-hidden="true" tabindex="-1"></a><span class="fu">toc</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>17.938 sec elapsed</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">include_graphics</span>(<span class="st">"animated-perlin-heart-100.gif"</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="animated-perlin-heart-100.gif" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="page-columns page-full">
+<div class="sourceCode cell-code" id="cb47"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a><span class="fu">animated_perlin_heart</span>(<span class="at">seed =</span> <span class="dv">123</span>)</span>
+<span id="cb47-2"><a href="#cb47-2" aria-hidden="true" tabindex="-1"></a><span class="fu">animated_perlin_heart</span>(<span class="at">seed =</span> <span class="dv">456</span>)</span>
+<span id="cb47-3"><a href="#cb47-3" aria-hidden="true" tabindex="-1"></a><span class="fu">animated_perlin_heart</span>(<span class="at">seed =</span> <span class="dv">789</span>)</span>
+<span id="cb47-4"><a href="#cb47-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb47-5"><a href="#cb47-5" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">include_graphics</span>(<span class="st">"animated-perlin-heart-123.gif"</span>)</span>
+<span id="cb47-6"><a href="#cb47-6" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">include_graphics</span>(<span class="st">"animated-perlin-heart-456.gif"</span>)</span>
+<span id="cb47-7"><a href="#cb47-7" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">include_graphics</span>(<span class="st">"animated-perlin-heart-789.gif"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell column-screen-inset quarto-layout-panel" data-fig.dpi="300" data-hash="index_cache/html/animated-perlin-hearts-2_645326be318bb007f131509e18dfdfc0">
+<div class="quarto-layout-row quarto-layout-valign-top">
+<div class="cell-output-display quarto-layout-cell" style="flex-basis: 33.3%;justify-content: center;">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="animated-perlin-heart-123.gif" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output-display quarto-layout-cell" style="flex-basis: 33.3%;justify-content: center;">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="animated-perlin-heart-456.gif" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output-display quarto-layout-cell" style="flex-basis: 33.3%;justify-content: center;">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="animated-perlin-heart-789.gif" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="textured-lines" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="textured-lines">Textured lines</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb48"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(e1071)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>There’s one other topic I want to mention in this session, and it’s completely unrelated to rayshader or 3D graphics. It’s also – broadly speaking – to do with texture and shading, but it applies at a much lower level. To motivate the topic, I’ll start by writing a function that uses statistical tools to generate random smooth curves in two dimensions:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb49"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a>smooth_loess <span class="ot">&lt;-</span> <span class="cf">function</span>(x, span) {</span>
+<span id="cb49-2"><a href="#cb49-2" aria-hidden="true" tabindex="-1"></a>  n <span class="ot">&lt;-</span> <span class="fu">length</span>(x)</span>
+<span id="cb49-3"><a href="#cb49-3" aria-hidden="true" tabindex="-1"></a>  dat <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">time =</span> <span class="dv">1</span><span class="sc">:</span>n, <span class="at">walk =</span> x)</span>
+<span id="cb49-4"><a href="#cb49-4" aria-hidden="true" tabindex="-1"></a>  mod <span class="ot">&lt;-</span> <span class="fu">loess</span>(walk <span class="sc">~</span> time, dat, <span class="at">span =</span> span)</span>
+<span id="cb49-5"><a href="#cb49-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">predict</span>(mod, <span class="fu">tibble</span>(<span class="at">time =</span> <span class="dv">1</span><span class="sc">:</span>n))</span>
+<span id="cb49-6"><a href="#cb49-6" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb49-7"><a href="#cb49-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-8"><a href="#cb49-8" aria-hidden="true" tabindex="-1"></a>smooth_path <span class="ot">&lt;-</span> <span class="cf">function</span>(<span class="at">n =</span> <span class="dv">1000</span>, <span class="at">smoothing =</span> .<span class="dv">4</span>, <span class="at">seed =</span> <span class="cn">NULL</span>) { </span>
+<span id="cb49-9"><a href="#cb49-9" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span>(<span class="sc">!</span><span class="fu">is.null</span>(seed)) <span class="fu">set.seed</span>(seed)</span>
+<span id="cb49-10"><a href="#cb49-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tibble</span>(</span>
+<span id="cb49-11"><a href="#cb49-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="fu">smooth_loess</span>(<span class="fu">rbridge</span>(<span class="dv">1</span>, n), <span class="at">span =</span> smoothing),</span>
+<span id="cb49-12"><a href="#cb49-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="fu">smooth_loess</span>(<span class="fu">rbridge</span>(<span class="dv">1</span>, n), <span class="at">span =</span> smoothing),</span>
+<span id="cb49-13"><a href="#cb49-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">stroke =</span> <span class="dv">1</span></span>
+<span id="cb49-14"><a href="#cb49-14" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb49-15"><a href="#cb49-15" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Here’s an example of the paths it produces:</p>
+<div class="cell" data-layout-align="center" data-fig.dpi="300" data-hash="index_cache/html/smooth-path_3307a0a8e02ba14a4ed7274dba6c4db7">
+<div class="sourceCode cell-code" id="cb50"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a>path <span class="ot">&lt;-</span> <span class="fu">smooth_path</span>(<span class="at">seed =</span> <span class="dv">123</span>)</span>
+<span id="cb50-2"><a href="#cb50-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb50-3"><a href="#cb50-3" aria-hidden="true" tabindex="-1"></a>path <span class="sc">|&gt;</span> </span>
+<span id="cb50-4"><a href="#cb50-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(x, y)) <span class="sc">+</span></span>
+<span id="cb50-5"><a href="#cb50-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_path</span>(<span class="at">colour =</span> <span class="st">"white"</span>, <span class="at">size =</span> <span class="dv">2</span>) <span class="sc">+</span> </span>
+<span id="cb50-6"><a href="#cb50-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_equal</span>() <span class="sc">+</span></span>
+<span id="cb50-7"><a href="#cb50-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_void</span>() </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="index_files/figure-html/smooth-path-1.png" class="img-fluid figure-img" width="576"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>The path it self is smooth but slightly misshapen (i.e., it doesn’t feel “precise” in the same way that the very first heart felt precise), and you can imagine creating a generative art system that uses this kind of technique, but it doesn’t feel hand drawn. The problem here is that while the <em>path</em> feels fairly natural, the <em>stroke</em> itself is too perfect. It’s a solid line with no texture or grading to it. That spoils the illusion of naturalness to an extent.</p>
+<p>It’s not too difficult to improve on this if, instead of plotting one smooth curve to represent the path, we plot a very large number of points or small segments with irregular breaks and spacing. In this section I won’t go into a lot of detail on design choices and the various ways you can do this, but I’ll mention that Ben Kovach has a lovely post on <a href="https://www.generativehut.com/post/how-to-make-generative-art-feel-natural">making generative art feel natural</a> that discusses this in more detail.</p>
+<p>For now, I’ll limit myself to presenting some code for a system that implements this idea:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb51"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a>perturb <span class="ot">&lt;-</span> <span class="cf">function</span>(path, <span class="at">noise =</span> .<span class="dv">01</span>, <span class="at">span =</span> .<span class="dv">1</span>) {</span>
+<span id="cb51-2"><a href="#cb51-2" aria-hidden="true" tabindex="-1"></a>  path <span class="sc">|&gt;</span> </span>
+<span id="cb51-3"><a href="#cb51-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">group_by</span>(stroke) <span class="sc">|&gt;</span></span>
+<span id="cb51-4"><a href="#cb51-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(</span>
+<span id="cb51-5"><a href="#cb51-5" aria-hidden="true" tabindex="-1"></a>      <span class="at">x =</span> x <span class="sc">+</span> <span class="fu">rnorm</span>(<span class="fu">n</span>(), <span class="dv">0</span>, noise),</span>
+<span id="cb51-6"><a href="#cb51-6" aria-hidden="true" tabindex="-1"></a>      <span class="at">y =</span> y <span class="sc">+</span> <span class="fu">rnorm</span>(<span class="fu">n</span>(), <span class="dv">0</span>, noise),</span>
+<span id="cb51-7"><a href="#cb51-7" aria-hidden="true" tabindex="-1"></a>      <span class="at">x =</span> <span class="fu">smooth_loess</span>(x, span),</span>
+<span id="cb51-8"><a href="#cb51-8" aria-hidden="true" tabindex="-1"></a>      <span class="at">y =</span> <span class="fu">smooth_loess</span>(y, span),</span>
+<span id="cb51-9"><a href="#cb51-9" aria-hidden="true" tabindex="-1"></a>      <span class="at">alpha =</span> <span class="fu">runif</span>(<span class="fu">n</span>()) <span class="sc">&gt;</span> .<span class="dv">5</span>,</span>
+<span id="cb51-10"><a href="#cb51-10" aria-hidden="true" tabindex="-1"></a>      <span class="at">size =</span> <span class="fu">runif</span>(<span class="fu">n</span>(), <span class="dv">0</span>, .<span class="dv">2</span>)</span>
+<span id="cb51-11"><a href="#cb51-11" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb51-12"><a href="#cb51-12" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb51-13"><a href="#cb51-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb51-14"><a href="#cb51-14" aria-hidden="true" tabindex="-1"></a>brush <span class="ot">&lt;-</span> <span class="cf">function</span>(path, <span class="at">bristles =</span> <span class="dv">100</span>, <span class="at">seed =</span> <span class="dv">1</span>, ...) {</span>
+<span id="cb51-15"><a href="#cb51-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">set.seed</span>(seed)</span>
+<span id="cb51-16"><a href="#cb51-16" aria-hidden="true" tabindex="-1"></a>  dat <span class="ot">&lt;-</span> <span class="fu">list</span>()</span>
+<span id="cb51-17"><a href="#cb51-17" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>bristles) {</span>
+<span id="cb51-18"><a href="#cb51-18" aria-hidden="true" tabindex="-1"></a>    dat[[i]] <span class="ot">&lt;-</span> <span class="fu">perturb</span>(path, ...)</span>
+<span id="cb51-19"><a href="#cb51-19" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb51-20"><a href="#cb51-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(<span class="fu">bind_rows</span>(dat, <span class="at">.id =</span> <span class="st">"id"</span>))</span>
+<span id="cb51-21"><a href="#cb51-21" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb51-22"><a href="#cb51-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb51-23"><a href="#cb51-23" aria-hidden="true" tabindex="-1"></a>stroke <span class="ot">&lt;-</span> <span class="cf">function</span>(dat, <span class="at">geom =</span> geom_path, <span class="at">colour =</span> <span class="st">"white"</span>, ...) {</span>
+<span id="cb51-24"><a href="#cb51-24" aria-hidden="true" tabindex="-1"></a>  dat <span class="sc">|&gt;</span>  </span>
+<span id="cb51-25"><a href="#cb51-25" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ggplot</span>(<span class="fu">aes</span>(</span>
+<span id="cb51-26"><a href="#cb51-26" aria-hidden="true" tabindex="-1"></a>      <span class="at">x =</span> x, </span>
+<span id="cb51-27"><a href="#cb51-27" aria-hidden="true" tabindex="-1"></a>      <span class="at">y =</span> y, </span>
+<span id="cb51-28"><a href="#cb51-28" aria-hidden="true" tabindex="-1"></a>      <span class="at">alpha =</span> alpha, </span>
+<span id="cb51-29"><a href="#cb51-29" aria-hidden="true" tabindex="-1"></a>      <span class="at">size =</span> size, </span>
+<span id="cb51-30"><a href="#cb51-30" aria-hidden="true" tabindex="-1"></a>      <span class="at">group =</span> <span class="fu">paste0</span>(stroke, id)</span>
+<span id="cb51-31"><a href="#cb51-31" aria-hidden="true" tabindex="-1"></a>    )) <span class="sc">+</span> </span>
+<span id="cb51-32"><a href="#cb51-32" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom</span>(</span>
+<span id="cb51-33"><a href="#cb51-33" aria-hidden="true" tabindex="-1"></a>      <span class="at">colour =</span> colour, </span>
+<span id="cb51-34"><a href="#cb51-34" aria-hidden="true" tabindex="-1"></a>      <span class="at">show.legend =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb51-35"><a href="#cb51-35" aria-hidden="true" tabindex="-1"></a>      ...</span>
+<span id="cb51-36"><a href="#cb51-36" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">+</span> </span>
+<span id="cb51-37"><a href="#cb51-37" aria-hidden="true" tabindex="-1"></a>    <span class="fu">coord_equal</span>() <span class="sc">+</span></span>
+<span id="cb51-38"><a href="#cb51-38" aria-hidden="true" tabindex="-1"></a>    <span class="fu">scale_alpha_identity</span>() <span class="sc">+</span></span>
+<span id="cb51-39"><a href="#cb51-39" aria-hidden="true" tabindex="-1"></a>    <span class="fu">scale_size_identity</span>() <span class="sc">+</span></span>
+<span id="cb51-40"><a href="#cb51-40" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme_void</span>() <span class="sc">+</span> </span>
+<span id="cb51-41"><a href="#cb51-41" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme</span>(<span class="at">plot.background =</span> <span class="fu">element_rect</span>(</span>
+<span id="cb51-42"><a href="#cb51-42" aria-hidden="true" tabindex="-1"></a>      <span class="at">fill =</span> <span class="st">"#222222"</span>, </span>
+<span id="cb51-43"><a href="#cb51-43" aria-hidden="true" tabindex="-1"></a>      <span class="at">colour =</span> <span class="st">"#222222"</span></span>
+<span id="cb51-44"><a href="#cb51-44" aria-hidden="true" tabindex="-1"></a>    ))</span>
+<span id="cb51-45"><a href="#cb51-45" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>The plots below show a couple of examples of how you can apply this idea to our original curve:</p>
+<div class="page-columns page-full">
+<div class="sourceCode cell-code" id="cb52"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a>path <span class="sc">|&gt;</span></span>
+<span id="cb52-2"><a href="#cb52-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">brush</span>() <span class="sc">|&gt;</span></span>
+<span id="cb52-3"><a href="#cb52-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stroke</span>()</span>
+<span id="cb52-4"><a href="#cb52-4" aria-hidden="true" tabindex="-1"></a>path <span class="sc">|&gt;</span></span>
+<span id="cb52-5"><a href="#cb52-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">brush</span>(<span class="at">bristles =</span> <span class="dv">200</span>, <span class="at">span =</span> .<span class="dv">08</span>) <span class="sc">|&gt;</span></span>
+<span id="cb52-6"><a href="#cb52-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">size =</span> size <span class="sc">*</span> <span class="dv">3</span>) <span class="sc">|&gt;</span></span>
+<span id="cb52-7"><a href="#cb52-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stroke</span>(<span class="at">geom =</span> geom_point, <span class="at">stroke =</span> <span class="dv">0</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell column-screen-inset quarto-layout-panel" data-fig.dpi="300" data-hash="index_cache/html/smooth-path-textured_ffc1329e7d015141851a22f1c447763d">
+<div class="quarto-layout-row quarto-layout-valign-top">
+<div class="cell-output-display quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="index_files/figure-html/smooth-path-textured-1.png" class="img-fluid figure-img" width="576"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output-display quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="index_files/figure-html/smooth-path-textured-2.png" class="img-fluid figure-img" width="576"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div>
+<p>This doesn’t in any sense exhaust the possibilities, but I hope it’s a useful hint about how to get started if you ever find yourself trying to figure out how to draw naturalistic looking pen strokes. Also, the fact that I’ve included the code means I get to apply the idea to the Perlin hearts system:</p>
+<div class="cell page-columns page-full" data-layout-align="center" data-fig.dpi="300" data-hash="index_cache/html/perlin-heart-texture_58c940c196c342de93663daa3b00387f">
+<div class="sourceCode cell-code" id="cb53"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a><span class="fu">perlin_heart</span>(<span class="at">n =</span> <span class="dv">500</span>, <span class="at">seed =</span> <span class="dv">123</span>) <span class="sc">|&gt;</span></span>
+<span id="cb53-2"><a href="#cb53-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">stroke =</span> <span class="dv">1</span>) <span class="sc">|&gt;</span></span>
+<span id="cb53-3"><a href="#cb53-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">brush</span>(<span class="at">bristles =</span> <span class="dv">100</span>, <span class="at">noise =</span> .<span class="dv">02</span>) <span class="sc">|&gt;</span></span>
+<span id="cb53-4"><a href="#cb53-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stroke</span>() </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display column-page">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="index_files/figure-html/perlin-heart-texture-1.png" class="img-fluid figure-img" width="384"></p>
+</figure>
+</div>
+</div>
+</div>
+
+
+</section>
+
+</main> <!-- /main -->
+<script defer="" data-domain="art-from-code.netlify.app" src="https://plausible.io/js/plausible.js"></script>
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    setTimeout(function() {
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      let href = ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const cites = ref.parentNode.getAttribute('data-cites').split(' ');
+    tippyHover(ref, function() {
+      var popup = window.document.createElement('div');
+      cites.forEach(function(cite) {
+        var citeDiv = window.document.createElement('div');
+        citeDiv.classList.add('hanging-indent');
+        citeDiv.classList.add('csl-entry');
+        var biblioDiv = window.document.getElementById('ref-' + cite);
+        if (biblioDiv) {
+          citeDiv.innerHTML = biblioDiv.innerHTML;
+        }
+        popup.appendChild(citeDiv);
+      });
+      return popup.innerHTML;
+    });
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>

@@ -1,0 +1,841 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-0.9.613">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>ART FROM CODE - GENERATIVE ART WITH R</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+span.underline{text-decoration: underline;}
+div.column{display: inline-block; vertical-align: top; width: 50%;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+
+
+<link rel="stylesheet" href="../../styles.css">
+<meta property="og:title" content="ART FROM CODE - GENERATIVE ART WITH R">
+<meta property="og:description" content="An rstudio::conf workshop on generative art with R">
+<meta property="og:image" content="http://art-from-code.netlify.app/img/banner.png">
+<meta property="og:site-name" content="ART FROM CODE">
+<meta name="twitter:title" content="ART FROM CODE - GENERATIVE ART WITH R">
+<meta name="twitter:description" content="An rstudio::conf workshop on generative art with R">
+<meta name="twitter:image" content="http://art-from-code.netlify.app/img/banner.png">
+<meta name="twitter:creator" content="@djnavarro">
+<meta name="twitter:card" content="summary_large_image">
+</head>
+
+<body class="nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
+      <div class="navbar-container container-fluid">
+      <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title">ART FROM CODE</span>
+  </a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../index.html">Home</a>
+  </li>  
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-sessions" role="button" data-bs-toggle="dropdown" aria-expanded="false">Sessions</a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-sessions">    
+        <li>
+    <a class="dropdown-item" href="../../day-1/session-1/index.html">
+ <span class="dropdown-text">Get started</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../day-1/session-2/index.html">
+ <span class="dropdown-text">Spatial noise tricks</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../day-1/session-3/index.html">
+ <span class="dropdown-text">Polygon tricks</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../day-1/session-4/index.html">
+ <span class="dropdown-text">Shading tricks</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../day-2/session-1/index.html">
+ <span class="dropdown-text">Iterated function systems</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../day-2/session-2/index.html">
+ <span class="dropdown-text">Tiles and tesselations</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../day-2/session-3/index.html">
+ <span class="dropdown-text">Pixel filters</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../day-2/session-4/index.html">
+ <span class="dropdown-text">Wrap up</span></a>
+  </li>  
+    </ul>
+  </li>
+</ul>
+              <div id="quarto-search" class="" title="Search"></div>
+          </div> <!-- /navcollapse -->
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#art-is-theft" id="toc-art-is-theft" class="nav-link active" data-scroll-target="#art-is-theft">Art is theft</a></li>
+  <li><a href="#technique" id="toc-technique" class="nav-link" data-scroll-target="#technique">Technique</a></li>
+  <li><a href="#colour" id="toc-colour" class="nav-link" data-scroll-target="#colour">Colour</a></li>
+  <li><a href="#composition" id="toc-composition" class="nav-link" data-scroll-target="#composition">Composition</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content page-columns page-full" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">GENERATIVE ART WITH R</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+    
+  </div>
+  
+
+</header>
+
+<p>Once upon a time I was a professor.</p>
+<p>It’s a dull story, and I won’t bore you with the details, but I mention it because at the start of almost every class I taught I’d have to go being by explaining the terminology. Want to teach a class on human learning? You better start out by saying what you think “learning” means. Want to teach people about computational models of cognition? The students would like you to start by giving a working definition of “computation”, “model” and “cognition”. It doesn’t really matter if the definitions aren’t <em>good</em> definitions (spoiler: they’re always terrible), but it helps people to start out from something that looks vaguely like stable ground to stand on.</p>
+<p>So. If this is going to be a workshop on generative art in R, I should say something about what I mean by “R”, “art”, and “generative”. Of the three terms, R is the easiest one to define: it’s a programming language used primarily for statistical computing and data science. To anyone starting this workshop I don’t really have to give a lot more detail than that. We all know (roughly speaking) what R is: we wouldn’t be participating at rstudio::conf if we didn’t! For the current purposes all I’ll say is that I’m talking about R the way it is typically used in 2022: R doesn’t just mean “base R”. It also includes “tidyverse”. It includes the sprawling ecosystem of packages on CRAN and GitHub. Often that includes code written in other languages: thanks to packages like Rcpp and cpp11 it’s not at all unusual for computationally intensive subroutines to be farmed out to C++ code, and not written in “pure” R. Supplying bindings to libraries written in other languages is a well-established tradition in R: in this workshop we shall not be purists. If we can do a thing by working with R code, then we’re doing something with R even if other languages are doing some of the work for us.</p>
+<p>Okay, so that’s “R”. What about “art” – what counts as “art”? In this essay I will…</p>
+<p>…just kidding. I do not have the arrogance to pretend that I know what art is. Art is pretty (except when it isn’t). Art is created (except when it is found). Art is intentional (except when it is accidental). Art makes you think (sometimes, not always). Art relies on artist skill (except when you send GPT-3 generated text to DALL-E). Art is uniquely human (no it isn’t). Art… yeah, look, I have no idea what art is. Personally, I like to make pretty things from code that appeal to my aesthetic sensibilities, and that’s good enough for me.</p>
+<p>Which brings me to the third word: “generative”. When we talk about “generative art”, what do we mean? The term isn’t particularly well defined, but what we typically (not always) mean is that generative art is computational artwork that incorporates some source of noise, disorder, or randomness (natural or artificial) into the artistic process itself. It’s a kind of perverse artistry: almost always we’re working with computers, one of the most precise and flexible tools that humans have devised, and yet we are deliberately making the products of the machine unpredictable, unknowable even to the artist.</p>
+<p>We are writing code that makes unpredictable paintings.</p>
+<section id="art-is-theft" class="level2">
+<h2 class="anchored" data-anchor-id="art-is-theft">Art is theft</h2>
+<p>Okay that’s quite enough preamble. Let’s stop talking and start making some art! Following Picasso’s dictum that “art is theft” I want to begin with an act of wholesale thievery. I am going to co-opt tools that were created for serious data science purposes and repurpose them for art. If you’re in this room with me then you already know these tools by name: <code>ggplot2</code> is an R package designed for data visualisation; <code>dplyr</code> is designed for data manipulation; <code>tibble</code> is designed for data representation. None of these packages were created for artists. They’re practical tools designed for statisticians, data scientists, analysts, and other knowledge workers.</p>
+<p>Fuck it. Let’s steal them. Sorry Hadley.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tibble)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Let’s start with a data visualisation exercise that most R users have encountered at one time or another: creating a scatterplot. The <code>ggplot2</code> package supplies the tediously-overused <code>mpg</code> data set that… I don’t know, it has something to do with cars, I think? I don’t drive and I am trying very hard to pretend I never learned anything about the internal combustion engine. The point here is that we have a data set. From the perspective of the generative artist our main concern is that it’s a table that contains some numbers and text organised in a table:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>mpg</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 234 × 11
+   manufacturer model      displ  year   cyl trans drv     cty   hwy fl    class
+   &lt;chr&gt;        &lt;chr&gt;      &lt;dbl&gt; &lt;int&gt; &lt;int&gt; &lt;chr&gt; &lt;chr&gt; &lt;int&gt; &lt;int&gt; &lt;chr&gt; &lt;chr&gt;
+ 1 audi         a4           1.8  1999     4 auto… f        18    29 p     comp…
+ 2 audi         a4           1.8  1999     4 manu… f        21    29 p     comp…
+ 3 audi         a4           2    2008     4 manu… f        20    31 p     comp…
+ 4 audi         a4           2    2008     4 auto… f        21    30 p     comp…
+ 5 audi         a4           2.8  1999     6 auto… f        16    26 p     comp…
+ 6 audi         a4           2.8  1999     6 manu… f        18    26 p     comp…
+ 7 audi         a4           3.1  2008     6 auto… f        18    27 p     comp…
+ 8 audi         a4 quattro   1.8  1999     4 manu… 4        18    26 p     comp…
+ 9 audi         a4 quattro   1.8  1999     4 auto… 4        16    25 p     comp…
+10 audi         a4 quattro   2    2008     4 manu… 4        20    28 p     comp…
+# … with 224 more rows</code></pre>
+</div>
+</div>
+<p>We need not concern ourselves with why <code>displ</code> refers to engine displacement nor what that term even means. Nor do we have to care about how <code>hwy</code> represents highway mileage or how <code>drv</code> has something to do with gears. Really, this is not our concern. As generative artists we think of these as raw sources of structure and randomness.</p>
+<p>Here’s what I mean. As a data scientist, I might draw a plot like this:</p>
+<div class="cell" data-layout-align="center" data-fig.dpi="300">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>mpg <span class="sc">|&gt;</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(displ, hwy, <span class="at">colour =</span> drv)) <span class="sc">+</span> </span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="index_files/figure-html/familiar-ggplot-1.png" class="img-fluid figure-img" width="576"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>On the x-axis I’ve plotted one column in the table, on the y-axis I’ve plotted another column, and each row in the table shows up as a dot. A third row of the table is used to supply the colour. Because <code>ggplot2</code> is designed to support interpretation, the resulting plot has a collection of guides, legends and other labels. In the world of data visualisation, these things are essential for helping the viewer understand how the picture relates to the thing in the world (cars, apparently) that the data pertains to.</p>
+<p>As an artist, I cannot be bothered with such dull practicalities. Let’s get rid of all of them, and – violating all sorts of data visualisation best practices – I’m going to vary the size of the dots in a way that doesn’t help anyone make sense of the data:</p>
+<div class="cell" data-layout-align="center" data-fig.dpi="300">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>mpg <span class="sc">|&gt;</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(displ, hwy, <span class="at">colour =</span> drv, <span class="at">size =</span> cyl)) <span class="sc">+</span> </span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">show.legend =</span> <span class="cn">FALSE</span>) <span class="sc">+</span> </span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_void</span>() <span class="sc">+</span> </span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_brewer</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="index_files/figure-html/tweak-ggplot-1.png" class="img-fluid figure-img" width="576"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Once we strip away the practical purpose of the data visualisation, we’re left with something that isn’t quite so easy to interpret, but is… well, it’s kind of pretty, right? There’s an overall structure to the scatterplot. The colours, shapes, and positions of the data don’t necessarily tell an easily-understood story about the real world anymore but they’re quite pleasing to look at.</p>
+<p>Viewing <code>ggplot2</code> through this lens opens up a new world of possibilities. Inspired by Leland Wilkinson’s book on the subject, Hadley Wickham wrote the package to provide a <em>grammar</em> of graphics: it supplies a collection of transformation and composition rules that we can use to construct mappings between data (that represent a thing in the world) and images (that our visual systems can quickly interpret). Those rules are not arbitrary: they’re created to make our lives as data analysts easier. But we can repurpose them. The grammatical rules of human language did not evolve to serve the needs of poets, but the poets use them anyway. So too we as visual artists can (and will) reuse the grammar of graphics for artistic purposes. A few minor tweaks gives us this:</p>
+<div class="cell" data-layout-align="center" data-fig.dpi="300">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>mpg <span class="sc">|&gt;</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(displ, hwy, <span class="at">colour =</span> drv)) <span class="sc">+</span> </span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">show.legend =</span> <span class="cn">FALSE</span>, <span class="at">size =</span> <span class="dv">4</span>) <span class="sc">+</span> </span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">show.legend =</span> <span class="cn">FALSE</span>, <span class="at">size =</span> <span class="dv">1</span>, <span class="at">colour =</span> <span class="st">"#222222"</span>) <span class="sc">+</span> </span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_polar</span>() <span class="sc">+</span> </span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_void</span>() <span class="sc">+</span> </span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_brewer</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="index_files/figure-html/tweak-ggplot-more-1.png" class="img-fluid figure-img" width="576"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>And let’s be honest. At this point the image has very little to do with cars. Sure, I’m using the <code>mpg</code> data to drive the process, but as far as I’m concerned it’s really just a source of raw numbers. As a generative artist these numbers are my raw materials, but I’m not too fussed about exactly how I came into possession of these numbers.</p>
+<p>I could just have easily created my own raw materials. As a statistical programming language R comes equipped with a very sophisticated collection of tools for generating pseudorandom numbers with various distributions. I can tap into this whenever I like but in a lot of cases I don’t need anything more fancy than the <code>runif()</code> function. Uniformly distributed random numbers are perfectly adequate for many purposes. Let’s make some:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1</span>)</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">50</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>dat <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">x0 =</span> <span class="fu">runif</span>(n),</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">y0 =</span> <span class="fu">runif</span>(n),</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">x1 =</span> x0 <span class="sc">+</span> <span class="fu">runif</span>(n, <span class="at">min =</span> <span class="sc">-</span>.<span class="dv">2</span>, <span class="at">max =</span> .<span class="dv">2</span>),</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">y1 =</span> y0 <span class="sc">+</span> <span class="fu">runif</span>(n, <span class="at">min =</span> <span class="sc">-</span>.<span class="dv">2</span>, <span class="at">max =</span> .<span class="dv">2</span>),</span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">shade =</span> <span class="fu">runif</span>(n), </span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">size =</span> <span class="fu">runif</span>(n)</span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>dat</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 50 × 6
+       x0     y0    x1      y1 shade  size
+    &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+ 1 0.266  0.478  0.327  0.523  0.268 0.762
+ 2 0.372  0.861  0.313  0.884  0.219 0.933
+ 3 0.573  0.438  0.481  0.370  0.517 0.471
+ 4 0.908  0.245  1.11   0.226  0.269 0.604
+ 5 0.202  0.0707 0.255  0.0709 0.181 0.485
+ 6 0.898  0.0995 0.784 -0.0282 0.519 0.109
+ 7 0.945  0.316  0.796  0.328  0.563 0.248
+ 8 0.661  0.519  0.652  0.349  0.129 0.499
+ 9 0.629  0.662  0.799  0.573  0.256 0.373
+10 0.0618 0.407  0.101  0.292  0.718 0.935
+# … with 40 more rows</code></pre>
+</div>
+</div>
+<p>Yup. Those look like a bunch of numbers. They do not mean anything to me. They’re entirely deterministic – at least in the sense that the <code>set.seed()</code> command ensures that the pseudorandom number will always generate the same random numbers with this code – but the underlying generator is utterly without structure. As the outside observer I am entirely indifferent about whether I should use <code>set.seed(1)</code> or <code>set.seed(234534)</code>. Both versions of this command will initialise the state of the random number generator in a way that ensures that <code>runif()</code> generates pure noise. Under the hood there are some fancy definitions of what we mean by “randomness” and “noise”, but this is not the place to talk about <a href="https://en.wikipedia.org/wiki/Algorithmically_random_sequence">Martin-Löf randomness</a>. For our purposes it is sufficient to agree that the output of a uniform random number generator is meaningless noise, no matter what seed value we supply.</p>
+<p>The key point is this: the input is garbage. Garbage in…</p>
+<div class="cell" data-layout-align="center" data-fig.dpi="300" data-hash="index_cache/html/coord-polar_4bb3796632c218480c792088868a87d3">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>dat <span class="sc">|&gt;</span> </span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> x0,</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> y0,</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">xend =</span> x1,</span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">yend =</span> y1,</span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">colour =</span> shade,</span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">size =</span> size</span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>  )) <span class="sc">+</span></span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_segment</span>(<span class="at">show.legend =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_polar</span>() <span class="sc">+</span></span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">expand =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">0</span>)) <span class="sc">+</span></span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">expand =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">0</span>)) <span class="sc">+</span> </span>
+<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_viridis_c</span>() <span class="sc">+</span> </span>
+<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_size</span>(<span class="at">range =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">10</span>)) <span class="sc">+</span> </span>
+<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_void</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="index_files/figure-html/coord-polar-1.png" class="img-fluid figure-img" width="576"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>…art out?</p>
+<p>Not that anyone has ever asked my opinion on the topic, but this is what I think generative art really is. An automated process that takes garbage as input and creates unpredictably delightful outputs – sometimes with a little helpful human oversight and curation – is a generative art system. It is fundamentally a process of making something from nothing. Art from the void. Treasure from trash. Signal from noise. You get the idea.</p>
+</section>
+<section id="technique" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="technique">Technique</h2>
+<p>At this point we have some sense of what our creative endeavour is all about, which leads naturally to questions about technique. One thing I’ve learned – about art, yes, but I think it holds quite generally – is that you can’t teach “personal style”. Everyone has their own tastes and preferences, and it makes no sense whatsoever to tell someone else who, what, or how they should love. I have no business telling you what is pleasing and what isn’t. I’m not arrogant enough to try.</p>
+<p>What I can do, however, is talk about the tools and coding practices that have made it easier for me to create the things that I think have aesthetic value. When art schools talk about teaching “technique”, this is what I think they mean. The point isn’t to dictate what you create, but to give you skills that will let you make a reality from the thing you envision. Fundamentally, this is a workshop on <em>technique</em>, in this sense of the term.</p>
+<p>Let’s start with a core principle: code reuse. The entire point of generative art is that we’re turning trash into treasure, and trash is not a scarce resource. If you can write code to create one beautiful thing, the same code should be reusable to create many beautiful things. This “reuse principle” means that the substantive work of writing generative art code is almost always a matter of writing functions. Functions are beautiful…</p>
+<p>…but they are opinionated. A function exists if (and only if) you intend to reuse it. In the ideal case, a function is a thing that makes sense on its own terms and – as a consequence – you might reuse it in many different contexts. Every scientific programming language since the dawn of time has included functions like <code>exp()</code> and <code>log()</code> because scientists will always reuse these functions. Exponents and logarithms are scientifically-reusable concepts.</p>
+<p>So what counts as an artistically-reusable concept? Well, at a minimum, the definition of an artistic <em>system</em> is a reusable concept. Suppose I want to create many art pieces that are “in the same style” as the piece I created above. To do that, I could wrap my code in a function that I’ll call <code>polar_art()</code>:</p>
+<div class="page-columns page-full">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>polar_art <span class="ot">&lt;-</span> <span class="cf">function</span>(seed, n, palette) {</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>  <span class="co"># set the state of the random number generator</span></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">set.seed</span>(seed)</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>  <span class="co"># data frame containing random values for </span></span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>  <span class="co"># aesthetics we might want to use in the art</span></span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>  dat <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">x0 =</span> <span class="fu">runif</span>(n),</span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">y0 =</span> <span class="fu">runif</span>(n),</span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">x1 =</span> x0 <span class="sc">+</span> <span class="fu">runif</span>(n, <span class="at">min =</span> <span class="sc">-</span>.<span class="dv">2</span>, <span class="at">max =</span> .<span class="dv">2</span>),</span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">y1 =</span> y0 <span class="sc">+</span> <span class="fu">runif</span>(n, <span class="at">min =</span> <span class="sc">-</span>.<span class="dv">2</span>, <span class="at">max =</span> .<span class="dv">2</span>),</span>
+<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">shade =</span> <span class="fu">runif</span>(n), </span>
+<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">size =</span> <span class="fu">runif</span>(n)</span>
+<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb10-16"><a href="#cb10-16" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb10-17"><a href="#cb10-17" aria-hidden="true" tabindex="-1"></a>  <span class="co"># plot segments in various colours, using </span></span>
+<span id="cb10-18"><a href="#cb10-18" aria-hidden="true" tabindex="-1"></a>  <span class="co"># polar coordinates and a gradient palette</span></span>
+<span id="cb10-19"><a href="#cb10-19" aria-hidden="true" tabindex="-1"></a>  dat <span class="sc">|&gt;</span> </span>
+<span id="cb10-20"><a href="#cb10-20" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ggplot</span>(<span class="fu">aes</span>(</span>
+<span id="cb10-21"><a href="#cb10-21" aria-hidden="true" tabindex="-1"></a>      <span class="at">x =</span> x0,</span>
+<span id="cb10-22"><a href="#cb10-22" aria-hidden="true" tabindex="-1"></a>      <span class="at">y =</span> y0,</span>
+<span id="cb10-23"><a href="#cb10-23" aria-hidden="true" tabindex="-1"></a>      <span class="at">xend =</span> x1,</span>
+<span id="cb10-24"><a href="#cb10-24" aria-hidden="true" tabindex="-1"></a>      <span class="at">yend =</span> y1,</span>
+<span id="cb10-25"><a href="#cb10-25" aria-hidden="true" tabindex="-1"></a>      <span class="at">colour =</span> shade,</span>
+<span id="cb10-26"><a href="#cb10-26" aria-hidden="true" tabindex="-1"></a>      <span class="at">size =</span> size</span>
+<span id="cb10-27"><a href="#cb10-27" aria-hidden="true" tabindex="-1"></a>    )) <span class="sc">+</span></span>
+<span id="cb10-28"><a href="#cb10-28" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_segment</span>(<span class="at">show.legend =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
+<span id="cb10-29"><a href="#cb10-29" aria-hidden="true" tabindex="-1"></a>    <span class="fu">coord_polar</span>() <span class="sc">+</span></span>
+<span id="cb10-30"><a href="#cb10-30" aria-hidden="true" tabindex="-1"></a>    <span class="fu">scale_y_continuous</span>(<span class="at">expand =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">0</span>)) <span class="sc">+</span></span>
+<span id="cb10-31"><a href="#cb10-31" aria-hidden="true" tabindex="-1"></a>    <span class="fu">scale_x_continuous</span>(<span class="at">expand =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">0</span>)) <span class="sc">+</span> </span>
+<span id="cb10-32"><a href="#cb10-32" aria-hidden="true" tabindex="-1"></a>    <span class="fu">scale_colour_gradientn</span>(<span class="at">colours =</span> palette) <span class="sc">+</span> </span>
+<span id="cb10-33"><a href="#cb10-33" aria-hidden="true" tabindex="-1"></a>    <span class="fu">scale_size</span>(<span class="at">range =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">10</span>)) <span class="sc">+</span> </span>
+<span id="cb10-34"><a href="#cb10-34" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme_void</span>()</span>
+<span id="cb10-35"><a href="#cb10-35" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell column-screen-inset quarto-layout-panel" data-fig.dpi="300">
+
+</div>
+</div>
+<p>Because I’ve written this thing down as a function, I’m now free to reuse it to create multiple pieces. Varying the <code>seed</code> argument creates new pieces that don’t differ in any systematic way from one another, whereas varying <code>n</code> and <code>palette</code> changes the number of segments plotted and the colour scheme used.</p>
+<div class="page-columns page-full">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">polar_art</span>(<span class="at">seed =</span> <span class="dv">1</span>, <span class="at">n =</span> <span class="dv">500</span>, <span class="at">palette =</span> <span class="fu">c</span>(<span class="st">"antiquewhite"</span>, <span class="st">"orange"</span>, <span class="st">"bisque"</span>))</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="fu">polar_art</span>(<span class="at">seed =</span> <span class="dv">1</span>, <span class="at">n =</span> <span class="dv">500</span>, <span class="at">palette =</span> <span class="fu">c</span>(<span class="st">"red"</span>, <span class="st">"black"</span>, <span class="st">"white"</span>))</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="fu">polar_art</span>(<span class="at">seed =</span> <span class="dv">2</span>, <span class="at">n =</span> <span class="dv">50</span>, <span class="at">palette =</span> <span class="fu">c</span>(<span class="st">"red"</span>, <span class="st">"black"</span>, <span class="st">"white"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell column-screen-inset quarto-layout-panel" data-fig.dpi="300" data-hash="index_cache/html/art-functions_2c0902d3fab7a281df81ba7ee30892bd">
+<div class="quarto-layout-row quarto-layout-valign-top">
+<div class="cell-output-display quarto-layout-cell" style="flex-basis: 33.3%;justify-content: center;">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="index_files/figure-html/art-functions-1.png" class="img-fluid figure-img" width="576"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output-display quarto-layout-cell" style="flex-basis: 33.3%;justify-content: center;">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="index_files/figure-html/art-functions-2.png" class="img-fluid figure-img" width="576"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output-display quarto-layout-cell" style="flex-basis: 33.3%;justify-content: center;">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="index_files/figure-html/art-functions-3.png" class="img-fluid figure-img" width="576"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="colour" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="colour">Colour</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(scales)</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggthemes)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Picking a palette is always tricky, but can often be made simpler because R has so many packages that provides prespecified colour palettes. My usual approach is to use palettes defined by a few colours, and it’s easy to find sites online that make it easy to find colour combinations you like. One of my favourite sites is <a href="https://coolors.co">coolors.co</a>, which you can browse for preselected palettes or use the tools to build your own. For example I might decide that <a href="https://coolors.co/palette/cdb4db-ffc8dd-ffafcc-bde0fe-a2d2ff">this palette</a> is the one I want to use. The site makes it easy to export the hex codes for each colour, so I can cut and paste to get this:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>pal <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"#cdb4db"</span>, <span class="st">"#ffc8dd"</span>, <span class="st">"#ffafcc"</span>, <span class="st">"#bde0fe"</span>, <span class="st">"#a2d2ff"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>The <code>show_col()</code> function from the <code>scales</code> package is a nice way to quickly preview the colours:</p>
+<div class="cell" data-layout-align="center" data-fig.dpi="300">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">show_col</span>(pal)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="index_files/figure-html/show-col-1.png" class="img-fluid figure-img" width="576"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Though there are only five colours in this palette, the <code>polar_art()</code> function uses <code>scales_colour_gradientn()</code> to construct a continuous colour scale from them by linearly interpolating between them. You can do the same thing manually using <code>colorRampPalette()</code>. In the code below I’ve created a new function <code>palette_fn()</code> that will generate a vector of colours that linearly interpolates between the five input colours in <code>pal</code>:</p>
+<div class="cell" data-layout-align="center" data-fig.dpi="300">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>palette_fn <span class="ot">&lt;-</span> <span class="fu">colorRampPalette</span>(pal)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>If I need 100 colours distributed along the spectrum defined by <code>pal</code>, all I need to do is this:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">palette_fn</span>(<span class="dv">100</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  [1] "#CDB4DB" "#CFB4DB" "#D1B5DB" "#D3B6DB" "#D5B7DB" "#D7B8DB" "#D9B8DB"
+  [8] "#DBB9DB" "#DDBADB" "#DFBBDB" "#E1BCDB" "#E3BCDB" "#E5BDDB" "#E7BEDC"
+ [15] "#E9BFDC" "#EBC0DC" "#EDC0DC" "#EFC1DC" "#F1C2DC" "#F3C3DC" "#F5C4DC"
+ [22] "#F7C4DC" "#F9C5DC" "#FBC6DC" "#FDC7DC" "#FFC7DC" "#FFC6DC" "#FFC5DB"
+ [29] "#FFC4DA" "#FFC3DA" "#FFC2D9" "#FFC1D8" "#FFC0D8" "#FFBFD7" "#FFBED6"
+ [36] "#FFBDD5" "#FFBCD5" "#FFBBD4" "#FFBAD3" "#FFB9D3" "#FFB8D2" "#FFB7D1"
+ [43] "#FFB6D1" "#FFB5D0" "#FFB4CF" "#FFB3CF" "#FFB2CE" "#FFB1CD" "#FFB0CD"
+ [50] "#FFAFCC" "#FDAFCD" "#FBB1CF" "#F8B3D1" "#F5B5D3" "#F3B7D5" "#F0B9D7"
+ [57] "#EDBBD9" "#EBBDDB" "#E8BFDD" "#E5C1DF" "#E3C3E1" "#E0C5E3" "#DDC7E5"
+ [64] "#DBC9E7" "#D8CBE9" "#D5CDEB" "#D3CFED" "#D0D1EF" "#CDD3F1" "#CBD5F3"
+ [71] "#C8D7F5" "#C5D9F7" "#C3DBF9" "#C0DDFB" "#BDDFFD" "#BCDFFE" "#BBDFFE"
+ [78] "#BADEFE" "#B8DDFE" "#B7DDFE" "#B6DCFE" "#B5DCFE" "#B4DBFE" "#B3DBFE"
+ [85] "#B2DAFE" "#B1D9FE" "#B0D9FE" "#AFD8FE" "#AED8FE" "#ACD7FE" "#ABD7FE"
+ [92] "#AAD6FE" "#A9D5FE" "#A8D5FE" "#A7D4FE" "#A6D4FE" "#A5D3FE" "#A4D3FE"
+ [99] "#A3D2FE" "#A2D2FF"</code></pre>
+</div>
+</div>
+<p>Here’s what those colours look like as a smooth palette:</p>
+<div class="cell" data-layout-align="center" data-fig.dpi="300">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">image</span>(</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">x =</span> <span class="fu">matrix</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">100</span>, <span class="at">ncol =</span> <span class="dv">1</span>), </span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">col =</span> <span class="fu">palette_fn</span>(<span class="dv">100</span>),</span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">useRaster =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">axes =</span> <span class="cn">FALSE</span></span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="index_files/figure-html/palette-function-1.png" class="img-fluid figure-img" width="576"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>In this example, I took one set of colours from the web to define a palette, but there are many built-in palettes you can select from randomly as part of your generative process. For example, the <code>ggthemes</code> package contains a list called <code>canva_palettes</code>, which contains 150 palettes taken from <a href="https://www.canva.com/colors/color-palettes/">canva.com</a>. For example, here’s one of those palettes</p>
+<div class="cell" data-layout-align="center" data-fig.dpi="300">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>canva_palettes[[<span class="dv">101</span>]]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "#4abdac" "#fc4a1a" "#f7b733" "#dfdce3"</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">show_col</span>(canva_palettes[[<span class="dv">101</span>]])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="index_files/figure-html/show-canva-palette-1.png" class="img-fluid figure-img" width="576"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>The fact that we have a list containing 150 different palettes, it’s a simple matter to write a <code>sample_canva()</code> function that samples one of these palettes at random:</p>
+<div class="cell" data-layout-align="center" data-fig.dpi="300">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>sample_canva <span class="ot">&lt;-</span> <span class="cf">function</span>(<span class="at">seed =</span> <span class="cn">NULL</span>) {</span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span>(<span class="sc">!</span><span class="fu">is.null</span>(seed)) <span class="fu">set.seed</span>(seed)</span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sample</span>(ggthemes<span class="sc">::</span>canva_palettes, <span class="dv">1</span>)[[<span class="dv">1</span>]]</span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Here’s an example of me using it:</p>
+<div class="page-columns page-full">
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">polar_art</span>(<span class="at">seed =</span> <span class="dv">2</span>, <span class="at">n =</span> <span class="dv">100</span>, <span class="at">palette =</span> <span class="fu">sample_canva</span>(<span class="at">seed =</span> <span class="dv">2</span>))</span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a><span class="fu">polar_art</span>(<span class="at">seed =</span> <span class="dv">2</span>, <span class="at">n =</span> <span class="dv">100</span>, <span class="at">palette =</span> <span class="fu">sample_canva</span>(<span class="at">seed =</span> <span class="dv">3</span>))</span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a><span class="fu">polar_art</span>(<span class="at">seed =</span> <span class="dv">2</span>, <span class="at">n =</span> <span class="dv">100</span>, <span class="at">palette =</span> <span class="fu">sample_canva</span>(<span class="at">seed =</span> <span class="dv">4</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell column-screen-inset quarto-layout-panel" data-fig.dpi="300" data-hash="index_cache/html/canva-palettes_4be9deaee3f72be1fd7f83a562a54026">
+<div class="quarto-layout-row quarto-layout-valign-top">
+<div class="cell-output-display quarto-layout-cell" style="flex-basis: 33.3%;justify-content: center;">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="index_files/figure-html/canva-palettes-1.png" class="img-fluid figure-img" width="576"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output-display quarto-layout-cell" style="flex-basis: 33.3%;justify-content: center;">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="index_files/figure-html/canva-palettes-2.png" class="img-fluid figure-img" width="576"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output-display quarto-layout-cell" style="flex-basis: 33.3%;justify-content: center;">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="index_files/figure-html/canva-palettes-3.png" class="img-fluid figure-img" width="576"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div>
+<p>Notice that I’ve set it up in a way that allows me some degree of control over which elements of the image are allowed to vary. In all three images I used the same seed when calling <code>polar_art()</code>, so the random configuration of shapes is identical in all three cases. In contrast, I gave different seeds to the <code>sample_canva()</code> function, so the images have different palettes. The reverse is also possible, producing different configurations with the same colour scheme:</p>
+<div class="page-columns page-full">
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">polar_art</span>(<span class="at">seed =</span> <span class="dv">5</span>, <span class="at">n =</span> <span class="dv">100</span>, <span class="at">palette =</span> <span class="fu">sample_canva</span>(<span class="at">seed =</span> <span class="dv">1</span>))</span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a><span class="fu">polar_art</span>(<span class="at">seed =</span> <span class="dv">6</span>, <span class="at">n =</span> <span class="dv">100</span>, <span class="at">palette =</span> <span class="fu">sample_canva</span>(<span class="at">seed =</span> <span class="dv">1</span>))</span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a><span class="fu">polar_art</span>(<span class="at">seed =</span> <span class="dv">7</span>, <span class="at">n =</span> <span class="dv">100</span>, <span class="at">palette =</span> <span class="fu">sample_canva</span>(<span class="at">seed =</span> <span class="dv">1</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell column-screen-inset quarto-layout-panel" data-fig.dpi="300" data-hash="index_cache/html/canva-palettes-2_70fd0f0f05c6b6caea62e6a0e0a935a6">
+<div class="quarto-layout-row quarto-layout-valign-top">
+<div class="cell-output-display quarto-layout-cell" style="flex-basis: 33.3%;justify-content: center;">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="index_files/figure-html/canva-palettes-2-1.png" class="img-fluid figure-img" width="576"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output-display quarto-layout-cell" style="flex-basis: 33.3%;justify-content: center;">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="index_files/figure-html/canva-palettes-2-2.png" class="img-fluid figure-img" width="576"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output-display quarto-layout-cell" style="flex-basis: 33.3%;justify-content: center;">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="index_files/figure-html/canva-palettes-2-3.png" class="img-fluid figure-img" width="576"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div>
+<p>The ability to pick and choose when the randomness gets turned on and off is quite handy!</p>
+</section>
+<section id="composition" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="composition">Composition</h2>
+<p>The <code>polar_art()</code> function I wrote earlier is nice, but it’s not very flexible. It allows some control over the palette and the number of segments to be plotted, but that’s all. It doesn’t let me use the full flexibility of <code>ggplot2</code> to create artwork. For example, what if I wanted to create more pieces in a “similar” style to the ones I created earlier, but plot different geoms? Or perhaps I want to plot more than one data set as part of a single piece? The <code>polar_art()</code> function doesn’t allow that. The data generation and plot building is all handled internally. Perhaps there’s a case to be made that we should break this into smaller functions and see if that helps.</p>
+<p>Let’s start out by writing a “random tibble generator” function, <code>sample_data()</code>. This function will generate tibbles full of random numbers, but that’s all:</p>
+<div class="cell" data-layout-align="center" data-fig.dpi="300">
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>sample_data <span class="ot">&lt;-</span> <span class="cf">function</span>(<span class="at">seed =</span> <span class="cn">NULL</span>, <span class="at">n =</span> <span class="dv">100</span>){</span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span>(<span class="sc">!</span><span class="fu">is.null</span>(seed)) <span class="fu">set.seed</span>(seed)</span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>  dat <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">x0 =</span> <span class="fu">runif</span>(n),</span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">y0 =</span> <span class="fu">runif</span>(n),</span>
+<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">x1 =</span> x0 <span class="sc">+</span> <span class="fu">runif</span>(n, <span class="at">min =</span> <span class="sc">-</span>.<span class="dv">2</span>, <span class="at">max =</span> .<span class="dv">2</span>),</span>
+<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">y1 =</span> y0 <span class="sc">+</span> <span class="fu">runif</span>(n, <span class="at">min =</span> <span class="sc">-</span>.<span class="dv">2</span>, <span class="at">max =</span> .<span class="dv">2</span>),</span>
+<span id="cb25-8"><a href="#cb25-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">shade =</span> <span class="fu">runif</span>(n), </span>
+<span id="cb25-9"><a href="#cb25-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">size =</span> <span class="fu">runif</span>(n),</span>
+<span id="cb25-10"><a href="#cb25-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">shape =</span> <span class="fu">factor</span>(<span class="fu">sample</span>(<span class="dv">0</span><span class="sc">:</span><span class="dv">22</span>, <span class="at">size =</span> n, <span class="at">replace =</span> <span class="cn">TRUE</span>))</span>
+<span id="cb25-11"><a href="#cb25-11" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb25-12"><a href="#cb25-12" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Next, let’s create a <code>styled_plot()</code> function that takes a palette and (optionally) a data set as inputs, and sets up the mappings and the stylistic aspects to the plot. This function does a lot of the work in defining what kind of artwork is possible using this system, even though it doesn’t actually draw anything. For example, it specifies <code>coord_polar()</code> as the coordinate system, so any points or lines that get created will be shown in polar coordinates. It uses <code>guide_none()</code> to suppress legends, and <code>theme_void()</code> to suppress axes, axis titles and so on.</p>
+<div class="cell" data-layout-align="center" data-fig.dpi="300">
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>styled_plot <span class="ot">&lt;-</span> <span class="cf">function</span>(<span class="at">data =</span> <span class="cn">NULL</span>, palette) {</span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(</span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">data =</span> data,</span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">mapping =</span> <span class="fu">aes</span>(</span>
+<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a>      <span class="at">x =</span> x0,</span>
+<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a>      <span class="at">y =</span> y0,</span>
+<span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a>      <span class="at">xend =</span> x1,</span>
+<span id="cb26-8"><a href="#cb26-8" aria-hidden="true" tabindex="-1"></a>      <span class="at">yend =</span> y1,</span>
+<span id="cb26-9"><a href="#cb26-9" aria-hidden="true" tabindex="-1"></a>      <span class="at">colour =</span> shade,</span>
+<span id="cb26-10"><a href="#cb26-10" aria-hidden="true" tabindex="-1"></a>      <span class="at">size =</span> size</span>
+<span id="cb26-11"><a href="#cb26-11" aria-hidden="true" tabindex="-1"></a>    )) <span class="sc">+</span> </span>
+<span id="cb26-12"><a href="#cb26-12" aria-hidden="true" tabindex="-1"></a>    <span class="fu">coord_polar</span>(<span class="at">clip =</span> <span class="st">"off"</span>) <span class="sc">+</span></span>
+<span id="cb26-13"><a href="#cb26-13" aria-hidden="true" tabindex="-1"></a>    <span class="fu">scale_y_continuous</span>(</span>
+<span id="cb26-14"><a href="#cb26-14" aria-hidden="true" tabindex="-1"></a>      <span class="at">expand =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">0</span>),</span>
+<span id="cb26-15"><a href="#cb26-15" aria-hidden="true" tabindex="-1"></a>      <span class="at">limits =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1</span>), </span>
+<span id="cb26-16"><a href="#cb26-16" aria-hidden="true" tabindex="-1"></a>      <span class="at">oob =</span> scales<span class="sc">::</span>oob_keep</span>
+<span id="cb26-17"><a href="#cb26-17" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">+</span></span>
+<span id="cb26-18"><a href="#cb26-18" aria-hidden="true" tabindex="-1"></a>    <span class="fu">scale_x_continuous</span>(</span>
+<span id="cb26-19"><a href="#cb26-19" aria-hidden="true" tabindex="-1"></a>      <span class="at">expand =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">0</span>), </span>
+<span id="cb26-20"><a href="#cb26-20" aria-hidden="true" tabindex="-1"></a>      <span class="at">limits =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1</span>), </span>
+<span id="cb26-21"><a href="#cb26-21" aria-hidden="true" tabindex="-1"></a>      <span class="at">oob =</span> scales<span class="sc">::</span>oob_keep</span>
+<span id="cb26-22"><a href="#cb26-22" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">+</span> </span>
+<span id="cb26-23"><a href="#cb26-23" aria-hidden="true" tabindex="-1"></a>    <span class="fu">scale_colour_gradientn</span>(<span class="at">colours =</span> palette) <span class="sc">+</span> </span>
+<span id="cb26-24"><a href="#cb26-24" aria-hidden="true" tabindex="-1"></a>    <span class="fu">scale_size</span>(<span class="at">range =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">10</span>)) <span class="sc">+</span> </span>
+<span id="cb26-25"><a href="#cb26-25" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme_void</span>() <span class="sc">+</span> </span>
+<span id="cb26-26"><a href="#cb26-26" aria-hidden="true" tabindex="-1"></a>    <span class="fu">guides</span>(</span>
+<span id="cb26-27"><a href="#cb26-27" aria-hidden="true" tabindex="-1"></a>      <span class="at">colour =</span> <span class="fu">guide_none</span>(),</span>
+<span id="cb26-28"><a href="#cb26-28" aria-hidden="true" tabindex="-1"></a>      <span class="at">size =</span> <span class="fu">guide_none</span>(),</span>
+<span id="cb26-29"><a href="#cb26-29" aria-hidden="true" tabindex="-1"></a>      <span class="at">fill =</span> <span class="fu">guide_none</span>(),</span>
+<span id="cb26-30"><a href="#cb26-30" aria-hidden="true" tabindex="-1"></a>      <span class="at">shape =</span> <span class="fu">guide_none</span>()</span>
+<span id="cb26-31"><a href="#cb26-31" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb26-32"><a href="#cb26-32" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>This structure gives a clean delineation of responsibility among the different functions. The <code>sample_canva()</code> function does the work of generating random palettes, <code>sample_data()</code> does the job of creating random data to drive the plot, <code>styled_plot()</code> takes care of all the ggplot set up, and then you can pick and choose which geom you want to add. So we can write code like this that differs only in the choice of geom:</p>
+<div class="page-columns page-full">
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>dat <span class="ot">&lt;-</span> <span class="fu">sample_data</span>(<span class="at">n =</span> <span class="dv">100</span>, <span class="at">seed =</span> <span class="dv">1</span>) </span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>pal <span class="ot">&lt;-</span> <span class="fu">sample_canva</span>(<span class="at">seed =</span> <span class="dv">1</span>)</span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a><span class="fu">styled_plot</span>(<span class="at">data =</span> dat, <span class="at">palette =</span> pal) <span class="sc">+</span> <span class="fu">geom_segment</span>()</span>
+<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a><span class="fu">styled_plot</span>(<span class="at">data =</span> dat, <span class="at">palette =</span> pal) <span class="sc">+</span> <span class="fu">geom_path</span>()</span>
+<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a><span class="fu">styled_plot</span>(<span class="at">data =</span> dat, <span class="at">palette =</span> pal) <span class="sc">+</span> <span class="fu">geom_point</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell column-screen-inset quarto-layout-panel" data-fig.dpi="300" data-hash="index_cache/html/simple-composition_9effddea8136d6173be54b2e321471bd">
+<div class="quarto-layout-row quarto-layout-valign-top">
+<div class="cell-output-display quarto-layout-cell" style="flex-basis: 33.3%;justify-content: center;">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="index_files/figure-html/simple-composition-1.png" class="img-fluid figure-img" width="576"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output-display quarto-layout-cell" style="flex-basis: 33.3%;justify-content: center;">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="index_files/figure-html/simple-composition-2.png" class="img-fluid figure-img" width="576"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output-display quarto-layout-cell" style="flex-basis: 33.3%;justify-content: center;">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="index_files/figure-html/simple-composition-3.png" class="img-fluid figure-img" width="576"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div>
+<p>Because the output of <code>styled_plot()</code> is a ggplot that we can add layers to, and because each layer in a ggplot can supply its own data, we now have the ability to reuse these components in different ways. For that it’s helpful to load <code>dplyr</code>. Here’s an example where we generate two random data sets and feed those into four separate geoms:</p>
+<div class="cell" data-layout-align="center" data-fig.dpi="300" data-hash="index_cache/html/compositionality_a57e1d2de0b14cb84c6d5b63af91d230">
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>dat1 <span class="ot">&lt;-</span> <span class="fu">sample_data</span>(<span class="at">n =</span> <span class="dv">2000</span>, <span class="at">seed =</span> <span class="dv">123</span>) </span>
+<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a>dat2 <span class="ot">&lt;-</span> <span class="fu">sample_data</span>(<span class="at">n =</span> <span class="dv">100</span>, <span class="at">seed =</span> <span class="dv">456</span>) <span class="sc">|&gt;</span>  </span>
+<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">y0 =</span> .<span class="dv">3</span> <span class="sc">+</span> y0 <span class="sc">*</span> .<span class="dv">6</span>, <span class="at">y1 =</span> .<span class="dv">3</span>)</span>
+<span id="cb28-6"><a href="#cb28-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-7"><a href="#cb28-7" aria-hidden="true" tabindex="-1"></a><span class="fu">styled_plot</span>(<span class="at">palette =</span> <span class="fu">sample_canva</span>(<span class="at">seed =</span> <span class="dv">7</span>)) <span class="sc">+</span> </span>
+<span id="cb28-8"><a href="#cb28-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_segment</span>(</span>
+<span id="cb28-9"><a href="#cb28-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">data =</span> dat1 <span class="sc">|&gt;</span> <span class="fu">mutate</span>(<span class="at">size =</span> size <span class="sc">*</span> <span class="dv">3</span>)</span>
+<span id="cb28-10"><a href="#cb28-10" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span> </span>
+<span id="cb28-11"><a href="#cb28-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_segment</span>(</span>
+<span id="cb28-12"><a href="#cb28-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">data =</span> dat2 <span class="sc">|&gt;</span> <span class="fu">mutate</span>(<span class="at">size =</span> size <span class="sc">/</span> <span class="dv">5</span>), </span>
+<span id="cb28-13"><a href="#cb28-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">lineend =</span> <span class="st">"round"</span>, </span>
+<span id="cb28-14"><a href="#cb28-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">colour =</span> <span class="st">"white"</span></span>
+<span id="cb28-15"><a href="#cb28-15" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb28-16"><a href="#cb28-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_segment</span>(</span>
+<span id="cb28-17"><a href="#cb28-17" aria-hidden="true" tabindex="-1"></a>    <span class="at">data =</span> dat2 <span class="sc">|&gt;</span> <span class="fu">mutate</span>(<span class="at">size =</span> size <span class="sc">/</span> <span class="dv">40</span>), </span>
+<span id="cb28-18"><a href="#cb28-18" aria-hidden="true" tabindex="-1"></a>    <span class="at">lineend =</span> <span class="st">"round"</span>, </span>
+<span id="cb28-19"><a href="#cb28-19" aria-hidden="true" tabindex="-1"></a>    <span class="at">colour =</span> <span class="st">"#222222"</span></span>
+<span id="cb28-20"><a href="#cb28-20" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb28-21"><a href="#cb28-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(</span>
+<span id="cb28-22"><a href="#cb28-22" aria-hidden="true" tabindex="-1"></a>    <span class="at">data =</span> dat2 <span class="sc">|&gt;</span> <span class="fu">mutate</span>(<span class="at">size =</span> size <span class="sc">*</span> <span class="dv">2</span>),</span>
+<span id="cb28-23"><a href="#cb28-23" aria-hidden="true" tabindex="-1"></a>    <span class="at">colour =</span> <span class="st">"#222222"</span></span>
+<span id="cb28-24"><a href="#cb28-24" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="index_files/figure-html/compositionality-1.png" class="img-fluid figure-img" width="576"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Another example that three copies of the same random data set to produce a variation that has additional symmetries:</p>
+<div class="cell" data-layout-align="center" data-fig.dpi="300" data-hash="index_cache/html/compositionality-2_aa036f7d5be0fcd2d30bbb393fb23279">
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>dat <span class="ot">&lt;-</span> <span class="fu">sample_data</span>(<span class="at">n =</span> <span class="dv">2000</span>, <span class="at">seed =</span> <span class="dv">123</span>) <span class="sc">|&gt;</span></span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">y1 =</span> y0, <span class="at">size =</span> size <span class="sc">/</span> <span class="dv">2</span>)</span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a><span class="fu">styled_plot</span>(<span class="at">palette =</span> <span class="fu">sample_canva</span>(<span class="at">seed =</span> <span class="dv">456</span>)) <span class="sc">+</span> </span>
+<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_segment</span>(<span class="at">data =</span> dat) <span class="sc">+</span> </span>
+<span id="cb29-6"><a href="#cb29-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_segment</span>(<span class="at">data =</span> dat <span class="sc">|&gt;</span> <span class="fu">mutate</span>(<span class="at">y1 =</span> y1 <span class="sc">-</span> .<span class="dv">2</span>, <span class="at">y0 =</span> y0 <span class="sc">-</span> .<span class="dv">2</span>)) <span class="sc">+</span></span>
+<span id="cb29-7"><a href="#cb29-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_segment</span>(<span class="at">data =</span> dat <span class="sc">|&gt;</span> <span class="fu">mutate</span>(<span class="at">y1 =</span> y1 <span class="sc">-</span> .<span class="dv">4</span>, <span class="at">y0 =</span> y0 <span class="sc">-</span> .<span class="dv">4</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="index_files/figure-html/compositionality-2-1.png" class="img-fluid figure-img" width="576"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Finally, here’s a version that uses the <code>linetype</code> argument to <code>geom_segment()</code> to create a “choppier” version of these pieces:</p>
+<div class="cell" data-layout-align="center" data-fig.dpi="300" data-hash="index_cache/html/compositionality-3_1eb982f8449b5f2d31e630ade720f4c8">
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>dat <span class="ot">&lt;-</span> <span class="fu">sample_data</span>(<span class="at">n =</span> <span class="dv">1000</span>, <span class="at">seed =</span> <span class="dv">1</span>) <span class="sc">|&gt;</span></span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">y1 =</span> y0, <span class="at">size =</span> size <span class="sc">/</span> <span class="dv">4</span>)</span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a><span class="fu">styled_plot</span>(<span class="at">palette =</span> <span class="fu">sample_canva</span>(<span class="at">seed =</span> <span class="dv">2</span>)) <span class="sc">+</span> </span>
+<span id="cb30-5"><a href="#cb30-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_segment</span>(<span class="at">data =</span> dat, <span class="at">linetype =</span> <span class="st">"331311"</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="index_files/figure-html/compositionality-3-1.png" class="img-fluid figure-img" width="576"></p>
+</figure>
+</div>
+</div>
+</div>
+
+
+</section>
+
+</main> <!-- /main -->
+<script defer="" data-domain="art-from-code.netlify.app" src="https://plausible.io/js/plausible.js"></script>
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    setTimeout(function() {
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      let href = ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const cites = ref.parentNode.getAttribute('data-cites').split(' ');
+    tippyHover(ref, function() {
+      var popup = window.document.createElement('div');
+      cites.forEach(function(cite) {
+        var citeDiv = window.document.createElement('div');
+        citeDiv.classList.add('hanging-indent');
+        citeDiv.classList.add('csl-entry');
+        var biblioDiv = window.document.getElementById('ref-' + cite);
+        if (biblioDiv) {
+          citeDiv.innerHTML = biblioDiv.innerHTML;
+        }
+        popup.appendChild(citeDiv);
+      });
+      return popup.innerHTML;
+    });
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>
