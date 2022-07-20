@@ -126,6 +126,8 @@ Very pretty!
 
 ## Glow
 
+...but it could be prettier, don't you think? Maybe we could add a glow around the leaves, to give it a twinkling look. This feels like the kind of job for a pixel filter, and ggfx should be able to do this for us. Conceptually, what we want to do is apply a "glow" filter to the `leaves` of our tree, but not to the `trunk`. We can do that in ggfx by using the `with_outer_glow()` filtering function: we pass the `leaves` layer to the filter, along with some other arguments (e.g., `colour`) that specify the properties of the glow. The examples below show this in action: the left plot is the original tree, the middle one adds a small white glow to the leaves, and the right one adds a much bigger glow:
+
 ```{r outer-glow, dev.args=list(bg="#222222")}
 #| fig-width: 4
 #| fig-height: 6
@@ -142,7 +144,30 @@ base +
   with_outer_glow(leaves, colour = "white", sigma = 5, expand = 3)
 ```
 
+In the third example, `sigma` is interpreted as the standard deviation of the Gaussian blur added around each point: `sigma = 5` specifies that this standard deviation is 5 pixels in size. The `expand = 3` argument tells ggfx to "expand" each point by 3 pixels before drawing the glow. This can be handy for very small objects that would otherwise be difficult to see even with the added glow.
+
+When written like this -- with each layer stored as a named variable -- ggfx code is very easy to read. I've quickly found myself adopting this code style any time I want to do pixel filtering. Constructing the plot piecewise and storing each layer as a variable makes it much easier to see what I'm doing!
+
+As an aside, yes, there is also a `with_inner_glow()` function that applies the glow to the interior of each object rather than extending the glow outside it. 
+
 ## Dither
+
+The previous example gives you a pretty good sense of the core mechanic of ggfx: the package supplies the `with_*()` functions that correspond to different kinds of pixel filtering operations. There are quite a lot of filters you might want to try. [Dithering](https://en.wikipedia.org/wiki/Dither) is a technique in which we reduce (or quantise) an image that has many colours down to an image with fewer colours, and then add some random (or not-so-random) noise to the coarser-grained image in a way that leaves it looking fairly natural. There are a lot of ways in which you can dither an image: one of the most famous is the [Floyd-Steinberg algorithm](https://en.wikipedia.org/wiki/Floyd%E2%80%93Steinberg_dithering). The Wikipedia page on Floyd-Steinberg dithering gives a nice (CC-licenced!) example using a kitten picture, shown to the left. 
+
+![](undithered.png)
+![](quantised.png)
+![](dithered.png)
+
+The original image is shown on the left. The image in the middle reduces the number of distinct colours in the image (i.e. quantises it) but doesn't apply any dithering. It's immediately obvious that there are artifacts in the image, and it doesn't look like a very good approximation to the original. On the right, a dithering algorithm is applied. The image still uses the same small set of colours, but arranges the pixels in such a way that the local density of light and dark pixels gives the impression of shading. 
+
+The ggfx package supplies several dithering filters, including:
+
+- `with_dither()` uses Floyd-Steinberg dithering
+- `with_halftone_dither()` uses [halftone](https://en.wikipedia.org/wiki/Halftone) dots
+- `with_ordered_dither()` uses [ordered dithering](https://en.wikipedia.org/wiki/Ordered_dithering)
+- `with_custom_dither()` lets you build your own! 
+
+So let's take a look. If we want to apply dithering to some generative art, it would help to have some generative art code! This time around, I'll reuse the code that we wrote in the very first session to create "polar coordinate art" in ggplot2. To spare you the effort of revisiting, here's the code we're going to use to specify a `base` image:
 
 ```{r}
 set.seed(1)
@@ -175,6 +200,8 @@ base <- ggplot(
   theme(panel.background = element_rect(fill = "#aaaaaa"))
 ```
 
+The details to this don't matter very much for this session. All that matters is that when we add `geom_segment()` to `base`, it produces radial art like the image shown below on the left. Then, on the right, we can see the effect of the `with_dither()` function. I've reduced the image to five distinct colours in order to exaggerate the dithering effect as much as possible. Any lower than this and the image degrades too much.
+
 
 ```{r dither, dev.args=list(bg="#222222")}
 #| fig-width: 6
@@ -187,6 +214,7 @@ base + geom_segment()
 base + with_dither(geom_segment(), max_colours = 5)
 ```
 
+Floyd-Steinberg dithering gives the image a slightly grainy feel. It can be very handy when you don't want the art to look too clean. Rendering the image in halftone gives it a more patterend feel, as the images below illustrate:
 
 ```{r halftone-dither, dev.args=list(bg="#222222")}
 #| fig-width: 6
@@ -194,23 +222,18 @@ base + with_dither(geom_segment(), max_colours = 5)
 #| fig-dpi: 300
 #| fig-align: center
 #| layout-nrow: 1
-#| column: screen-inset
-base + geom_segment()
+#| column: page
 base + with_halftone_dither(geom_segment())
 with_halftone_dither(base + geom_segment())
 ```
 
+Notice the difference between these two examples. The `with_*()` functions in ggfx are quite flexible. You can pass a single layer as the input, or alternatively you can pass the whole image. In fact, if you're comfortable with [grid graphics](https://stat.ethz.ch/R-manual/R-devel/library/grid/doc/grid.pdf), you can pass individual grobs too. This is discussed in the [ggfx object support help page](https://ggfx.data-imaginist.com/reference/object_support.html). 
+
 ## Mask
 
+One of my favourite filtering tricks is to use `with_mask()` as a way of displaying one layer of the plot *only* when it overlaps with a second layer (referred to as the "mask"). To see why I love this so much, let's use the ambient package to create a textured grid that we could draw using `geom_raster()`. I talked about this in the session on spatial noise tricks, so I won't bore you by repeating the explanation. Instead, here's the code to create a layer called `texture`:
 
-```{r mask, dev.args=list(bg="#222222")}
-#| fig-width: 6
-#| fig-height: 6
-#| fig-dpi: 300
-#| fig-align: center
-#| layout-nrow: 1
-#| column: page
-
+```{r texture-layer}
 texture <- geom_raster(
   mapping = aes(x, y, fill = paint),
   data = long_grid(
@@ -224,19 +247,18 @@ texture <- geom_raster(
       paint = lf_noise + mf_noise + hf_noise
     )
 )
+```
 
+We're going to use `texture` as our background, but instead of plotting the whole thing we're going mask it. Let's create a polygon layer that will serve as the mask. 
+
+```{r mask-layer}
 hex <- tibble(x = sin((0:6)/6 * 2 * pi), y = cos((0:6)/6 * 2 * pi))
-border <- geom_path(aes(x, y), hex, colour = "white", size = 15)
-frame <- geom_polygon(aes(x, y), hex, fill = "white")
+mask <- geom_polygon(aes(x, y), hex, fill = "white")
+```
 
-text <- geom_text(
-  mapping = aes(x, y, label = text), 
-  dat = tibble(x = 0, y = 0, text = "ART"), 
-  size = 36,
-  colour = "white", 
-  fontface = "bold"
-) 
+As before I'll create a `base` plot to which we can add these geoms. The code isn't very interesting, but I should be thorough and show it to you anyway:
 
+```{r mask-base}
 base <- ggplot() + 
   theme_void() +
   coord_equal() +
@@ -246,14 +268,76 @@ base <- ggplot() +
     colours = c("#222222","#e83e8c"), 
     guide = guide_none()
   )
+```
+
+Okay, so now let's take a look the two layers individually:
+
+```{r mask-components, dev.args=list(bg="#222222")}
+#| fig-width: 6
+#| fig-height: 6
+#| fig-dpi: 300
+#| fig-align: center
+#| layout-nrow: 1
+#| column: page
+base + texture
+base + mask
+```
+
+Gosh, I wonder what we could possibly do with a texture and a hexagon shape...
+
+```{r plain-hex, dev.args=list(bg="#222222")}
+#| fig-width: 6
+#| fig-height: 6
+#| fig-dpi: 300
+#| fig-align: center
+base + 
+  as_reference(mask, id = "mask") + 
+  with_mask(texture, "mask")
+```
+
+Huh. Well look at that... we have something that could quite easily turn into the design of a hex sticker. Amazing.
+
+Before we move on I should explain why I called `as_reference()` in the previous example, and what that function does. To get a sense of it, let's see what happens if I attempt the more "intuitive" strategy of trying to pass the `mask` layer directly to `with_mask()`:
+
+```{r bad-mask, error=TRUE, fig.show='hide'}
+base + with_mask(texture, mask)
+```
+
+The error message here complains that R doesn't know how to convert the `mask` layer to a raster object. Remember at the beginning I said that ggfx works by converting everything to a pixel representation (i.e., turn our vector graphics layer into raster graphics). What's going on here is that the second argument to `with_mask()` is allowed to  be a "registered filter", or it has to actually be a raster object. I'm not doing either one! I'm trying to pass it a raw ggplot layer. That's where the `as_reference()` function comes in. Its role is to take a layer and "register" it as a filter (the `id` argument is used to give it a name) that can subsequently used as the mask. 
+
+There are a few functions in ggfx that work like that. Another one is the `as_group()` function. Suppose I want to apply a filter to several layers at once, but not necessarily to the whole plot. For example, suppose I want some text and a pretty border on my hex sticker, represented by these two layers:
+
+```{r extra-layers}
+border <- geom_path(aes(x, y), hex, colour = "white", size = 15)
+
+text <- geom_text(
+  mapping = aes(x, y, label = text), 
+  dat = tibble(x = 0, y = 0, text = "ART"), 
+  size = 36,
+  colour = "white", 
+  fontface = "bold"
+) 
+```
+
+When I construct my mask, what I really want to do is apply it to all three layers: `texture`, `border`, and `text` should all be masked by the `mask` layer. To do that I pass `texture`, `border`, and `text` to `as_group()` to define the group; then I pass `mask` to `as_reference()` to register it as a filter; and *then* I apply `with_mask()`. Here's how that works:
+
+```{r mask, dev.args=list(bg="#222222")}
+#| fig-width: 6
+#| fig-height: 6
+#| fig-dpi: 300
+#| fig-align: center
+#| layout-nrow: 1
+#| column: page
+
 
 base + texture + text + border
 base + 
   as_group(texture, text, border, id = "content") +
-  as_reference(frame, id = "frame") + 
-  with_mask("content", "frame")
+  as_reference(mask, id = "mask") + 
+  with_mask("content", "mask")
 ```
 
+That's awfully convenient :)
 
 ## Displace
 
