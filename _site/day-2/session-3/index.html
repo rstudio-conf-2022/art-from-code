@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>ART FROM CODE - PIXEL FILTERS WITH GGFX</title>
+<title>ART FROM CODE - PIXEL FILTERS</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -119,11 +119,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 
 <link rel="stylesheet" href="../../styles.css">
-<meta property="og:title" content="ART FROM CODE - PIXEL FILTERS WITH GGFX">
+<meta property="og:title" content="ART FROM CODE - PIXEL FILTERS">
 <meta property="og:description" content="An rstudio::conf workshop on generative art with R">
 <meta property="og:image" content="http://art-from-code.netlify.app/img/banner.png">
 <meta property="og:site-name" content="ART FROM CODE">
-<meta name="twitter:title" content="ART FROM CODE - PIXEL FILTERS WITH GGFX">
+<meta name="twitter:title" content="ART FROM CODE - PIXEL FILTERS">
 <meta name="twitter:description" content="An rstudio::conf workshop on generative art with R">
 <meta name="twitter:image" content="http://art-from-code.netlify.app/img/banner.png">
 <meta name="twitter:creator" content="@djnavarro">
@@ -199,9 +199,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#glow" id="toc-glow" class="nav-link active" data-scroll-target="#glow">Glow</a></li>
+  <li><a href="#prelude" id="toc-prelude" class="nav-link active" data-scroll-target="#prelude">Prelude</a></li>
+  <li><a href="#glow" id="toc-glow" class="nav-link" data-scroll-target="#glow">Glow</a></li>
   <li><a href="#dither" id="toc-dither" class="nav-link" data-scroll-target="#dither">Dither</a></li>
   <li><a href="#mask" id="toc-mask" class="nav-link" data-scroll-target="#mask">Mask</a></li>
+  <li><a href="#displace" id="toc-displace" class="nav-link" data-scroll-target="#displace">Displace</a></li>
+  <li><a href="#blend" id="toc-blend" class="nav-link" data-scroll-target="#blend">Blend</a></li>
   </ul>
 </nav>
     </div>
@@ -210,7 +213,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">PIXEL FILTERS WITH GGFX</h1>
+<h1 class="title">PIXEL FILTERS</h1>
 </div>
 
 
@@ -228,66 +231,103 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tibble)</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(scales)</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggforce)</span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggthemes)</span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggfx)</span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(flametree)</span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ambient)</span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tictoc)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggforce)</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggfx)</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(flametree)</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ambient)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
+<p>The last technical topic I want to cover in this workshop is pixel filters, and specifically the <a href="https://ggfx.data-imaginist.com/">ggfx package</a> which makes it relatively easy to use them in conjunction with ggplot2. Phrased in the most general terms, a filter is any function that takes one image as input and returns a new (presumably modified!) image as output. As an example, think about how Instagram filters work: the original photo is used as the input, and the modified one is returned as output. This filtering takes place at the pixel level, so it’s not immediately obvious how we could do this with ggplot2. The way that the ggfx package handles this is to render render the image (or part of the image) off screen to obtain a representation that can be filtered. The filter is applied to that rendered image and then, when the final plot is constructed, the filtered versions are included in the final plot rather than the original ones.</p>
+<p>In this session I’ll provide an introduction to ggfx. The API for ggfx takes a little while to wrap your head around, but once you’ve got a handle on it, it turns out to be a very powerful tool for generative art in R.</p>
+<section id="prelude" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="prelude">Prelude</h2>
+<p>When we dive into ggfx, it will be handy to have some data that we can use to make interesting art. For that purpose I’ll rely on the <a href="https://flametree.djnavarro.net/">flametree package</a> which I’ve used in the past to make pretty pictures of trees. The <code>flametree_grow()</code> function generates the raw data:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>sample_canva2 <span class="ot">&lt;-</span> <span class="cf">function</span>(<span class="at">seed =</span> <span class="cn">NULL</span>, <span class="at">n =</span> <span class="dv">4</span>) {</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span>(<span class="sc">!</span><span class="fu">is.null</span>(seed)) <span class="fu">set.seed</span>(seed)</span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sample</span>(ggthemes<span class="sc">::</span>canva_palettes, <span class="dv">1</span>)[[<span class="dv">1</span>]] <span class="sc">|&gt;</span></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>    (\(x) <span class="fu">colorRampPalette</span>(x)(n))()  </span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>tree <span class="ot">&lt;-</span> <span class="fu">flametree_grow</span>(</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">seed =</span> <span class="dv">1</span>, </span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">time =</span> <span class="dv">9</span>, </span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">angle =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">15</span>, <span class="dv">15</span>, <span class="dv">30</span>)</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>tree</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>tree <span class="ot">&lt;-</span> <span class="fu">flametree_grow</span>(<span class="at">seed =</span> <span class="dv">1</span>, <span class="at">time =</span> <span class="dv">8</span>, <span class="at">angle =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">15</span>, <span class="dv">15</span>, <span class="dv">30</span>))</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>tree</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell column-page">
 <div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 1,533 × 12
-   coord_x coord_y id_tree id_time id_path id_leaf id_pathtree id_step seg_deg
-     &lt;dbl&gt;   &lt;dbl&gt;   &lt;int&gt;   &lt;int&gt;   &lt;int&gt; &lt;lgl&gt;   &lt;chr&gt;         &lt;int&gt;   &lt;dbl&gt;
- 1  -0.839    0          1       1       1 FALSE   1_1               0      90
- 2  -0.839    0.5        1       1       1 FALSE   1_1               1      90
- 3  -0.839    1          1       1       1 FALSE   1_1               2      90
- 4  -0.839    1          1       2       2 FALSE   1_2               0      75
- 5  -0.839    1.45       1       2       2 FALSE   1_2               1      75
- 6  -0.606    1.87       1       2       2 FALSE   1_2               2      75
- 7  -0.839    1          1       2       3 FALSE   1_3               0      75
- 8  -0.839    1.3        1       2       3 FALSE   1_3               1      75
- 9  -0.683    1.58       1       2       3 FALSE   1_3               2      75
-10  -0.606    1.87       1       3       4 FALSE   1_4               0     105
-# … with 1,523 more rows, and 3 more variables: seg_len &lt;dbl&gt;, seg_col &lt;dbl&gt;,
-#   seg_wid &lt;dbl&gt;</code></pre>
+<pre><code># A tibble: 3,069 × 12
+   coord_x coord_y id_tree id_time id_path id_leaf id_pathtree id_step seg_deg seg_len seg_col seg_wid
+     &lt;dbl&gt;   &lt;dbl&gt;   &lt;int&gt;   &lt;int&gt;   &lt;int&gt; &lt;lgl&gt;   &lt;chr&gt;         &lt;int&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;
+ 1  -0.429    0          1       1       1 FALSE   1_1               0      90    1          3    4.67
+ 2  -0.429    0.5        1       1       1 FALSE   1_1               1      90    1          3    4.67
+ 3  -0.429    1          1       1       1 FALSE   1_1               2      90    1          3    4.67
+ 4  -0.429    1          1       2       2 FALSE   1_2               0      75    0.9        4    3.59
+ 5  -0.429    1.45       1       2       2 FALSE   1_2               1      75    0.9        4    3.59
+ 6  -0.196    1.87       1       2       2 FALSE   1_2               2      75    0.9        4    3.59
+ 7  -0.429    1          1       2       3 FALSE   1_3               0      75    0.6        4    3.59
+ 8  -0.429    1.3        1       2       3 FALSE   1_3               1      75    0.6        4    3.59
+ 9  -0.274    1.58       1       2       3 FALSE   1_3               2      75    0.6        4    3.59
+10  -0.196    1.87       1       3       4 FALSE   1_4               0     105    0.54       5    2.32
+# … with 3,059 more rows</code></pre>
 </div>
 </div>
+<p>You can render the output conveniently with the help of <code>flametree_plot()</code>:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>tree <span class="sc">|&gt;</span> </span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">flametree_plot</span>(</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">background =</span> <span class="st">"#222222"</span>, </span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">palette =</span> <span class="fu">c</span>(<span class="st">"#ffffff"</span>, <span class="st">"#f652a0"</span>)</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="index_files/figure-html/flametree-plot-origin-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>The <code>flametree_plot()</code> function is fairly flexible and allows you to draw the tree in several different styles, but for the purposes of this session we’ll want to write our own ggplot2 (and ggfx) code, so it may be helpful to explain what you’re looking at in this <code>tree</code>. Each curved segment in the tree is drawn as a <a href="https://en.wikipedia.org/wiki/B%C3%A9zier_curve">Bézier curve</a> specified by three control points whose locations are given by the <code>coord_x</code> and <code>coord_y</code> variables. Each row in the tibble refers to one control point, so there are three rows per segment. Here’s the three rows that correspond to the 99th segment in the tree:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>tree <span class="sc">|&gt;</span> <span class="fu">filter</span>(path_id <span class="sc">==</span> <span class="dv">99</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell column-page">
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 3 × 12
+  coord_x coord_y id_tree id_time id_path id_leaf id_pathtree id_step seg_deg seg_len seg_col seg_wid
+    &lt;dbl&gt;   &lt;dbl&gt;   &lt;int&gt;   &lt;int&gt;   &lt;int&gt; &lt;lgl&gt;   &lt;chr&gt;         &lt;int&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;
+1   -1.05    2.75       1       7      99 FALSE   1_99              0     180   0.140       9   0.161
+2   -1.11    2.78       1       7      99 FALSE   1_99              1     180   0.140       9   0.161
+3   -1.19    2.75       1       7      99 FALSE   1_99              2     180   0.140       9   0.161</code></pre>
+</div>
+</div>
+<p>The various columns here describe different aspects of the tree: there’s a <code>seg_wid</code> column representing the width of each segment (usually mapped to the size aesthetic), a <code>seg_col</code> column specifying a colour (usually mapped to the colour aesthetic), etc.</p>
+<p>Of particular relevance here is the <code>id_leaf</code> column. This column is a logical variable that is <code>TRUE</code> only for those control points that represent the very tips of the tree: the leaves, essentially. Later on I’m going to plot the tree trunk and leaves separately, so it’s convenient to have a <code>leaf</code> tibble that contains the data only for the leaf nodes:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>leaf <span class="ot">&lt;-</span> tree <span class="sc">|&gt;</span> <span class="fu">filter</span>(id_leaf <span class="sc">==</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Okay, now let’s construct a flametree image piece by piece. I’ll start with a <code>base</code> plot that specifies some stylistic choices but doesn’t map any aesthetics, doesn’t include any data, and doesn’t have any geoms. It’s a blank canvas:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>base <span class="ot">&lt;-</span> <span class="fu">ggplot</span>() <span class="sc">+</span> </span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_size_identity</span>() <span class="sc">+</span> </span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_void</span>() <span class="sc">+</span> </span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_equal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Now I’m going to create the individual geoms. Usually when we write ggplot2 code we just add the geoms directly to the plot, and if my only intention was to show you how flametree works I’d do that here. But later I’m going to use this in conjunction with ggfx, and the design of ggfx is such that you (usually) apply a filter to a ggplot2 layer. The ggfx code will look a lot cleaner if we store our layers as variables.</p>
+<p>First, let’s create a layer representing the <code>leaves</code>. The only thing we want to do with the <code>leaf</code> data is draw a scatter plot, and we can accomplish our goal using <code>geom_point()</code>:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>leaves <span class="ot">&lt;-</span> <span class="fu">geom_point</span>(</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">mapping =</span> <span class="fu">aes</span>(coord_x, coord_y),</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> leaf, </span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">size =</span> <span class="fl">1.3</span>, </span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">stroke =</span> <span class="dv">0</span>, </span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">colour =</span> <span class="st">"#e38b75"</span></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Now we can do the same thing to create the <code>trunk</code>. What we want in this case is something <em>similar</em> to <code>geom_path()</code>, but instead of plotting paths in linear segments we want to draw Bézier curves. Conveniently for us, the ggforce package supplies the <code>geom_bezier()</code> function that does exactly this. All we need to do is make sure we specify the <code>group</code> aesthetic so that there is one curve per segment in the tree. Here’s the code for doing that:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>trunk <span class="ot">&lt;-</span> <span class="fu">geom_bezier</span>(</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">mapping =</span> <span class="fu">aes</span>(coord_x, coord_y, <span class="at">group =</span> id_pathtree, <span class="at">size =</span> seg_wid),</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> tree, </span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">lineend =</span> <span class="st">"round"</span>, </span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">colour =</span> <span class="st">"#555555"</span>,</span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">show.legend =</span> <span class="cn">FALSE</span></span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Having done all the work in this piecewise manner, the code to draw the tree is as simple as adding the <code>trunk</code> and <code>leaves</code> to the <code>base</code> image:</p>
 <div class="cell" data-layout-align="center" data-fig.dpi="300">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>leaf <span class="ot">&lt;-</span> tree <span class="sc">|&gt;</span> </span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(id_time <span class="sc">==</span> <span class="fu">max</span>(id_time), id_step <span class="sc">==</span> <span class="dv">2</span>)</span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>palette <span class="ot">&lt;-</span> <span class="fu">sample_canva2</span>(<span class="at">seed =</span> <span class="dv">1</span>)</span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>canvas <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(</span>
-<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">x =</span> coord_x, </span>
-<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">y =</span> coord_y, </span>
-<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">group =</span> id_pathtree, </span>
-<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">colour =</span> seg_col, </span>
-<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">size =</span> seg_wid</span>
-<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>)) <span class="sc">+</span> </span>
-<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_size_identity</span>(<span class="at">guide =</span> <span class="fu">guide_none</span>()) <span class="sc">+</span> </span>
-<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_gradientn</span>(</span>
-<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>    <span class="at">colours =</span> palette,</span>
-<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a>    <span class="at">guide =</span> <span class="fu">guide_none</span>()</span>
-<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span> </span>
-<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_void</span>() <span class="sc">+</span> </span>
-<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_equal</span>()</span>
-<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-21"><a href="#cb5-21" aria-hidden="true" tabindex="-1"></a>canvas <span class="sc">+</span>   </span>
-<span id="cb5-22"><a href="#cb5-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bezier</span>(<span class="at">data =</span> tree, <span class="at">lineend =</span> <span class="st">"round"</span>) <span class="sc">+</span> </span>
-<span id="cb5-23"><a href="#cb5-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">data =</span> leaf, <span class="at">size =</span> <span class="fl">1.3</span>, <span class="at">stroke =</span> <span class="dv">0</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>base <span class="sc">+</span> trunk <span class="sc">+</span> leaves</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
@@ -296,26 +336,19 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 </div>
 </div>
+<p>Very pretty!</p>
+</section>
 <section id="glow" class="level2 page-columns page-full">
 <h2 class="anchored" data-anchor-id="glow">Glow</h2>
+<p>…but it could be prettier, don’t you think? Maybe we could add a glow around the leaves, to give it a twinkling look. This feels like the kind of job for a pixel filter, and ggfx should be able to do this for us. Conceptually, what we want to do is apply a “glow” filter to the <code>leaves</code> of our tree, but not to the <code>trunk</code>. We can do that in ggfx by using the <code>with_outer_glow()</code> filtering function: we pass the <code>leaves</code> layer to the filter, along with some other arguments (e.g., <code>colour</code>) that specify the properties of the glow. The examples below show this in action: the left plot is the original tree, the middle one adds a small white glow to the leaves, and the right one adds a much bigger glow:</p>
 <div class="page-columns page-full">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>canvas <span class="sc">+</span>   </span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bezier</span>(<span class="at">data =</span> tree, <span class="at">lineend =</span> <span class="st">"round"</span>) <span class="sc">+</span> </span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">data =</span> leaf, <span class="at">size =</span> <span class="fl">1.3</span>, <span class="at">stroke =</span> <span class="dv">0</span>)</span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>canvas <span class="sc">+</span>   </span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bezier</span>(<span class="at">data =</span> tree, <span class="at">lineend =</span> <span class="st">"round"</span>) <span class="sc">+</span> </span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">with_outer_glow</span>(</span>
-<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_point</span>(<span class="at">data =</span> leaf, <span class="at">size =</span> <span class="fl">1.3</span>, <span class="at">stroke =</span> <span class="dv">0</span>), </span>
-<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">colour =</span> palette[<span class="dv">4</span>]</span>
-<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>canvas <span class="sc">+</span>   </span>
-<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bezier</span>(<span class="at">data =</span> tree, <span class="at">lineend =</span> <span class="st">"round"</span>) <span class="sc">+</span> </span>
-<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">with_outer_glow</span>(</span>
-<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_point</span>(<span class="at">data =</span> leaf, <span class="at">size =</span> <span class="fl">1.3</span>, <span class="at">stroke =</span> <span class="dv">0</span>), </span>
-<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">colour =</span> palette[<span class="dv">4</span>], </span>
-<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a>    <span class="at">sigma =</span> <span class="dv">5</span>,</span>
-<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a>    <span class="at">expand =</span> <span class="dv">2</span></span>
-<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>base <span class="sc">+</span> trunk <span class="sc">+</span> leaves</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>base <span class="sc">+</span>   </span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>  trunk <span class="sc">+</span> </span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">with_outer_glow</span>(leaves, <span class="at">colour =</span> <span class="st">"white"</span>)</span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>base <span class="sc">+</span>   </span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>  trunk <span class="sc">+</span> </span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">with_outer_glow</span>(leaves, <span class="at">colour =</span> <span class="st">"white"</span>, <span class="at">sigma =</span> <span class="dv">5</span>, <span class="at">expand =</span> <span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell column-page quarto-layout-panel" data-fig.dpi="300">
 <div class="quarto-layout-row quarto-layout-valign-top">
 <div class="cell-output-display quarto-layout-cell" style="flex-basis: 33.3%;justify-content: center;">
@@ -342,100 +375,57 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 </div>
 </div>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>heart_x <span class="ot">&lt;-</span> <span class="cf">function</span>(angle) {</span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  x <span class="ot">&lt;-</span> (<span class="dv">16</span> <span class="sc">*</span> <span class="fu">sin</span>(angle) <span class="sc">^</span> <span class="dv">3</span>) <span class="sc">/</span> <span class="dv">17</span></span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(x <span class="sc">-</span> <span class="fu">mean</span>(x))</span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>heart_y <span class="ot">&lt;-</span> <span class="cf">function</span>(angle) {</span>
-<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>  y <span class="ot">&lt;-</span> (<span class="dv">13</span> <span class="sc">*</span> <span class="fu">cos</span>(angle) <span class="sc">-</span> <span class="dv">5</span> <span class="sc">*</span> <span class="fu">cos</span>(<span class="dv">2</span> <span class="sc">*</span> angle) <span class="sc">-</span> <span class="dv">2</span> <span class="sc">*</span> <span class="fu">cos</span>(<span class="dv">3</span> <span class="sc">*</span> angle) <span class="sc">-</span></span>
-<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>          <span class="fu">cos</span>(<span class="dv">4</span> <span class="sc">*</span> angle)) <span class="sc">/</span> <span class="dv">17</span></span>
-<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(y <span class="sc">-</span> <span class="fu">mean</span>(y))</span>
-<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>heart <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
-<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>  <span class="at">angle =</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">2</span> <span class="sc">*</span> pi, <span class="at">length.out =</span> <span class="dv">100</span>),</span>
-<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a>  <span class="at">x =</span> <span class="fu">heart_x</span>(angle),</span>
-<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a>  <span class="at">y =</span> <span class="fu">heart_y</span>(angle)</span>
-<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a>heart_canvas <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(heart, <span class="fu">aes</span>(x, y)) <span class="sc">+</span></span>
-<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">guides</span>(<span class="at">fill =</span> <span class="fu">guide_none</span>()) <span class="sc">+</span></span>
-<span id="cb7-20"><a href="#cb7-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_equal</span>() <span class="sc">+</span> </span>
-<span id="cb7-21"><a href="#cb7-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_void</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<div class="page-columns page-full">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>heart_canvas <span class="sc">+</span> </span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_polygon</span>(<span class="at">colour =</span> <span class="cn">NA</span>, <span class="at">fill =</span> <span class="st">"black"</span>)</span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>heart_canvas <span class="sc">+</span>   </span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">with_inner_glow</span>(</span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_polygon</span>(<span class="at">colour =</span> <span class="cn">NA</span>, <span class="at">fill =</span> <span class="st">"black"</span>),</span>
-<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">colour =</span> <span class="st">"white"</span></span>
-<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>heart_canvas <span class="sc">+</span>   </span>
-<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">with_inner_glow</span>(</span>
-<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_polygon</span>(<span class="at">colour =</span> <span class="cn">NA</span>, <span class="at">fill =</span> <span class="st">"black"</span>),</span>
-<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">colour =</span> <span class="st">"white"</span>,</span>
-<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">sigma =</span> <span class="dv">10</span>,</span>
-<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">expand =</span> <span class="dv">5</span></span>
-<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell column-page quarto-layout-panel" data-fig.dpi="300">
-<div class="quarto-layout-row quarto-layout-valign-top">
-<div class="cell-output-display quarto-layout-cell" style="flex-basis: 33.3%;justify-content: center;">
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="index_files/figure-html/inner-glow-1.png" class="img-fluid figure-img" width="384"></p>
-</figure>
-</div>
-</div>
-<div class="cell-output-display quarto-layout-cell" style="flex-basis: 33.3%;justify-content: center;">
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="index_files/figure-html/inner-glow-2.png" class="img-fluid figure-img" width="384"></p>
-</figure>
-</div>
-</div>
-<div class="cell-output-display quarto-layout-cell" style="flex-basis: 33.3%;justify-content: center;">
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="index_files/figure-html/inner-glow-3.png" class="img-fluid figure-img" width="384"></p>
-</figure>
-</div>
-</div>
-</div>
-</div>
-</div>
+<p>In the third example, <code>sigma</code> is interpreted as the standard deviation of the Gaussian blur added around each point: <code>sigma = 5</code> specifies that this standard deviation is 5 pixels in size. The <code>expand = 3</code> argument tells ggfx to “expand” each point by 3 pixels before drawing the glow. This can be handy for very small objects that would otherwise be difficult to see even with the added glow.</p>
+<p>When written like this – with each layer stored as a named variable – ggfx code is very easy to read. I’ve quickly found myself adopting this code style any time I want to do pixel filtering. Constructing the plot piecewise and storing each layer as a variable makes it much easier to see what I’m doing!</p>
+<p>As an aside, yes, there is also a <code>with_inner_glow()</code> function that applies the glow to the interior of each object rather than extending the glow outside it.</p>
 </section>
 <section id="dither" class="level2 page-columns page-full">
 <h2 class="anchored" data-anchor-id="dither">Dither</h2>
+<p>The previous example gives you a pretty good sense of the core mechanic of ggfx: the package supplies the <code>with_*()</code> functions that correspond to different kinds of pixel filtering operations. There are quite a lot of filters you might want to try. <a href="https://en.wikipedia.org/wiki/Dither">Dithering</a> is a technique in which we reduce (or quantise) an image that has many colours down to an image with fewer colours, and then add some random (or not-so-random) noise to the coarser-grained image in a way that leaves it looking fairly natural. There are a lot of ways in which you can dither an image: one of the most famous is the <a href="https://en.wikipedia.org/wiki/Floyd%E2%80%93Steinberg_dithering">Floyd-Steinberg algorithm</a>. The Wikipedia page on Floyd-Steinberg dithering gives a nice (CC-licenced!) example using a kitten picture, shown to the left.</p>
+<p><img src="undithered.png" class="img-fluid"> <img src="quantised.png" class="img-fluid"> <img src="dithered.png" class="img-fluid"></p>
+<p>The original image is shown on the left. The image in the middle reduces the number of distinct colours in the image (i.e.&nbsp;quantises it) but doesn’t apply any dithering. It’s immediately obvious that there are artifacts in the image, and it doesn’t look like a very good approximation to the original. On the right, a dithering algorithm is applied. The image still uses the same small set of colours, but arranges the pixels in such a way that the local density of light and dark pixels gives the impression of shading.</p>
+<p>The ggfx package supplies several dithering filters, including:</p>
+<ul>
+<li><code>with_dither()</code> uses Floyd-Steinberg dithering</li>
+<li><code>with_halftone_dither()</code> uses <a href="https://en.wikipedia.org/wiki/Halftone">halftone</a> dots</li>
+<li><code>with_ordered_dither()</code> uses <a href="https://en.wikipedia.org/wiki/Ordered_dithering">ordered dithering</a></li>
+<li><code>with_custom_dither()</code> lets you build your own!</li>
+</ul>
+<p>So let’s take a look. If we want to apply dithering to some generative art, it would help to have some generative art code! This time around, I’ll reuse the code that we wrote in the very first session to create “polar coordinate art” in ggplot2. To spare you the effort of revisiting, here’s the code we’re going to use to specify a <code>base</code> image:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1</span>)</span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">200</span></span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>polar_data <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">x0 =</span> <span class="fu">runif</span>(n),</span>
-<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">y0 =</span> <span class="fu">runif</span>(n),</span>
-<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">x1 =</span> x0 <span class="sc">+</span> <span class="fu">runif</span>(n, <span class="at">min =</span> <span class="sc">-</span>.<span class="dv">2</span>, <span class="at">max =</span> .<span class="dv">2</span>),</span>
-<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">y1 =</span> y0,</span>
-<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">shade =</span> <span class="fu">runif</span>(n), </span>
-<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">size =</span> <span class="fu">runif</span>(n)</span>
-<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a>polar_canvas <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(</span>
-<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> polar_data, </span>
-<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a>  <span class="at">mapping =</span> <span class="fu">aes</span>(x0, y0, <span class="at">xend =</span> x1, <span class="at">yend =</span> y1, <span class="at">colour =</span> shade, <span class="at">size =</span> size)</span>
-<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a>) <span class="sc">+</span> </span>
-<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_polar</span>(<span class="at">clip =</span> <span class="st">"off"</span>) <span class="sc">+</span></span>
-<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">expand =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">0</span>), <span class="at">limits =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1</span>), <span class="at">oob =</span> oob_keep) <span class="sc">+</span></span>
-<span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">expand =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">0</span>), <span class="at">limits =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1</span>), <span class="at">oob =</span> oob_keep) <span class="sc">+</span> </span>
-<span id="cb9-19"><a href="#cb9-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_colour_gradientn</span>(<span class="at">colours =</span> <span class="fu">sample_canva2</span>(<span class="at">seed =</span> <span class="dv">10</span>)) <span class="sc">+</span> </span>
-<span id="cb9-20"><a href="#cb9-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">guides</span>(<span class="at">colour =</span> <span class="fu">guide_none</span>(), <span class="at">size =</span> <span class="fu">guide_none</span>()) <span class="sc">+</span> </span>
-<span id="cb9-21"><a href="#cb9-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_size</span>(<span class="at">range =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">10</span>)) <span class="sc">+</span> </span>
-<span id="cb9-22"><a href="#cb9-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_void</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1</span>)</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>polar <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">arc_start =</span> <span class="fu">runif</span>(<span class="dv">200</span>),</span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">arc_end =</span> arc_start <span class="sc">+</span> <span class="fu">runif</span>(<span class="dv">200</span>, <span class="at">min =</span> <span class="sc">-</span>.<span class="dv">2</span>, <span class="at">max =</span> .<span class="dv">2</span>),</span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">radius =</span> <span class="fu">runif</span>(<span class="dv">200</span>),</span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">shade =</span> <span class="fu">runif</span>(<span class="dv">200</span>), </span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">size =</span> <span class="fu">runif</span>(<span class="dv">200</span>)</span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a>base <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(</span>
+<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> polar, </span>
+<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">mapping =</span> <span class="fu">aes</span>(</span>
+<span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> arc_start, </span>
+<span id="cb13-14"><a href="#cb13-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> radius,</span>
+<span id="cb13-15"><a href="#cb13-15" aria-hidden="true" tabindex="-1"></a>    <span class="at">xend =</span> arc_end, </span>
+<span id="cb13-16"><a href="#cb13-16" aria-hidden="true" tabindex="-1"></a>    <span class="at">yend =</span> radius, </span>
+<span id="cb13-17"><a href="#cb13-17" aria-hidden="true" tabindex="-1"></a>    <span class="at">colour =</span> shade, </span>
+<span id="cb13-18"><a href="#cb13-18" aria-hidden="true" tabindex="-1"></a>    <span class="at">size =</span> size</span>
+<span id="cb13-19"><a href="#cb13-19" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb13-20"><a href="#cb13-20" aria-hidden="true" tabindex="-1"></a>) <span class="sc">+</span> </span>
+<span id="cb13-21"><a href="#cb13-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_polar</span>(<span class="at">clip =</span> <span class="st">"off"</span>) <span class="sc">+</span></span>
+<span id="cb13-22"><a href="#cb13-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">limits =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1</span>), <span class="at">oob =</span> scales<span class="sc">::</span>oob_keep) <span class="sc">+</span></span>
+<span id="cb13-23"><a href="#cb13-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">limits =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1</span>), <span class="at">oob =</span> scales<span class="sc">::</span>oob_keep) <span class="sc">+</span> </span>
+<span id="cb13-24"><a href="#cb13-24" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_colour_viridis_c</span>(<span class="at">option =</span> <span class="st">"magma"</span>) <span class="sc">+</span></span>
+<span id="cb13-25"><a href="#cb13-25" aria-hidden="true" tabindex="-1"></a>  <span class="fu">guides</span>(<span class="at">colour =</span> <span class="fu">guide_none</span>(), <span class="at">size =</span> <span class="fu">guide_none</span>()) <span class="sc">+</span> </span>
+<span id="cb13-26"><a href="#cb13-26" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_size</span>(<span class="at">range =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">10</span>)) <span class="sc">+</span> </span>
+<span id="cb13-27"><a href="#cb13-27" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_void</span>() <span class="sc">+</span></span>
+<span id="cb13-28"><a href="#cb13-28" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">panel.background =</span> <span class="fu">element_rect</span>(<span class="at">fill =</span> <span class="st">"#aaaaaa"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
+<p>The details to this don’t matter very much for this session. All that matters is that when we add <code>geom_segment()</code> to <code>base</code>, it produces radial art like the image shown below on the left. Then, on the right, we can see the effect of the <code>with_dither()</code> function. I’ve reduced the image to five distinct colours in order to exaggerate the dithering effect as much as possible. Any lower than this and the image degrades too much.</p>
 <div class="page-columns page-full">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>polar_canvas <span class="sc">+</span> <span class="fu">geom_segment</span>()</span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>polar_canvas <span class="sc">+</span> <span class="fu">with_dither</span>(<span class="fu">geom_segment</span>(), <span class="at">max_colours =</span> <span class="dv">6</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>base <span class="sc">+</span> <span class="fu">geom_segment</span>()</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>base <span class="sc">+</span> <span class="fu">with_dither</span>(<span class="fu">geom_segment</span>(), <span class="at">max_colours =</span> <span class="dv">5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell column-page quarto-layout-panel" data-fig.dpi="300">
 <div class="quarto-layout-row quarto-layout-valign-top">
 <div class="cell-output-display quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
@@ -455,86 +445,130 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 </div>
 </div>
+<p>Floyd-Steinberg dithering gives the image a slightly grainy feel. It can be very handy when you don’t want the art to look too clean. Rendering the image in halftone gives it a more patterend feel, as the images below illustrate:</p>
 <div class="page-columns page-full">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>polar_canvas <span class="sc">+</span> <span class="fu">geom_segment</span>()</span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>polar_canvas <span class="sc">+</span> <span class="fu">with_halftone_dither</span>(<span class="fu">geom_segment</span>())</span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>polar_canvas <span class="sc">+</span> <span class="fu">with_halftone_dither</span>(<span class="fu">geom_segment</span>(), <span class="at">black =</span> <span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell column-screen-inset quarto-layout-panel" data-fig.dpi="300">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>base <span class="sc">+</span> <span class="fu">with_halftone_dither</span>(<span class="fu">geom_segment</span>())</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="fu">with_halftone_dither</span>(base <span class="sc">+</span> <span class="fu">geom_segment</span>())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell column-page quarto-layout-panel" data-fig.dpi="300">
 <div class="quarto-layout-row quarto-layout-valign-top">
-<div class="cell-output-display quarto-layout-cell" style="flex-basis: 33.3%;justify-content: center;">
+<div class="cell-output-display quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="index_files/figure-html/halftone-dither-1.png" class="img-fluid figure-img" width="576"></p>
 </figure>
 </div>
 </div>
-<div class="cell-output-display quarto-layout-cell" style="flex-basis: 33.3%;justify-content: center;">
+<div class="cell-output-display quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="index_files/figure-html/halftone-dither-2.png" class="img-fluid figure-img" width="576"></p>
 </figure>
 </div>
 </div>
-<div class="cell-output-display quarto-layout-cell" style="flex-basis: 33.3%;justify-content: center;">
+</div>
+</div>
+</div>
+<p>Notice the difference between these two examples. The <code>with_*()</code> functions in ggfx are quite flexible. You can pass a single layer as the input, or alternatively you can pass the whole image. In fact, if you’re comfortable with <a href="https://stat.ethz.ch/R-manual/R-devel/library/grid/doc/grid.pdf">grid graphics</a>, you can pass individual grobs too. This is discussed in the <a href="https://ggfx.data-imaginist.com/reference/object_support.html">ggfx object support help page</a>.</p>
+</section>
+<section id="mask" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="mask">Mask</h2>
+<p>One of my favourite filtering tricks is to use <code>with_mask()</code> as a way of displaying one layer of the plot <em>only</em> when it overlaps with a second layer (referred to as the “mask”). To see why I love this so much, let’s use the ambient package to create a textured grid that we could draw using <code>geom_raster()</code>. I talked about this in the session on spatial noise tricks, so I won’t bore you by repeating the explanation. Instead, here’s the code to create a layer called <code>texture</code>:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>texture <span class="ot">&lt;-</span> <span class="fu">geom_raster</span>(</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">mapping =</span> <span class="fu">aes</span>(x, y, <span class="at">fill =</span> paint),</span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> <span class="fu">long_grid</span>(</span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="fu">seq</span>(<span class="at">from =</span> <span class="sc">-</span><span class="dv">1</span>, <span class="at">to =</span> <span class="dv">1</span>, <span class="at">length.out =</span> <span class="dv">1000</span>),</span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="fu">seq</span>(<span class="at">from =</span> <span class="sc">-</span><span class="dv">1</span>, <span class="at">to =</span> <span class="dv">1</span>, <span class="at">length.out =</span> <span class="dv">1000</span>)</span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span> </span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(</span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a>      <span class="at">lf_noise =</span> <span class="fu">gen_simplex</span>(x, y, <span class="at">frequency =</span> <span class="dv">2</span>, <span class="at">seed =</span> <span class="dv">1234</span>),</span>
+<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a>      <span class="at">mf_noise =</span> <span class="fu">gen_simplex</span>(x, y, <span class="at">frequency =</span> <span class="dv">20</span>, <span class="at">seed =</span> <span class="dv">1234</span>),</span>
+<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a>      <span class="at">hf_noise =</span> <span class="fu">gen_simplex</span>(x, y, <span class="at">frequency =</span> <span class="dv">99</span>, <span class="at">seed =</span> <span class="dv">1234</span>),</span>
+<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a>      <span class="at">paint =</span> lf_noise <span class="sc">+</span> mf_noise <span class="sc">+</span> hf_noise</span>
+<span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb16-13"><a href="#cb16-13" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>We’re going to use <code>texture</code> as our background, but instead of plotting the whole thing we’re going mask it. Let’s create a polygon layer that will serve as the mask.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>hex <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">x =</span> <span class="fu">sin</span>((<span class="dv">0</span><span class="sc">:</span><span class="dv">6</span>)<span class="sc">/</span><span class="dv">6</span> <span class="sc">*</span> <span class="dv">2</span> <span class="sc">*</span> pi), <span class="at">y =</span> <span class="fu">cos</span>((<span class="dv">0</span><span class="sc">:</span><span class="dv">6</span>)<span class="sc">/</span><span class="dv">6</span> <span class="sc">*</span> <span class="dv">2</span> <span class="sc">*</span> pi))</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>mask <span class="ot">&lt;-</span> <span class="fu">geom_polygon</span>(<span class="fu">aes</span>(x, y), hex, <span class="at">fill =</span> <span class="st">"white"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>As before I’ll create a <code>base</code> plot to which we can add these geoms. The code isn’t very interesting, but I should be thorough and show it to you anyway:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>base <span class="ot">&lt;-</span> <span class="fu">ggplot</span>() <span class="sc">+</span> </span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_void</span>() <span class="sc">+</span></span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_equal</span>() <span class="sc">+</span></span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">expand =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">0</span>)) <span class="sc">+</span></span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">expand =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">0</span>)) <span class="sc">+</span></span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_gradientn</span>(</span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">colours =</span> <span class="fu">c</span>(<span class="st">"#222222"</span>,<span class="st">"#e83e8c"</span>), </span>
+<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">guide =</span> <span class="fu">guide_none</span>()</span>
+<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Okay, so now let’s take a look the two layers individually:</p>
+<div class="page-columns page-full">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>base <span class="sc">+</span> texture</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>base <span class="sc">+</span> mask</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell column-page quarto-layout-panel" data-fig.dpi="300">
+<div class="quarto-layout-row quarto-layout-valign-top">
+<div class="cell-output-display quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="index_files/figure-html/halftone-dither-3.png" class="img-fluid figure-img" width="576"></p>
+<p><img src="index_files/figure-html/mask-components-1.png" class="img-fluid figure-img" width="576"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output-display quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="index_files/figure-html/mask-components-2.png" class="img-fluid figure-img" width="576"></p>
 </figure>
 </div>
 </div>
 </div>
 </div>
 </div>
-</section>
-<section id="mask" class="level2 page-columns page-full">
-<h2 class="anchored" data-anchor-id="mask">Mask</h2>
+<p>Gosh, I wonder what we could possibly do with a texture and a hexagon shape…</p>
+<div class="cell" data-layout-align="center" data-fig.dpi="300">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>base <span class="sc">+</span> </span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as_reference</span>(mask, <span class="at">id =</span> <span class="st">"mask"</span>) <span class="sc">+</span> </span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">with_mask</span>(texture, <span class="st">"mask"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="index_files/figure-html/plain-hex-1.png" class="img-fluid figure-img" width="576"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Huh. Well look at that… we have something that could quite easily turn into the design of a hex sticker. Amazing.</p>
+<p>Before we move on I should explain why I called <code>as_reference()</code> in the previous example, and what that function does. To get a sense of it, let’s see what happens if I attempt the more “intuitive” strategy of trying to pass the <code>mask</code> layer directly to <code>with_mask()</code>:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>base <span class="sc">+</span> <span class="fu">with_mask</span>(texture, mask)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-error">
+<pre><code>Error in UseMethod("as.raster"): no applicable method for 'as.raster' applied to an object of class "c('LayerInstance', 'Layer', 'ggproto', 'gg')"</code></pre>
+</div>
+</div>
+<p>The error message here complains that R doesn’t know how to convert the <code>mask</code> layer to a raster object. Remember at the beginning I said that ggfx works by converting everything to a pixel representation (i.e., turn our vector graphics layer into raster graphics). What’s going on here is that the second argument to <code>with_mask()</code> is allowed to be a “registered filter”, or it has to actually be a raster object. I’m not doing either one! I’m trying to pass it a raw ggplot layer. That’s where the <code>as_reference()</code> function comes in. Its role is to take a layer and “register” it as a filter (the <code>id</code> argument is used to give it a name) that can subsequently used as the mask.</p>
+<p>There are a few functions in ggfx that work like that. Another one is the <code>as_group()</code> function. Suppose I want to apply a filter to several layers at once, but not necessarily to the whole plot. For example, suppose I want some text and a pretty border on my hex sticker, represented by these two layers:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>border <span class="ot">&lt;-</span> <span class="fu">geom_path</span>(<span class="fu">aes</span>(x, y), hex, <span class="at">colour =</span> <span class="st">"white"</span>, <span class="at">size =</span> <span class="dv">15</span>)</span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>text <span class="ot">&lt;-</span> <span class="fu">geom_text</span>(</span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">mapping =</span> <span class="fu">aes</span>(x, y, <span class="at">label =</span> text), </span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">dat =</span> <span class="fu">tibble</span>(<span class="at">x =</span> <span class="dv">0</span>, <span class="at">y =</span> <span class="dv">0</span>, <span class="at">text =</span> <span class="st">"ART"</span>), </span>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">size =</span> <span class="dv">36</span>,</span>
+<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">colour =</span> <span class="st">"white"</span>, </span>
+<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">fontface =</span> <span class="st">"bold"</span></span>
+<span id="cb23-9"><a href="#cb23-9" aria-hidden="true" tabindex="-1"></a>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>When I construct my mask, what I really want to do is apply it to all three layers: <code>texture</code>, <code>border</code>, and <code>text</code> should all be masked by the <code>mask</code> layer. To do that I pass <code>texture</code>, <code>border</code>, and <code>text</code> to <code>as_group()</code> to define the group; then I pass <code>mask</code> to <code>as_reference()</code> to register it as a filter; and <em>then</em> I apply <code>with_mask()</code>. Here’s how that works:</p>
 <div class="page-columns page-full">
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>palette <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"#222222"</span>,<span class="st">"#e83e8c"</span>)</span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>background <span class="ot">&lt;-</span> <span class="fu">long_grid</span>(</span>
-<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">x =</span> <span class="fu">seq</span>(<span class="at">from =</span> <span class="sc">-</span><span class="dv">1</span>, <span class="at">to =</span> <span class="dv">1</span>, <span class="at">length.out =</span> <span class="dv">1000</span>),</span>
-<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">y =</span> <span class="fu">seq</span>(<span class="at">from =</span> <span class="sc">-</span><span class="dv">1</span>, <span class="at">to =</span> <span class="dv">1</span>, <span class="at">length.out =</span> <span class="dv">1000</span>)</span>
-<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>) <span class="sc">|&gt;</span> </span>
-<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
-<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">lf_noise =</span> <span class="fu">gen_simplex</span>(x, y, <span class="at">frequency =</span> <span class="dv">2</span>, <span class="at">seed =</span> <span class="dv">1234</span>),</span>
-<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">mf_noise =</span> <span class="fu">gen_simplex</span>(x, y, <span class="at">frequency =</span> <span class="dv">20</span>, <span class="at">seed =</span> <span class="dv">1234</span>),</span>
-<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">hf_noise =</span> <span class="fu">gen_simplex</span>(x, y, <span class="at">frequency =</span> <span class="dv">99</span>, <span class="at">seed =</span> <span class="dv">1234</span>),</span>
-<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">paint =</span> lf_noise <span class="sc">+</span> mf_noise <span class="sc">+</span> hf_noise</span>
-<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a>hexagon <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
-<span id="cb12-15"><a href="#cb12-15" aria-hidden="true" tabindex="-1"></a>  <span class="at">theta =</span> (<span class="dv">1</span><span class="sc">:</span><span class="dv">6</span>)<span class="sc">/</span><span class="dv">6</span> <span class="sc">*</span> <span class="dv">2</span> <span class="sc">*</span> pi,</span>
-<span id="cb12-16"><a href="#cb12-16" aria-hidden="true" tabindex="-1"></a>  <span class="at">x =</span> <span class="fu">sin</span>(theta),</span>
-<span id="cb12-17"><a href="#cb12-17" aria-hidden="true" tabindex="-1"></a>  <span class="at">y =</span> <span class="fu">cos</span>(theta)</span>
-<span id="cb12-18"><a href="#cb12-18" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb12-19"><a href="#cb12-19" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-20"><a href="#cb12-20" aria-hidden="true" tabindex="-1"></a>art <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">x =</span> <span class="dv">0</span>, <span class="at">y =</span> <span class="dv">0</span>, <span class="at">text =</span> <span class="st">"ART"</span>)</span>
-<span id="cb12-21"><a href="#cb12-21" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-22"><a href="#cb12-22" aria-hidden="true" tabindex="-1"></a>hex_canvas <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(x, y)) <span class="sc">+</span> </span>
-<span id="cb12-23"><a href="#cb12-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_void</span>() <span class="sc">+</span></span>
-<span id="cb12-24"><a href="#cb12-24" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_equal</span>() <span class="sc">+</span></span>
-<span id="cb12-25"><a href="#cb12-25" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">expand =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">0</span>)) <span class="sc">+</span></span>
-<span id="cb12-26"><a href="#cb12-26" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">expand =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">0</span>)) <span class="sc">+</span></span>
-<span id="cb12-27"><a href="#cb12-27" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_gradientn</span>(<span class="at">colours =</span> palette, <span class="at">guide =</span> <span class="fu">guide_none</span>())</span>
-<span id="cb12-28"><a href="#cb12-28" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-29"><a href="#cb12-29" aria-hidden="true" tabindex="-1"></a>hex_canvas <span class="sc">+</span> </span>
-<span id="cb12-30"><a href="#cb12-30" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_raster</span>(<span class="at">data =</span> background, <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">fill =</span> paint)) <span class="sc">+</span>  </span>
-<span id="cb12-31"><a href="#cb12-31" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="at">data =</span> art, <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">label =</span> text), <span class="at">size =</span> <span class="dv">24</span>, </span>
-<span id="cb12-32"><a href="#cb12-32" aria-hidden="true" tabindex="-1"></a>            <span class="at">colour =</span> <span class="st">"white"</span>, <span class="at">fontface =</span> <span class="st">"bold"</span>) <span class="sc">+</span> </span>
-<span id="cb12-33"><a href="#cb12-33" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_polygon</span>(<span class="at">data =</span> hexagon, <span class="at">fill =</span> <span class="cn">NA</span>, <span class="at">colour =</span> <span class="st">"white"</span>, <span class="at">size =</span> <span class="dv">15</span>)</span>
-<span id="cb12-34"><a href="#cb12-34" aria-hidden="true" tabindex="-1"></a>hex_canvas <span class="sc">+</span> </span>
-<span id="cb12-35"><a href="#cb12-35" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as_group</span>(</span>
-<span id="cb12-36"><a href="#cb12-36" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_raster</span>(<span class="at">data =</span> background, <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">fill =</span> paint)),</span>
-<span id="cb12-37"><a href="#cb12-37" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_text</span>(<span class="at">data =</span> art, <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">label =</span> text), <span class="at">size =</span> <span class="dv">24</span>, </span>
-<span id="cb12-38"><a href="#cb12-38" aria-hidden="true" tabindex="-1"></a>              <span class="at">colour =</span> <span class="st">"white"</span>, <span class="at">fontface =</span> <span class="st">"bold"</span>),</span>
-<span id="cb12-39"><a href="#cb12-39" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_polygon</span>(<span class="at">data =</span> hexagon, <span class="at">fill =</span> <span class="cn">NA</span>, <span class="at">colour =</span> <span class="st">"white"</span>, <span class="at">size =</span> <span class="dv">15</span>),</span>
-<span id="cb12-40"><a href="#cb12-40" aria-hidden="true" tabindex="-1"></a>    <span class="at">id =</span> <span class="st">"content"</span></span>
-<span id="cb12-41"><a href="#cb12-41" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span> </span>
-<span id="cb12-42"><a href="#cb12-42" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as_reference</span>(</span>
-<span id="cb12-43"><a href="#cb12-43" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_polygon</span>(<span class="at">data =</span> hexagon, <span class="at">fill =</span> <span class="st">"white"</span>), </span>
-<span id="cb12-44"><a href="#cb12-44" aria-hidden="true" tabindex="-1"></a>    <span class="at">id =</span> <span class="st">"hexagon"</span> </span>
-<span id="cb12-45"><a href="#cb12-45" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span> </span>
-<span id="cb12-46"><a href="#cb12-46" aria-hidden="true" tabindex="-1"></a>  <span class="fu">with_mask</span>(<span class="st">"content"</span>, <span class="st">"hexagon"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>base <span class="sc">+</span> texture <span class="sc">+</span> text <span class="sc">+</span> border</span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>base <span class="sc">+</span> </span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as_group</span>(texture, text, border, <span class="at">id =</span> <span class="st">"content"</span>) <span class="sc">+</span></span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as_reference</span>(mask, <span class="at">id =</span> <span class="st">"mask"</span>) <span class="sc">+</span> </span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">with_mask</span>(<span class="st">"content"</span>, <span class="st">"mask"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell column-page quarto-layout-panel" data-fig.dpi="300">
 <div class="quarto-layout-row quarto-layout-valign-top">
 <div class="cell-output-display quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
@@ -551,6 +585,147 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </figure>
 </div>
 </div>
+</div>
+</div>
+</div>
+<p>That’s awfully convenient :)</p>
+</section>
+<section id="displace" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="displace">Displace</h2>
+<p>Displacement filters are conceptually simple, but extremely powerful, and can be a bit counterintuitive to work with in practice. The idea to shift all the pixels in one layer based on the pixel values in another layer (referred to as the displacement map). For example, a black pixel in the displacement map might be interpreted to mean “don’t move this pixel in the original layer”, whereas a white pixel might mean “move this 10 pixels to the right”. The idea of constructing a pixel value to displacement mapping makes conceptual sense to me, but I find it a little hard to visualise what that actually means. A worked example would probably help!</p>
+<p>Let’s start by creating some ggplot layers that each contain semi-transparent triangles:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>polygon_layer <span class="ot">&lt;-</span> <span class="cf">function</span>(x, y, <span class="at">fill =</span> <span class="st">"white"</span>, <span class="at">alpha =</span> .<span class="dv">5</span>) {</span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_polygon</span>(<span class="fu">aes</span>(x, y), <span class="at">fill =</span> fill, <span class="at">alpha =</span> alpha)</span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>poly1 <span class="ot">&lt;-</span> <span class="fu">polygon_layer</span>(<span class="at">x =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">0</span>), <span class="at">y =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">1</span>))</span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>poly2 <span class="ot">&lt;-</span> <span class="fu">polygon_layer</span>(<span class="at">x =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">1</span>), <span class="at">y =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">1</span>))</span>
+<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a>poly3 <span class="ot">&lt;-</span> <span class="fu">polygon_layer</span>(<span class="at">x =</span> <span class="fu">c</span>(.<span class="dv">3</span>, <span class="dv">1</span>, <span class="dv">1</span>), <span class="at">y =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">0</span>, .<span class="dv">7</span>))</span>
+<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a>poly4 <span class="ot">&lt;-</span> <span class="fu">polygon_layer</span>(<span class="at">x =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">0</span>, .<span class="dv">7</span>), <span class="at">y =</span> <span class="fu">c</span>(.<span class="dv">3</span>, <span class="dv">1</span>, <span class="dv">1</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Next, I’ll define a <code>base</code> plot and then show you what these polygons look like when drawn together:</p>
+<div class="cell" data-layout-align="center" data-fig.dpi="300">
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>base <span class="ot">&lt;-</span> <span class="fu">ggplot</span>() <span class="sc">+</span> </span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_equal</span>(<span class="at">xlim =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1</span>), <span class="at">ylim =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1</span>)) <span class="sc">+</span> </span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_void</span>() <span class="sc">+</span> </span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">panel.background =</span> <span class="fu">element_rect</span>(<span class="at">fill =</span> <span class="st">"#333333"</span>))</span>
+<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a>base <span class="sc">+</span> poly1 <span class="sc">+</span> poly2 <span class="sc">+</span> poly3 <span class="sc">+</span> poly4</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="index_files/figure-html/polygons-only-1.png" class="img-fluid figure-img" width="576"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Later on, we’re going to use this as our displacement map. The easiest way to interpret this map (I think?) is to think about each of the shaded regions separately. Let’s start by thinking about the darkest area, the region that makes up the border of the image and the diagonal stripe in the center. When we go to “fill in” that part of the final image, we won’t grab the “same” pixel in the other image: instead we’re going to grab a pixel that is below and to the left. For the brightest areas (the two bright white triangles, one to the top left of the map and the other to the bottom right), we’ll displace in the other direction.</p>
+<p>Okay, so if we’re going to do this, we will need an layer that can serve as the image to be displaced. I’ll keep it simple. Here’s a layer that plots the word <code>"ART"</code> using <code>geom_text()</code>:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>text <span class="ot">&lt;-</span> <span class="fu">geom_text</span>(</span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="fl">0.5</span>, <span class="fl">0.5</span>, <span class="at">label =</span> <span class="st">"ART"</span>), </span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">size =</span> <span class="dv">60</span>, </span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">colour =</span> <span class="st">"black"</span>, </span>
+<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">fontface =</span> <span class="st">"bold"</span></span>
+<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>So here’s our process:</p>
+<ol type="1">
+<li>Use <code>as_group()</code> to convert the four polygon layers into a single group.</li>
+<li>Use <code>as_reference()</code> to register that group as a filter.</li>
+<li>Use <code>with_displacement()</code> to displace the <code>text</code> layer using the polygons.</li>
+</ol>
+<p>Here’s the code, and the results:</p>
+<div class="page-columns page-full">
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>base <span class="sc">+</span> poly1 <span class="sc">+</span> poly2 <span class="sc">+</span> poly3 <span class="sc">+</span> poly4 <span class="sc">+</span> text</span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>base <span class="sc">+</span> </span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as_group</span>(poly1, poly2, poly3, poly4, <span class="at">id =</span> <span class="st">"polygons"</span>, <span class="at">include =</span> <span class="cn">TRUE</span>) <span class="sc">+</span></span>
+<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as_reference</span>(<span class="st">"polygons"</span>, <span class="at">id =</span> <span class="st">"displacement_map"</span>) <span class="sc">+</span> </span>
+<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">with_displacement</span>(</span>
+<span id="cb28-6"><a href="#cb28-6" aria-hidden="true" tabindex="-1"></a>    text,</span>
+<span id="cb28-7"><a href="#cb28-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">x_map =</span> <span class="fu">ch_alpha</span>(<span class="st">"displacement_map"</span>),</span>
+<span id="cb28-8"><a href="#cb28-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">y_map =</span> <span class="fu">ch_alpha</span>(<span class="st">"displacement_map"</span>), </span>
+<span id="cb28-9"><a href="#cb28-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">x_scale =</span> <span class="dv">150</span>,</span>
+<span id="cb28-10"><a href="#cb28-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">y_scale =</span> <span class="sc">-</span><span class="dv">150</span></span>
+<span id="cb28-11"><a href="#cb28-11" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell column-page quarto-layout-panel" data-fig.dpi="300">
+<div class="quarto-layout-row quarto-layout-valign-top">
+<div class="cell-output-display quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="index_files/figure-html/displace-1.png" class="img-fluid figure-img" width="576"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output-display quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="index_files/figure-html/displace-2.png" class="img-fluid figure-img" width="576"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div>
+<p>Again, this is very pretty, but it probably needs a little explanation:</p>
+<ul>
+<li>When I called <code>with_displacement()</code> I passed the <code>text</code> object first: that’s the “thing we will displace”. Next, I specified <em>two</em> displacement maps, <code>x_map</code> and <code>y_map</code>. It is, after all, quite possible to use a <em>different</em> displacement map to describe how we find the displacement in the horizontal direction and the vertical directions! However, I haven’t done that here because it makes my head hurt.</li>
+<li>When constructing the displacement maps I used <code>ch_alpha()</code> to make clear that we should use the transparency value of each pixel as the basis for the displacement. That makes sense in this case because transparency is the thing that varies across the image.</li>
+<li>The <code>x_scale</code> and <code>y_scale</code> parameters specify the number of pixels to shift. Specifically, setting <code>x_scale = 150</code> means that the maximum difference in transparency should correspoind to a shift of 150 pixels.</li>
+</ul>
+<p>To be perfectly honest, I find it hard to visualise the effect of <code>with_displacement()</code>. My spatial reasoning skills just aren’t good enough. So what I usually do is tinker until I find something I like. YMMV.</p>
+</section>
+<section id="blend" class="level2">
+<h2 class="anchored" data-anchor-id="blend">Blend</h2>
+<p>The last ggfx trick I want to mention is <code>with_blend()</code>. Blending filters compose two images together using a particular rule. For example, we could <code>"darken_intensity"</code> by selecting the darker of the two pixel values at each location. Or we could use a <code>"plus"</code> filter that just adds the pixel values together. Blending is a powerful technique and can be used to mimic the behaviour of other filters (e.g., a mask is really just a very particular type of blend). I’m not going to try to summarise all the different kinds of blend you can do. But I will point you to the <a href="https://ggfx.data-imaginist.com/reference/with_blend.html">documentation page for with_blend()</a>, which provides a pretty good place to start and has links to other resources you can follow up on.</p>
+<p>Meanwhile, I’ll give a simple example using an <code>"xor"</code> blend. I’ll return to our flametree plot as the basis for this example. The <code>trunk</code> and <code>leaves</code> plot layers below define the flametree image in solid white colour:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>leaves <span class="ot">&lt;-</span> <span class="fu">geom_point</span>(</span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> leaf, </span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">mapping =</span> <span class="fu">aes</span>(coord_x, coord_y, <span class="at">colour =</span> seg_col),</span>
+<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">colour =</span> <span class="st">"white"</span>,</span>
+<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">size =</span> <span class="dv">2</span>, </span>
+<span id="cb29-6"><a href="#cb29-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">stroke =</span> <span class="dv">0</span></span>
+<span id="cb29-7"><a href="#cb29-7" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb29-8"><a href="#cb29-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-9"><a href="#cb29-9" aria-hidden="true" tabindex="-1"></a>trunk <span class="ot">&lt;-</span> <span class="fu">geom_bezier</span>(</span>
+<span id="cb29-10"><a href="#cb29-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> tree,</span>
+<span id="cb29-11"><a href="#cb29-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">mapping =</span> <span class="fu">aes</span>(</span>
+<span id="cb29-12"><a href="#cb29-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> coord_x, </span>
+<span id="cb29-13"><a href="#cb29-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> coord_y, </span>
+<span id="cb29-14"><a href="#cb29-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">size =</span> seg_wid,</span>
+<span id="cb29-15"><a href="#cb29-15" aria-hidden="true" tabindex="-1"></a>    <span class="at">group =</span> id_pathtree</span>
+<span id="cb29-16"><a href="#cb29-16" aria-hidden="true" tabindex="-1"></a>  ),</span>
+<span id="cb29-17"><a href="#cb29-17" aria-hidden="true" tabindex="-1"></a>  <span class="at">colour =</span> <span class="st">"white"</span>,</span>
+<span id="cb29-18"><a href="#cb29-18" aria-hidden="true" tabindex="-1"></a>  <span class="at">lineend =</span> <span class="st">"round"</span></span>
+<span id="cb29-19"><a href="#cb29-19" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Next I’ll create a <code>triangle</code> layer that is a solid white triangle on the lower right side of the image, but is otherwise empty:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>triangle <span class="ot">&lt;-</span> <span class="fu">polygon_layer</span>(</span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">x =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">4</span>, <span class="dv">2</span>, <span class="dv">2</span>), </span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">y =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">6</span>), </span>
+<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">fill =</span> <span class="st">"white"</span>,</span>
+<span id="cb30-5"><a href="#cb30-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">alpha =</span> <span class="dv">1</span></span>
+<span id="cb30-6"><a href="#cb30-6" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Because these images are binary valued the exclusive-or <code>"xor"</code> filter is easy to visualise in this case. If a pixel is white in exactly <em>one</em> of the two inputs (the tree or the triangle), that pixel will also be white in the output. Otherwise that pixel will be transparent. That gives us this:</p>
+<div class="cell" data-layout-align="center" data-fig.dpi="300">
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>base <span class="ot">&lt;-</span> <span class="fu">ggplot</span>() <span class="sc">+</span> </span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_void</span>() <span class="sc">+</span></span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_equal</span>(<span class="at">xlim =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">3</span>, <span class="dv">1</span>), <span class="at">ylim =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">5</span>)) <span class="sc">+</span></span>
+<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">expand =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">0</span>)) <span class="sc">+</span></span>
+<span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">expand =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">0</span>)) <span class="sc">+</span></span>
+<span id="cb31-6"><a href="#cb31-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_size_identity</span>(<span class="at">guide =</span> <span class="fu">guide_none</span>())</span>
+<span id="cb31-7"><a href="#cb31-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-8"><a href="#cb31-8" aria-hidden="true" tabindex="-1"></a>base <span class="sc">+</span></span>
+<span id="cb31-9"><a href="#cb31-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as_group</span>(trunk, leaves, <span class="at">id =</span> <span class="st">"tree"</span>) <span class="sc">+</span> </span>
+<span id="cb31-10"><a href="#cb31-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">with_blend</span>(triangle, <span class="st">"tree"</span>, <span class="at">blend_type =</span> <span class="st">"xor"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="index_files/figure-html/blend-1.png" class="img-fluid figure-img" width="960"></p>
+</figure>
 </div>
 </div>
 </div>
