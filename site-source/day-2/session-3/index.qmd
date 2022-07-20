@@ -1,5 +1,5 @@
 ---
-title: "PIXEL FILTERS WITH GGFX"
+title: "PIXEL FILTERS"
 ---
 
 
@@ -7,25 +7,19 @@ title: "PIXEL FILTERS WITH GGFX"
 library(dplyr)
 library(tibble)
 library(ggplot2)
-library(scales)
 library(ggforce)
-library(ggthemes)
 library(ggfx)
 library(flametree)
 library(ambient)
-library(tictoc)
 ```
 
-```{r sample-canva-2}
-sample_canva2 <- function(seed = NULL, n = 4) {
-  if(!is.null(seed)) set.seed(seed)
-  sample(ggthemes::canva_palettes, 1)[[1]] |>
-    (\(x) colorRampPalette(x)(n))()  
-}
-```
 
 ```{r flametree-data, dev.args=list(bg="#222222")}
-tree <- flametree_grow(seed = 1, time = 8, angle = c(-15, 15, 30))
+tree <- flametree_grow(
+  seed = 1, 
+  time = 8, 
+  angle = c(-15, 15, 30)
+)
 tree
 ```
 
@@ -34,29 +28,27 @@ tree
 #| fig-height: 6
 #| fig-dpi: 300
 #| fig-align: center
+trunk <- geom_bezier(
+  mapping = aes(coord_x, coord_y, group = id_pathtree, size = seg_wid),
+  data = tree, 
+  lineend = "round", 
+  colour = "#444444",
+  show.legend = FALSE
+)
+
 leaf <- tree |> 
   filter(id_time == max(id_time), id_step == 2)
 
-palette <- sample_canva2(seed = 1)
+leaves <- geom_point(
+  mapping = aes(coord_x, coord_y),
+  data = leaf, 
+  size = 1.3, 
+  stroke = 0, 
+  colour = "#e38b75"
+)
 
-canvas <- ggplot(mapping = aes(
-  x = coord_x, 
-  y = coord_y, 
-  group = id_pathtree, 
-  colour = seg_col, 
-  size = seg_wid
-)) + 
-  scale_size_identity(guide = guide_none()) + 
-  scale_color_gradientn(
-    colours = palette,
-    guide = guide_none()
-  ) + 
-  theme_void() + 
-  coord_equal()
-
-canvas +   
-  geom_bezier(data = tree, lineend = "round") + 
-  geom_point(data = leaf, size = 1.3, stroke = 0)
+base <- ggplot() + scale_size_identity() + theme_void() + coord_equal()
+base + trunk + leaves
 ```
 
 
@@ -69,100 +61,46 @@ canvas +
 #| fig-align: center
 #| layout-nrow: 1
 #| column: page
-canvas +   
-  geom_bezier(data = tree, lineend = "round") + 
-  geom_point(data = leaf, size = 1.3, stroke = 0)
-canvas +   
-  geom_bezier(data = tree, lineend = "round") + 
-  with_outer_glow(
-    geom_point(data = leaf, size = 1.3, stroke = 0), 
-    colour = palette[4]
-  )
-canvas +   
-  geom_bezier(data = tree, lineend = "round") + 
-  with_outer_glow(
-    geom_point(data = leaf, size = 1.3, stroke = 0), 
-    colour = palette[4], 
-    sigma = 5,
-    expand = 2
-  )
+base + trunk + leaves
+base +   
+  trunk + 
+  with_outer_glow(leaves, colour = "white")
+base +   
+  trunk + 
+  with_outer_glow(leaves, colour = "white", sigma = 5, expand = 3)
 ```
-
-
-```{r heart-formulas}
-heart_x <- function(angle) {
-  x <- (16 * sin(angle) ^ 3) / 17
-  return(x - mean(x))
-}
-
-heart_y <- function(angle) {
-  y <- (13 * cos(angle) - 5 * cos(2 * angle) - 2 * cos(3 * angle) -
-          cos(4 * angle)) / 17
-  return(y - mean(y))
-}
-
-heart <- tibble(
-  angle = seq(0, 2 * pi, length.out = 100),
-  x = heart_x(angle),
-  y = heart_y(angle)
-)
-
-heart_canvas <- ggplot(heart, aes(x, y)) +
-  guides(fill = guide_none()) +
-  coord_equal() + 
-  theme_void()
-```
-
-
-```{r inner-glow, dev.args=list(bg="#222222")}
-#| fig-width: 4
-#| fig-height: 4
-#| fig-dpi: 300
-#| fig-align: center
-#| layout-nrow: 1
-#| column: page
-heart_canvas + 
-  geom_polygon(colour = NA, fill = "black")
-heart_canvas +   
-  with_inner_glow(
-    geom_polygon(colour = NA, fill = "black"),
-    colour = "white"
-  )
-heart_canvas +   
-  with_inner_glow(
-    geom_polygon(colour = NA, fill = "black"),
-    colour = "white",
-    sigma = 10,
-    expand = 5
-  )
-```
-
 
 ## Dither
 
 ```{r}
 set.seed(1)
-n <- 200
-polar_data <- tibble(
-  x0 = runif(n),
-  y0 = runif(n),
-  x1 = x0 + runif(n, min = -.2, max = .2),
-  y1 = y0,
-  shade = runif(n), 
-  size = runif(n)
+polar <- tibble(
+  arc_start = runif(200),
+  arc_end = arc_start + runif(200, min = -.2, max = .2),
+  radius = runif(200),
+  shade = runif(200), 
+  size = runif(200)
 )
 
-polar_canvas <- ggplot(
-  data = polar_data, 
-  mapping = aes(x0, y0, xend = x1, yend = y1, colour = shade, size = size)
+base <- ggplot(
+  data = polar, 
+  mapping = aes(
+    x = arc_start, 
+    y = radius,
+    xend = arc_end, 
+    yend = radius, 
+    colour = shade, 
+    size = size
+  )
 ) + 
   coord_polar(clip = "off") +
-  scale_y_continuous(expand = c(0, 0), limits = c(0, 1), oob = oob_keep) +
-  scale_x_continuous(expand = c(0, 0), limits = c(0, 1), oob = oob_keep) + 
-  scale_colour_gradientn(colours = sample_canva2(seed = 10)) + 
+  scale_y_continuous(limits = c(0, 1), oob = scales::oob_keep) +
+  scale_x_continuous(limits = c(0, 1), oob = scales::oob_keep) + 
+  scale_colour_viridis_c(option = "magma") +
   guides(colour = guide_none(), size = guide_none()) + 
   scale_size(range = c(0, 10)) + 
-  theme_void()
+  theme_void() +
+  theme(panel.background = element_rect(fill = "#aaaaaa"))
 ```
 
 
@@ -173,8 +111,8 @@ polar_canvas <- ggplot(
 #| fig-align: center
 #| layout-nrow: 1
 #| column: page
-polar_canvas + geom_segment()
-polar_canvas + with_dither(geom_segment(), max_colours = 6)
+base + geom_segment()
+base + with_dither(geom_segment(), max_colours = 5)
 ```
 
 
@@ -185,9 +123,9 @@ polar_canvas + with_dither(geom_segment(), max_colours = 6)
 #| fig-align: center
 #| layout-nrow: 1
 #| column: screen-inset
-polar_canvas + geom_segment()
-polar_canvas + with_halftone_dither(geom_segment())
-polar_canvas + with_halftone_dither(geom_segment(), black = FALSE)
+base + geom_segment()
+base + with_halftone_dither(geom_segment())
+with_halftone_dither(base + geom_segment())
 ```
 
 ## Mask
@@ -201,53 +139,47 @@ polar_canvas + with_halftone_dither(geom_segment(), black = FALSE)
 #| layout-nrow: 1
 #| column: page
 
-palette2 <- c("#222222","#e83e8c")
-
-background <- long_grid(
-  x = seq(from = -1, to = 1, length.out = 1000),
-  y = seq(from = -1, to = 1, length.out = 1000)
-) |> 
-  mutate(
-    lf_noise = gen_simplex(x, y, frequency = 2, seed = 1234),
-    mf_noise = gen_simplex(x, y, frequency = 20, seed = 1234),
-    hf_noise = gen_simplex(x, y, frequency = 99, seed = 1234),
-    paint = lf_noise + mf_noise + hf_noise
-  )
-
-hexagon <- tibble(
-  theta = (1:6)/6 * 2 * pi,
-  x = sin(theta),
-  y = cos(theta)
+texture <- geom_raster(
+  mapping = aes(x, y, fill = paint),
+  data = long_grid(
+    x = seq(from = -1, to = 1, length.out = 1000),
+    y = seq(from = -1, to = 1, length.out = 1000)
+  ) |> 
+    mutate(
+      lf_noise = gen_simplex(x, y, frequency = 2, seed = 1234),
+      mf_noise = gen_simplex(x, y, frequency = 20, seed = 1234),
+      hf_noise = gen_simplex(x, y, frequency = 99, seed = 1234),
+      paint = lf_noise + mf_noise + hf_noise
+    )
 )
 
-art <- tibble(x = 0, y = 0, text = "ART")
+hex <- tibble(x = sin((0:6)/6 * 2 * pi), y = cos((0:6)/6 * 2 * pi))
+border <- geom_path(aes(x, y), hex, colour = "white", size = 15)
+frame <- geom_polygon(aes(x, y), hex, fill = "white")
 
-hex_canvas <- ggplot(mapping = aes(x, y)) + 
+text <- geom_text(
+  mapping = aes(x, y, label = text), 
+  dat = tibble(x = 0, y = 0, text = "ART"), 
+  size = 36,
+  colour = "white", 
+  fontface = "bold"
+) 
+
+base <- ggplot() + 
   theme_void() +
   coord_equal() +
   scale_x_continuous(expand = c(0, 0)) +
   scale_y_continuous(expand = c(0, 0)) +
-  scale_fill_gradientn(colours = palette2, guide = guide_none())
+  scale_fill_gradientn(
+    colours = c("#222222","#e83e8c"), 
+    guide = guide_none()
+  )
 
-hex_canvas + 
-  geom_raster(data = background, mapping = aes(fill = paint)) +  
-  geom_text(data = art, mapping = aes(label = text), size = 24, 
-            colour = "white", fontface = "bold") + 
-  geom_polygon(data = hexagon, fill = NA, colour = "white", size = 15)
-
-hex_canvas + 
-  as_group(
-    geom_raster(data = background, mapping = aes(fill = paint)),
-    geom_text(data = art, mapping = aes(label = text), size = 24, 
-              colour = "white", fontface = "bold"),
-    geom_polygon(data = hexagon, fill = NA, colour = "white", size = 15),
-    id = "content"
-  ) + 
-  as_reference(
-    geom_polygon(data = hexagon, fill = "white"), 
-    id = "hexagon" 
-  ) + 
-  with_mask("content", "hexagon")
+base + texture + text + border
+base + 
+  as_group(texture, text, border, id = "content") +
+  as_reference(frame, id = "frame") + 
+  with_mask("content", "frame")
 ```
 
 
@@ -264,7 +196,6 @@ hex_canvas +
 polygon_layer <- function(x, y, fill = "white", alpha = .5) {
   geom_polygon(aes(x, y), fill = fill, alpha = alpha)
 }
-
 poly1 <- polygon_layer(x = c(1, 0, 0), y = c(0, 0, 1))
 poly2 <- polygon_layer(x = c(0, 1, 1), y = c(0, 0, 1))
 poly3 <- polygon_layer(x = c(.3, 1, 1), y = c(0, 0, .7))
@@ -272,7 +203,7 @@ poly4 <- polygon_layer(x = c(0, 0, .7), y = c(.3, 1, 1))
 
 text <- geom_text(
   mapping = aes(0.5, 0.5, label = "ART"), 
-  size = 50, 
+  size = 60, 
   colour = "black", 
   fontface = "bold"
 )
@@ -286,11 +217,11 @@ base + poly1 + poly2 + poly3 + poly4 + text
 
 base + 
   as_group(poly1, poly2, poly3, poly4, id = "polygons", include = TRUE) +
-  as_reference("polygons", id = "shift") + 
+  as_reference("polygons", id = "displacement_map") + 
   with_displacement(
     text,
-    x_map = ch_alpha("shift"),
-    y_map = ch_alpha("shift"), 
+    x_map = ch_alpha("displacement_map"),
+    y_map = ch_alpha("displacement_map"), 
     x_scale = 150,
     y_scale = -150
   )
@@ -299,7 +230,6 @@ base +
 
 ## Blend
 
-
 ```{r blend, dev.args=list(bg="#222222")}
 #| fig-width: 8
 #| fig-height: 8
@@ -307,22 +237,15 @@ base +
 #| fig-align: center
 #| layout-nrow: 1
 #| column: screen-inset
-blend_canvas <- ggplot() + 
-  theme_void() +
-  coord_equal(xlim = c(-3, 1), ylim = c(1, 5)) +
-  scale_x_continuous(expand = c(0, 0)) +
-  scale_y_continuous(expand = c(0, 0)) +
-  scale_size_identity(guide = guide_none())
-  
-leaf_layer <- geom_point(
-    data = leaf, 
-    mapping = aes(coord_x, coord_y, colour = seg_col),
-    colour = "white",
-    size = 2, 
-    stroke = 0
-  )
+leaves <- geom_point(
+  data = leaf, 
+  mapping = aes(coord_x, coord_y, colour = seg_col),
+  colour = "white",
+  size = 2, 
+  stroke = 0
+)
 
-tree_layer <- geom_bezier(
+trunk <- geom_bezier(
   data = tree,
   mapping = aes(
     x = coord_x, 
@@ -333,16 +256,21 @@ tree_layer <- geom_bezier(
   colour = "white",
   lineend = "round"
 )
-  
-poly <- polygon_layer(c(-4, 2, 2), c(0, 0, 6), alpha = 1)
 
-blend_canvas +
-  tree_layer +
-  leaf_layer
+triangle <- polygon_layer(c(-4, 2, 2), c(0, 0, 6), alpha = 1)
 
-blend_canvas +
-  as_group(tree_layer, leaf_layer, id = "flametree") + 
-  with_blend(poly, bg_layer = "flametree", blend_type = "xor")
+base <- ggplot() + 
+  theme_void() +
+  coord_equal(xlim = c(-3, 1), ylim = c(1, 5)) +
+  scale_x_continuous(expand = c(0, 0)) +
+  scale_y_continuous(expand = c(0, 0)) +
+  scale_size_identity(guide = guide_none())
+
+base + trunk + leaves
+
+base +
+  as_group(trunk, leaves, id = "tree") + 
+  with_blend(triangle, "tree", blend_type = "xor")
 ```
 
 
