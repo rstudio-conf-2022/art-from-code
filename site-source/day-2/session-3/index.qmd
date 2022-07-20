@@ -341,14 +341,11 @@ That's awfully convenient :)
 
 ## Displace
 
-```{r displace, dev.args=list(bg="#222222")}
-#| fig-width: 6
-#| fig-height: 6
-#| fig-dpi: 300
-#| fig-align: center
-#| layout-nrow: 1
-#| column: page
+Displacement filters are conceptually simple, but extremely powerful, and can be a bit counterintuitive to work with in practice. The idea to shift all the pixels in one layer based on the pixel values in another layer (referred to as the displacement map). For example, a black pixel in the displacement map might be interpreted to mean "don't move this pixel in the original layer", whereas a white pixel might mean "move this 10 pixels to the right". The idea of constructing a pixel value to displacement mapping makes conceptual sense to me, but I find it a little hard to visualise what that actually means. A worked example would probably help!
 
+Let's start by creating some ggplot layers that each contain semi-transparent triangles:
+
+```{r polygon-layers}
 polygon_layer <- function(x, y, fill = "white", alpha = .5) {
   geom_polygon(aes(x, y), fill = fill, alpha = alpha)
 }
@@ -356,19 +353,51 @@ poly1 <- polygon_layer(x = c(1, 0, 0), y = c(0, 0, 1))
 poly2 <- polygon_layer(x = c(0, 1, 1), y = c(0, 0, 1))
 poly3 <- polygon_layer(x = c(.3, 1, 1), y = c(0, 0, .7))
 poly4 <- polygon_layer(x = c(0, 0, .7), y = c(.3, 1, 1))
+```
 
+Next, I'll define a `base` plot and then show you what these polygons look like when drawn together:
+
+```{r polygons-only, dev.args=list(bg="#222222")}
+#| fig-width: 6
+#| fig-height: 6
+#| fig-dpi: 300
+#| fig-align: center
+base <- ggplot() + 
+  coord_equal(xlim = c(0, 1), ylim = c(0, 1)) + 
+  theme_void() + 
+  theme(panel.background = element_rect(fill = "#333333"))
+
+base + poly1 + poly2 + poly3 + poly4
+```
+
+Later on, we're going to use this as our displacement map. The easiest way to interpret this map (I think?) is to think about each of the shaded regions separately. Let's start by thinking about the darkest area, the region that makes up the border of the image and the diagonal stripe in the center. When we go to "fill in" that part of the final image, we won't grab the "same" pixel in the other image: instead we're going to grab a pixel that is below and to the left. For the brightest areas (the two bright white triangles, one to the top left of the map and the other to the bottom right), we'll displace in the other direction. 
+
+Okay, so if we're going to do this, we will need an layer that can serve as the image to be displaced. I'll keep it simple. Here's a layer that plots the word `"ART"` using `geom_text()`:
+
+```{r art-text}
 text <- geom_text(
   mapping = aes(0.5, 0.5, label = "ART"), 
   size = 60, 
   colour = "black", 
   fontface = "bold"
 )
+```
 
-base <- ggplot() + 
-  coord_equal(xlim = c(0, 1), ylim = c(0, 1)) + 
-  theme_void() + 
-  theme(panel.background = element_rect(fill = "#333333"))
+So here's our process:
 
+1. Use `as_group()` to convert the four polygon layers into a single group.
+2. Use `as_reference()` to register that group as a filter.
+3. Use `with_displacement()` to displace the `text` layer using the polygons.
+
+Here's the code, and the results:
+
+```{r displace, dev.args=list(bg="#222222")}
+#| fig-width: 6
+#| fig-height: 6
+#| fig-dpi: 300
+#| fig-align: center
+#| layout-nrow: 1
+#| column: page
 base + poly1 + poly2 + poly3 + poly4 + text
 
 base + 
@@ -383,6 +412,13 @@ base +
   )
 ```
 
+Again, this is very pretty, but it probably needs a little explanation: 
+
+- When I called `with_displacement()` I passed the `text` object first: that's the "thing we will displace". Next, I specified *two* displacement maps, `x_map` and `y_map`. It is, after all, quite possible to use a *different* displacement map to describe how we find the displacement in the horizontal direction and the vertical directions! However, I haven't done that here because it makes my head hurt. 
+- When constructing the displacement maps I used `ch_alpha()` to make clear that we should use the transparency value of each pixel as the basis for the displacement. That makes sense in this case because transparency is the thing that varies across the image.
+- The `x_scale` and `y_scale` parameters specify the number of pixels to shift. Specifically, setting `x_scale = 150` means that the maximum difference in transparency should correspoind to a shift of 150 pixels. 
+
+To be perfectly honest, I find it hard to visualise the effect of `with_displacement()`. My spatial reasoning skills just aren't good enough. So what I usually do is tinker until I find something I like. YMMV. 
 
 ## Blend
 
