@@ -13,32 +13,84 @@ library(flametree)
 library(ambient)
 ```
 
+The last technical topic I want to cover in this workshop is pixel filters, and specifically the [ggfx package](https://ggfx.data-imaginist.com/) which makes it relatively easy to use them in conjunction with ggplot2. Phrased in the most general terms, a filter is any function that takes one image as input and returns a new (presumably modified!) image as output. As an example, think about how Instagram filters work: the original photo is used as the input, and the modified one is returned as output. This filtering takes place at the pixel level, so it's not immediately obvious how we could do this with ggplot2. The way that the ggfx package handles this is to render render the image (or part of the image) off screen to obtain a representation that can be filtered. The filter is applied to that rendered image and then, when the final plot is constructed, the filtered versions are included in the final plot rather than the original ones. 
 
-```{r flametree-data, dev.args=list(bg="#222222")}
+In this session I'll provide an introduction to ggfx. The API for ggfx takes a little while to wrap your head around, but once you've got a handle on it, it turns out to be a very powerful tool for generative art in R. 
+
+## Prelude
+
+When we dive into ggfx, it will be handy to have some data that we can use to make interesting art. For that purpose I'll rely on the [flametree package](https://flametree.djnavarro.net/) which I've used in the past to make pretty pictures of trees. The `flametree_grow()` function generates the raw data:
+
+
+```{r flametree-data}
+#| eval: false
 tree <- flametree_grow(
   seed = 1, 
-  time = 8, 
+  time = 9, 
   angle = c(-15, 15, 30)
 )
 tree
 ```
 
-```{r flametree-plot, dev.args=list(bg="#222222")}
-#| fig-width: 4
-#| fig-height: 6
-#| fig-dpi: 300
-#| fig-align: center
-trunk <- geom_bezier(
-  mapping = aes(coord_x, coord_y, group = id_pathtree, size = seg_wid),
-  data = tree, 
-  lineend = "round", 
-  colour = "#444444",
-  show.legend = FALSE
+```{r flametree-data-2}
+#| column: page
+#| echo: false
+op <- options(width = 150)
+tree <- flametree_grow(
+  seed = 1, 
+  time = 9, 
+  angle = c(-15, 15, 30)
 )
+tree
+options(op)
+```
 
-leaf <- tree |> 
-  filter(id_time == max(id_time), id_step == 2)
+You can render the output conveniently with the help of `flametree_plot()`:
 
+```{r flametree-plot-origin, dev.args=list(bg="#222222")}
+tree |> 
+  flametree_plot(
+    background = "#222222", 
+    palette = c("#ffffff", "#f652a0")
+  )
+```
+
+The `flametree_plot()` function is fairly flexible and allows you to draw the tree in several different styles, but for the purposes of this session we'll want to write our own ggplot2 (and ggfx) code, so it may be helpful to explain what you're looking at in this `tree`. Each curved segment in the tree is drawn as a [Bézier curve](https://en.wikipedia.org/wiki/B%C3%A9zier_curve) specified by three control points whose locations are given by the `coord_x` and `coord_y` variables. Each row in the tibble refers to one control point, so there are three rows per segment. Here's the three rows that correspond to the 99th segment in the tree:
+
+```{r flametree-segment, eval=FALSE}
+tree |> filter(path_id == 99)
+```
+
+```{r flametree-segment-2}
+#| column: page
+#| echo: false
+op <- options(width = 150)
+tree |> filter(id_path == 99)
+options(op)
+```
+
+The various columns here describe different aspects of the tree: there's a `seg_wid` column representing the width of each segment (usually mapped to the size aesthetic), a `seg_col` column specifying a colour (usually mapped to the colour aesthetic), etc. 
+
+Of particular relevance here is the `id_leaf` column. This column is a logical variable that is `TRUE` only for those control points that represent the very tips of the tree: the leaves, essentially. Later on I'm going to plot the tree trunk and leaves separately, so it's convenient to have a `leaf` tibble that contains the data only for the leaf nodes:
+
+```{r leaves}
+leaf <- tree |> filter(id_leaf == TRUE)
+```
+
+Okay, now let's construct a flametree image piece by piece. I'll start with a `base` plot that specifies some stylistic choices but doesn't map any aesthetics, doesn't include any data, and doesn't have any geoms. It's a blank canvas:
+
+```{r base-plot}
+base <- ggplot() + 
+  scale_size_identity() + 
+  theme_void() + 
+  coord_equal()
+```
+
+Now I'm going to create the individual geoms. Usually when we write ggplot2 code we just add the geoms directly to the plot, and if my only intention was to show you how flametree works I'd do that here. But later I'm going to use this in conjunction with ggfx, and the design of ggfx is such that you (usually) apply a filter to a ggplot2 layer. The ggfx code will look a lot cleaner if we store our layers as variables.
+
+First, let's create a layer representing the `leaves`. The only thing we want to do with the `leaf` data is draw a scatter plot, and we can accomplish our goal using `geom_point()`:
+
+```{r leaves-layer}
 leaves <- geom_point(
   mapping = aes(coord_x, coord_y),
   data = leaf, 
@@ -46,11 +98,31 @@ leaves <- geom_point(
   stroke = 0, 
   colour = "#e38b75"
 )
+```
 
-base <- ggplot() + scale_size_identity() + theme_void() + coord_equal()
+Now we can do the same thing to create the `trunk`. What we want in this case is something *similar* to `geom_path()`, but instead of plotting paths in linear segments we want to draw Bézier curves. Conveniently for us, the ggforce package supplies the `geom_bezier()` function that does exactly this. All we need to do is make sure we specify the `group` aesthetic so that there is one curve per segment in the tree. Here's the code for doing that:
+
+```{r trunk-layer}
+trunk <- geom_bezier(
+  mapping = aes(coord_x, coord_y, group = id_pathtree, size = seg_wid),
+  data = tree, 
+  lineend = "round", 
+  colour = "#555555",
+  show.legend = FALSE
+)
+```
+
+Having done all the work in this piecewise manner, the code to draw the tree is as simple as adding the `trunk` and `leaves` to the `base` image:
+
+```{r flametree-plot, dev.args=list(bg="#222222")}
+#| fig-width: 4
+#| fig-height: 6
+#| fig-dpi: 300
+#| fig-align: center
 base + trunk + leaves
 ```
 
+Very pretty!
 
 ## Glow
 
