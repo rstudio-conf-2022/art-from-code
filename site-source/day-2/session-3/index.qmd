@@ -201,7 +201,7 @@ polar_canvas + with_halftone_dither(geom_segment(), black = FALSE)
 #| layout-nrow: 1
 #| column: page
 
-palette <- c("#222222","#e83e8c")
+palette2 <- c("#222222","#e83e8c")
 
 background <- long_grid(
   x = seq(from = -1, to = 1, length.out = 1000),
@@ -227,7 +227,7 @@ hex_canvas <- ggplot(mapping = aes(x, y)) +
   coord_equal() +
   scale_x_continuous(expand = c(0, 0)) +
   scale_y_continuous(expand = c(0, 0)) +
-  scale_fill_gradientn(colours = palette, guide = guide_none())
+  scale_fill_gradientn(colours = palette2, guide = guide_none())
 
 hex_canvas + 
   geom_raster(data = background, mapping = aes(fill = paint)) +  
@@ -248,6 +248,101 @@ hex_canvas +
     id = "hexagon" 
   ) + 
   with_mask("content", "hexagon")
+```
+
+
+## Displace
+
+```{r displace, dev.args=list(bg="#222222")}
+#| fig-width: 6
+#| fig-height: 6
+#| fig-dpi: 300
+#| fig-align: center
+#| layout-nrow: 1
+#| column: page
+
+polygon_layer <- function(x, y, fill = "white", alpha = .5) {
+  geom_polygon(aes(x, y), fill = fill, alpha = alpha)
+}
+
+poly1 <- polygon_layer(x = c(1, 0, 0), y = c(0, 0, 1))
+poly2 <- polygon_layer(x = c(0, 1, 1), y = c(0, 0, 1))
+poly3 <- polygon_layer(x = c(.3, 1, 1), y = c(0, 0, .7))
+poly4 <- polygon_layer(x = c(0, 0, .7), y = c(.3, 1, 1))
+
+text <- geom_text(
+  mapping = aes(0.5, 0.5, label = "ART"), 
+  size = 50, 
+  colour = "black", 
+  fontface = "bold"
+)
+
+base <- ggplot() + 
+  coord_equal(xlim = c(0, 1), ylim = c(0, 1)) + 
+  theme_void() + 
+  theme(panel.background = element_rect(fill = "#333333"))
+
+base + poly1 + poly2 + poly3 + poly4 + text
+
+base + 
+  as_group(poly1, poly2, poly3, poly4, id = "polygons", include = TRUE) +
+  as_reference("polygons", id = "shift") + 
+  with_displacement(
+    text,
+    x_map = ch_alpha("shift"),
+    y_map = ch_alpha("shift"), 
+    x_scale = 150,
+    y_scale = -150
+  )
+```
+
+
+## Blend
+
+
+```{r blend, dev.args=list(bg="#222222")}
+#| fig-width: 8
+#| fig-height: 8
+#| fig-dpi: 300
+#| fig-align: center
+#| layout-nrow: 1
+#| column: screen-inset
+blend_canvas <- ggplot() + 
+  theme_void() +
+  coord_equal(xlim = c(-3, 1), ylim = c(1, 5)) +
+  scale_x_continuous(expand = c(0, 0)) +
+  scale_y_continuous(expand = c(0, 0)) +
+  scale_size_identity(guide = guide_none())
+  
+leaf_layer <- geom_point(
+    data = leaf, 
+    mapping = aes(coord_x, coord_y, colour = seg_col),
+    colour = "white",
+    size = 2, 
+    stroke = 0
+  )
+
+tree_layer <- geom_bezier(
+  data = tree,
+  mapping = aes(
+    x = coord_x, 
+    y = coord_y, 
+    size = seg_wid,
+    group = id_pathtree
+  ),
+  colour = "white",
+  lineend = "round"
+)
+  
+poly <- polygon_layer(c(-4, 2, 2), c(0, 0, 6), alpha = 1)
+
+blend_canvas +
+  tree_layer +
+  leaf_layer
+
+blend_canvas +
+  as_group(tree_layer, leaf_layer, id = "flametree") + 
+  with_blend(poly, bg_layer = "flametree", blend_type = "xor")
 ```
 
 
