@@ -422,13 +422,11 @@ To be perfectly honest, I find it hard to visualise the effect of `with_displace
 
 ## Blend
 
-```{r blend, dev.args=list(bg="#222222")}
-#| fig-width: 8
-#| fig-height: 8
-#| fig-dpi: 300
-#| fig-align: center
-#| layout-nrow: 1
-#| column: screen-inset
+The last ggfx trick I want to mention is `with_blend()`. Blending filters compose two images together using a particular rule. For example, we could `"darken_intensity"` by selecting the darker of the two pixel values at each location. Or we could use a `"plus"` filter that just adds the pixel values together. Blending is a powerful technique and can be used to mimic the behaviour of other filters (e.g., a mask is really just a very particular type of blend). I'm not going to try to summarise all the different kinds of blend you can do. But I will point you to the [documentation page for with_blend()](https://ggfx.data-imaginist.com/reference/with_blend.html), which provides a pretty good place to start and has links to other resources you can follow up on. 
+
+Meanwhile, I'll give a simple example using an `"xor"` blend. I'll return to our flametree plot as the basis for this example. The `trunk` and `leaves` plot layers below define the flametree image in solid white colour:
+
+```{r blend-tree-components}
 leaves <- geom_point(
   data = leaf, 
   mapping = aes(coord_x, coord_y, colour = seg_col),
@@ -448,17 +446,32 @@ trunk <- geom_bezier(
   colour = "white",
   lineend = "round"
 )
+```
 
-triangle <- polygon_layer(c(-4, 2, 2), c(0, 0, 6), alpha = 1)
+Next I'll create a `triangle` layer that is a solid white triangle on the lower right side of the image, but is otherwise empty:
 
+```{r blend-triangle}
+triangle <- polygon_layer(
+  x = c(-4, 2, 2), 
+  y = c(0, 0, 6), 
+  fill = "white",
+  alpha = 1
+)
+```
+
+Because these images are binary valued the exclusive-or `"xor"` filter is easy to visualise in this case. If a pixel is white in exactly *one* of the two inputs (the tree or the triangle), that pixel will also be white in the output. Otherwise that pixel will be transparent. That gives us this:
+
+```{r blend, dev.args=list(bg="#222222")}
+#| fig-width: 10
+#| fig-height: 10
+#| fig-dpi: 300
+#| fig-align: center
 base <- ggplot() + 
   theme_void() +
   coord_equal(xlim = c(-3, 1), ylim = c(1, 5)) +
   scale_x_continuous(expand = c(0, 0)) +
   scale_y_continuous(expand = c(0, 0)) +
   scale_size_identity(guide = guide_none())
-
-base + trunk + leaves
 
 base +
   as_group(trunk, leaves, id = "tree") + 
