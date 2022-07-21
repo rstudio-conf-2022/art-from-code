@@ -145,7 +145,7 @@ Danielle Navarro is a generative artist, data scientist, professional educator, 
 :::
 ::: {.g-col-12 .g-col-md-4}
 - **Time**: 13:30 - 15:00
-- **Description**: Manipulate ggplot objects as if they were raster graphics: learn to dither, mask, displace, blend, and more. The {flametree} package makes as special guest appearance in this one  
+- **Description**: Manipulate ggplot objects as if they were raster graphics using {ggfx}: learn to dither, mask, displace, blend, and more. The {flametree} package makes as special guest appearance in this one  
 :::
 :::
 
