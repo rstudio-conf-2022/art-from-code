@@ -159,7 +159,7 @@ Danielle Navarro is a generative artist, data scientist, professional educator, 
 
 ::: {.grid}
 ::: {.g-col-12 .g-col-md-8}
-[![](img/day-2-session-4.png)](day-2/session-2/index.html)
+[![](img/day-2-session-4.png)](day-2/session-4/index.html)
 :::
 ::: {.g-col-12 .g-col-md-4}
 - **Time**: 15:30 - 17:00
