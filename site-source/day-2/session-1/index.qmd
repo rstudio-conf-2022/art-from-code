@@ -206,6 +206,14 @@ ggplot(fern_dat, aes(x, y, colour = iteration)) +
   theme_void() 
 ```
 
+::: {.callout-important icon=false #exercise-barsnley-fern}
+## Exercise
+
+Code for this system is included in the `barnsley-fern.R` script.
+
+:::
+
+
 ## Happy accidents
 
 Iterated function systems can be a lot more elaborate than the Barnsley fern, often involving transformation functions that are constructed according to some fancypants compositional rules. For example, the [fractal flame algorithm](https://en.wikipedia.org/wiki/Fractal_flame) proposed by Scott Draves in 1992 (here's [the original article](https://flam3.com/flame_draves.pdf)) specifies transformation functions $f_i()$ -- called "flame functions" -- that are composed according to the rule:
@@ -386,6 +394,15 @@ toc()
 ```
 
 The system is slow, but I'm usually willing to wait 30 seconds for something pretty. (Though in a moment I'll talk about how we can speed this up drastically) 
+
+
+::: {.callout-important icon=false #exercise-unboxing-base}
+## Exercise
+
+Code for this system is included in the `unbox-base.R` script.
+
+:::
+
 
 The outputs from this system have a fairly consistent look and feel: a pair of nested boxes, with something "bursting" from the top right corner. The fine grained details vary a lot from output to output, and there are some systematic differences as a function of the number of layers. Here's an example showing what happens when I ratchet up the number of layers from 2 to 9:
 
@@ -570,6 +587,16 @@ set.seed(101); dat2 <- unboxer_rcpp(10 * mil, layers = 5)
 set.seed(420); dat3 <- unboxer_rcpp(10 * mil, layers = 9) 
 toc()
 ```
+
+
+
+::: {.callout-important icon=false #exercise-unboxing-rcpp}
+## Exercise
+
+The C++ code for this system is included in the `unbox-fast.cpp` script, and the code calling it from R to test the timing is included as the `unbox-fast-test.R` script.
+
+:::
+
 
 Transforming the data into plots, on the other hand, is a little slower. At this point the rendering code is the part that is causing slowness:
 
@@ -757,10 +784,10 @@ pretty_boxes <- function(
   set.seed(seed)
   
   mat <- unboxer_grid(
-    iterations = 100 * mil, 
-    layers = sample(3:6, 1), 
-    pixels = 4000, 
-    border = 4
+    iterations = iterations, 
+    layers = layers, 
+    pixels = pixels, 
+    border = border
   )
   
   shades <- c(background, sample_canva2(seed, n = 1023))
@@ -798,6 +825,16 @@ tic()
 pretty_boxes(222)
 pretty_boxes(567)
 pretty_boxes(890)
-toc()
+toc() 
 ```
+
+
+
+::: {.callout-important icon=false #exercise-pretty-boxes}
+## Exercise
+
+The C++ code to generate the data for this system is included in the `unbox-grid.cpp` script, and plotting code is in the `pretty-boxes.R` script.
+
+:::
+
 

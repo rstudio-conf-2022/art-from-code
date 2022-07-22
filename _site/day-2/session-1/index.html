@@ -494,6 +494,19 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 </div>
 </div>
+<div id="exercise-barsnley-fern" class="callout-important callout callout-style-default no-icon callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Exercise
+</div>
+</div>
+<div id="exercise-barsnley-fern" class="callout-body-container callout-body">
+<p>Code for this system is included in the <code>barnsley-fern.R</code> script.</p>
+</div>
+</div>
 </section>
 <section id="happy-accidents" class="level2">
 <h2 class="anchored" data-anchor-id="happy-accidents">Happy accidents</h2>
@@ -667,6 +680,19 @@ f_{ij}(\mathbf{x}) = g_j(\mathbf{A}_i \mathbf{x})
 </div>
 </div>
 <p>The system is slow, but I’m usually willing to wait 30 seconds for something pretty. (Though in a moment I’ll talk about how we can speed this up drastically)</p>
+<div id="exercise-unboxing-base" class="callout-important callout callout-style-default no-icon callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Exercise
+</div>
+</div>
+<div id="exercise-unboxing-base" class="callout-body-container callout-body">
+<p>Code for this system is included in the <code>unbox-base.R</code> script.</p>
+</div>
+</div>
 <p>The outputs from this system have a fairly consistent look and feel: a pair of nested boxes, with something “bursting” from the top right corner. The fine grained details vary a lot from output to output, and there are some systematic differences as a function of the number of layers. Here’s an example showing what happens when I ratchet up the number of layers from 2 to 9:</p>
 <div class="page-columns page-full">
 <div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tic</span>()</span>
@@ -860,7 +886,20 @@ f_{ij}(\mathbf{x}) = g_j(\mathbf{A}_i \mathbf{x})
 <span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">420</span>); dat3 <span class="ot">&lt;-</span> <span class="fu">unboxer_rcpp</span>(<span class="dv">10</span> <span class="sc">*</span> mil, <span class="at">layers =</span> <span class="dv">9</span>) </span>
 <span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a><span class="fu">toc</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>2.053 sec elapsed</code></pre>
+<pre><code>1.438 sec elapsed</code></pre>
+</div>
+</div>
+<div id="exercise-unboxing-rcpp" class="callout-important callout callout-style-default no-icon callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Exercise
+</div>
+</div>
+<div id="exercise-unboxing-rcpp" class="callout-body-container callout-body">
+<p>The C++ code for this system is included in the <code>unbox-fast.cpp</code> script, and the code calling it from R to test the timing is included as the <code>unbox-fast-test.R</code> script.</p>
 </div>
 </div>
 <p>Transforming the data into plots, on the other hand, is a little slower. At this point the rendering code is the part that is causing slowness:</p>
@@ -992,7 +1031,7 @@ f_{ij}(\mathbf{x}) = g_j(\mathbf{A}_i \mathbf{x})
 <span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">420</span>); mat3 <span class="ot">&lt;-</span> <span class="fu">unboxer_grid</span>(<span class="dv">10</span> <span class="sc">*</span> mil, <span class="dv">9</span>, <span class="dv">1000</span>, <span class="dv">4</span>)</span>
 <span id="cb33-5"><a href="#cb33-5" aria-hidden="true" tabindex="-1"></a><span class="fu">toc</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>1.295 sec elapsed</code></pre>
+<pre><code>1.169 sec elapsed</code></pre>
 </div>
 </div>
 <p>Ah, but now look what happens when we generate an image from the data. Originally we were working with ggplot2, and we were forcing it to convert a large data frame to an image in a very very painful way. This time around, the data is already in the right format. It’s a bitmap that we can pass to <code>image()</code>. No heavy lifting required!</p>
@@ -1054,10 +1093,10 @@ f_{ij}(\mathbf{x}) = g_j(\mathbf{A}_i \mathbf{x})
 <span id="cb37-11"><a href="#cb37-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">set.seed</span>(seed)</span>
 <span id="cb37-12"><a href="#cb37-12" aria-hidden="true" tabindex="-1"></a>  </span>
 <span id="cb37-13"><a href="#cb37-13" aria-hidden="true" tabindex="-1"></a>  mat <span class="ot">&lt;-</span> <span class="fu">unboxer_grid</span>(</span>
-<span id="cb37-14"><a href="#cb37-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">iterations =</span> <span class="dv">100</span> <span class="sc">*</span> mil, </span>
-<span id="cb37-15"><a href="#cb37-15" aria-hidden="true" tabindex="-1"></a>    <span class="at">layers =</span> <span class="fu">sample</span>(<span class="dv">3</span><span class="sc">:</span><span class="dv">6</span>, <span class="dv">1</span>), </span>
-<span id="cb37-16"><a href="#cb37-16" aria-hidden="true" tabindex="-1"></a>    <span class="at">pixels =</span> <span class="dv">4000</span>, </span>
-<span id="cb37-17"><a href="#cb37-17" aria-hidden="true" tabindex="-1"></a>    <span class="at">border =</span> <span class="dv">4</span></span>
+<span id="cb37-14"><a href="#cb37-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">iterations =</span> iterations, </span>
+<span id="cb37-15"><a href="#cb37-15" aria-hidden="true" tabindex="-1"></a>    <span class="at">layers =</span> layers, </span>
+<span id="cb37-16"><a href="#cb37-16" aria-hidden="true" tabindex="-1"></a>    <span class="at">pixels =</span> pixels, </span>
+<span id="cb37-17"><a href="#cb37-17" aria-hidden="true" tabindex="-1"></a>    <span class="at">border =</span> border</span>
 <span id="cb37-18"><a href="#cb37-18" aria-hidden="true" tabindex="-1"></a>  )</span>
 <span id="cb37-19"><a href="#cb37-19" aria-hidden="true" tabindex="-1"></a>  </span>
 <span id="cb37-20"><a href="#cb37-20" aria-hidden="true" tabindex="-1"></a>  shades <span class="ot">&lt;-</span> <span class="fu">c</span>(background, <span class="fu">sample_canva2</span>(seed, <span class="at">n =</span> <span class="dv">1023</span>))</span>
@@ -1082,7 +1121,7 @@ f_{ij}(\mathbf{x}) = g_j(\mathbf{A}_i \mathbf{x})
 <span id="cb37-39"><a href="#cb37-39" aria-hidden="true" tabindex="-1"></a><span class="fu">pretty_boxes</span>(<span class="dv">380</span>)</span>
 <span id="cb37-40"><a href="#cb37-40" aria-hidden="true" tabindex="-1"></a><span class="fu">pretty_boxes</span>(<span class="dv">100</span>)</span>
 <span id="cb37-41"><a href="#cb37-41" aria-hidden="true" tabindex="-1"></a><span class="fu">toc</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell column-screen-inset quarto-layout-panel" data-fig.dpi="400" data-hash="index_cache/html/pretty-boxes_3c326b5eda3f5e93a6fd34f08bbf0faf">
+<div class="cell column-screen-inset quarto-layout-panel" data-fig.dpi="400" data-hash="index_cache/html/pretty-boxes_4f89fe8616c0f4c0137bdae40ee5abb3">
 <div class="quarto-layout-row quarto-layout-valign-top">
 <div class="cell-output-display quarto-layout-cell" style="flex-basis: 33.3%;justify-content: center;">
 <p><img src="index_files/figure-html/pretty-boxes-1.png" class="img-fluid" width="960"></p>
@@ -1096,7 +1135,7 @@ f_{ij}(\mathbf{x}) = g_j(\mathbf{A}_i \mathbf{x})
 </div>
 <div class="quarto-layout-row quarto-layout-valign-top">
 <div class="cell-output cell-output-stdout quarto-layout-cell" style="flex-basis: 33.3%;justify-content: center;">
-<pre><code>25.08 sec elapsed</code></pre>
+<pre><code>21.296 sec elapsed</code></pre>
 </div>
 </div>
 </div>
@@ -1106,8 +1145,8 @@ f_{ij}(\mathbf{x}) = g_j(\mathbf{A}_i \mathbf{x})
 <span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a><span class="fu">pretty_boxes</span>(<span class="dv">222</span>)</span>
 <span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a><span class="fu">pretty_boxes</span>(<span class="dv">567</span>)</span>
 <span id="cb39-4"><a href="#cb39-4" aria-hidden="true" tabindex="-1"></a><span class="fu">pretty_boxes</span>(<span class="dv">890</span>)</span>
-<span id="cb39-5"><a href="#cb39-5" aria-hidden="true" tabindex="-1"></a><span class="fu">toc</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell column-screen-inset quarto-layout-panel" data-fig.dpi="400" data-hash="index_cache/html/more-pretty-boxes_d2da5dfcd27d65f4a209eb8e881f082e">
+<span id="cb39-5"><a href="#cb39-5" aria-hidden="true" tabindex="-1"></a><span class="fu">toc</span>() </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell column-screen-inset quarto-layout-panel" data-fig.dpi="400" data-hash="index_cache/html/more-pretty-boxes_16669d327d0deda4d1b547e5c40b13a4">
 <div class="quarto-layout-row quarto-layout-valign-top">
 <div class="cell-output-display quarto-layout-cell" style="flex-basis: 33.3%;justify-content: center;">
 <p><img src="index_files/figure-html/more-pretty-boxes-1.png" class="img-fluid" width="960"></p>
@@ -1121,9 +1160,22 @@ f_{ij}(\mathbf{x}) = g_j(\mathbf{A}_i \mathbf{x})
 </div>
 <div class="quarto-layout-row quarto-layout-valign-top">
 <div class="cell-output cell-output-stdout quarto-layout-cell" style="flex-basis: 33.3%;justify-content: center;">
-<pre><code>25.003 sec elapsed</code></pre>
+<pre><code>21.665 sec elapsed</code></pre>
 </div>
 </div>
+</div>
+</div>
+<div id="exercise-pretty-boxes" class="callout-important callout callout-style-default no-icon callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Exercise
+</div>
+</div>
+<div id="exercise-pretty-boxes" class="callout-body-container callout-body">
+<p>The C++ code to generate the data for this system is included in the <code>unbox-grid.cpp</code> script, and plotting code is in the <code>pretty-boxes.R</code> script.</p>
 </div>
 </div>
 
