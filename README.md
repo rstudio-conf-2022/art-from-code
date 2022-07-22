@@ -9,7 +9,7 @@ by Danielle Navarro
 
 :spiral_calendar: July 25 and 26, 2022  
 :alarm_clock:     09:00 - 17:00  
-:hotel:           \[ADD ROOM\]  
+:hotel:           Maryland 1
 :writing_hand:    [rstd.io/conf](http://rstd.io/conf)
 
 -----
