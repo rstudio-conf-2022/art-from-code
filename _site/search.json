@@ -487,6 +487,20 @@
     "href": "slides/index.html#workshop-housekeeping",
     "title": "ART FROM CODE",
     "section": "Workshop housekeeping",
-    "text": "Workshop housekeeping\n\nWritten tutorial, data sets, exercises\n\nWebsite: art-from-code.netlify.app\nGitHub: github.com/rstudio-conf-2022/art-from-code\n\nInstructors:\n\nDanielle Navarro\n\n\n\n\nart-from-code.netlify.app"
+    "text": "Workshop housekeeping\n\nWritten tutorial, data sets, exercises\n\nWebsite: art-from-code.netlify.app\nGitHub: github.com/rstudio-conf-2022/art-from-code\n\nInstructors:\n\nDanielle Navarro"
+  },
+  {
+    "objectID": "slides/index.html#schedule-day-1",
+    "href": "slides/index.html#schedule-day-1",
+    "title": "ART FROM CODE",
+    "section": "Schedule, Day 1",
+    "text": "Schedule, Day 1\n\n\n\nTime\nActivity\n\n\n\n\n09:00 - 10:30\nSession 1: Get started\n\n\n10:30 - 11:00\nCoffee break\n\n\n11:00 - 12:30\nSession 2: Spatial noise tricks\n\n\n12:30 - 13:30\nLunch break\n\n\n13:30 - 15:00\nSession 3: Polygon tricks\n\n\n15:00 - 15:30\nCoffee break\n\n\n15:30 - 17:00\nSession 4: Shading tricks"
+  },
+  {
+    "objectID": "slides/index.html#schedule-day-2",
+    "href": "slides/index.html#schedule-day-2",
+    "title": "ART FROM CODE",
+    "section": "Schedule, Day 2",
+    "text": "Schedule, Day 2\n\n\n\nTime\nActivity\n\n\n\n\n09:00 - 10:30\nSession 1: Iterated function systems\n\n\n10:30 - 11:00\nCoffee break\n\n\n11:00 - 12:30\nSession 2: Tiles and tesselations\n\n\n12:30 - 13:30\nLunch break\n\n\n13:30 - 15:00\nSession 3: Pixel shaders\n\n\n15:00 - 15:30\nCoffee break\n\n\n15:30 - 17:00\nSession 4: Wrap up\n\n\n\n\n\nart-from-code.netlify.app"
   }
 ]

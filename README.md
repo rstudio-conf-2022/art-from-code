@@ -30,27 +30,27 @@ Everything you need for the workshop is (or will be!) posted online at [art-from
 
 ### Day 1
 
-| Time          | Activity         |
-| :------------ | :--------------- |
-| 09:00 - 10:30 | Session 1        |
-| 10:30 - 11:00 | *Coffee break*   |
-| 11:00 - 12:30 | Session 2        |
-| 12:30 - 13:30 | *Lunch break*    |
-| 13:30 - 15:00 | Session 3        |
-| 15:00 - 15:30 | *Coffee break*   |
-| 15:30 - 17:00 | Session 4        |
+| Time          | Activity                                                                              |
+| :------------ | :------------------------------------------------------------------------------------ |
+| 09:00 - 10:30 | Session 1: [Get started](https://art-from-code.netlify.com/day-1/session-1)           |
+| 10:30 - 11:00 | *Coffee break*                                                                        |
+| 11:00 - 12:30 | Session 2: [Spatial noise tricks](https://art-from-code.netlify.com/day-1/session-2)  |
+| 12:30 - 13:30 | *Lunch break*                                                                         |
+| 13:30 - 15:00 | Session 3: [Polygon tricks](https://art-from-code.netlify.com/day-1/session-3)        |
+| 15:00 - 15:30 | *Coffee break*                                                                        |
+| 15:30 - 17:00 | Session 4: [Shading tricks](https://art-from-code.netlify.com/day-1/session-4)        |
 
 ### Day 2
 
-| Time          | Activity         |
-| :------------ | :--------------- |
-| 09:00 - 10:30 | Session 1        |
-| 10:30 - 11:00 | *Coffee break*   |
-| 11:00 - 12:30 | Session 2        |
-| 12:30 - 13:30 | *Lunch break*    |
-| 13:30 - 15:00 | Session 3        |
-| 15:00 - 15:30 | *Coffee break*   |
-| 15:30 - 17:00 | Session 4        |
+| Time          | Activity                                                                                  |
+| :------------ | :---------------------------------------------------------------------------------------- |
+| 09:00 - 10:30 | Session 1: [Iterated function systems](https://art-from-code.netlify.com/day-2/session-1) |
+| 10:30 - 11:00 | *Coffee break*                                                                            |
+| 11:00 - 12:30 | Session 2: [Tiles and tesselations](https://art-from-code.netlify.com/day-2/session-2)    |
+| 12:30 - 13:30 | *Lunch break*                                                                             |
+| 13:30 - 15:00 | Session 3: [Pixel shaders](https://art-from-code.netlify.com/day-2/session-3)             |
+| 15:00 - 15:30 | *Coffee break*                                                                            |
+| 15:30 - 17:00 | Session 4: [Wrap up](https://art-from-code.netlify.com/day-2/session-4)                   |
 
 ## Instructor
 
