@@ -3,6 +3,8 @@ title: "ART FROM CODE"
 author: "Danielle Navarro"
 execute:
   echo: true
+  fig-width: 6
+  fig-height: 6
 format: 
   revealjs:
     theme: dark
@@ -11,6 +13,10 @@ format:
 
 ```{r}
 #| include: false
+
+# can't seem to make this work in the yaml so...
+knitr::opts_chunk$set(dev.args = list(bg="#191919"))
+
 # save the built-in output hook
 hook_output <- knitr::knit_hooks$get("output")
 
@@ -26,6 +32,10 @@ knitr::knit_hooks$set(output = function(x, options) {
   }
   hook_output(x, options)
 })
+```
+
+```{r packages, include=FALSE}
+library(ggplot2)
 ```
 
 ## WiFi
@@ -110,6 +120,62 @@ TBA
 # Get Started
 
 Session 1: Hands on introduction to generative art. Make your own pieces using ggplot2 and dplyr
+
+## Using data science tools for art
+
+```{r familiar-ggplot}
+#| output-location: column
+mpg |>
+  ggplot(aes(
+    x = displ, 
+    y = hwy, 
+    colour = drv
+  )) + 
+  geom_point()
+```
+
+## Using data science tools for art
+
+```{r just-the-dots}
+#| output-location: column
+mpg |>
+  ggplot(aes(
+    x = displ, 
+    y = hwy, 
+    colour = drv, 
+    size = cyl
+  )) + 
+  geom_point(
+    show.legend = FALSE
+  ) + 
+  theme_void() + 
+  scale_color_brewer()
+```
+
+## Using data science tools for art
+
+```{r entirely-abstract}
+#| output-location: column
+mpg |>
+  ggplot(aes(
+    x = displ, 
+    y = hwy, 
+    colour = drv
+  )) + 
+  geom_point(
+    show.legend = FALSE, 
+    size = 4
+  ) + 
+  geom_point(
+    show.legend = FALSE, 
+    size = 1, 
+    colour = "#222222"
+  ) + 
+  coord_polar() + 
+  theme_void() + 
+  scale_color_brewer()
+```
+
 
 # Spatial Noise Trickery
 

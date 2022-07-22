@@ -530,5 +530,26 @@
     "title": "ART FROM CODE",
     "section": "Downloading materials",
     "text": "Downloading materials\nTBA"
+  },
+  {
+    "objectID": "slides/index.html#using-data-science-tools-for-art",
+    "href": "slides/index.html#using-data-science-tools-for-art",
+    "title": "ART FROM CODE",
+    "section": "Using data science tools for art",
+    "text": "Using data science tools for art\n\n\nmpg |>\n  ggplot(aes(\n    x = displ, \n    y = hwy, \n    colour = drv\n  )) + \n  geom_point()"
+  },
+  {
+    "objectID": "slides/index.html#using-data-science-tools-for-art-1",
+    "href": "slides/index.html#using-data-science-tools-for-art-1",
+    "title": "ART FROM CODE",
+    "section": "Using data science tools for art",
+    "text": "Using data science tools for art\n\n\nmpg |>\n  ggplot(aes(\n    x = displ, \n    y = hwy, \n    colour = drv, \n    size = cyl\n  )) + \n  geom_point(\n    show.legend = FALSE\n  ) + \n  theme_void() + \n  scale_color_brewer()"
+  },
+  {
+    "objectID": "slides/index.html#using-data-science-tools-for-art-2",
+    "href": "slides/index.html#using-data-science-tools-for-art-2",
+    "title": "ART FROM CODE",
+    "section": "Using data science tools for art",
+    "text": "Using data science tools for art\n\n\nmpg |>\n  ggplot(aes(\n    x = displ, \n    y = hwy, \n    colour = drv\n  )) + \n  geom_point(\n    show.legend = FALSE, \n    size = 4\n  ) + \n  geom_point(\n    show.legend = FALSE, \n    size = 1, \n    colour = \"#222222\"\n  ) + \n  coord_polar() + \n  theme_void() + \n  scale_color_brewer()"
   }
 ]
