@@ -1,18 +1,9 @@
-Making art from code: How the magic works, and the practical skills it teaches
+[Art from code](https://art-from-code.netlify.app/)
 ================
 
 ### rstudio::conf 2022
 
 by Danielle Navarro
-
------
-
-INSTRUCTIONS FOR INSTRUCTORS: Please insert information about your
-workshop below. Then, add workshop content in the materials folder and
-link to each session’s materials from the schedule below. You are
-welcomed to add more rows to the schedule. We just ask that you take
-breaks at the specified times. Once you are done adding information, you
-can remove these instructions from the README.
 
 -----
 
