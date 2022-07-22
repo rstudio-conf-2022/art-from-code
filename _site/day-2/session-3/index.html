@@ -337,6 +337,19 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 </div>
 <p>Very pretty!</p>
+<div id="exercise-flametree-example" class="callout-important callout callout-style-default no-icon callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Exercise
+</div>
+</div>
+<div id="exercise-flametree-example" class="callout-body-container callout-body">
+<p>A script containing this code is included as the <code>flametree-example.R</code> script.</p>
+</div>
+</div>
 </section>
 <section id="glow" class="level2 page-columns page-full">
 <h2 class="anchored" data-anchor-id="glow">Glow</h2>
@@ -378,6 +391,19 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>In the third example, <code>sigma</code> is interpreted as the standard deviation of the Gaussian blur added around each point: <code>sigma = 5</code> specifies that this standard deviation is 5 pixels in size. The <code>expand = 3</code> argument tells ggfx to “expand” each point by 3 pixels before drawing the glow. This can be handy for very small objects that would otherwise be difficult to see even with the added glow.</p>
 <p>When written like this – with each layer stored as a named variable – ggfx code is very easy to read. I’ve quickly found myself adopting this code style any time I want to do pixel filtering. Constructing the plot piecewise and storing each layer as a variable makes it much easier to see what I’m doing!</p>
 <p>As an aside, yes, there is also a <code>with_inner_glow()</code> function that applies the glow to the interior of each object rather than extending the glow outside it.</p>
+<div id="exercise-ggfx-glow" class="callout-important callout callout-style-default no-icon callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Exercise
+</div>
+</div>
+<div id="exercise-ggfx-glow" class="callout-body-container callout-body">
+<p>A script containing this code is included as the <code>ggfx-glow.R</code> file</p>
+</div>
+</div>
 </section>
 <section id="dither" class="level2 page-columns page-full">
 <h2 class="anchored" data-anchor-id="dither">Dither</h2>
@@ -469,6 +495,19 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 </div>
 <p>Notice the difference between these two examples. The <code>with_*()</code> functions in ggfx are quite flexible. You can pass a single layer as the input, or alternatively you can pass the whole image. In fact, if you’re comfortable with <a href="https://stat.ethz.ch/R-manual/R-devel/library/grid/doc/grid.pdf">grid graphics</a>, you can pass individual grobs too. This is discussed in the <a href="https://ggfx.data-imaginist.com/reference/object_support.html">ggfx object support help page</a>.</p>
+<div id="exercise-ggfx-dither" class="callout-important callout callout-style-default no-icon callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Exercise
+</div>
+</div>
+<div id="exercise-ggfx-dither" class="callout-body-container callout-body">
+<p>A script containing this code is included as the <code>ggfx-dither.R</code> file</p>
+</div>
+</div>
 </section>
 <section id="mask" class="level2 page-columns page-full">
 <h2 class="anchored" data-anchor-id="mask">Mask</h2>
@@ -589,6 +628,19 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 </div>
 <p>That’s awfully convenient :)</p>
+<div id="exercise-ggfx-mask" class="callout-important callout callout-style-default no-icon callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Exercise
+</div>
+</div>
+<div id="exercise-ggfx-mask" class="callout-body-container callout-body">
+<p>A script containing this code is included as the <code>ggfx-mask.R</code> file</p>
+</div>
+</div>
 </section>
 <section id="displace" class="level2 page-columns page-full">
 <h2 class="anchored" data-anchor-id="displace">Displace</h2>
@@ -674,6 +726,19 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>The <code>x_scale</code> and <code>y_scale</code> parameters specify the number of pixels to shift. Specifically, setting <code>x_scale = 150</code> means that the maximum difference in transparency should correspoind to a shift of 150 pixels.</li>
 </ul>
 <p>To be perfectly honest, I find it hard to visualise the effect of <code>with_displacement()</code>. My spatial reasoning skills just aren’t good enough. So what I usually do is tinker until I find something I like. YMMV.</p>
+<div id="exercise-ggfx-displace" class="callout-important callout callout-style-default no-icon callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Exercise
+</div>
+</div>
+<div id="exercise-ggfx-displace" class="callout-body-container callout-body">
+<p>A script containing this code is included as the <code>ggfx-displace.R</code> file</p>
+</div>
+</div>
 </section>
 <section id="blend" class="level2">
 <h2 class="anchored" data-anchor-id="blend">Blend</h2>
@@ -727,6 +792,19 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p><img src="index_files/figure-html/blend-1.png" class="img-fluid figure-img" width="960"></p>
 </figure>
 </div>
+</div>
+</div>
+<div id="exercise-ggfx-blend" class="callout-important callout callout-style-default no-icon callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Exercise
+</div>
+</div>
+<div id="exercise-ggfx-blend" class="callout-body-container callout-body">
+<p>A script containing this code is included as the <code>ggfx-blend.R</code> file</p>
 </div>
 </div>
 

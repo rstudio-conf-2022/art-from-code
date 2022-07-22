@@ -124,6 +124,16 @@ base + trunk + leaves
 
 Very pretty!
 
+
+::: {.callout-important icon=false #exercise-flametree-example}
+## Exercise
+
+A script containing this code is included as the `flametree-example.R` script.
+
+:::
+
+
+
 ## Glow
 
 ...but it could be prettier, don't you think? Maybe we could add a glow around the leaves, to give it a twinkling look. This feels like the kind of job for a pixel filter, and ggfx should be able to do this for us. Conceptually, what we want to do is apply a "glow" filter to the `leaves` of our tree, but not to the `trunk`. We can do that in ggfx by using the `with_outer_glow()` filtering function: we pass the `leaves` layer to the filter, along with some other arguments (e.g., `colour`) that specify the properties of the glow. The examples below show this in action: the left plot is the original tree, the middle one adds a small white glow to the leaves, and the right one adds a much bigger glow:
@@ -149,6 +159,16 @@ In the third example, `sigma` is interpreted as the standard deviation of the Ga
 When written like this -- with each layer stored as a named variable -- ggfx code is very easy to read. I've quickly found myself adopting this code style any time I want to do pixel filtering. Constructing the plot piecewise and storing each layer as a variable makes it much easier to see what I'm doing!
 
 As an aside, yes, there is also a `with_inner_glow()` function that applies the glow to the interior of each object rather than extending the glow outside it. 
+
+
+::: {.callout-important icon=false #exercise-ggfx-glow}
+## Exercise
+
+A script containing this code is included as the `ggfx-glow.R` file
+
+:::
+
+
 
 ## Dither
 
@@ -228,6 +248,16 @@ with_halftone_dither(base + geom_segment())
 ```
 
 Notice the difference between these two examples. The `with_*()` functions in ggfx are quite flexible. You can pass a single layer as the input, or alternatively you can pass the whole image. In fact, if you're comfortable with [grid graphics](https://stat.ethz.ch/R-manual/R-devel/library/grid/doc/grid.pdf), you can pass individual grobs too. This is discussed in the [ggfx object support help page](https://ggfx.data-imaginist.com/reference/object_support.html). 
+
+
+::: {.callout-important icon=false #exercise-ggfx-dither}
+## Exercise
+
+A script containing this code is included as the `ggfx-dither.R` file
+
+:::
+
+
 
 ## Mask
 
@@ -339,6 +369,15 @@ base +
 
 That's awfully convenient :)
 
+
+::: {.callout-important icon=false #exercise-ggfx-mask}
+## Exercise
+
+A script containing this code is included as the `ggfx-mask.R` file
+
+:::
+
+
 ## Displace
 
 Displacement filters are conceptually simple, but extremely powerful, and can be a bit counterintuitive to work with in practice. The idea to shift all the pixels in one layer based on the pixel values in another layer (referred to as the displacement map). For example, a black pixel in the displacement map might be interpreted to mean "don't move this pixel in the original layer", whereas a white pixel might mean "move this 10 pixels to the right". The idea of constructing a pixel value to displacement mapping makes conceptual sense to me, but I find it a little hard to visualise what that actually means. A worked example would probably help!
@@ -420,6 +459,15 @@ Again, this is very pretty, but it probably needs a little explanation:
 
 To be perfectly honest, I find it hard to visualise the effect of `with_displacement()`. My spatial reasoning skills just aren't good enough. So what I usually do is tinker until I find something I like. YMMV. 
 
+
+::: {.callout-important icon=false #exercise-ggfx-displace}
+## Exercise
+
+A script containing this code is included as the `ggfx-displace.R` file
+
+:::
+
+
 ## Blend
 
 The last ggfx trick I want to mention is `with_blend()`. Blending filters compose two images together using a particular rule. For example, we could `"darken_intensity"` by selecting the darker of the two pixel values at each location. Or we could use a `"plus"` filter that just adds the pixel values together. Blending is a powerful technique and can be used to mimic the behaviour of other filters (e.g., a mask is really just a very particular type of blend). I'm not going to try to summarise all the different kinds of blend you can do. But I will point you to the [documentation page for with_blend()](https://ggfx.data-imaginist.com/reference/with_blend.html), which provides a pretty good place to start and has links to other resources you can follow up on. 
@@ -477,5 +525,14 @@ base +
   as_group(trunk, leaves, id = "tree") + 
   with_blend(triangle, "tree", blend_type = "xor")
 ```
+
+
+
+::: {.callout-important icon=false #exercise-ggfx-blend}
+## Exercise
+
+A script containing this code is included as the `ggfx-blend.R` file
+
+:::
 
 
