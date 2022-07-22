@@ -17,6 +17,8 @@ Computer-generated artwork has been around for quite a while. The idea of using 
 
 This workshop provides a hands-on introduction to generative art in R. You’ll learn artistic techniques that generative artists use regularly in their work including flow fields, iterative function systems, and more. You’ll also learn about R packages specialised for generative art. But more than that, you’ll learn how to reuse skills you already have as part of an artistic process: with a little work, ggplot2, dplyr, and Rcpp can become an artist's best friends. The assumed background is that you’re reasonably comfortable using R and RStudio, and have experience with tidyverse. 
 
+GitHub repository: [github.com/rstudio-conf-2022/art-from-code](https://github.com/rstudio-conf-2022/art-from-code)
+
 ### About the instructor
 
 Danielle Navarro is a generative artist, data scientist, professional educator, mathematical psychologist, academic professor in recovery, open source R developer, and occasional essayist. She is currently a developer advocate at Voltron Data working with the Apache Arrow ecosystem. You can find her art at [art.djnavarro.net](https://art.djnavarro.net), and other professional details at [djnavarro.net](https://djnavarro.net). Danielle lives in Sydney, Australia with her two children and her Netflix subscription.
