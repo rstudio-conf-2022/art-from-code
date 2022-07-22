@@ -153,6 +153,17 @@ art +
 
 Not bad. A little blurry looking, but it's a nice place to start!
 
+
+
+::: {.callout-important icon=false #exercise-first-ambient}
+## Exercise
+
+Try it yourself! In the materials folder there is a file called `first-ambient-art.R` that reproduces the code above. Try playing around with it to see what kind of output you can create by changing the values fed to `gen_perlin()`, or by trying other generator functions!
+
+:::
+
+
+
 ## Our first system
 
 The next step in the process is to start thinking about what aspects to the art should be variable, what aspects should be fixed, and use those insights to formalise this as a function. Some things that won't change:
@@ -273,6 +284,17 @@ make_noise_art(generator = gen_worley)
 make_noise_art(generator = gen_waves) 
 ```
 
+
+::: {.callout-important icon=false #exercise-first-ambient}
+## Exercises
+
+1. In the materials folder there is a file called `make-noise-art.R` that includes the `make_noise_art()` function. Unlike the code I've shown here, the version in the script writes the output to a file (located at `output/noise-art.png`). Try playing around with the inputs to `make_noise_art()` to see what outputs you can create.
+
+2. At the moment, the script is set up so that the output is always written to the same file, `output/noise-art.png`. When you create your own generative art systems you will want to ensure that each unique output is written to a file with a unique filename, and that this filename should (ideally!) allow you to work out what inputs were used to create the piece. How would you write code to do this?
+
+:::
+
+
 ## Why dplyr is a girls best friend
 
 As you can see from the output we've created so far, spatial noise patterns can be quite pretty even without any special artistic intervention. Our `make_noise_art()` function isn't complicated: it takes the output from a generator function like `gen_perlin()` and plots it as a raster object. It doesn't manipulate or modify that output in any way. However, there's nothing preventing us from doing precisely that if that's what we want to do. To simplify the later code, let's create a `blank_canvas` object that we can reuse as the starting point for our later pieces:
@@ -378,6 +400,17 @@ blank_canvas |>
   ) |>
   plot_painted_canvas(palette = sample_canva(seed = 3))
 ```
+
+
+
+::: {.callout-important icon=false #exercise-dplyr-ambient}
+## Exercise
+
+Try it yourself! In the materials folder there is a script called `dplyr-ambient.R` that defines `blank_canvas` and `plot_painted_canvas()` for you. At the bottom of the file there is space for you to add to the blank canvas. Try using dplyr and ambient together to create a spatial noise pattern of your own.
+
+:::
+
+
 
 ## Fractals
 
@@ -702,6 +735,20 @@ fractal_art(billow, gen_gate, palette = pal, seed = 9, octaves = 20)
 ```
 
 
+::: {.callout-important icon=false #exercise-fractal-art}
+## Exercises
+
+The `fractal_art.R` script in the materials folder contains all the setup you need to play around with the `fractal_art()` function. Try using it to explore the possibilities! There are a lot of possibilities in fractals. Here are a few ideas to get you started:
+
+1. The easiest way to play around with fractals is to modify the basic arguments. Try changing the `generator`, `fractal`, `freq_init` (i.e., frequency value for the first octave), `octaves`, `seed`, and `palette` to make a piece you really like. 
+
+2. A fun inversion: use those same arguments to create something that you find incredibly ugly!
+
+3. The `fractal_art()` function is written flexibly enough that you can pass your own gain functions and frequency functions. There's an example of this above. Try writing your own functions to modify the `gain` and `frequency` rules that apply to the fractal.
+
+4. Using the `gen_scope()` and `gen_gate()` examples to motivate you, write your own generator function. See what effect that has.
+
+:::
 
 
 ## Curl (of a spatial) noise (pattern)
@@ -1081,4 +1128,17 @@ ggplot(mapping = aes(x, y, group = time)) +
   coord_equal()
 ```
 
+
+::: {.callout-important icon=false #exercise-curl-art}
+## Exercises
+
+The `curl-art-1.R` and `curl-art-2.R` scripts contain code to generate the "small grid of fractal walks" image and the "genesis-inspired" image. In both cases the ouput is written to a 2000x2000 pixel png file, and the time taken to complete the task printed to the screen.
+
+1. Run both scripts, and compare the difference in rendering times.
+
+2. Modify the "small grid" version so that it produces smoother looking results.
+
+3. Explore what you can do with the "genesis style". It's a powerful technique that can do a lot more than I've done in this code. By now you should have a good sense of what dials you can turn: the fractal, the generator, the parameters, the palette, etc. You can use dplyr to modify the data if you want to. Try to make something you really like!
+
+:::
 

@@ -412,6 +412,19 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 </div>
 <p>Not bad. A little blurry looking, but it’s a nice place to start!</p>
+<div id="exercise-first-ambient" class="callout-important callout callout-style-default no-icon callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Exercise
+</div>
+</div>
+<div id="exercise-first-ambient" class="callout-body-container callout-body">
+<p>Try it yourself! In the materials folder there is a file called <code>first-ambient-art.R</code> that reproduces the code above. Try playing around with it to see what kind of output you can create by changing the values fed to <code>gen_perlin()</code>, or by trying other generator functions!</p>
+</div>
+</div>
 </section>
 <section id="our-first-system" class="level2 page-columns page-full">
 <h2 class="anchored" data-anchor-id="our-first-system">Our first system</h2>
@@ -545,6 +558,22 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 </div>
 </div>
+<div id="exercise-first-ambient" class="callout-important callout callout-style-default no-icon callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Exercises
+</div>
+</div>
+<div id="exercise-first-ambient" class="callout-body-container callout-body">
+<ol type="1">
+<li><p>In the materials folder there is a file called <code>make-noise-art.R</code> that includes the <code>make_noise_art()</code> function. Unlike the code I’ve shown here, the version in the script writes the output to a file (located at <code>output/noise-art.png</code>). Try playing around with the inputs to <code>make_noise_art()</code> to see what outputs you can create.</p></li>
+<li><p>At the moment, the script is set up so that the output is always written to the same file, <code>output/noise-art.png</code>. When you create your own generative art systems you will want to ensure that each unique output is written to a file with a unique filename, and that this filename should (ideally!) allow you to work out what inputs were used to create the piece. How would you write code to do this?</p></li>
+</ol>
+</div>
+</div>
 </section>
 <section id="why-dplyr-is-a-girls-best-friend" class="level2">
 <h2 class="anchored" data-anchor-id="why-dplyr-is-a-girls-best-friend">Why dplyr is a girls best friend</h2>
@@ -644,6 +673,19 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p><img src="index_files/figure-html/dplyr-art-example-3-1.png" class="img-fluid figure-img" width="576"></p>
 </figure>
 </div>
+</div>
+</div>
+<div id="exercise-dplyr-ambient" class="callout-important callout callout-style-default no-icon callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Exercise
+</div>
+</div>
+<div id="exercise-dplyr-ambient" class="callout-body-container callout-body">
+<p>Try it yourself! In the materials folder there is a script called <code>dplyr-ambient.R</code> that defines <code>blank_canvas</code> and <code>plot_painted_canvas()</code> for you. At the bottom of the file there is space for you to add to the blank canvas. Try using dplyr and ambient together to create a spatial noise pattern of your own.</p>
 </div>
 </div>
 </section>
@@ -1024,6 +1066,25 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p><img src="index_files/figure-html/fractal-art-gated-3.png" class="img-fluid" width="576"></p>
 </div>
 </div>
+</div>
+</div>
+<div id="exercise-fractal-art" class="callout-important callout callout-style-default no-icon callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Exercises
+</div>
+</div>
+<div id="exercise-fractal-art" class="callout-body-container callout-body">
+<p>The <code>fractal_art.R</code> script in the materials folder contains all the setup you need to play around with the <code>fractal_art()</code> function. Try using it to explore the possibilities! There are a lot of possibilities in fractals. Here are a few ideas to get you started:</p>
+<ol type="1">
+<li><p>The easiest way to play around with fractals is to modify the basic arguments. Try changing the <code>generator</code>, <code>fractal</code>, <code>freq_init</code> (i.e., frequency value for the first octave), <code>octaves</code>, <code>seed</code>, and <code>palette</code> to make a piece you really like.</p></li>
+<li><p>A fun inversion: use those same arguments to create something that you find incredibly ugly!</p></li>
+<li><p>The <code>fractal_art()</code> function is written flexibly enough that you can pass your own gain functions and frequency functions. There’s an example of this above. Try writing your own functions to modify the <code>gain</code> and <code>frequency</code> rules that apply to the fractal.</p></li>
+<li><p>Using the <code>gen_scope()</code> and <code>gen_gate()</code> examples to motivate you, write your own generator function. See what effect that has.</p></li>
+</ol>
 </div>
 </div>
 </section>
@@ -1444,6 +1505,24 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p><img src="index_files/figure-html/curl-art-examples-2-1.png" class="img-fluid figure-img" width="768"></p>
 </figure>
 </div>
+</div>
+</div>
+<div id="exercise-curl-art" class="callout-important callout callout-style-default no-icon callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Exercises
+</div>
+</div>
+<div id="exercise-curl-art" class="callout-body-container callout-body">
+<p>The <code>curl-art-1.R</code> and <code>curl-art-2.R</code> scripts contain code to generate the “small grid of fractal walks” image and the “genesis-inspired” image. In both cases the ouput is written to a 2000x2000 pixel png file, and the time taken to complete the task printed to the screen.</p>
+<ol type="1">
+<li><p>Run both scripts, and compare the difference in rendering times.</p></li>
+<li><p>Modify the “small grid” version so that it produces smoother looking results.</p></li>
+<li><p>Explore what you can do with the “genesis style”. It’s a powerful technique that can do a lot more than I’ve done in this code. By now you should have a good sense of what dials you can turn: the fractal, the generator, the parameters, the palette, etc. You can use dplyr to modify the data if you want to. Try to make something you really like!</p></li>
+</ol>
 </div>
 </div>
 
