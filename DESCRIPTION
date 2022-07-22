@@ -30,6 +30,7 @@ Imports:
     purrr,
     rayshader,
     Rcpp,
+    remotes,
     scales,
     sf,
     stringr,
@@ -38,7 +39,7 @@ Imports:
     tidyr,
     truchet (>= 0.0.0.9007),
     voronoise (>= 0.0.0.9000)
-Remotes:  
+Remotes: 
     github::paezha/truchet,
     github::djnavarro/jasmines,
     github::djnavarro/voronoise

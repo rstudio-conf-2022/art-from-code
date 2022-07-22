@@ -5,6 +5,12 @@ library(here)
 
 sourceCpp(file = here("materials", "unbox-grid.cpp"))
 
+sample_canva2 <- function(seed = NULL, n = 4) {
+  if(!is.null(seed)) set.seed(seed)
+  sample(ggthemes::canva_palettes, 1)[[1]] |>
+    (\(x) colorRampPalette(x)(n))()  
+}
+
 pretty_boxes <- function(
     seed,
     iterations = 100000000, 
