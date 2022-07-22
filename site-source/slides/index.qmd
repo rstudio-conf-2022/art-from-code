@@ -36,6 +36,9 @@ knitr::knit_hooks$set(output = function(x, options) {
 
 ```{r packages, include=FALSE}
 library(ggplot2)
+library(tibble)
+library(dplyr)
+library(ggthemes)
 ```
 
 ## WiFi
@@ -176,6 +179,118 @@ mpg |>
   scale_color_brewer()
 ```
 
+## Your turn!
+
+- Using only ggplot2 and the `mpg` data, create your own art 
+- Don't think too hard, just do something in 3 minutes!
+
+## Random data
+
+```{r random-data}
+#| output-location: slide
+set.seed(1)
+n <- 50
+dat <- tibble(
+  x0 = runif(n),
+  y0 = runif(n),
+  x1 = x0 + runif(n, min = -.2, max = .2),
+  y1 = y0 + runif(n, min = -.2, max = .2),
+  shade = runif(n), 
+  size = runif(n)
+)
+dat
+```
+
+## ... Transformed to art
+
+```{r coord-polar, dev.args=list(bg="#222222")}
+#| output-location: column
+dat |> 
+  ggplot(aes(
+    x = x0,
+    y = y0,
+    xend = x1,
+    yend = y1,
+    colour = shade,
+    size = size
+  )) +
+  geom_segment(show.legend = FALSE) +
+  coord_polar() +
+  scale_y_continuous(expand = c(0, 0)) +
+  scale_x_continuous(expand = c(0, 0)) + 
+  scale_color_viridis_c() + 
+  scale_size(range = c(0, 10)) + 
+  theme_void()
+```
+
+## Our first system
+
+```{r polar-art}
+polar_art <- function(seed, n, palette) {
+  
+  set.seed(seed)
+  
+  dat <- tibble(
+    x0 = runif(n),
+    y0 = runif(n),
+    x1 = x0 + runif(n, min = -.2, max = .2),
+    y1 = y0 + runif(n, min = -.2, max = .2),
+    shade = runif(n), 
+    size = runif(n)
+  )
+  
+  dat |> 
+    ggplot(aes(
+      x = x0,
+      y = y0,
+      xend = x1,
+      yend = y1,
+      colour = shade,
+      size = size
+    )) +
+    geom_segment(show.legend = FALSE) +
+    coord_polar() +
+    scale_y_continuous(expand = c(0, 0)) +
+    scale_x_continuous(expand = c(0, 0)) + 
+    scale_colour_gradientn(colours = palette) + 
+    scale_size(range = c(0, 10)) + 
+    theme_void()
+}
+```
+
+## An output
+
+```{r polar-art-out-1}
+#| output-location: column
+polar_art(
+  seed = 1, 
+  n = 500, 
+  palette = c(
+    "antiquewhite", 
+    "orange", 
+    "bisque"
+  )
+)
+```
+
+
+## Another output
+
+```{r polar-art-out-2}
+#| output-location: column
+polar_art(
+  seed = 2, 
+  n = 50, 
+  palette = c(
+    "red", 
+    "black", 
+    "white"
+  )
+)
+```
+
+
+## Your turn!
 
 # Spatial Noise Trickery
 

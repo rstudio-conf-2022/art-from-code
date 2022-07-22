@@ -551,5 +551,54 @@
     "title": "ART FROM CODE",
     "section": "Using data science tools for art",
     "text": "Using data science tools for art\n\n\nmpg |>\n  ggplot(aes(\n    x = displ, \n    y = hwy, \n    colour = drv\n  )) + \n  geom_point(\n    show.legend = FALSE, \n    size = 4\n  ) + \n  geom_point(\n    show.legend = FALSE, \n    size = 1, \n    colour = \"#222222\"\n  ) + \n  coord_polar() + \n  theme_void() + \n  scale_color_brewer()"
+  },
+  {
+    "objectID": "slides/index.html#your-turn",
+    "href": "slides/index.html#your-turn",
+    "title": "ART FROM CODE",
+    "section": "Your turn!",
+    "text": "Your turn!\n\nUsing only ggplot2 and the mpg data, create your own art\nDon’t think too hard, just do something in 3 minutes!"
+  },
+  {
+    "objectID": "slides/index.html#random-data",
+    "href": "slides/index.html#random-data",
+    "title": "ART FROM CODE",
+    "section": "Random data",
+    "text": "Random data\n\nset.seed(1)\nn <- 50\ndat <- tibble(\n  x0 = runif(n),\n  y0 = runif(n),\n  x1 = x0 + runif(n, min = -.2, max = .2),\n  y1 = y0 + runif(n, min = -.2, max = .2),\n  shade = runif(n), \n  size = runif(n)\n)\ndat"
+  },
+  {
+    "objectID": "slides/index.html#transformed-to-art",
+    "href": "slides/index.html#transformed-to-art",
+    "title": "ART FROM CODE",
+    "section": "… Transformed to art",
+    "text": "… Transformed to art\n\n\ndat |> \n  ggplot(aes(\n    x = x0,\n    y = y0,\n    xend = x1,\n    yend = y1,\n    colour = shade,\n    size = size\n  )) +\n  geom_segment(show.legend = FALSE) +\n  coord_polar() +\n  scale_y_continuous(expand = c(0, 0)) +\n  scale_x_continuous(expand = c(0, 0)) + \n  scale_color_viridis_c() + \n  scale_size(range = c(0, 10)) + \n  theme_void()"
+  },
+  {
+    "objectID": "slides/index.html#our-first-system",
+    "href": "slides/index.html#our-first-system",
+    "title": "ART FROM CODE",
+    "section": "Our first system",
+    "text": "Our first system\n\npolar_art <- function(seed, n, palette) {\n  \n  set.seed(seed)\n  \n  dat <- tibble(\n    x0 = runif(n),\n    y0 = runif(n),\n    x1 = x0 + runif(n, min = -.2, max = .2),\n    y1 = y0 + runif(n, min = -.2, max = .2),\n    shade = runif(n), \n    size = runif(n)\n  )\n  \n  dat |> \n    ggplot(aes(\n      x = x0,\n      y = y0,\n      xend = x1,\n      yend = y1,\n      colour = shade,\n      size = size\n    )) +\n    geom_segment(show.legend = FALSE) +\n    coord_polar() +\n    scale_y_continuous(expand = c(0, 0)) +\n    scale_x_continuous(expand = c(0, 0)) + \n    scale_colour_gradientn(colours = palette) + \n    scale_size(range = c(0, 10)) + \n    theme_void()\n}"
+  },
+  {
+    "objectID": "slides/index.html#an-output",
+    "href": "slides/index.html#an-output",
+    "title": "ART FROM CODE",
+    "section": "An output",
+    "text": "An output\n\n\npolar_art(\n  seed = 1, \n  n = 500, \n  palette = c(\n    \"antiquewhite\", \n    \"orange\", \n    \"bisque\"\n  )\n)"
+  },
+  {
+    "objectID": "slides/index.html#another-output",
+    "href": "slides/index.html#another-output",
+    "title": "ART FROM CODE",
+    "section": "Another output",
+    "text": "Another output\n\n\npolar_art(\n  seed = 2, \n  n = 50, \n  palette = c(\n    \"red\", \n    \"black\", \n    \"white\"\n  )\n)"
+  },
+  {
+    "objectID": "slides/index.html#your-turn-1",
+    "href": "slides/index.html#your-turn-1",
+    "title": "ART FROM CODE",
+    "section": "Your turn!",
+    "text": "Your turn!"
   }
 ]

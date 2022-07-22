@@ -631,7 +631,153 @@
 </div>
 </div>
 </div>
-</section></section>
+</section>
+<section id="your-turn" class="slide level2">
+<h2>Your turn!</h2>
+<ul>
+<li>Using only ggplot2 and the <code>mpg</code> data, create your own art</li>
+<li>Don’t think too hard, just do something in 3 minutes!</li>
+</ul>
+</section>
+<section id="random-data" class="slide level2">
+<h2>Random data</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a><span class="fu">set.seed</span>(<span class="dv">1</span>)</span>
+<span id="cb4-2"><a href="#cb4-2"></a>n <span class="ot">&lt;-</span> <span class="dv">50</span></span>
+<span id="cb4-3"><a href="#cb4-3"></a>dat <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
+<span id="cb4-4"><a href="#cb4-4"></a>  <span class="at">x0 =</span> <span class="fu">runif</span>(n),</span>
+<span id="cb4-5"><a href="#cb4-5"></a>  <span class="at">y0 =</span> <span class="fu">runif</span>(n),</span>
+<span id="cb4-6"><a href="#cb4-6"></a>  <span class="at">x1 =</span> x0 <span class="sc">+</span> <span class="fu">runif</span>(n, <span class="at">min =</span> <span class="sc">-</span>.<span class="dv">2</span>, <span class="at">max =</span> .<span class="dv">2</span>),</span>
+<span id="cb4-7"><a href="#cb4-7"></a>  <span class="at">y1 =</span> y0 <span class="sc">+</span> <span class="fu">runif</span>(n, <span class="at">min =</span> <span class="sc">-</span>.<span class="dv">2</span>, <span class="at">max =</span> .<span class="dv">2</span>),</span>
+<span id="cb4-8"><a href="#cb4-8"></a>  <span class="at">shade =</span> <span class="fu">runif</span>(n), </span>
+<span id="cb4-9"><a href="#cb4-9"></a>  <span class="at">size =</span> <span class="fu">runif</span>(n)</span>
+<span id="cb4-10"><a href="#cb4-10"></a>)</span>
+<span id="cb4-11"><a href="#cb4-11"></a>dat</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+
+</section>
+<section id="transformed-to-art" class="slide level2">
+<h2>… Transformed to art</h2>
+<div class="cell columns column-output-location">
+<div class="column">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a>dat <span class="sc">|&gt;</span> </span>
+<span id="cb6-2"><a href="#cb6-2"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(</span>
+<span id="cb6-3"><a href="#cb6-3"></a>    <span class="at">x =</span> x0,</span>
+<span id="cb6-4"><a href="#cb6-4"></a>    <span class="at">y =</span> y0,</span>
+<span id="cb6-5"><a href="#cb6-5"></a>    <span class="at">xend =</span> x1,</span>
+<span id="cb6-6"><a href="#cb6-6"></a>    <span class="at">yend =</span> y1,</span>
+<span id="cb6-7"><a href="#cb6-7"></a>    <span class="at">colour =</span> shade,</span>
+<span id="cb6-8"><a href="#cb6-8"></a>    <span class="at">size =</span> size</span>
+<span id="cb6-9"><a href="#cb6-9"></a>  )) <span class="sc">+</span></span>
+<span id="cb6-10"><a href="#cb6-10"></a>  <span class="fu">geom_segment</span>(<span class="at">show.legend =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
+<span id="cb6-11"><a href="#cb6-11"></a>  <span class="fu">coord_polar</span>() <span class="sc">+</span></span>
+<span id="cb6-12"><a href="#cb6-12"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">expand =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">0</span>)) <span class="sc">+</span></span>
+<span id="cb6-13"><a href="#cb6-13"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">expand =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">0</span>)) <span class="sc">+</span> </span>
+<span id="cb6-14"><a href="#cb6-14"></a>  <span class="fu">scale_color_viridis_c</span>() <span class="sc">+</span> </span>
+<span id="cb6-15"><a href="#cb6-15"></a>  <span class="fu">scale_size</span>(<span class="at">range =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">10</span>)) <span class="sc">+</span> </span>
+<span id="cb6-16"><a href="#cb6-16"></a>  <span class="fu">theme_void</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div><div class="column">
+<div class="cell-output-display">
+<p><img data-src="index_files/figure-revealjs/coord-polar-1.png" width="576"></p>
+</div>
+</div>
+</div>
+</section>
+<section id="our-first-system" class="slide level2">
+<h2>Our first system</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a>polar_art <span class="ot">&lt;-</span> <span class="cf">function</span>(seed, n, palette) {</span>
+<span id="cb7-2"><a href="#cb7-2"></a>  </span>
+<span id="cb7-3"><a href="#cb7-3"></a>  <span class="fu">set.seed</span>(seed)</span>
+<span id="cb7-4"><a href="#cb7-4"></a>  </span>
+<span id="cb7-5"><a href="#cb7-5"></a>  dat <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
+<span id="cb7-6"><a href="#cb7-6"></a>    <span class="at">x0 =</span> <span class="fu">runif</span>(n),</span>
+<span id="cb7-7"><a href="#cb7-7"></a>    <span class="at">y0 =</span> <span class="fu">runif</span>(n),</span>
+<span id="cb7-8"><a href="#cb7-8"></a>    <span class="at">x1 =</span> x0 <span class="sc">+</span> <span class="fu">runif</span>(n, <span class="at">min =</span> <span class="sc">-</span>.<span class="dv">2</span>, <span class="at">max =</span> .<span class="dv">2</span>),</span>
+<span id="cb7-9"><a href="#cb7-9"></a>    <span class="at">y1 =</span> y0 <span class="sc">+</span> <span class="fu">runif</span>(n, <span class="at">min =</span> <span class="sc">-</span>.<span class="dv">2</span>, <span class="at">max =</span> .<span class="dv">2</span>),</span>
+<span id="cb7-10"><a href="#cb7-10"></a>    <span class="at">shade =</span> <span class="fu">runif</span>(n), </span>
+<span id="cb7-11"><a href="#cb7-11"></a>    <span class="at">size =</span> <span class="fu">runif</span>(n)</span>
+<span id="cb7-12"><a href="#cb7-12"></a>  )</span>
+<span id="cb7-13"><a href="#cb7-13"></a>  </span>
+<span id="cb7-14"><a href="#cb7-14"></a>  dat <span class="sc">|&gt;</span> </span>
+<span id="cb7-15"><a href="#cb7-15"></a>    <span class="fu">ggplot</span>(<span class="fu">aes</span>(</span>
+<span id="cb7-16"><a href="#cb7-16"></a>      <span class="at">x =</span> x0,</span>
+<span id="cb7-17"><a href="#cb7-17"></a>      <span class="at">y =</span> y0,</span>
+<span id="cb7-18"><a href="#cb7-18"></a>      <span class="at">xend =</span> x1,</span>
+<span id="cb7-19"><a href="#cb7-19"></a>      <span class="at">yend =</span> y1,</span>
+<span id="cb7-20"><a href="#cb7-20"></a>      <span class="at">colour =</span> shade,</span>
+<span id="cb7-21"><a href="#cb7-21"></a>      <span class="at">size =</span> size</span>
+<span id="cb7-22"><a href="#cb7-22"></a>    )) <span class="sc">+</span></span>
+<span id="cb7-23"><a href="#cb7-23"></a>    <span class="fu">geom_segment</span>(<span class="at">show.legend =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
+<span id="cb7-24"><a href="#cb7-24"></a>    <span class="fu">coord_polar</span>() <span class="sc">+</span></span>
+<span id="cb7-25"><a href="#cb7-25"></a>    <span class="fu">scale_y_continuous</span>(<span class="at">expand =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">0</span>)) <span class="sc">+</span></span>
+<span id="cb7-26"><a href="#cb7-26"></a>    <span class="fu">scale_x_continuous</span>(<span class="at">expand =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">0</span>)) <span class="sc">+</span> </span>
+<span id="cb7-27"><a href="#cb7-27"></a>    <span class="fu">scale_colour_gradientn</span>(<span class="at">colours =</span> palette) <span class="sc">+</span> </span>
+<span id="cb7-28"><a href="#cb7-28"></a>    <span class="fu">scale_size</span>(<span class="at">range =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">10</span>)) <span class="sc">+</span> </span>
+<span id="cb7-29"><a href="#cb7-29"></a>    <span class="fu">theme_void</span>()</span>
+<span id="cb7-30"><a href="#cb7-30"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="an-output" class="slide level2">
+<h2>An output</h2>
+<div class="cell columns column-output-location">
+<div class="column">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a><span class="fu">polar_art</span>(</span>
+<span id="cb8-2"><a href="#cb8-2"></a>  <span class="at">seed =</span> <span class="dv">1</span>, </span>
+<span id="cb8-3"><a href="#cb8-3"></a>  <span class="at">n =</span> <span class="dv">500</span>, </span>
+<span id="cb8-4"><a href="#cb8-4"></a>  <span class="at">palette =</span> <span class="fu">c</span>(</span>
+<span id="cb8-5"><a href="#cb8-5"></a>    <span class="st">"antiquewhite"</span>, </span>
+<span id="cb8-6"><a href="#cb8-6"></a>    <span class="st">"orange"</span>, </span>
+<span id="cb8-7"><a href="#cb8-7"></a>    <span class="st">"bisque"</span></span>
+<span id="cb8-8"><a href="#cb8-8"></a>  )</span>
+<span id="cb8-9"><a href="#cb8-9"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div><div class="column">
+<div class="cell-output-display">
+<p><img data-src="index_files/figure-revealjs/polar-art-out-1-1.png" width="576"></p>
+</div>
+</div>
+</div>
+</section>
+<section id="another-output" class="slide level2">
+<h2>Another output</h2>
+<div class="cell columns column-output-location">
+<div class="column">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a><span class="fu">polar_art</span>(</span>
+<span id="cb9-2"><a href="#cb9-2"></a>  <span class="at">seed =</span> <span class="dv">2</span>, </span>
+<span id="cb9-3"><a href="#cb9-3"></a>  <span class="at">n =</span> <span class="dv">50</span>, </span>
+<span id="cb9-4"><a href="#cb9-4"></a>  <span class="at">palette =</span> <span class="fu">c</span>(</span>
+<span id="cb9-5"><a href="#cb9-5"></a>    <span class="st">"red"</span>, </span>
+<span id="cb9-6"><a href="#cb9-6"></a>    <span class="st">"black"</span>, </span>
+<span id="cb9-7"><a href="#cb9-7"></a>    <span class="st">"white"</span></span>
+<span id="cb9-8"><a href="#cb9-8"></a>  )</span>
+<span id="cb9-9"><a href="#cb9-9"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div><div class="column">
+<div class="cell-output-display">
+<p><img data-src="index_files/figure-revealjs/polar-art-out-2-1.png" width="576"></p>
+</div>
+</div>
+</div>
+</section>
+<section id="your-turn-1" class="slide level2">
+<h2>Your turn!</h2>
+</section><section random-data-output="random-data-output" class="slide level2 output-location-slide"><h2>Random data</h2><div class="cell output-location-slide">
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 50 × 6
+       x0     y0    x1      y1 shade  size
+    &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+ 1 0.266  0.478  0.327  0.523  0.268 0.762
+ 2 0.372  0.861  0.313  0.884  0.219 0.933
+ 3 0.573  0.438  0.481  0.370  0.517 0.471
+ 4 0.908  0.245  1.11   0.226  0.269 0.604
+ 5 0.202  0.0707 0.255  0.0709 0.181 0.485
+ 6 0.898  0.0995 0.784 -0.0282 0.519 0.109
+ 7 0.945  0.316  0.796  0.328  0.563 0.248
+ 8 0.661  0.519  0.652  0.349  0.129 0.499
+ 9 0.629  0.662  0.799  0.573  0.256 0.373
+10 0.0618 0.407  0.101  0.292  0.718 0.935
+# … with 40 more rows</code></pre>
+</div>
+</div></section></section>
 <section id="spatial-noise-trickery" class="title-slide slide level1 center">
 <h1>Spatial Noise Trickery</h1>
 <p>Session 2: Multidimensional noise generators. Flow fields, fractals, and more using the ambient package</p>
