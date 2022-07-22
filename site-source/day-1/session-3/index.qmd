@@ -217,6 +217,18 @@ show_multipolygon(dat, fill = "#d43790")
 
 It's a little slow to produce results, but at least the results are pretty!
 
+
+::: {.callout-important icon=false #exercise-grow-multipolygon}
+## Exercise
+
+1. Let's look at single polygons first. All the code you need to work with those is included in the `grow-polygon.R` function. Try modifying the `iterations`, `noise`, and `seed` arguments to see what kind of output is created at different parameter values.
+
+2. The `grow-multipolygons.R` file contains the extra machinery to create these textured plots. Try playing around with the code for this. I've tweaked the parameter settings so that it runs faster than the code shown here, but doesn't produce output that looks quite as nice.
+
+:::
+
+
+
 ## Growing polygons faster
 
 As an aside, you may have noticed that the code I've written here is inefficient: I've got vectors growing in a loop, which is very inefficient in R. There's a few ways we could speed this up. The most time consuming would be to rewrite the resource intensive loops in C++ and then call it from R using a package like `Rcpp` or `cpp11`. I'll show an example of this technique later in the workshop, but in this case I'll do something a little simpler.
@@ -472,6 +484,16 @@ ggplot(dat, aes(x, y, group = id, fill = factor(source))) +
 
 This one makes me happy :-) 
 
+
+::: {.callout-important icon=false #exercise-splotch-hexagon}
+## Exercise
+
+Code for these two systems is included in the `splotch.R` and `smudged-hexagon.R` scripts.
+
+:::
+
+
+
 ## Slightly misshapen objects
 
 The second case of polygon trickery that I want to talk about is adapted from an example kindly shared with me by [Will Chase](https://www.williamrchase.com/). Will posted some code on twitter showing how to very gently deform the outline of a shape to give it a slightly hand drawn look, and I'll expand on that example here. Let's suppose I want to draw the outline of a heart. I do a little googling and discover some formulas that I can use for that purpose. If I have a vector describing the `angle` around circle from 0 to 2$\pi$, I can compute the x- and y-coordinates for a heart shape using these functions:
@@ -620,6 +642,16 @@ perlin_blob(
 ```
 
 At these parameter settings the output of `perlin_blob()` reminds me more of a cookie shape than a hand-drawn circle. I've never used those settings in art before, but I can imagine some tasty applications!
+
+
+::: {.callout-important icon=false #exercise-perlin-blob}
+## Exercise
+
+Code for this system is included in the `perlin-blob.R` script. You can also find analogous code for the Perlin heart system describe in in the next section in the `perlin-heart.R` script.
+
+:::
+
+
 
 ## Perlin hearts
 
@@ -831,6 +863,15 @@ perlin_heart_grid2 <- function(nx = 4, ny = 2, seed = NULL) {
 perlin_heart_grid2(seed = 666)
 ```
 
+
+::: {.callout-important icon=false #exercise-splotch-hexagon}
+## Exercise
+
+Code for these two systems is included in the `perlin-heart-grid.R` and `perlin-heart-grid-2.R` scripts.
+
+:::
+
+
 ## Animated perlin hearts
 
 The final example for this session uses the `gifsky` package to create an animated version of the variable-width hearts from the last section, by "rotating" or "sliding" the variable-with curves along the contours of the Perlin hearts. The design of the functions in this system is very similar in spirit to that adopted in the static systems. The main difference is that the output is created by calling the `save_gif()` function. We pass it an expression that, in the normal course of events, would create many plots -- that's what the `generate_all_frames()` function does -- and it captures these plots and turns them into a single animated gif:
@@ -943,6 +984,16 @@ knitr::include_graphics("animated-perlin-heart-123.gif")
 knitr::include_graphics("animated-perlin-heart-456.gif")
 knitr::include_graphics("animated-perlin-heart-789.gif")
 ```
+
+
+
+::: {.callout-important icon=false #exercise-perlin-animated}
+## Exercise
+
+Code for this system is included in the `perlin-heart-animated.R` script.
+
+:::
+
 
 
 ## Textured lines
@@ -1077,3 +1128,11 @@ perlin_heart(n = 500, seed = 123) |>
   brush(bristles = 100, noise = .02) |>
   stroke() 
 ```
+
+
+::: {.callout-important icon=false #exercise-textured-lines}
+## Exercise
+
+Code for this system is included in the `textured-lines.R` script.
+
+:::
