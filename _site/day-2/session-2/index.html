@@ -478,6 +478,19 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 </div>
 </div>
+<div id="exercise-subdivision" class="callout-important callout callout-style-default no-icon callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Exercise
+</div>
+</div>
+<div id="exercise-subdivision" class="callout-body-container callout-body">
+<p>Code for this system is included in the <code>subdivision.R</code> script.</p>
+</div>
+</div>
 </section>
 <section id="mosaica" class="level2 page-columns page-full">
 <h2 class="anchored" data-anchor-id="mosaica">Mosaica</h2>
@@ -608,6 +621,19 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 </div>
 </div>
+</div>
+</div>
+<div id="exercise-mosaica" class="callout-important callout callout-style-default no-icon callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Exercise
+</div>
+</div>
+<div id="exercise-mosaica" class="callout-body-container callout-body">
+<p>Code for this system is included in the <code>mosaica.R</code> script.</p>
 </div>
 </div>
 </section>
@@ -759,6 +785,19 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 </div>
 </div>
+<div id="exercise-voronoi-tiles" class="callout-important callout callout-style-default no-icon callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Exercise
+</div>
+</div>
+<div id="exercise-voronoi-tiles" class="callout-body-container callout-body">
+<p>A script reproducing this piece is included in the <code>voronoi-tiles.R</code> file</p>
+</div>
+</div>
 </section>
 <section id="studies-in-voronoi-baroque-part-i" class="level2">
 <h2 class="anchored" data-anchor-id="studies-in-voronoi-baroque-part-i">Studies in Voronoi baroque: Part I</h2>
@@ -900,6 +939,19 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 </div>
 <p>The possibilities are surprisingly rich, and quite a lot of fun to play around with!</p>
+<div id="exercise-voronoi-unbox" class="callout-important callout callout-style-default no-icon callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Exercise
+</div>
+</div>
+<div id="exercise-voronoi-unbox" class="callout-body-container callout-body">
+<p>A script containing code for this system is included in the materials folder, as the <code>voronoi-unbox.R</code> file</p>
+</div>
+</div>
 </section>
 <section id="studies-in-voronoi-baroque-part-ii" class="level2 page-columns page-full">
 <h2 class="anchored" data-anchor-id="studies-in-voronoi-baroque-part-ii">Studies in Voronoi baroque: Part II</h2>
@@ -1043,13 +1095,26 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 </div>
 </div>
+<div id="exercise-voronoi-baroque" class="callout-important callout callout-style-default no-icon callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Exercise
+</div>
+</div>
+<div id="exercise-voronoi-baroque" class="callout-body-container callout-body">
+<p>Code for this system is included in the <code>voronoi-baroque.R</code> script.</p>
+</div>
+</div>
 </section>
 <section id="truchet-tiles" class="level2">
 <h2 class="anchored" data-anchor-id="truchet-tiles">Truchet tiles</h2>
 <p>One final topic to mention before: <a href="https://en.wikipedia.org/wiki/Truchet_tiles">truchet tiles</a>. Truchet tiles are square tiles decorated with asymmetric patterns, designed so that whenever you lay them out randomly, the patterns will connect up in aesthetically pleasing ways. To be honest, I’ve not explore them much myself but Antonio Páez has written the <a href="https://paezha.github.io/truchet/">truchet package</a> that you can use to play with these. It’s not currently on CRAN, but you can install from GitHub with:</p>
 <div class="sourceCode" id="cb46"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a>remotes<span class="sc">::</span><span class="fu">install_github</span>(<span class="st">"paezha/truchet"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>The basic idea in the truchet package is to represent the patterns compactly as a geometry column. If you’re familiar with the <a href="https://r-spatial.github.io/sf/">sf package</a> this sort of output will be familiar to you:</p>
-<div class="cell">
+<div class="cell" data-hash="index_cache/html/mosaics-as-sf_f7fc56d51dd87779a81e0da68df11594">
 <div class="sourceCode cell-code" id="cb47"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
 <span id="cb47-2"><a href="#cb47-2" aria-hidden="true" tabindex="-1"></a>mosaic <span class="ot">&lt;-</span> <span class="fu">st_truchet_ms</span>(</span>
 <span id="cb47-3"><a href="#cb47-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">tiles =</span> <span class="fu">c</span>(<span class="st">"dr"</span>, <span class="st">"tn"</span>, <span class="st">"ane"</span>), </span>
@@ -1119,6 +1184,19 @@ First 10 features:
 <p><img src="index_files/figure-html/second-truchet-1.png" class="img-fluid figure-img" width="864"></p>
 </figure>
 </div>
+</div>
+</div>
+<div id="exercise-truchet" class="callout-important callout callout-style-default no-icon callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Exercise
+</div>
+</div>
+<div id="exercise-truchet" class="callout-body-container callout-body">
+<p>Example code for truchet tiles is included in the <code>truchet-example.R</code> script.</p>
 </div>
 </div>
 

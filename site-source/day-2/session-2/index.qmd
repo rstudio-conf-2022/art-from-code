@@ -233,6 +233,14 @@ subdivision(nsplits = 200, seed = 102) |> develop()
 subdivision(nsplits = 500, seed = 103) |> develop()
 ```
 
+::: {.callout-important icon=false #exercise-subdivision}
+## Exercise
+
+Code for this system is included in the `subdivision.R` script.
+
+:::
+
+
 
 ## Mosaica
 
@@ -337,6 +345,14 @@ mosaica(nrow = 100, seed = 1)
 mosaica(nrow = 100, seed = 2)
 mosaica(nrow = 100, seed = 3)
 ```
+
+
+::: {.callout-important icon=false #exercise-mosaica}
+## Exercise
+
+Code for this system is included in the `mosaica.R` script.
+
+:::
 
 
 ## Voronoi tesselation
@@ -482,6 +498,13 @@ pic +
 ```
 
 
+::: {.callout-important icon=false #exercise-voronoi-tiles}
+## Exercise
+
+A script reproducing this piece is included in the `voronoi-tiles.R` file
+
+:::
+
 
 ## Studies in Voronoi baroque: Part I
 
@@ -606,6 +629,15 @@ pic +
 ```
 
 The possibilities are surprisingly rich, and quite a lot of fun to play around with!
+
+
+::: {.callout-important icon=false #exercise-voronoi-unbox}
+## Exercise
+
+A script containing code for this system is included in the materials folder, as the `voronoi-unbox.R` file
+
+:::
+
 
 
 ## Studies in Voronoi baroque: Part II
@@ -744,6 +776,15 @@ voronoi_baroque(43, shake)
 voronoi_baroque(17, shake)
 ```
 
+::: {.callout-important icon=false #exercise-voronoi-baroque}
+## Exercise
+
+Code for this system is included in the `voronoi-baroque.R` script.
+
+:::
+
+
+
 ## Truchet tiles
 
 One final topic to mention before: [truchet tiles](https://en.wikipedia.org/wiki/Truchet_tiles). Truchet tiles are square tiles decorated with asymmetric patterns, designed so that whenever you lay them out randomly, the patterns will connect up in aesthetically pleasing ways. To be honest, I've not explore them much myself but Antonio Páez has written the [truchet package](https://paezha.github.io/truchet/) that you can use to play with these. It's not currently on CRAN, but you can install from GitHub with:
@@ -755,6 +796,7 @@ remotes::install_github("paezha/truchet")
 The basic idea in the truchet package is to represent the patterns compactly as a geometry column. If you're  familiar with the [sf package](https://r-spatial.github.io/sf/) this sort of output will be familiar to you:
 
 ```{r mosaics-as-sf}
+#| cache: true
 set.seed(123)
 mosaic <- st_truchet_ms(
   tiles = c("dr", "tn", "ane"), 
@@ -808,3 +850,13 @@ st_truchet_ss(
   scale_y_continuous(expand = c(0, 0)) +
   theme_void()
 ```
+
+
+::: {.callout-important icon=false #exercise-truchet}
+## Exercise
+
+Example code for truchet tiles is included in the `truchet-example.R` script.
+
+:::
+
+
