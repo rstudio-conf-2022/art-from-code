@@ -68,7 +68,14 @@ knitr::knit_hooks$set(output = function(x, options) {
 - Instructors: 
     - Danielle Navarro
 
-## Schedule, Day 1
+## Use the stickies!
+
+- There are two coloured sticky notes
+- Place a $COLOUR one on your laptop if all is well
+- Place a $COLOUR one on your laptop if you'd like help
+- This will make it easy for us to find you and help out!
+
+## Schedule for day 1
 
 | Time          | Activity                                                                              |
 | :------------ | :------------------------------------------------------------------------------------ |
@@ -91,3 +98,47 @@ knitr::knit_hooks$set(output = function(x, options) {
 | 13:30 - 15:00 | Session 3: [Pixel shaders](https://art-from-code.netlify.com/day-2/session-3)             |
 | 15:00 - 15:30 | *Coffee break*                                                                            |
 | 15:30 - 17:00 | Session 4: [Wrap up](https://art-from-code.netlify.com/day-2/session-4)                   |
+
+## Installing packages
+
+TBA
+
+## Downloading materials
+
+TBA
+
+# Get Started
+
+Session 1: Hands on introduction to generative art. Make your own pieces using ggplot2 and dplyr
+
+# Spatial Noise Trickery
+
+Session 2: Multidimensional noise generators. Flow fields, fractals, and more using the ambient package
+
+# Polygon Trickery
+
+Session 3: Create textures with recursive polygon deformation, draw wonky hearts as animated gifs, and convert boring lines to textured strokes
+
+# Shading Trickery
+
+Session 4: Use rayshader to add depth to 2D plots, and generate 3D graphics from generative art
+
+# Welcome to Day 2
+
+# Iterated Function Systems
+
+Session 1: Embrace the chaotic joy of the fractal flame and render quickly with Rcpp. This one is a bit technical
+
+# Tiles and Tesselations 
+
+Session 2: Make lovely things by subdividing a rectangle, explore Voronoi tesselations, and have a passing encounter with Truchet tiles
+
+# Pixel Filters
+
+Session 3: Manipulate ggplot objects as if they were raster graphics using ggfx: learn to dither, mask, displace, blend, and more. The flametree package makes as special guest appearance
+
+# Wrap Up
+
+Session 4: TBA
+
+
