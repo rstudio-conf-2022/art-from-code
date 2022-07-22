@@ -47,7 +47,7 @@ curl_art <- function(...) {
 custom_curl_data <- function(data) {
   curl_data(
     data = data,
-    iterations = 100, 
+    iterations = 80, 
     octaves = 10,
     fractal = ridged,
     noise = gen_cubic,

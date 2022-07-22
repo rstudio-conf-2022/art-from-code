@@ -1093,8 +1093,8 @@ A related example using polygons, heavily influenced by Thomas Lin Pedersen's "g
 
 
 ```{r curl-art-examples-2, dev.args=list(bg="#222222")}
-#| fig-width: 8
-#| fig-height: 8
+#| fig-width: 10
+#| fig-height: 10
 #| fig-dpi: 300
 #| fig-align: center
 #| cache: true
@@ -1102,7 +1102,7 @@ A related example using polygons, heavily influenced by Thomas Lin Pedersen's "g
 custom_curl_data <- function(data) {
   curl_data(
     data = data,
-    iterations = 100, 
+    iterations = 80, 
     octaves = 10,
     fractal = ridged,
     noise = gen_cubic,
@@ -1122,9 +1122,9 @@ dat2 <- circle(5000) |>
   custom_curl_data()
 
 ggplot(mapping = aes(x, y, group = time)) +
-  geom_polygon(data = dat1, fill = "#ffffff10") +
-  geom_polygon(data = dat2, fill = "#22222205") +
-  theme_void() +
+  geom_polygon(data = dat1, fill = "#22222210") +
+  geom_polygon(data = dat2, fill = "#ffffff05") +
+  theme_void() + 
   coord_equal()
 ```
 

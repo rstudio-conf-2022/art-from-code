@@ -1471,11 +1471,11 @@ Exercises
 </div>
 </div>
 <p>A related example using polygons, heavily influenced by Thomas Lin Pedersen’s “genesis” system:</p>
-<div class="cell" data-layout-align="center" data-fig.dpi="300" data-hash="index_cache/html/curl-art-examples-2_3baf242c81b88178deb4c9dfd691a63e">
+<div class="cell" data-layout-align="center" data-fig.dpi="300" data-hash="index_cache/html/curl-art-examples-2_34738add422586d59d35a190e6653388">
 <div class="sourceCode cell-code" id="cb65"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb65-1"><a href="#cb65-1" aria-hidden="true" tabindex="-1"></a>custom_curl_data <span class="ot">&lt;-</span> <span class="cf">function</span>(data) {</span>
 <span id="cb65-2"><a href="#cb65-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">curl_data</span>(</span>
 <span id="cb65-3"><a href="#cb65-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">data =</span> data,</span>
-<span id="cb65-4"><a href="#cb65-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">iterations =</span> <span class="dv">100</span>, </span>
+<span id="cb65-4"><a href="#cb65-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">iterations =</span> <span class="dv">80</span>, </span>
 <span id="cb65-5"><a href="#cb65-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">octaves =</span> <span class="dv">10</span>,</span>
 <span id="cb65-6"><a href="#cb65-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">fractal =</span> ridged,</span>
 <span id="cb65-7"><a href="#cb65-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">noise =</span> gen_cubic,</span>
@@ -1495,14 +1495,14 @@ Exercises
 <span id="cb65-21"><a href="#cb65-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">custom_curl_data</span>()</span>
 <span id="cb65-22"><a href="#cb65-22" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb65-23"><a href="#cb65-23" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(x, y, <span class="at">group =</span> time)) <span class="sc">+</span></span>
-<span id="cb65-24"><a href="#cb65-24" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_polygon</span>(<span class="at">data =</span> dat1, <span class="at">fill =</span> <span class="st">"#ffffff10"</span>) <span class="sc">+</span></span>
-<span id="cb65-25"><a href="#cb65-25" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_polygon</span>(<span class="at">data =</span> dat2, <span class="at">fill =</span> <span class="st">"#22222205"</span>) <span class="sc">+</span></span>
-<span id="cb65-26"><a href="#cb65-26" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_void</span>() <span class="sc">+</span></span>
+<span id="cb65-24"><a href="#cb65-24" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_polygon</span>(<span class="at">data =</span> dat1, <span class="at">fill =</span> <span class="st">"#22222210"</span>) <span class="sc">+</span></span>
+<span id="cb65-25"><a href="#cb65-25" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_polygon</span>(<span class="at">data =</span> dat2, <span class="at">fill =</span> <span class="st">"#ffffff05"</span>) <span class="sc">+</span></span>
+<span id="cb65-26"><a href="#cb65-26" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_void</span>() <span class="sc">+</span> </span>
 <span id="cb65-27"><a href="#cb65-27" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_equal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="index_files/figure-html/curl-art-examples-2-1.png" class="img-fluid figure-img" width="768"></p>
+<p><img src="index_files/figure-html/curl-art-examples-2-1.png" class="img-fluid figure-img" width="960"></p>
 </figure>
 </div>
 </div>
