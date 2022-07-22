@@ -6,8 +6,8 @@ library(dplyr)
 library(ggplot2)
 library(ggthemes)
 library(dplyr)
-
-seed <- 51:100
+library(tictoc)
+library(here)
 
 sample_canva2 <- function(seed = NULL, n = 4) {
   
@@ -15,7 +15,6 @@ sample_canva2 <- function(seed = NULL, n = 4) {
   sample(ggthemes::canva_palettes, 1)[[1]] |>
     (\(x) colorRampPalette(x)(n))()  
 }
-
 
 transform_to_curl_space <- function(x, y, frequency = 1, octaves = 10) {
   curl_noise(
@@ -78,7 +77,7 @@ ice_floe <- function(seed) {
     as.array(value = paint)
 }
 
-ice_scape <- function(seed) {
+icescape_3d <- function(seed) {
   
   ice_height <- matrix(0, 2500, 2500)
   ice_height[251:2250, 251:2250] <- ice_floe(seed)
@@ -113,13 +112,12 @@ ice_scape <- function(seed) {
   )
   
   render_snapshot(
-    filename = paste0("~/Desktop/icescape/icescape_", seed, ".png"), 
+    filename = here("output", paste0("icescape_3d_", seed, ".png")), 
     clear = TRUE
   )
 }
 
+tic()
+icescape_3d(123)
+toc()
 
-for(s in seed) {
-  cat(s, "\n")
-  ice_scape(s)
-}
