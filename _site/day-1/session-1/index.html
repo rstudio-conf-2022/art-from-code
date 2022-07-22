@@ -234,13 +234,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>We are writing code that makes unpredictable paintings.</p>
 <section id="art-is-theft" class="level2">
 <h2 class="anchored" data-anchor-id="art-is-theft">Art is theft</h2>
-<p>Okay that’s quite enough preamble. Let’s stop talking and start making some art! Following Picasso’s dictum that “art is theft” I want to begin with an act of wholesale thievery. I am going to co-opt tools that were created for serious data science purposes and repurpose them for art. If you’re in this room with me then you already know these tools by name: <code>ggplot2</code> is an R package designed for data visualisation; <code>dplyr</code> is designed for data manipulation; <code>tibble</code> is designed for data representation. None of these packages were created for artists. They’re practical tools designed for statisticians, data scientists, analysts, and other knowledge workers.</p>
+<p>Okay that’s quite enough preamble. Let’s stop talking and start making some art! Following Picasso’s dictum that “art is theft” I want to begin with an act of wholesale thievery. I am going to co-opt tools that were created for serious data science purposes and repurpose them for art. If you’re in this room with me then you already know these tools by name: ggplot2 is an R package designed for data visualisation; dplyr is designed for data manipulation; tibble is designed for data representation. None of these packages were created for artists. They’re practical tools designed for statisticians, data scientists, analysts, and other knowledge workers.</p>
 <p>Fuck it. Let’s steal them. Sorry Hadley.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tibble)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>Let’s start with a data visualisation exercise that most R users have encountered at one time or another: creating a scatterplot. The <code>ggplot2</code> package supplies the tediously-overused <code>mpg</code> data set that… I don’t know, it has something to do with cars, I think? I don’t drive and I am trying very hard to pretend I never learned anything about the internal combustion engine. The point here is that we have a data set. From the perspective of the generative artist our main concern is that it’s a table that contains some numbers and text organised in a table:</p>
+<p>Let’s start with a data visualisation exercise that most R users have encountered at one time or another: creating a scatterplot. The ggplot2 package supplies the tediously-overused <code>mpg</code> data set that… I don’t know, it has something to do with cars, I think? I don’t drive and I am trying very hard to pretend I never learned anything about the internal combustion engine. The point here is that we have a data set. From the perspective of the generative artist our main concern is that it’s a table that contains some numbers and text organised in a table:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>mpg</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -274,7 +274,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 </div>
 </div>
-<p>On the x-axis I’ve plotted one column in the table, on the y-axis I’ve plotted another column, and each row in the table shows up as a dot. A third row of the table is used to supply the colour. Because <code>ggplot2</code> is designed to support interpretation, the resulting plot has a collection of guides, legends and other labels. In the world of data visualisation, these things are essential for helping the viewer understand how the picture relates to the thing in the world (cars, apparently) that the data pertains to.</p>
+<p>On the x-axis I’ve plotted one column in the table, on the y-axis I’ve plotted another column, and each row in the table shows up as a dot. A third row of the table is used to supply the colour. Because ggplot2 is designed to support interpretation, the resulting plot has a collection of guides, legends and other labels. In the world of data visualisation, these things are essential for helping the viewer understand how the picture relates to the thing in the world (cars, apparently) that the data pertains to.</p>
 <p>As an artist, I cannot be bothered with such dull practicalities. Let’s get rid of all of them, and – violating all sorts of data visualisation best practices – I’m going to vary the size of the dots in a way that doesn’t help anyone make sense of the data:</p>
 <div class="cell" data-layout-align="center" data-fig.dpi="300">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>mpg <span class="sc">|&gt;</span></span>
@@ -291,7 +291,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 </div>
 <p>Once we strip away the practical purpose of the data visualisation, we’re left with something that isn’t quite so easy to interpret, but is… well, it’s kind of pretty, right? There’s an overall structure to the scatterplot. The colours, shapes, and positions of the data don’t necessarily tell an easily-understood story about the real world anymore but they’re quite pleasing to look at.</p>
-<p>Viewing <code>ggplot2</code> through this lens opens up a new world of possibilities. Inspired by Leland Wilkinson’s book on the subject, Hadley Wickham wrote the package to provide a <em>grammar</em> of graphics: it supplies a collection of transformation and composition rules that we can use to construct mappings between data (that represent a thing in the world) and images (that our visual systems can quickly interpret). Those rules are not arbitrary: they’re created to make our lives as data analysts easier. But we can repurpose them. The grammatical rules of human language did not evolve to serve the needs of poets, but the poets use them anyway. So too we as visual artists can (and will) reuse the grammar of graphics for artistic purposes. A few minor tweaks gives us this:</p>
+<p>Viewing ggplot2 through this lens opens up a new world of possibilities. Inspired by Leland Wilkinson’s book on the subject, Hadley Wickham wrote the package to provide a <em>grammar</em> of graphics: it supplies a collection of transformation and composition rules that we can use to construct mappings between data (that represent a thing in the world) and images (that our visual systems can quickly interpret). Those rules are not arbitrary: they’re created to make our lives as data analysts easier. But we can repurpose them. The grammatical rules of human language did not evolve to serve the needs of poets, but the poets use them anyway. So too we as visual artists can (and will) reuse the grammar of graphics for artistic purposes. A few minor tweaks gives us this:</p>
 <div class="cell" data-layout-align="center" data-fig.dpi="300">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>mpg <span class="sc">|&gt;</span></span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(displ, hwy, <span class="at">colour =</span> drv)) <span class="sc">+</span> </span>
@@ -309,6 +309,19 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 </div>
 <p>And let’s be honest. At this point the image has very little to do with cars. Sure, I’m using the <code>mpg</code> data to drive the process, but as far as I’m concerned it’s really just a source of raw numbers. As a generative artist these numbers are my raw materials, but I’m not too fussed about exactly how I came into possession of these numbers.</p>
+<div id="exercise-mpg-art" class="callout-important callout callout-style-default no-icon callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Exercise
+</div>
+</div>
+<div id="exercise-mpg-art" class="callout-body-container callout-body">
+<p>Try it yourself! Using nothing other than ggplot2 and the <code>mpg</code> data set, create your own artwork. Don’t take too long: 3 minutes at the absolute most! See what you can come up with in that time!</p>
+</div>
+</div>
 <p>I could just have easily created my own raw materials. As a statistical programming language R comes equipped with a very sophisticated collection of tools for generating pseudorandom numbers with various distributions. I can tap into this whenever I like but in a lot of cases I don’t need anything more fancy than the <code>runif()</code> function. Uniformly distributed random numbers are perfectly adequate for many purposes. Let’s make some:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1</span>)</span>
@@ -447,6 +460,23 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 </div>
 </div>
+<div id="exercise-polar-art" class="callout-important callout callout-style-default no-icon callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Exercises
+</div>
+</div>
+<div id="exercise-polar-art" class="callout-body-container callout-body">
+<ol type="1">
+<li><p>In the materials folder there is a file called <code>polar_art.R</code> that contains a copy of the <code>polar_art()</code> function. Open it and use the <code>polar_art()</code> function to generate your own pieces. Try changing the <code>seed</code>, <code>n</code>, and the <code>palette</code> to create a variety of different pieces.</p></li>
+<li><p>Create a new file called <code>polar_art_02.R</code> that contains the <code>polar_art()</code> function. In the new file, try modifying the <code>polar_art()</code> function itself to see if you can create your own new system.</p></li>
+<li><p>Something to think about: Usually in data science we try to avoid naming our files <code>my_file_version_1</code>, <code>my_file_version_2</code>, etc, and instead we place files under version control using git. Yet here I am in an art context, apparently giving the advice to fall back on the old-fashioned system of naming files with version numbers. Why might I be doing that?</p></li>
+</ol>
+</div>
+</div>
 </section>
 <section id="colour" class="level2 page-columns page-full">
 <h2 class="anchored" data-anchor-id="colour">Colour</h2>
@@ -458,7 +488,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="cell">
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>pal <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"#cdb4db"</span>, <span class="st">"#ffc8dd"</span>, <span class="st">"#ffafcc"</span>, <span class="st">"#bde0fe"</span>, <span class="st">"#a2d2ff"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>The <code>show_col()</code> function from the <code>scales</code> package is a nice way to quickly preview the colours:</p>
+<p>The <code>show_col()</code> function from the scales package is a nice way to quickly preview the colours:</p>
 <div class="cell" data-layout-align="center" data-fig.dpi="300">
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">show_col</span>(pal)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
@@ -510,7 +540,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 </div>
 </div>
-<p>In this example, I took one set of colours from the web to define a palette, but there are many built-in palettes you can select from randomly as part of your generative process. For example, the <code>ggthemes</code> package contains a list called <code>canva_palettes</code>, which contains 150 palettes taken from <a href="https://www.canva.com/colors/color-palettes/">canva.com</a>. For example, here’s one of those palettes</p>
+<p>In this example, I took one set of colours from the web to define a palette, but there are many built-in palettes you can select from randomly as part of your generative process. For example, the ggthemes package contains a list called <code>canva_palettes</code>, which contains 150 palettes taken from <a href="https://www.canva.com/colors/color-palettes/">canva.com</a>. For example, here’s one of those palettes</p>
 <div class="cell" data-layout-align="center" data-fig.dpi="300">
 <div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>canva_palettes[[<span class="dv">101</span>]]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -595,10 +625,27 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 </div>
 <p>The ability to pick and choose when the randomness gets turned on and off is quite handy!</p>
+<div id="exercise-palettes" class="callout-important callout callout-style-default no-icon callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Exercises
+</div>
+</div>
+<div id="exercise-palettes" class="callout-body-container callout-body">
+<ol type="1">
+<li><p>In the materials folder there is a file called <code>palette-generators.R</code> that contains a copy of the <code>sample_canva()</code> function. Take a look and try calling the function a few times to see what kind of output it produces. You may find it handy to use <code>show_col()</code> to visualise the results.</p></li>
+<li><p>Try writing your own random palette generator. A simple (and occasionally useful) approach is to construct a palette consisting of distinct but otherwise randomly selected named colours in R. There is a set of 502 colour names generated by calling <code>colours()</code> with <code>distinct = TRUE)</code>. Write a function called <code>sample_named_colours()</code> that takes <code>n</code> as an input argument, and then returns a sample of <code>n</code> of these colour. Try using it with the <code>polar_art()</code> function.</p></li>
+<li><p>The <code>sample_canva()</code> function, as I’ve written it, preserves the original structure of the 150 palettes in <code>ggthemes::canva_palettes</code>, so that the 4 colours returned all belong to the same palette on the Canva website originally. Try breaking this constraint. If you call <code>unlist(ggthemes::canva_palettes)</code> you get a vector of 600 distinct colours. Write a palette generating function that samples colours randomly from that set of 600 colours.</p></li>
+</ol>
+</div>
+</div>
 </section>
 <section id="composition" class="level2 page-columns page-full">
 <h2 class="anchored" data-anchor-id="composition">Composition</h2>
-<p>The <code>polar_art()</code> function I wrote earlier is nice, but it’s not very flexible. It allows some control over the palette and the number of segments to be plotted, but that’s all. It doesn’t let me use the full flexibility of <code>ggplot2</code> to create artwork. For example, what if I wanted to create more pieces in a “similar” style to the ones I created earlier, but plot different geoms? Or perhaps I want to plot more than one data set as part of a single piece? The <code>polar_art()</code> function doesn’t allow that. The data generation and plot building is all handled internally. Perhaps there’s a case to be made that we should break this into smaller functions and see if that helps.</p>
+<p>The <code>polar_art()</code> function I wrote earlier is nice, but it’s not very flexible. It allows some control over the palette and the number of segments to be plotted, but that’s all. It doesn’t let me use the full flexibility of ggplot2 to create artwork. For example, what if I wanted to create more pieces in a “similar” style to the ones I created earlier, but plot different geoms? Or perhaps I want to plot more than one data set as part of a single piece? The <code>polar_art()</code> function doesn’t allow that. The data generation and plot building is all handled internally. Perhaps there’s a case to be made that we should break this into smaller functions and see if that helps.</p>
 <p>Let’s start out by writing a “random tibble generator” function, <code>sample_data()</code>. This function will generate tibbles full of random numbers, but that’s all:</p>
 <div class="cell" data-layout-align="center" data-fig.dpi="300">
 <div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>sample_data <span class="ot">&lt;-</span> <span class="cf">function</span>(<span class="at">seed =</span> <span class="cn">NULL</span>, <span class="at">n =</span> <span class="dv">100</span>){</span>
@@ -616,7 +663,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <p>Next, let’s create a <code>styled_plot()</code> function that takes a palette and (optionally) a data set as inputs, and sets up the mappings and the stylistic aspects to the plot. This function does a lot of the work in defining what kind of artwork is possible using this system, even though it doesn’t actually draw anything. For example, it specifies <code>coord_polar()</code> as the coordinate system, so any points or lines that get created will be shown in polar coordinates. It uses <code>guide_none()</code> to suppress legends, and <code>theme_void()</code> to suppress axes, axis titles and so on.</p>
 <div class="cell" data-layout-align="center" data-fig.dpi="300">
-<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>styled_plot <span class="ot">&lt;-</span> <span class="cf">function</span>(<span class="at">data =</span> <span class="cn">NULL</span>, palette) {</span>
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>polar_styled_plot <span class="ot">&lt;-</span> <span class="cf">function</span>(<span class="at">data =</span> <span class="cn">NULL</span>, palette) {</span>
 <span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(</span>
 <span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">data =</span> data,</span>
 <span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">mapping =</span> <span class="fu">aes</span>(</span>
@@ -649,15 +696,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb26-31"><a href="#cb26-31" aria-hidden="true" tabindex="-1"></a>    )</span>
 <span id="cb26-32"><a href="#cb26-32" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>This structure gives a clean delineation of responsibility among the different functions. The <code>sample_canva()</code> function does the work of generating random palettes, <code>sample_data()</code> does the job of creating random data to drive the plot, <code>styled_plot()</code> takes care of all the ggplot set up, and then you can pick and choose which geom you want to add. So we can write code like this that differs only in the choice of geom:</p>
+<p>This structure gives a clean delineation of responsibility among the different functions. The <code>sample_canva()</code> function does the work of generating random palettes, <code>sample_data()</code> does the job of creating random data to drive the plot, <code>polar_styled_plot()</code> takes care of all the ggplot set up, and then you can pick and choose which geom you want to add. So we can write code like this that differs only in the choice of geom:</p>
 <div class="page-columns page-full">
 <div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>dat <span class="ot">&lt;-</span> <span class="fu">sample_data</span>(<span class="at">n =</span> <span class="dv">100</span>, <span class="at">seed =</span> <span class="dv">1</span>) </span>
 <span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>pal <span class="ot">&lt;-</span> <span class="fu">sample_canva</span>(<span class="at">seed =</span> <span class="dv">1</span>)</span>
 <span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a><span class="fu">styled_plot</span>(<span class="at">data =</span> dat, <span class="at">palette =</span> pal) <span class="sc">+</span> <span class="fu">geom_segment</span>()</span>
-<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a><span class="fu">styled_plot</span>(<span class="at">data =</span> dat, <span class="at">palette =</span> pal) <span class="sc">+</span> <span class="fu">geom_path</span>()</span>
-<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a><span class="fu">styled_plot</span>(<span class="at">data =</span> dat, <span class="at">palette =</span> pal) <span class="sc">+</span> <span class="fu">geom_point</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell column-screen-inset quarto-layout-panel" data-fig.dpi="300" data-hash="index_cache/html/simple-composition_9effddea8136d6173be54b2e321471bd">
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a><span class="fu">polar_styled_plot</span>(<span class="at">data =</span> dat, <span class="at">palette =</span> pal) <span class="sc">+</span> <span class="fu">geom_segment</span>()</span>
+<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a><span class="fu">polar_styled_plot</span>(<span class="at">data =</span> dat, <span class="at">palette =</span> pal) <span class="sc">+</span> <span class="fu">geom_path</span>()</span>
+<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a><span class="fu">polar_styled_plot</span>(<span class="at">data =</span> dat, <span class="at">palette =</span> pal) <span class="sc">+</span> <span class="fu">geom_point</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell column-screen-inset quarto-layout-panel" data-fig.dpi="300" data-hash="index_cache/html/simple-composition_f47828d0c694ec59954ab18f30f3c524">
 <div class="quarto-layout-row quarto-layout-valign-top">
 <div class="cell-output-display quarto-layout-cell" style="flex-basis: 33.3%;justify-content: center;">
 <div class="quarto-figure quarto-figure-center">
@@ -683,15 +730,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 </div>
 </div>
-<p>Because the output of <code>styled_plot()</code> is a ggplot that we can add layers to, and because each layer in a ggplot can supply its own data, we now have the ability to reuse these components in different ways. For that it’s helpful to load <code>dplyr</code>. Here’s an example where we generate two random data sets and feed those into four separate geoms:</p>
-<div class="cell" data-layout-align="center" data-fig.dpi="300" data-hash="index_cache/html/compositionality_a57e1d2de0b14cb84c6d5b63af91d230">
+<p>Because the output of <code>polar_styled_plot()</code> is a ggplot that we can add layers to, and because each layer in a ggplot can supply its own data, we now have the ability to reuse these components in different ways. For that it’s helpful to load dplyr. Here’s an example where we generate two random data sets and feed those into four separate geoms:</p>
+<div class="cell" data-layout-align="center" data-fig.dpi="300" data-hash="index_cache/html/compositionality_bf53ee62a8098868f0c30c5b83c8138c">
 <div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
 <span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>dat1 <span class="ot">&lt;-</span> <span class="fu">sample_data</span>(<span class="at">n =</span> <span class="dv">2000</span>, <span class="at">seed =</span> <span class="dv">123</span>) </span>
 <span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a>dat2 <span class="ot">&lt;-</span> <span class="fu">sample_data</span>(<span class="at">n =</span> <span class="dv">100</span>, <span class="at">seed =</span> <span class="dv">456</span>) <span class="sc">|&gt;</span>  </span>
 <span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">y0 =</span> .<span class="dv">3</span> <span class="sc">+</span> y0 <span class="sc">*</span> .<span class="dv">6</span>, <span class="at">y1 =</span> .<span class="dv">3</span>)</span>
 <span id="cb28-6"><a href="#cb28-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb28-7"><a href="#cb28-7" aria-hidden="true" tabindex="-1"></a><span class="fu">styled_plot</span>(<span class="at">palette =</span> <span class="fu">sample_canva</span>(<span class="at">seed =</span> <span class="dv">7</span>)) <span class="sc">+</span> </span>
+<span id="cb28-7"><a href="#cb28-7" aria-hidden="true" tabindex="-1"></a><span class="fu">polar_styled_plot</span>(<span class="at">palette =</span> <span class="fu">sample_canva</span>(<span class="at">seed =</span> <span class="dv">7</span>)) <span class="sc">+</span> </span>
 <span id="cb28-8"><a href="#cb28-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_segment</span>(</span>
 <span id="cb28-9"><a href="#cb28-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">data =</span> dat1 <span class="sc">|&gt;</span> <span class="fu">mutate</span>(<span class="at">size =</span> size <span class="sc">*</span> <span class="dv">3</span>)</span>
 <span id="cb28-10"><a href="#cb28-10" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span> </span>
@@ -718,11 +765,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 </div>
 <p>Another example that three copies of the same random data set to produce a variation that has additional symmetries:</p>
-<div class="cell" data-layout-align="center" data-fig.dpi="300" data-hash="index_cache/html/compositionality-2_aa036f7d5be0fcd2d30bbb393fb23279">
+<div class="cell" data-layout-align="center" data-fig.dpi="300" data-hash="index_cache/html/compositionality-2_81451a39fb741d1a21abdb9df484cf02">
 <div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>dat <span class="ot">&lt;-</span> <span class="fu">sample_data</span>(<span class="at">n =</span> <span class="dv">2000</span>, <span class="at">seed =</span> <span class="dv">123</span>) <span class="sc">|&gt;</span></span>
 <span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">y1 =</span> y0, <span class="at">size =</span> size <span class="sc">/</span> <span class="dv">2</span>)</span>
 <span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a><span class="fu">styled_plot</span>(<span class="at">palette =</span> <span class="fu">sample_canva</span>(<span class="at">seed =</span> <span class="dv">456</span>)) <span class="sc">+</span> </span>
+<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a><span class="fu">polar_styled_plot</span>(<span class="at">palette =</span> <span class="fu">sample_canva</span>(<span class="at">seed =</span> <span class="dv">456</span>)) <span class="sc">+</span> </span>
 <span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_segment</span>(<span class="at">data =</span> dat) <span class="sc">+</span> </span>
 <span id="cb29-6"><a href="#cb29-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_segment</span>(<span class="at">data =</span> dat <span class="sc">|&gt;</span> <span class="fu">mutate</span>(<span class="at">y1 =</span> y1 <span class="sc">-</span> .<span class="dv">2</span>, <span class="at">y0 =</span> y0 <span class="sc">-</span> .<span class="dv">2</span>)) <span class="sc">+</span></span>
 <span id="cb29-7"><a href="#cb29-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_segment</span>(<span class="at">data =</span> dat <span class="sc">|&gt;</span> <span class="fu">mutate</span>(<span class="at">y1 =</span> y1 <span class="sc">-</span> .<span class="dv">4</span>, <span class="at">y0 =</span> y0 <span class="sc">-</span> .<span class="dv">4</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -735,11 +782,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 </div>
 <p>Finally, here’s a version that uses the <code>linetype</code> argument to <code>geom_segment()</code> to create a “choppier” version of these pieces:</p>
-<div class="cell" data-layout-align="center" data-fig.dpi="300" data-hash="index_cache/html/compositionality-3_1eb982f8449b5f2d31e630ade720f4c8">
+<div class="cell" data-layout-align="center" data-fig.dpi="300" data-hash="index_cache/html/compositionality-3_cad23fe95af4f8f9d83c5c7ffad0e8a2">
 <div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>dat <span class="ot">&lt;-</span> <span class="fu">sample_data</span>(<span class="at">n =</span> <span class="dv">1000</span>, <span class="at">seed =</span> <span class="dv">1</span>) <span class="sc">|&gt;</span></span>
 <span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">y1 =</span> y0, <span class="at">size =</span> size <span class="sc">/</span> <span class="dv">4</span>)</span>
 <span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a><span class="fu">styled_plot</span>(<span class="at">palette =</span> <span class="fu">sample_canva</span>(<span class="at">seed =</span> <span class="dv">2</span>)) <span class="sc">+</span> </span>
+<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a><span class="fu">polar_styled_plot</span>(<span class="at">palette =</span> <span class="fu">sample_canva</span>(<span class="at">seed =</span> <span class="dv">2</span>)) <span class="sc">+</span> </span>
 <span id="cb30-5"><a href="#cb30-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_segment</span>(<span class="at">data =</span> dat, <span class="at">linetype =</span> <span class="st">"331311"</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
@@ -747,6 +794,22 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p><img src="index_files/figure-html/compositionality-3-1.png" class="img-fluid figure-img" width="576"></p>
 </figure>
 </div>
+</div>
+</div>
+<div id="exercise-grammars" class="callout-important callout callout-style-default no-icon callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Exercises
+</div>
+</div>
+<div id="exercise-grammars" class="callout-body-container callout-body">
+<ol type="1">
+<li><p>In the materials folder there is a file called <code>polar-styled-plots.R</code> that contains a copy of the <code>sample_canva()</code>, <code>sample_data()</code> and <code>polar_styled_plot()</code> functions. Without modifying any of these three functions, explore how much flexibility you have to make different pieces in which (1) data are generated with <code>sample_data()</code>, (2) the plot is initialised by calling <code>polar_styled_plot()</code>, and (3) the piece is created by adding ggplot2 geoms. Data manipulation with dplyr is allowed!</p></li>
+<li><p>In the examples above and the previous exercise you saw that the <code>polar_styled_plot()</code> function plays the role of defining an overarching “style” for possible art pieces, but it doesn’t completely constrain artistic freedom. Your task in this exercise is to try to write a <code>my_styled_plot()</code> that does something similar… but creates a different style that you can explore</p></li>
+</ol>
 </div>
 </div>
 
