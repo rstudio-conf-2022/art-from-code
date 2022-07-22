@@ -22,24 +22,9 @@ This workshop provides a hands-on introduction to generative art in R. You’ll 
 
 The assumed background is that you’re reasonably comfortable using R and RStudio, and have experience with tidyverse. There are places where C++, git/github, and blogdown are used, but these aren’t major parts of the workshop.
 
-## Learning objectives
+## Course material
 
-[ADD AN ITEMIZED LIST OF LEARNING OBJECTIVES.]
-
-## Is this course for me?
-
-- Do you want to learn more about creating art in R? 
-- Do you want to be able to make connections between art and data science skills? 
-- Are you fairly comfortable with R and tidyverse but keen to learn more?
-
-If your answer is yes to all three, this workshop might be for you!
-
-## Prework
-
-\[ADD INFORMATION YOU WANT LEARNERS TO HAVE / STEPS THEY WANT THEM TO
-COMPLETE PRIOR TO THE WORKSHOP. THIS COULD BE A LINK TO A THREAD ON
-RSTUDIO COMMUNITY, PACKAGE INSTALL INSTRUCTIONS, HOW TO GET AN
-RSTUDIO.CLOUD ACCOUNT, ETC.\]
+Everything you need for the workshop is (or will be!) posted online at [art-from-code.netlify.app](https://art-from-code.netlify.app). It is currently missing some details, but please do not fret -- I'm finishing the preparation on the flight from Sydney to DC, so expect an update when I arrive in the US, which will include additional detail about installing dependencies and downloading materials! :grinning:
 
 ## Schedule
 
