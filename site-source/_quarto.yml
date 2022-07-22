@@ -37,7 +37,8 @@ website:
             text: "Pixel filters"
           - href: day-2/session-4/index.html
             text: "Wrap up"
-
+      - text: Slides
+        href: slides/index.html
 
 format:
   html:
