@@ -28,13 +28,43 @@ knitr::knit_hooks$set(output = function(x, options) {
 })
 ```
 
+## WiFi
+	
+- Username: conf22
+- Password: together!
 
-## Housekeeping
+## Facilities
+	
+- Gender neutral bathroom: 
+    - river side of Potomac Ballroom
+- Meditation room: 
+    - Potomac Dressing Room. (8am - 5pm, Mon - Thurs)
+- Lactation room: 
+    - National Harbor 9. (8am - 5pm, Mon - Thurs) 
+    - The hotel also has a dedicated room behind reception
+
+## Code of conduct
+
+- The Code of Conduct and COVID policies can be found at [www.rstudio.com/conference/2022/2022-conf-code-of-conduct](https://www.rstudio.com/conference/2022/2022-conf-code-of-conduct/). Please review them carefully
+- You can report Code of Conduct violations in person, by email, or by phone. Please see the policy linked above for contact information
+
+## Mask policy
+
+- RStudio requires that you wear a mask that fully covers your mouth and nose at all times in all public spaces 
+- We strongly recommend that you use a correctly fitted N95, KN95, or similar particulate filtering mask
+- We will have a limited supply available upon request
+
+## Photography
+
+- Red lanyard = Does not wish to be photographed 
+- Please note lanyard colors before taking a photo
+- Respect their choices
+
+## Workshop housekeeping
 
 - Written tutorial, data sets, exercises
     - Website: [art-from-code.netlify.app](https://art-from-code.netlify.app)
     - GitHub: [github.com/rstudio-conf-2022/art-from-code](https://github.com/rstudio-conf-2022/art-from-code)
 - Instructors: 
     - Danielle Navarro
-
 
