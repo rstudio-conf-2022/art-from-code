@@ -654,7 +654,27 @@
 <span id="cb4-10"><a href="#cb4-10"></a>)</span>
 <span id="cb4-11"><a href="#cb4-11"></a>dat</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-
+</section>
+<section id="random-data-1" class="slide level2">
+<h2>Random data</h2>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 50 × 6
+       x0     y0    x1      y1 shade  size
+    &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+ 1 0.266  0.478  0.327  0.523  0.268 0.762
+ 2 0.372  0.861  0.313  0.884  0.219 0.933
+ 3 0.573  0.438  0.481  0.370  0.517 0.471
+ 4 0.908  0.245  1.11   0.226  0.269 0.604
+ 5 0.202  0.0707 0.255  0.0709 0.181 0.485
+ 6 0.898  0.0995 0.784 -0.0282 0.519 0.109
+ 7 0.945  0.316  0.796  0.328  0.563 0.248
+ 8 0.661  0.519  0.652  0.349  0.129 0.499
+ 9 0.629  0.662  0.799  0.573  0.256 0.373
+10 0.0618 0.407  0.101  0.292  0.718 0.935
+# … with 40 more rows</code></pre>
+</div>
+</div>
 </section>
 <section id="transformed-to-art" class="slide level2">
 <h2>… Transformed to art</h2>
@@ -760,24 +780,290 @@
 </section>
 <section id="your-turn-1" class="slide level2">
 <h2>Your turn!</h2>
-</section><section random-data-output="random-data-output" class="slide level2 output-location-slide"><h2>Random data</h2><div class="cell output-location-slide">
-<div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 50 × 6
-       x0     y0    x1      y1 shade  size
-    &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
- 1 0.266  0.478  0.327  0.523  0.268 0.762
- 2 0.372  0.861  0.313  0.884  0.219 0.933
- 3 0.573  0.438  0.481  0.370  0.517 0.471
- 4 0.908  0.245  1.11   0.226  0.269 0.604
- 5 0.202  0.0707 0.255  0.0709 0.181 0.485
- 6 0.898  0.0995 0.784 -0.0282 0.519 0.109
- 7 0.945  0.316  0.796  0.328  0.563 0.248
- 8 0.661  0.519  0.652  0.349  0.129 0.499
- 9 0.629  0.662  0.799  0.573  0.256 0.373
-10 0.0618 0.407  0.101  0.292  0.718 0.935
-# … with 40 more rows</code></pre>
+<p>TBA</p>
+</section>
+<section id="palettes" class="slide level2">
+<h2>Palettes</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a>pal <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"#cdb4db"</span>, <span class="st">"#ffc8dd"</span>, <span class="st">"#ffafcc"</span>, <span class="st">"#bde0fe"</span>, <span class="st">"#a2d2ff"</span>)</span>
+<span id="cb10-2"><a href="#cb10-2"></a><span class="fu">show_col</span>(pal)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+
 </div>
-</div></section></section>
+<img data-src="index_files/figure-revealjs/define-pal-1.png" width="960" class="r-stretch"></section>
+<section id="palettes-1" class="slide level2">
+<h2>Palettes</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a>palette_fn <span class="ot">&lt;-</span> <span class="fu">colorRampPalette</span>(pal)</span>
+<span id="cb11-2"><a href="#cb11-2"></a><span class="fu">image</span>(</span>
+<span id="cb11-3"><a href="#cb11-3"></a>  <span class="at">x =</span> <span class="fu">matrix</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">100</span>, <span class="at">ncol =</span> <span class="dv">1</span>), </span>
+<span id="cb11-4"><a href="#cb11-4"></a>  <span class="at">col =</span> <span class="fu">palette_fn</span>(<span class="dv">100</span>),</span>
+<span id="cb11-5"><a href="#cb11-5"></a>  <span class="at">useRaster =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb11-6"><a href="#cb11-6"></a>  <span class="at">axes =</span> <span class="cn">FALSE</span></span>
+<span id="cb11-7"><a href="#cb11-7"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+
+</div>
+<img data-src="index_files/figure-revealjs/continuous-palettes-1.png" width="960" class="r-stretch"></section>
+<section id="sampling-palettes" class="slide level2">
+<h2>Sampling palettes</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1"></a>canva_palettes[[<span class="dv">101</span>]]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "#4abdac" "#fc4a1a" "#f7b733" "#dfdce3"</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1"></a><span class="fu">show_col</span>(canva_palettes[[<span class="dv">101</span>]])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+
+</div>
+<img data-src="index_files/figure-revealjs/show-canva-palette-1.png" width="960" class="r-stretch"></section>
+<section id="sampling-palettes-1" class="slide level2">
+<h2>Sampling palettes</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1"></a>sample_canva <span class="ot">&lt;-</span> <span class="cf">function</span>(<span class="at">seed =</span> <span class="cn">NULL</span>) {</span>
+<span id="cb15-2"><a href="#cb15-2"></a>  <span class="cf">if</span>(<span class="sc">!</span><span class="fu">is.null</span>(seed)) <span class="fu">set.seed</span>(seed)</span>
+<span id="cb15-3"><a href="#cb15-3"></a>  <span class="fu">sample</span>(ggthemes<span class="sc">::</span>canva_palettes, <span class="dv">1</span>)[[<span class="dv">1</span>]]</span>
+<span id="cb15-4"><a href="#cb15-4"></a>}</span>
+<span id="cb15-5"><a href="#cb15-5"></a></span>
+<span id="cb15-6"><a href="#cb15-6"></a><span class="fu">sample_canva</span>(<span class="at">seed =</span> <span class="dv">5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "#a5c3cf" "#f3d3b8" "#e59d5c" "#a99f3c"</code></pre>
+</div>
+</div>
+</section>
+<section id="sampling-palettes-2" class="slide level2">
+<h2>Sampling palettes</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1"></a><span class="fu">polar_art</span>(</span>
+<span id="cb17-2"><a href="#cb17-2"></a>  <span class="at">seed =</span> <span class="dv">2</span>, </span>
+<span id="cb17-3"><a href="#cb17-3"></a>  <span class="at">n =</span> <span class="dv">100</span>, </span>
+<span id="cb17-4"><a href="#cb17-4"></a>  <span class="at">palette =</span> <span class="fu">sample_canva</span>(<span class="at">seed =</span> <span class="dv">5</span>)</span>
+<span id="cb17-5"><a href="#cb17-5"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+
+</div>
+<img data-src="index_files/figure-revealjs/sample-canva-example-2-1.png" width="576" class="r-stretch"></section>
+<section id="your-turn-2" class="slide level2">
+<h2>Your turn!</h2>
+<p>TBA</p>
+</section>
+<section id="composition" class="slide level2">
+<h2>Composition</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1"></a>sample_data <span class="ot">&lt;-</span> <span class="cf">function</span>(<span class="at">seed =</span> <span class="cn">NULL</span>, <span class="at">n =</span> <span class="dv">100</span>){</span>
+<span id="cb18-2"><a href="#cb18-2"></a>  <span class="cf">if</span>(<span class="sc">!</span><span class="fu">is.null</span>(seed)) <span class="fu">set.seed</span>(seed)</span>
+<span id="cb18-3"><a href="#cb18-3"></a>  dat <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
+<span id="cb18-4"><a href="#cb18-4"></a>    <span class="at">x0 =</span> <span class="fu">runif</span>(n),</span>
+<span id="cb18-5"><a href="#cb18-5"></a>    <span class="at">y0 =</span> <span class="fu">runif</span>(n),</span>
+<span id="cb18-6"><a href="#cb18-6"></a>    <span class="at">x1 =</span> x0 <span class="sc">+</span> <span class="fu">runif</span>(n, <span class="at">min =</span> <span class="sc">-</span>.<span class="dv">2</span>, <span class="at">max =</span> .<span class="dv">2</span>),</span>
+<span id="cb18-7"><a href="#cb18-7"></a>    <span class="at">y1 =</span> y0 <span class="sc">+</span> <span class="fu">runif</span>(n, <span class="at">min =</span> <span class="sc">-</span>.<span class="dv">2</span>, <span class="at">max =</span> .<span class="dv">2</span>),</span>
+<span id="cb18-8"><a href="#cb18-8"></a>    <span class="at">shade =</span> <span class="fu">runif</span>(n), </span>
+<span id="cb18-9"><a href="#cb18-9"></a>    <span class="at">size =</span> <span class="fu">runif</span>(n),</span>
+<span id="cb18-10"><a href="#cb18-10"></a>    <span class="at">shape =</span> <span class="fu">factor</span>(<span class="fu">sample</span>(<span class="dv">0</span><span class="sc">:</span><span class="dv">22</span>, <span class="at">size =</span> n, <span class="at">replace =</span> <span class="cn">TRUE</span>))</span>
+<span id="cb18-11"><a href="#cb18-11"></a>  )</span>
+<span id="cb18-12"><a href="#cb18-12"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="composition-1" class="slide level2">
+<h2>Composition</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1"></a>polar_styled_plot <span class="ot">&lt;-</span> <span class="cf">function</span>(<span class="at">data =</span> <span class="cn">NULL</span>, palette) {</span>
+<span id="cb19-2"><a href="#cb19-2"></a>  <span class="fu">ggplot</span>(</span>
+<span id="cb19-3"><a href="#cb19-3"></a>    <span class="at">data =</span> data,</span>
+<span id="cb19-4"><a href="#cb19-4"></a>    <span class="at">mapping =</span> <span class="fu">aes</span>(</span>
+<span id="cb19-5"><a href="#cb19-5"></a>      <span class="at">x =</span> x0,</span>
+<span id="cb19-6"><a href="#cb19-6"></a>      <span class="at">y =</span> y0,</span>
+<span id="cb19-7"><a href="#cb19-7"></a>      <span class="at">xend =</span> x1,</span>
+<span id="cb19-8"><a href="#cb19-8"></a>      <span class="at">yend =</span> y1,</span>
+<span id="cb19-9"><a href="#cb19-9"></a>      <span class="at">colour =</span> shade,</span>
+<span id="cb19-10"><a href="#cb19-10"></a>      <span class="at">size =</span> size</span>
+<span id="cb19-11"><a href="#cb19-11"></a>    )) <span class="sc">+</span> </span>
+<span id="cb19-12"><a href="#cb19-12"></a>    <span class="fu">coord_polar</span>(<span class="at">clip =</span> <span class="st">"off"</span>) <span class="sc">+</span></span>
+<span id="cb19-13"><a href="#cb19-13"></a>    <span class="fu">scale_y_continuous</span>(</span>
+<span id="cb19-14"><a href="#cb19-14"></a>      <span class="at">expand =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">0</span>),</span>
+<span id="cb19-15"><a href="#cb19-15"></a>      <span class="at">limits =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1</span>), </span>
+<span id="cb19-16"><a href="#cb19-16"></a>      <span class="at">oob =</span> scales<span class="sc">::</span>oob_keep</span>
+<span id="cb19-17"><a href="#cb19-17"></a>    ) <span class="sc">+</span></span>
+<span id="cb19-18"><a href="#cb19-18"></a>    <span class="fu">scale_x_continuous</span>(</span>
+<span id="cb19-19"><a href="#cb19-19"></a>      <span class="at">expand =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">0</span>), </span>
+<span id="cb19-20"><a href="#cb19-20"></a>      <span class="at">limits =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1</span>), </span>
+<span id="cb19-21"><a href="#cb19-21"></a>      <span class="at">oob =</span> scales<span class="sc">::</span>oob_keep</span>
+<span id="cb19-22"><a href="#cb19-22"></a>    ) <span class="sc">+</span> </span>
+<span id="cb19-23"><a href="#cb19-23"></a>    <span class="fu">scale_colour_gradientn</span>(<span class="at">colours =</span> palette) <span class="sc">+</span> </span>
+<span id="cb19-24"><a href="#cb19-24"></a>    <span class="fu">scale_size</span>(<span class="at">range =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">10</span>)) <span class="sc">+</span> </span>
+<span id="cb19-25"><a href="#cb19-25"></a>    <span class="fu">theme_void</span>() <span class="sc">+</span> </span>
+<span id="cb19-26"><a href="#cb19-26"></a>    <span class="fu">guides</span>(</span>
+<span id="cb19-27"><a href="#cb19-27"></a>      <span class="at">colour =</span> <span class="fu">guide_none</span>(),</span>
+<span id="cb19-28"><a href="#cb19-28"></a>      <span class="at">size =</span> <span class="fu">guide_none</span>(),</span>
+<span id="cb19-29"><a href="#cb19-29"></a>      <span class="at">fill =</span> <span class="fu">guide_none</span>(),</span>
+<span id="cb19-30"><a href="#cb19-30"></a>      <span class="at">shape =</span> <span class="fu">guide_none</span>()</span>
+<span id="cb19-31"><a href="#cb19-31"></a>    )</span>
+<span id="cb19-32"><a href="#cb19-32"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="composition-2" class="slide level2">
+<h2>Composition</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1"></a><span class="fu">polar_styled_plot</span>(</span>
+<span id="cb20-2"><a href="#cb20-2"></a>  <span class="at">data =</span> <span class="fu">sample_data</span>(<span class="at">n =</span> <span class="dv">100</span>, <span class="at">seed =</span> <span class="dv">1</span>), </span>
+<span id="cb20-3"><a href="#cb20-3"></a>  <span class="at">palette =</span> <span class="fu">sample_canva</span>(<span class="at">seed =</span> <span class="dv">1</span>)</span>
+<span id="cb20-4"><a href="#cb20-4"></a>) <span class="sc">+</span> <span class="fu">geom_segment</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+
+</div>
+<img data-src="index_files/figure-revealjs/showing-compositionality-1.png" width="576" class="r-stretch"></section>
+<section id="composition-3" class="slide level2">
+<h2>Composition</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb21" data-code-line-numbers="2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1"></a><span class="fu">polar_styled_plot</span>(</span>
+<span id="cb21-2"><a href="#cb21-2"></a>  <span class="at">data =</span> <span class="fu">sample_data</span>(<span class="at">n =</span> <span class="dv">200</span>, <span class="at">seed =</span> <span class="dv">1</span>), </span>
+<span id="cb21-3"><a href="#cb21-3"></a>  <span class="at">palette =</span> <span class="fu">sample_canva</span>(<span class="at">seed =</span> <span class="dv">1</span>)</span>
+<span id="cb21-4"><a href="#cb21-4"></a>) <span class="sc">+</span> <span class="fu">geom_segment</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+
+</div>
+<img data-src="index_files/figure-revealjs/showing-compositionality-2-1.png" width="576" class="r-stretch"></section>
+<section id="composition-4" class="slide level2">
+<h2>Composition</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb22" data-code-line-numbers="4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1"></a><span class="fu">polar_styled_plot</span>(</span>
+<span id="cb22-2"><a href="#cb22-2"></a>  <span class="at">data =</span> <span class="fu">sample_data</span>(<span class="at">n =</span> <span class="dv">200</span>, <span class="at">seed =</span> <span class="dv">1</span>), </span>
+<span id="cb22-3"><a href="#cb22-3"></a>  <span class="at">palette =</span> <span class="fu">sample_canva</span>(<span class="at">seed =</span> <span class="dv">1</span>)</span>
+<span id="cb22-4"><a href="#cb22-4"></a>) <span class="sc">+</span> <span class="fu">geom_curve</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+
+</div>
+<img data-src="index_files/figure-revealjs/showing-compositionality-3-1.png" width="576" class="r-stretch"></section>
+<section id="composition-5" class="slide level2">
+<h2>Composition</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb23" data-code-line-numbers="4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1"></a><span class="fu">polar_styled_plot</span>(</span>
+<span id="cb23-2"><a href="#cb23-2"></a>  <span class="at">data =</span> <span class="fu">sample_data</span>(<span class="at">n =</span> <span class="dv">200</span>, <span class="at">seed =</span> <span class="dv">1</span>), </span>
+<span id="cb23-3"><a href="#cb23-3"></a>  <span class="at">palette =</span> <span class="fu">sample_canva</span>(<span class="at">seed =</span> <span class="dv">1</span>)</span>
+<span id="cb23-4"><a href="#cb23-4"></a>) <span class="sc">+</span> <span class="fu">geom_path</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+
+</div>
+<img data-src="index_files/figure-revealjs/showing-compositionality-4-1.png" width="576" class="r-stretch"></section>
+<section id="using-dplyr" class="slide level2">
+<h2>Using dplyr</h2>
+<div class="cell columns column-output-location">
+<div class="column">
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1"></a>dat1 <span class="ot">&lt;-</span> <span class="fu">sample_data</span>(</span>
+<span id="cb24-2"><a href="#cb24-2"></a>  <span class="at">n =</span> <span class="dv">2000</span>, </span>
+<span id="cb24-3"><a href="#cb24-3"></a>  <span class="at">seed =</span> <span class="dv">123</span></span>
+<span id="cb24-4"><a href="#cb24-4"></a>)</span>
+<span id="cb24-5"><a href="#cb24-5"></a></span>
+<span id="cb24-6"><a href="#cb24-6"></a>dat2 <span class="ot">&lt;-</span> <span class="fu">sample_data</span>(</span>
+<span id="cb24-7"><a href="#cb24-7"></a>  <span class="at">n =</span> <span class="dv">100</span>, </span>
+<span id="cb24-8"><a href="#cb24-8"></a>  <span class="at">seed =</span> <span class="dv">456</span></span>
+<span id="cb24-9"><a href="#cb24-9"></a>) <span class="sc">|&gt;</span>  </span>
+<span id="cb24-10"><a href="#cb24-10"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb24-11"><a href="#cb24-11"></a>    <span class="at">y0 =</span> .<span class="dv">3</span> <span class="sc">+</span> y0 <span class="sc">*</span> .<span class="dv">6</span>, </span>
+<span id="cb24-12"><a href="#cb24-12"></a>    <span class="at">y1 =</span> .<span class="dv">3</span></span>
+<span id="cb24-13"><a href="#cb24-13"></a>  )</span>
+<span id="cb24-14"><a href="#cb24-14"></a></span>
+<span id="cb24-15"><a href="#cb24-15"></a><span class="fu">polar_styled_plot</span>(</span>
+<span id="cb24-16"><a href="#cb24-16"></a>  <span class="at">palette =</span> </span>
+<span id="cb24-17"><a href="#cb24-17"></a>    <span class="fu">sample_canva</span>(<span class="at">seed =</span> <span class="dv">7</span>)</span>
+<span id="cb24-18"><a href="#cb24-18"></a>) <span class="sc">+</span> </span>
+<span id="cb24-19"><a href="#cb24-19"></a>  <span class="fu">geom_segment</span>(</span>
+<span id="cb24-20"><a href="#cb24-20"></a>    <span class="at">data =</span> dat1 <span class="sc">|&gt;</span> </span>
+<span id="cb24-21"><a href="#cb24-21"></a>      <span class="fu">mutate</span>(<span class="at">size =</span> size <span class="sc">*</span> <span class="dv">3</span>)</span>
+<span id="cb24-22"><a href="#cb24-22"></a>  ) <span class="sc">+</span> </span>
+<span id="cb24-23"><a href="#cb24-23"></a>  <span class="fu">geom_segment</span>(</span>
+<span id="cb24-24"><a href="#cb24-24"></a>    <span class="at">data =</span> dat2 <span class="sc">|&gt;</span> </span>
+<span id="cb24-25"><a href="#cb24-25"></a>      <span class="fu">mutate</span>(<span class="at">size =</span> size <span class="sc">/</span> <span class="dv">5</span>), </span>
+<span id="cb24-26"><a href="#cb24-26"></a>    <span class="at">lineend =</span> <span class="st">"round"</span>, </span>
+<span id="cb24-27"><a href="#cb24-27"></a>    <span class="at">colour =</span> <span class="st">"white"</span></span>
+<span id="cb24-28"><a href="#cb24-28"></a>  ) <span class="sc">+</span></span>
+<span id="cb24-29"><a href="#cb24-29"></a>  <span class="fu">geom_segment</span>(</span>
+<span id="cb24-30"><a href="#cb24-30"></a>    <span class="at">data =</span> dat2 <span class="sc">|&gt;</span></span>
+<span id="cb24-31"><a href="#cb24-31"></a>      <span class="fu">mutate</span>(<span class="at">size =</span> size <span class="sc">/</span> <span class="dv">40</span>),</span>
+<span id="cb24-32"><a href="#cb24-32"></a>    <span class="at">lineend =</span> <span class="st">"round"</span>, </span>
+<span id="cb24-33"><a href="#cb24-33"></a>    <span class="at">colour =</span> <span class="st">"#222222"</span></span>
+<span id="cb24-34"><a href="#cb24-34"></a>  ) <span class="sc">+</span></span>
+<span id="cb24-35"><a href="#cb24-35"></a>  <span class="fu">geom_point</span>(</span>
+<span id="cb24-36"><a href="#cb24-36"></a>    <span class="at">data =</span> dat2 <span class="sc">|&gt;</span></span>
+<span id="cb24-37"><a href="#cb24-37"></a>      <span class="fu">mutate</span>(<span class="at">size =</span> size <span class="sc">*</span> <span class="dv">2</span>),</span>
+<span id="cb24-38"><a href="#cb24-38"></a>    <span class="at">colour =</span> <span class="st">"#222222"</span></span>
+<span id="cb24-39"><a href="#cb24-39"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div><div class="column">
+<div class="cell-output-display">
+<p><img data-src="index_files/figure-revealjs/composing-with-dplyr-1-1.png" width="576"></p>
+</div>
+</div>
+</div>
+</section>
+<section id="using-dplyr-1" class="slide level2">
+<h2>Using dplyr</h2>
+<div class="cell columns column-output-location">
+<div class="column">
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1"></a>dat <span class="ot">&lt;-</span> <span class="fu">sample_data</span>(</span>
+<span id="cb25-2"><a href="#cb25-2"></a>  <span class="at">n =</span> <span class="dv">2000</span>, </span>
+<span id="cb25-3"><a href="#cb25-3"></a>  <span class="at">seed =</span> <span class="dv">123</span></span>
+<span id="cb25-4"><a href="#cb25-4"></a>) <span class="sc">|&gt;</span></span>
+<span id="cb25-5"><a href="#cb25-5"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb25-6"><a href="#cb25-6"></a>    <span class="at">y1 =</span> y0, </span>
+<span id="cb25-7"><a href="#cb25-7"></a>    <span class="at">size =</span> size <span class="sc">/</span> <span class="dv">2</span></span>
+<span id="cb25-8"><a href="#cb25-8"></a>  )</span>
+<span id="cb25-9"><a href="#cb25-9"></a></span>
+<span id="cb25-10"><a href="#cb25-10"></a><span class="fu">polar_styled_plot</span>(</span>
+<span id="cb25-11"><a href="#cb25-11"></a>  <span class="at">palette =</span> </span>
+<span id="cb25-12"><a href="#cb25-12"></a>    <span class="fu">sample_canva</span>(<span class="at">seed =</span> <span class="dv">456</span>)</span>
+<span id="cb25-13"><a href="#cb25-13"></a>) <span class="sc">+</span> </span>
+<span id="cb25-14"><a href="#cb25-14"></a>  </span>
+<span id="cb25-15"><a href="#cb25-15"></a>  <span class="co"># original data</span></span>
+<span id="cb25-16"><a href="#cb25-16"></a>  <span class="fu">geom_segment</span>(<span class="at">data =</span> dat) <span class="sc">+</span> </span>
+<span id="cb25-17"><a href="#cb25-17"></a>  </span>
+<span id="cb25-18"><a href="#cb25-18"></a>  <span class="co"># displaced copy</span></span>
+<span id="cb25-19"><a href="#cb25-19"></a>  <span class="fu">geom_segment</span>(</span>
+<span id="cb25-20"><a href="#cb25-20"></a>    <span class="at">data =</span> dat <span class="sc">|&gt;</span> </span>
+<span id="cb25-21"><a href="#cb25-21"></a>      <span class="fu">mutate</span>(</span>
+<span id="cb25-22"><a href="#cb25-22"></a>        <span class="at">y1 =</span> y1 <span class="sc">-</span> .<span class="dv">2</span>, </span>
+<span id="cb25-23"><a href="#cb25-23"></a>        <span class="at">y0 =</span> y0 <span class="sc">-</span> .<span class="dv">2</span></span>
+<span id="cb25-24"><a href="#cb25-24"></a>      )</span>
+<span id="cb25-25"><a href="#cb25-25"></a>    ) <span class="sc">+</span></span>
+<span id="cb25-26"><a href="#cb25-26"></a>  </span>
+<span id="cb25-27"><a href="#cb25-27"></a>  <span class="co"># another displaced copy</span></span>
+<span id="cb25-28"><a href="#cb25-28"></a>  <span class="fu">geom_segment</span>(</span>
+<span id="cb25-29"><a href="#cb25-29"></a>    <span class="at">data =</span> dat <span class="sc">|&gt;</span> </span>
+<span id="cb25-30"><a href="#cb25-30"></a>      <span class="fu">mutate</span>(</span>
+<span id="cb25-31"><a href="#cb25-31"></a>        <span class="at">y1 =</span> y1 <span class="sc">-</span> .<span class="dv">4</span>, </span>
+<span id="cb25-32"><a href="#cb25-32"></a>        <span class="at">y0 =</span> y0 <span class="sc">-</span> .<span class="dv">4</span></span>
+<span id="cb25-33"><a href="#cb25-33"></a>      )</span>
+<span id="cb25-34"><a href="#cb25-34"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div><div class="column">
+<div class="cell-output-display">
+<p><img data-src="index_files/figure-revealjs/composing-with-dplyr-2-1.png" width="576"></p>
+</div>
+</div>
+</div>
+</section>
+<section id="using-dplyr-2" class="slide level2">
+<h2>Using dplyr</h2>
+<div class="cell columns column-output-location">
+<div class="column">
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1"></a>dat <span class="ot">&lt;-</span> <span class="fu">sample_data</span>(</span>
+<span id="cb26-2"><a href="#cb26-2"></a>  <span class="at">n =</span> <span class="dv">1000</span>, </span>
+<span id="cb26-3"><a href="#cb26-3"></a>  <span class="at">seed =</span> <span class="dv">1</span></span>
+<span id="cb26-4"><a href="#cb26-4"></a>) <span class="sc">|&gt;</span></span>
+<span id="cb26-5"><a href="#cb26-5"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb26-6"><a href="#cb26-6"></a>    <span class="at">y1 =</span> y0, </span>
+<span id="cb26-7"><a href="#cb26-7"></a>    <span class="at">size =</span> size <span class="sc">/</span> <span class="dv">4</span></span>
+<span id="cb26-8"><a href="#cb26-8"></a>  )</span>
+<span id="cb26-9"><a href="#cb26-9"></a></span>
+<span id="cb26-10"><a href="#cb26-10"></a><span class="fu">polar_styled_plot</span>(</span>
+<span id="cb26-11"><a href="#cb26-11"></a>  <span class="at">palette =</span> </span>
+<span id="cb26-12"><a href="#cb26-12"></a>    <span class="fu">sample_canva</span>(<span class="at">seed =</span> <span class="dv">2</span>)</span>
+<span id="cb26-13"><a href="#cb26-13"></a>  ) <span class="sc">+</span> </span>
+<span id="cb26-14"><a href="#cb26-14"></a>  <span class="fu">geom_segment</span>(</span>
+<span id="cb26-15"><a href="#cb26-15"></a>    <span class="at">data =</span> dat, </span>
+<span id="cb26-16"><a href="#cb26-16"></a>    <span class="at">linetype =</span> <span class="st">"331311"</span></span>
+<span id="cb26-17"><a href="#cb26-17"></a>  ) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div><div class="column">
+<div class="cell-output-display">
+<p><img data-src="index_files/figure-revealjs/composing-with-dplyr-3-1.png" width="576"></p>
+</div>
+</div>
+</div>
+</section>
+<section id="your-turn-3" class="slide level2">
+<h2>Your turn!</h2>
+<p>TBA</p>
+</section></section>
 <section id="spatial-noise-trickery" class="title-slide slide level1 center">
 <h1>Spatial Noise Trickery</h1>
 <p>Session 2: Multidimensional noise generators. Flow fields, fractals, and more using the ambient package</p>

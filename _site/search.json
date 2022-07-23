@@ -599,6 +599,139 @@
     "href": "slides/index.html#your-turn-1",
     "title": "ART FROM CODE",
     "section": "Your turn!",
-    "text": "Your turn!"
+    "text": "Your turn!\nTBA"
+  },
+  {
+    "objectID": "slides/index.html#random-data-1",
+    "href": "slides/index.html#random-data-1",
+    "title": "ART FROM CODE",
+    "section": "Random data",
+    "text": "Random data\n\n\n# A tibble: 50 × 6\n       x0     y0    x1      y1 shade  size\n    <dbl>  <dbl> <dbl>   <dbl> <dbl> <dbl>\n 1 0.266  0.478  0.327  0.523  0.268 0.762\n 2 0.372  0.861  0.313  0.884  0.219 0.933\n 3 0.573  0.438  0.481  0.370  0.517 0.471\n 4 0.908  0.245  1.11   0.226  0.269 0.604\n 5 0.202  0.0707 0.255  0.0709 0.181 0.485\n 6 0.898  0.0995 0.784 -0.0282 0.519 0.109\n 7 0.945  0.316  0.796  0.328  0.563 0.248\n 8 0.661  0.519  0.652  0.349  0.129 0.499\n 9 0.629  0.662  0.799  0.573  0.256 0.373\n10 0.0618 0.407  0.101  0.292  0.718 0.935\n# … with 40 more rows"
+  },
+  {
+    "objectID": "slides/index.html#palettes",
+    "href": "slides/index.html#palettes",
+    "title": "ART FROM CODE",
+    "section": "Palettes",
+    "text": "Palettes\n\npal <- c(\"#cdb4db\", \"#ffc8dd\", \"#ffafcc\", \"#bde0fe\", \"#a2d2ff\")\nshow_col(pal)"
+  },
+  {
+    "objectID": "slides/index.html#palettes-1",
+    "href": "slides/index.html#palettes-1",
+    "title": "ART FROM CODE",
+    "section": "Palettes",
+    "text": "Palettes\n\npalette_fn <- colorRampPalette(pal)\nimage(\n  x = matrix(1:100, ncol = 1), \n  col = palette_fn(100),\n  useRaster = TRUE,\n  axes = FALSE\n)"
+  },
+  {
+    "objectID": "slides/index.html#canva-palettes",
+    "href": "slides/index.html#canva-palettes",
+    "title": "ART FROM CODE",
+    "section": "Canva palettes",
+    "text": "Canva palettes\n\n\ncanva_palettes[[101]]\n\n\n[1] \"#4abdac\" \"#fc4a1a\" \"#f7b733\" \"#dfdce3\"\n\nshow_col(canva_palettes[[101]])"
+  },
+  {
+    "objectID": "slides/index.html#sampling-palettes",
+    "href": "slides/index.html#sampling-palettes",
+    "title": "ART FROM CODE",
+    "section": "Sampling palettes",
+    "text": "Sampling palettes\n\ncanva_palettes[[101]]\n\n[1] \"#4abdac\" \"#fc4a1a\" \"#f7b733\" \"#dfdce3\"\n\nshow_col(canva_palettes[[101]])"
+  },
+  {
+    "objectID": "slides/index.html#sampling-palettes-1",
+    "href": "slides/index.html#sampling-palettes-1",
+    "title": "ART FROM CODE",
+    "section": "Sampling palettes",
+    "text": "Sampling palettes\n\nsample_canva <- function(seed = NULL) {\n  if(!is.null(seed)) set.seed(seed)\n  sample(ggthemes::canva_palettes, 1)[[1]]\n}\n\nsample_canva(seed = 5)\n\n[1] \"#a5c3cf\" \"#f3d3b8\" \"#e59d5c\" \"#a99f3c\""
+  },
+  {
+    "objectID": "slides/index.html#sampling-palettes-2",
+    "href": "slides/index.html#sampling-palettes-2",
+    "title": "ART FROM CODE",
+    "section": "Sampling palettes",
+    "text": "Sampling palettes\n\npolar_art(\n  seed = 2, \n  n = 100, \n  palette = sample_canva(seed = 5)\n)"
+  },
+  {
+    "objectID": "slides/index.html#sampling-palettes-3",
+    "href": "slides/index.html#sampling-palettes-3",
+    "title": "ART FROM CODE",
+    "section": "Sampling palettes",
+    "text": "Sampling palettes\n\n\npolar_art(\n  seed = 2, \n  n = 100, \n  palette = sample_canva(seed = 5)\n)"
+  },
+  {
+    "objectID": "slides/index.html#your-turn-2",
+    "href": "slides/index.html#your-turn-2",
+    "title": "ART FROM CODE",
+    "section": "Your turn!",
+    "text": "Your turn!\nTBA"
+  },
+  {
+    "objectID": "slides/index.html#composition",
+    "href": "slides/index.html#composition",
+    "title": "ART FROM CODE",
+    "section": "Composition",
+    "text": "Composition\n\nsample_data <- function(seed = NULL, n = 100){\n  if(!is.null(seed)) set.seed(seed)\n  dat <- tibble(\n    x0 = runif(n),\n    y0 = runif(n),\n    x1 = x0 + runif(n, min = -.2, max = .2),\n    y1 = y0 + runif(n, min = -.2, max = .2),\n    shade = runif(n), \n    size = runif(n),\n    shape = factor(sample(0:22, size = n, replace = TRUE))\n  )\n}"
+  },
+  {
+    "objectID": "slides/index.html#composition-1",
+    "href": "slides/index.html#composition-1",
+    "title": "ART FROM CODE",
+    "section": "Composition",
+    "text": "Composition\n\npolar_styled_plot <- function(data = NULL, palette) {\n  ggplot(\n    data = data,\n    mapping = aes(\n      x = x0,\n      y = y0,\n      xend = x1,\n      yend = y1,\n      colour = shade,\n      size = size\n    )) + \n    coord_polar(clip = \"off\") +\n    scale_y_continuous(\n      expand = c(0, 0),\n      limits = c(0, 1), \n      oob = scales::oob_keep\n    ) +\n    scale_x_continuous(\n      expand = c(0, 0), \n      limits = c(0, 1), \n      oob = scales::oob_keep\n    ) + \n    scale_colour_gradientn(colours = palette) + \n    scale_size(range = c(0, 10)) + \n    theme_void() + \n    guides(\n      colour = guide_none(),\n      size = guide_none(),\n      fill = guide_none(),\n      shape = guide_none()\n    )\n}"
+  },
+  {
+    "objectID": "slides/index.html#composition-2",
+    "href": "slides/index.html#composition-2",
+    "title": "ART FROM CODE",
+    "section": "Composition",
+    "text": "Composition\n\npolar_styled_plot(\n  data = sample_data(n = 100, seed = 1), \n  palette = sample_canva(seed = 1)\n) + geom_segment()"
+  },
+  {
+    "objectID": "slides/index.html#composition-3",
+    "href": "slides/index.html#composition-3",
+    "title": "ART FROM CODE",
+    "section": "Composition",
+    "text": "Composition\n\npolar_styled_plot(\n  data = sample_data(n = 200, seed = 1), \n  palette = sample_canva(seed = 1)\n) + geom_segment()"
+  },
+  {
+    "objectID": "slides/index.html#composition-4",
+    "href": "slides/index.html#composition-4",
+    "title": "ART FROM CODE",
+    "section": "Composition",
+    "text": "Composition\n\npolar_styled_plot(\n  data = sample_data(n = 200, seed = 1), \n  palette = sample_canva(seed = 1)\n) + geom_curve()"
+  },
+  {
+    "objectID": "slides/index.html#composition-5",
+    "href": "slides/index.html#composition-5",
+    "title": "ART FROM CODE",
+    "section": "Composition",
+    "text": "Composition\n\npolar_styled_plot(\n  data = sample_data(n = 200, seed = 1), \n  palette = sample_canva(seed = 1)\n) + geom_path()"
+  },
+  {
+    "objectID": "slides/index.html#using-dplyr",
+    "href": "slides/index.html#using-dplyr",
+    "title": "ART FROM CODE",
+    "section": "Using dplyr",
+    "text": "Using dplyr\n\n\ndat1 <- sample_data(\n  n = 2000, \n  seed = 123\n)\n\ndat2 <- sample_data(\n  n = 100, \n  seed = 456\n) |>  \n  mutate(\n    y0 = .3 + y0 * .6, \n    y1 = .3\n  )\n\npolar_styled_plot(\n  palette = \n    sample_canva(seed = 7)\n) + \n  geom_segment(\n    data = dat1 |> \n      mutate(size = size * 3)\n  ) + \n  geom_segment(\n    data = dat2 |> \n      mutate(size = size / 5), \n    lineend = \"round\", \n    colour = \"white\"\n  ) +\n  geom_segment(\n    data = dat2 |>\n      mutate(size = size / 40),\n    lineend = \"round\", \n    colour = \"#222222\"\n  ) +\n  geom_point(\n    data = dat2 |>\n      mutate(size = size * 2),\n    colour = \"#222222\"\n  )"
+  },
+  {
+    "objectID": "slides/index.html#using-dplyr-1",
+    "href": "slides/index.html#using-dplyr-1",
+    "title": "ART FROM CODE",
+    "section": "Using dplyr",
+    "text": "Using dplyr\n\n\ndat <- sample_data(\n  n = 2000, \n  seed = 123\n) |>\n  mutate(\n    y1 = y0, \n    size = size / 2\n  )\n\npolar_styled_plot(\n  palette = \n    sample_canva(seed = 456)\n) + \n  \n  # original data\n  geom_segment(data = dat) + \n  \n  # displaced copy\n  geom_segment(\n    data = dat |> \n      mutate(\n        y1 = y1 - .2, \n        y0 = y0 - .2\n      )\n    ) +\n  \n  # another displaced copy\n  geom_segment(\n    data = dat |> \n      mutate(\n        y1 = y1 - .4, \n        y0 = y0 - .4\n      )\n  )"
+  },
+  {
+    "objectID": "slides/index.html#using-dplyr-2",
+    "href": "slides/index.html#using-dplyr-2",
+    "title": "ART FROM CODE",
+    "section": "Using dplyr",
+    "text": "Using dplyr\n\n\ndat <- sample_data(\n  n = 1000, \n  seed = 1\n) |>\n  mutate(\n    y1 = y0, \n    size = size / 4\n  )\n\npolar_styled_plot(\n  palette = \n    sample_canva(seed = 2)\n  ) + \n  geom_segment(\n    data = dat, \n    linetype = \"331311\"\n  )"
+  },
+  {
+    "objectID": "slides/index.html#your-turn-3",
+    "href": "slides/index.html#your-turn-3",
+    "title": "ART FROM CODE",
+    "section": "Your turn!",
+    "text": "Your turn!\nTBA"
   }
 ]
