@@ -52,9 +52,9 @@ library(scales)
 - Gender neutral bathroom: 
     - river side of Potomac Ballroom
 - Meditation room: 
-    - Potomac Dressing Room. (8am - 5pm, Mon - Thurs)
+    - National Harbor 9. (8am - 5pm, Mon - Thurs)
 - Lactation room: 
-    - National Harbor 9. (8am - 5pm, Mon - Thurs) 
+    - Potomac Dressing Room. (8am - 5pm, Mon - Thurs) 
     - The hotel also has a dedicated room behind reception
 
 ## Code of conduct
@@ -77,17 +77,13 @@ library(scales)
 ## Workshop housekeeping
 
 - Written tutorial, data sets, exercises
+    - Slides: Intentionally minimal! We'll work from the notes :)
     - Website: [art-from-code.netlify.app](https://art-from-code.netlify.app)
     - GitHub: [github.com/rstudio-conf-2022/art-from-code](https://github.com/rstudio-conf-2022/art-from-code)
 - Instructors: 
     - Danielle Navarro
-
-## Use the stickies!
-
-- There are two coloured sticky notes
-- Place a $COLOUR one on your laptop if all is well
-- Place a $COLOUR one on your laptop if you'd like help
-- This will make it easy for us to find you and help out!
+    - Meghan Harris
+    - Jaclyn Janis 
 
 ## Schedule for day 1
 
@@ -121,480 +117,38 @@ TBA
 
 TBA
 
-# Get Started
+# [Get started](https://art-from-code.netlify.com/day-1/session-1)
 
 Session 1: Hands on introduction to generative art. Make your own pieces using ggplot2 and dplyr
 
-## Using data science tools for art
-
-```{r familiar-ggplot}
-#| output-location: column
-mpg |>
-  ggplot(aes(
-    x = displ, 
-    y = hwy, 
-    colour = drv
-  )) + 
-  geom_point()
-```
-
-## Using data science tools for art
-
-```{r just-the-dots}
-#| output-location: column
-mpg |>
-  ggplot(aes(
-    x = displ, 
-    y = hwy, 
-    colour = drv, 
-    size = cyl
-  )) + 
-  geom_point(
-    show.legend = FALSE
-  ) + 
-  theme_void() + 
-  scale_color_brewer()
-```
-
-## Using data science tools for art
-
-```{r entirely-abstract}
-#| output-location: column
-mpg |>
-  ggplot(aes(
-    x = displ, 
-    y = hwy, 
-    colour = drv
-  )) + 
-  geom_point(
-    show.legend = FALSE, 
-    size = 4
-  ) + 
-  geom_point(
-    show.legend = FALSE, 
-    size = 1, 
-    colour = "#222222"
-  ) + 
-  coord_polar() + 
-  theme_void() + 
-  scale_color_brewer()
-```
-
-## Your turn!
-
-- Using only ggplot2 and the `mpg` data, create your own art 
-- Don't think too hard, just do something in 3 minutes!
-
-## Random data
-
-```{r random-data}
-#| eval: false
-set.seed(1)
-n <- 50
-dat <- tibble(
-  x0 = runif(n),
-  y0 = runif(n),
-  x1 = x0 + runif(n, min = -.2, max = .2),
-  y1 = y0 + runif(n, min = -.2, max = .2),
-  shade = runif(n), 
-  size = runif(n)
-)
-dat
-```
-
-## Random data
-
-```{r, ref.label="random-data"}
-#| echo: false
-#| eval: true
-```
-
---- 
-
-## ... Transformed to art
-
-```{r coord-polar}
-#| output-location: column
-dat |> 
-  ggplot(aes(
-    x = x0,
-    y = y0,
-    xend = x1,
-    yend = y1,
-    colour = shade,
-    size = size
-  )) +
-  geom_segment(show.legend = FALSE) +
-  coord_polar() +
-  scale_y_continuous(expand = c(0, 0)) +
-  scale_x_continuous(expand = c(0, 0)) + 
-  scale_color_viridis_c() + 
-  scale_size(range = c(0, 10)) + 
-  theme_void()
-```
-
-## Our first system
-
-```{r polar-art}
-polar_art <- function(seed, n, palette) {
-  
-  set.seed(seed)
-  
-  dat <- tibble(
-    x0 = runif(n),
-    y0 = runif(n),
-    x1 = x0 + runif(n, min = -.2, max = .2),
-    y1 = y0 + runif(n, min = -.2, max = .2),
-    shade = runif(n), 
-    size = runif(n)
-  )
-  
-  dat |> 
-    ggplot(aes(
-      x = x0,
-      y = y0,
-      xend = x1,
-      yend = y1,
-      colour = shade,
-      size = size
-    )) +
-    geom_segment(show.legend = FALSE) +
-    coord_polar() +
-    scale_y_continuous(expand = c(0, 0)) +
-    scale_x_continuous(expand = c(0, 0)) + 
-    scale_colour_gradientn(colours = palette) + 
-    scale_size(range = c(0, 10)) + 
-    theme_void()
-}
-```
-
-## An output
-
-```{r polar-art-out-1}
-#| output-location: column
-polar_art(
-  seed = 1, 
-  n = 500, 
-  palette = c(
-    "antiquewhite", 
-    "orange", 
-    "bisque"
-  )
-)
-```
-
-
-## Another output
-
-```{r polar-art-out-2}
-#| output-location: column
-polar_art(
-  seed = 2, 
-  n = 50, 
-  palette = c(
-    "red", 
-    "black", 
-    "white"
-  )
-)
-```
-
-
-## Your turn!
-
-TBA
-
-## Palettes
-
-```{r define-pal}
-#| fig-width: 10
-pal <- c("#cdb4db", "#ffc8dd", "#ffafcc", "#bde0fe", "#a2d2ff")
-show_col(pal)
-```
-
-## Palettes
-
-```{r continuous-palettes}
-#| fig-width: 10
-palette_fn <- colorRampPalette(pal)
-image(
-  x = matrix(1:100, ncol = 1), 
-  col = palette_fn(100),
-  useRaster = TRUE,
-  axes = FALSE
-)
-```
-
-## Sampling palettes
-
-```{r show-canva-palette}
-#| fig-width: 10
-canva_palettes[[101]]
-show_col(canva_palettes[[101]])
-```
-
-## Sampling palettes
-
-```{r sample-canva}
-#| fig-width: 10
-sample_canva <- function(seed = NULL) {
-  if(!is.null(seed)) set.seed(seed)
-  sample(ggthemes::canva_palettes, 1)[[1]]
-}
-
-sample_canva(seed = 5)
-```
-
-
-## Sampling palettes
-
-```{r sample-canva-example-2}
-polar_art(
-  seed = 2, 
-  n = 100, 
-  palette = sample_canva(seed = 5)
-)
-```
-
-## Your turn!
-
-TBA
-
-## Composition
-
-```{r sample-data}
-sample_data <- function(seed = NULL, n = 100){
-  if(!is.null(seed)) set.seed(seed)
-  dat <- tibble(
-    x0 = runif(n),
-    y0 = runif(n),
-    x1 = x0 + runif(n, min = -.2, max = .2),
-    y1 = y0 + runif(n, min = -.2, max = .2),
-    shade = runif(n), 
-    size = runif(n),
-    shape = factor(sample(0:22, size = n, replace = TRUE))
-  )
-}
-```
-
-## Composition
-
-```{r polar-art-plot}
-polar_styled_plot <- function(data = NULL, palette) {
-  ggplot(
-    data = data,
-    mapping = aes(
-      x = x0,
-      y = y0,
-      xend = x1,
-      yend = y1,
-      colour = shade,
-      size = size
-    )) + 
-    coord_polar(clip = "off") +
-    scale_y_continuous(
-      expand = c(0, 0),
-      limits = c(0, 1), 
-      oob = scales::oob_keep
-    ) +
-    scale_x_continuous(
-      expand = c(0, 0), 
-      limits = c(0, 1), 
-      oob = scales::oob_keep
-    ) + 
-    scale_colour_gradientn(colours = palette) + 
-    scale_size(range = c(0, 10)) + 
-    theme_void() + 
-    guides(
-      colour = guide_none(),
-      size = guide_none(),
-      fill = guide_none(),
-      shape = guide_none()
-    )
-}
-```
-
-## Composition
-
-```{r showing-compositionality}
-polar_styled_plot(
-  data = sample_data(n = 100, seed = 1), 
-  palette = sample_canva(seed = 1)
-) + geom_segment()
-```
-
-## Composition
-
-```{r showing-compositionality-2}
-#| code-line-numbers: 2
-polar_styled_plot(
-  data = sample_data(n = 200, seed = 1), 
-  palette = sample_canva(seed = 1)
-) + geom_segment()
-```
-
-## Composition
-
-```{r showing-compositionality-3}
-#| code-line-numbers: 4
-polar_styled_plot(
-  data = sample_data(n = 200, seed = 1), 
-  palette = sample_canva(seed = 1)
-) + geom_curve()
-```
-
-## Composition
-
-```{r showing-compositionality-4}
-#| code-line-numbers: 4
-polar_styled_plot(
-  data = sample_data(n = 200, seed = 1), 
-  palette = sample_canva(seed = 1)
-) + geom_path()
-```
-
-## Using dplyr 
-
-```{r composing-with-dplyr-1}
-#| output-location: column
-dat1 <- sample_data(
-  n = 2000, 
-  seed = 123
-)
-
-dat2 <- sample_data(
-  n = 100, 
-  seed = 456
-) |>  
-  mutate(
-    y0 = .3 + y0 * .6, 
-    y1 = .3
-  )
-
-polar_styled_plot(
-  palette = 
-    sample_canva(seed = 7)
-) + 
-  geom_segment(
-    data = dat1 |> 
-      mutate(size = size * 3)
-  ) + 
-  geom_segment(
-    data = dat2 |> 
-      mutate(size = size / 5), 
-    lineend = "round", 
-    colour = "white"
-  ) +
-  geom_segment(
-    data = dat2 |>
-      mutate(size = size / 40),
-    lineend = "round", 
-    colour = "#222222"
-  ) +
-  geom_point(
-    data = dat2 |>
-      mutate(size = size * 2),
-    colour = "#222222"
-  )
-```
-
-
-## Using dplyr 
-
-```{r composing-with-dplyr-2}
-#| output-location: column
-dat <- sample_data(
-  n = 2000, 
-  seed = 123
-) |>
-  mutate(
-    y1 = y0, 
-    size = size / 2
-  )
-
-polar_styled_plot(
-  palette = 
-    sample_canva(seed = 456)
-) + 
-  
-  # original data
-  geom_segment(data = dat) + 
-  
-  # displaced copy
-  geom_segment(
-    data = dat |> 
-      mutate(
-        y1 = y1 - .2, 
-        y0 = y0 - .2
-      )
-    ) +
-  
-  # another displaced copy
-  geom_segment(
-    data = dat |> 
-      mutate(
-        y1 = y1 - .4, 
-        y0 = y0 - .4
-      )
-  )
-```
-
-
-## Using dplyr 
-
-```{r composing-with-dplyr-3}
-#| output-location: column
-dat <- sample_data(
-  n = 1000, 
-  seed = 1
-) |>
-  mutate(
-    y1 = y0, 
-    size = size / 4
-  )
-
-polar_styled_plot(
-  palette = 
-    sample_canva(seed = 2)
-  ) + 
-  geom_segment(
-    data = dat, 
-    linetype = "331311"
-  ) 
-```
-
-## Your turn!
-
-TBA
-
-# Spatial Noise Trickery
+# [Spatial noise tricks](https://art-from-code.netlify.com/day-1/session-2)
 
 Session 2: Multidimensional noise generators. Flow fields, fractals, and more using the ambient package
 
-# Polygon Trickery
+# [Polygon tricks](https://art-from-code.netlify.com/day-1/session-3)
 
 Session 3: Create textures with recursive polygon deformation, draw wonky hearts as animated gifs, and convert boring lines to textured strokes
 
-# Shading Trickery
+# [Shading tricks](https://art-from-code.netlify.com/day-1/session-4) 
 
 Session 4: Use rayshader to add depth to 2D plots, and generate 3D graphics from generative art
 
 # Welcome to Day 2
 
-# Iterated Function Systems
+# [Iterated function systems](https://art-from-code.netlify.com/day-2/session-1)
 
 Session 1: Embrace the chaotic joy of the fractal flame and render quickly with Rcpp. This one is a bit technical
 
-# Tiles and Tesselations 
+# [Tiles and tesselations](https://art-from-code.netlify.com/day-2/session-2) 
 
 Session 2: Make lovely things by subdividing a rectangle, explore Voronoi tesselations, and have a passing encounter with Truchet tiles
 
-# Pixel Filters
+# [Pixel shaders](https://art-from-code.netlify.com/day-2/session-3) 
 
 Session 3: Manipulate ggplot objects as if they were raster graphics using ggfx: learn to dither, mask, displace, blend, and more. The flametree package makes as special guest appearance
 
-# Wrap Up
+# [Wrap up](https://art-from-code.netlify.com/day-2/session-4)
 
-Session 4: TBA
+Session 4: In which we end things by making things up as we go along, because this is, after all, an art workshop!
 
 
