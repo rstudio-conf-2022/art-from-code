@@ -740,5 +740,40 @@
     "title": "ART FROM CODE",
     "section": "Schedule for day 2",
     "text": "Schedule for day 2\n\n\n\nTime\nActivity\n\n\n\n\n09:00 - 10:30\nSession 1: Iterated function systems\n\n\n10:30 - 11:00\nCoffee break\n\n\n11:00 - 12:30\nSession 2: Tiles and tesselations\n\n\n12:30 - 13:30\nLunch break\n\n\n13:30 - 15:00\nSession 3: Pixel shaders\n\n\n15:00 - 15:30\nCoffee break\n\n\n15:30 - 17:00\nSession 4: Wrap up"
+  },
+  {
+    "objectID": "slides/index.html#packages-materials-etc-local-installation",
+    "href": "slides/index.html#packages-materials-etc-local-installation",
+    "title": "ART FROM CODE",
+    "section": "Packages, materials, etc: Local installation",
+    "text": "Packages, materials, etc: Local installation\nStep 1: fork the repo on GitHub\n\nusethis::create_from_github(\n  repo_spec = \"rstudio-conf-2022/art-from-code\", \n  destdir = \"wherever/you/would/like\"\n)\n\nStep 2: install dependencies:\n\nremotes::install_deps()"
+  },
+  {
+    "objectID": "slides/index.html#local-installation",
+    "href": "slides/index.html#local-installation",
+    "title": "ART FROM CODE",
+    "section": "Local installation",
+    "text": "Local installation\nStep 1: fork the repo on GitHub\n\nusethis::create_from_github(\n  repo_spec = \"rstudio-conf-2022/art-from-code\", \n  destdir = \"wherever/you/would/like\"\n)\n\nStep 2: install dependencies:\n\nremotes::install_deps()"
+  },
+  {
+    "objectID": "slides/index.html#rstudio-cloud",
+    "href": "slides/index.html#rstudio-cloud",
+    "title": "ART FROM CODE",
+    "section": "RStudio cloud",
+    "text": "RStudio cloud\nrstudio.cloud/spaces/250954"
+  },
+  {
+    "objectID": "slides/index.html#option-1-local-installation",
+    "href": "slides/index.html#option-1-local-installation",
+    "title": "ART FROM CODE",
+    "section": "Option 1: Local installation",
+    "text": "Option 1: Local installation\nStep 1: fork the repo on GitHub\n\nusethis::create_from_github(\n  repo_spec = \"rstudio-conf-2022/art-from-code\", \n  destdir = \"wherever/you/would/like\"\n)\n\nStep 2: install dependencies:\n\nremotes::install_deps()\n\n\nOption 2: RStudio cloud\nrstudio.cloud/spaces/250954"
+  },
+  {
+    "objectID": "slides/index.html#set-up",
+    "href": "slides/index.html#set-up",
+    "title": "ART FROM CODE",
+    "section": "Set up",
+    "text": "Set up\nOption 1: Local\n\n# create, download, and open project...\nusethis::create_from_github(\n  repo_spec = \"rstudio-conf-2022/art-from-code\", \n  destdir = \"wherever/you/would/like\"\n)\n\n# within the project...\nremotes::install_deps()\n\n\nOption 2: RStudio cloud\nrstudio.cloud/spaces/250954"
   }
 ]

@@ -109,13 +109,28 @@ library(scales)
 | 15:00 - 15:30 | *Coffee break*                                                                            |
 | 15:30 - 17:00 | Session 4: [Wrap up](https://art-from-code.netlify.com/day-2/session-4)                   |
 
-## Installing packages
+## Set up
 
-TBA
+### Option 1: Local
 
-## Downloading materials
+```{r, eval=FALSE}
+# create, download, and open project...
+usethis::create_from_github(
+  repo_spec = "rstudio-conf-2022/art-from-code", 
+  destdir = "wherever/you/would/like"
+)
 
-TBA
+# within the project...
+remotes::install_deps()
+```
+
+
+<br>
+
+### Option 2: RStudio cloud 
+
+[rstudio.cloud/spaces/250954](https://rstudio.cloud/spaces/250954)
+
 
 # [Get started](https://art-from-code.netlify.com/day-1/session-1)
 
