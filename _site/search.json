@@ -775,5 +775,54 @@
     "title": "ART FROM CODE",
     "section": "Set up",
     "text": "Set up\nOption 1: Local\n\n# create, download, and open project...\nusethis::create_from_github(\n  repo_spec = \"rstudio-conf-2022/art-from-code\", \n  destdir = \"wherever/you/would/like\"\n)\n\n# within the project...\nremotes::install_deps()\n\n\nOption 2: RStudio cloud\nrstudio.cloud/spaces/250954"
+  },
+  {
+    "objectID": "slides/index.html#get-started-topics",
+    "href": "slides/index.html#get-started-topics",
+    "title": "ART FROM CODE",
+    "section": "Get started: Topics",
+    "text": "Get started: Topics\n\nArt is theft\nTechnique and art functions\nColour and palettes\nComposition and grammar"
+  },
+  {
+    "objectID": "slides/index.html#spatial-noise-topics",
+    "href": "slides/index.html#spatial-noise-topics",
+    "title": "ART FROM CODE",
+    "section": "Spatial noise: Topics",
+    "text": "Spatial noise: Topics\n\nSampling spatial patterns\nOur first ambient artwork\nOur first system\nUsing dplyr with ambient\nFractals in ambient\nCurl fields\nCurl of fractal patterns"
+  },
+  {
+    "objectID": "slides/index.html#polygon-tricks-topics",
+    "href": "slides/index.html#polygon-tricks-topics",
+    "title": "ART FROM CODE",
+    "section": "Polygon tricks: Topics",
+    "text": "Polygon tricks: Topics\n\nSemi-transparent polygons\nOptional: Growing polygons a bit faster\nExamples: Splotches and smudged hexagons\nSlighly misshapen objects\nPerlin blobs and Perlin hearts\nAnimated Perlin hearts\nTextured lines"
+  },
+  {
+    "objectID": "slides/index.html#shading-tricks-topics",
+    "href": "slides/index.html#shading-tricks-topics",
+    "title": "ART FROM CODE",
+    "section": "Shading tricks: Topics",
+    "text": "Shading tricks: Topics\n\nRayshader art\nSpatial noise with shadows\nFractured terrain\n(Optional) Three dimensional art"
+  },
+  {
+    "objectID": "slides/index.html#iterated-function-systems-topics",
+    "href": "slides/index.html#iterated-function-systems-topics",
+    "title": "ART FROM CODE",
+    "section": "Iterated function systems: Topics",
+    "text": "Iterated function systems: Topics\n\n(Extremely optional) The tiresome formalism\nThe Barnsley fern\n(Aside) Regarding “happy accidents”\nChaos game for unboxing\n(Optional) Faster chaos with Rcpp\n(Optional) Even faster chaos with raster representation"
+  },
+  {
+    "objectID": "slides/index.html#tiles-and-tesselations-topics",
+    "href": "slides/index.html#tiles-and-tesselations-topics",
+    "title": "ART FROM CODE",
+    "section": "Tiles and tesselations: Topics",
+    "text": "Tiles and tesselations: Topics\n\nRectangle subdivision\nMosaica\nVoronoi tesselation\nVoronoi baroque, part 1\n(Optional) Voronoi baroque, part 2\n(Optional) Truchet tiles"
+  },
+  {
+    "objectID": "slides/index.html#pixel-filters-topics",
+    "href": "slides/index.html#pixel-filters-topics",
+    "title": "ART FROM CODE",
+    "section": "Pixel filters: topics",
+    "text": "Pixel filters: topics\n\nPrelude with flametree\nAdding glow\nDithering an image\nApplying a mask\nDisplacement filters\nImage blends"
   }
 ]

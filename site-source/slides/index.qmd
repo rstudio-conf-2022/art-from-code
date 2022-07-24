@@ -136,17 +136,53 @@ remotes::install_deps()
 
 Session 1: Hands on introduction to generative art. Make your own pieces using ggplot2 and dplyr
 
+## Get started: Topics
+
+- [Art is theft](https://art-from-code.netlify.app/day-1/session-1/#art-is-theft)
+- [Technique and art functions](https://art-from-code.netlify.app/day-1/session-1/#technique)
+- [Colour and palettes](https://art-from-code.netlify.app/day-1/session-1/#colour)
+- [Composition and grammar](https://art-from-code.netlify.app/day-1/session-1/#composition)
+
 # [Spatial noise tricks](https://art-from-code.netlify.com/day-1/session-2)
 
 Session 2: Multidimensional noise generators. Flow fields, fractals, and more using the ambient package
+
+## Spatial noise: Topics
+
+- [Sampling spatial patterns](https://art-from-code.netlify.app/day-1/session-2/#sampling-spatial-patterns)
+- [Our first ambient artwork](https://art-from-code.netlify.app/day-1/session-2/#our-first-ambient-artwork)
+- [Our first system](https://art-from-code.netlify.app/day-1/session-2/#our-first-system)
+- [Using dplyr with ambient](https://art-from-code.netlify.app/day-1/session-2/#why-dplyr-is-a-girls-best-friend)
+- [Fractals in ambient](https://art-from-code.netlify.app/day-1/session-2/#fractals)
+- [Curl fields](https://art-from-code.netlify.app/day-1/session-2/#curl-of-a-spatial-noise-pattern)
+- [Curl of fractal patterns](https://art-from-code.netlify.app/day-1/session-2/#curl-of-a-fractal-pattern)
 
 # [Polygon tricks](https://art-from-code.netlify.com/day-1/session-3)
 
 Session 3: Create textures with recursive polygon deformation, draw wonky hearts as animated gifs, and convert boring lines to textured strokes
 
+## Polygon tricks: Topics
+
+- [Semi-transparent polygons](https://art-from-code.netlify.app/day-1/session-3/#semi-transparent-polygons)
+- Optional: [Growing polygons a bit faster](https://art-from-code.netlify.app/day-1/session-3/#growing-polygons-faster)
+- Examples: [Splotches](https://art-from-code.netlify.app/day-1/session-3/#using-the-method-splotches) and [smudged hexagons](https://art-from-code.netlify.app/day-1/session-3/#using-the-method-smudged-hexagons)
+- [Slighly misshapen objects](https://art-from-code.netlify.app/day-1/session-3/#slightly-misshapen-objects)
+- [Perlin blobs](https://art-from-code.netlify.app/day-1/session-3/#perlin-blobs) and [Perlin hearts](https://art-from-code.netlify.app/day-1/session-3/#perlin-hearts)
+- [Animated Perlin hearts](https://art-from-code.netlify.app/day-1/session-3/#animated-perlin-hearts)
+- [Textured lines](https://art-from-code.netlify.app/day-1/session-3/#textured-lines)
+
 # [Shading tricks](https://art-from-code.netlify.com/day-1/session-4) 
 
 Session 4: Use rayshader to add depth to 2D plots, and generate 3D graphics from generative art
+
+## Shading tricks: Topics
+
+- [Rayshader art](https://art-from-code.netlify.app/day-1/session-4/#rayshader-art)
+- [Spatial noise with shadows](https://art-from-code.netlify.app/day-1/session-4/#shadowed-noise-fields)
+- [Fractured terrain](https://art-from-code.netlify.app/day-1/session-4/#fractured-terrain)
+- (Optional) [Three dimensional art](https://art-from-code.netlify.app/day-1/session-4/#three-dimensional-art)
+
+
 
 # Welcome to Day 2
 
@@ -154,13 +190,40 @@ Session 4: Use rayshader to add depth to 2D plots, and generate 3D graphics from
 
 Session 1: Embrace the chaotic joy of the fractal flame and render quickly with Rcpp. This one is a bit technical
 
+## Iterated function systems: Topics
+
+- (Extremely optional) [The tiresome formalism](https://art-from-code.netlify.app/day-2/session-1/#some-tiresome-formalism)
+- [The Barnsley fern](https://art-from-code.netlify.app/day-2/session-1/#chaos-game-for-the-barnsley-fern)
+- (Aside) [Regarding "happy accidents"](https://art-from-code.netlify.app/day-2/session-1/#happy-accidents)
+- [Chaos game for unboxing](https://art-from-code.netlify.app/day-2/session-1/#chaos-game-for-unboxing)
+- (Optional) [Faster chaos with Rcpp](https://art-from-code.netlify.app/day-2/session-1/#faster-chaos-with-rcpp)
+- (Optional) [Even faster chaos with raster representation](https://art-from-code.netlify.app/day-2/session-1/#even-faster-chaos-with-raster-representation)
+
 # [Tiles and tesselations](https://art-from-code.netlify.com/day-2/session-2) 
 
 Session 2: Make lovely things by subdividing a rectangle, explore Voronoi tesselations, and have a passing encounter with Truchet tiles
 
-# [Pixel shaders](https://art-from-code.netlify.com/day-2/session-3) 
+## Tiles and tesselations: Topics
+
+- [Rectangle subdivision](https://art-from-code.netlify.app/day-2/session-2/#rectangle-subdivision)
+- [Mosaica](https://art-from-code.netlify.app/day-2/session-2/#mosaica)
+- [Voronoi tesselation](https://art-from-code.netlify.app/day-2/session-2/#voronoi-tesselation)
+- [Voronoi baroque, part 1](https://art-from-code.netlify.app/day-2/session-2/#studies-in-voronoi-baroque-part-i)
+- (Optional) [Voronoi baroque, part 2](https://art-from-code.netlify.app/day-2/session-2/#studies-in-voronoi-baroque-part-ii)
+- (Optional) [Truchet tiles](https://art-from-code.netlify.app/day-2/session-2/#truchet-tiles)
+
+# [Pixel filters](https://art-from-code.netlify.com/day-2/session-3) 
 
 Session 3: Manipulate ggplot objects as if they were raster graphics using ggfx: learn to dither, mask, displace, blend, and more. The flametree package makes as special guest appearance
+
+## Pixel filters: topics
+
+- [Prelude with flametree](https://art-from-code.netlify.app/day-2/session-3/#prelude)
+- [Adding glow](https://art-from-code.netlify.app/day-2/session-3/#glow)
+- [Dithering an image](https://art-from-code.netlify.app/day-2/session-3/#dither)
+- [Applying a mask](https://art-from-code.netlify.app/day-2/session-3/#mask)
+- [Displacement filters](https://art-from-code.netlify.app/day-2/session-3/#displace)
+- [Image blends](https://art-from-code.netlify.app/day-2/session-3/#blend)
 
 # [Wrap up](https://art-from-code.netlify.com/day-2/session-4)
 
