@@ -733,5 +733,12 @@
     "title": "ART FROM CODE",
     "section": "Your turn!",
     "text": "Your turn!\nTBA"
+  },
+  {
+    "objectID": "slides/index.html#schedule-for-day-2",
+    "href": "slides/index.html#schedule-for-day-2",
+    "title": "ART FROM CODE",
+    "section": "Schedule for day 2",
+    "text": "Schedule for day 2\n\n\n\nTime\nActivity\n\n\n\n\n09:00 - 10:30\nSession 1: Iterated function systems\n\n\n10:30 - 11:00\nCoffee break\n\n\n11:00 - 12:30\nSession 2: Tiles and tesselations\n\n\n12:30 - 13:30\nLunch break\n\n\n13:30 - 15:00\nSession 3: Pixel shaders\n\n\n15:00 - 15:30\nCoffee break\n\n\n15:30 - 17:00\nSession 4: Wrap up"
   }
 ]

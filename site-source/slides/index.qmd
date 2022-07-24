@@ -97,7 +97,7 @@ library(scales)
 | 15:00 - 15:30 | *Coffee break*                                                                        |
 | 15:30 - 17:00 | Session 4: [Shading tricks](https://art-from-code.netlify.com/day-1/session-4)        |
 
-## Schedule, Day 2
+## Schedule for day 2
 
 | Time          | Activity                                                                                  |
 | :------------ | :---------------------------------------------------------------------------------------- |
