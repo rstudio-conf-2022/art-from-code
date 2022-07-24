@@ -24,7 +24,27 @@ The assumed background is that you’re reasonably comfortable using R and RStud
 
 ## Course material
 
-Everything you need for the workshop is (or will be!) posted online at [art-from-code.netlify.app](https://art-from-code.netlify.app). It is currently missing some details, but please do not fret -- I'm finishing the preparation on the flight from Sydney to DC, so expect an update when I arrive in the US, which will include additional detail about installing dependencies and downloading materials! :grinning:
+Everything you need for the workshop is (or will be!) posted online at [art-from-code.netlify.app](https://art-from-code.netlify.app). 
+
+## Getting set up 
+
+### Option 1: Local
+
+``` r
+# create, download, and open project...
+usethis::create_from_github(
+  repo_spec = "rstudio-conf-2022/art-from-code", 
+  destdir = "wherever/you/would/like"
+)
+
+# within the project...
+remotes::install_deps()
+```
+
+### Option 2: RStudio cloud 
+
+[rstudio.cloud/spaces/250954](https://rstudio.cloud/spaces/250954)
+
 
 ## Schedule
 
