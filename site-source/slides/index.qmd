@@ -134,7 +134,10 @@ I may not be at my best during the teaching period due to an incident during my 
 
 # Say hello! {background-image="../img/nebula_04_153_5000.jpg"}
 
-Some introductions might be a good idea, yes? :)
+# Navigating the content {background-image="../img/pollen_55_5739.jpg"}
+
+Art is personal. So I want you to have scope to explore!
+
 
 # [Get started](https://art-from-code.netlify.com/day-1/session-1)
 
@@ -221,11 +224,12 @@ Session 2: Multidimensional noise generators. Flow fields, fractals, and more us
 
 
 ::: {layout-ncol=3}
-![A spatial pattern](../img/ascii-cross.png)
 
-![Same idea but pretty](../day-1/session-2/index_files/figure-html/random-crosses-1.png)
+![A spatial pattern expressed as a matrix of zeros, with one column and one row set to 1](../img/ascii-cross.png)
 
-<br><br>What if we used fancier patterns?
+![Same idea as an image](../day-1/session-2/index_files/figure-html/random-crosses-1.png)
+
+<br><br>What if we want fancier patterns? Use ambient!
 
 :::
 

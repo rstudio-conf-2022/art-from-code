@@ -858,7 +858,7 @@
     "href": "slides/index.html#sampling-spatial-patterns",
     "title": "ART FROM CODE",
     "section": "Sampling spatial patterns",
-    "text": "Sampling spatial patterns\n\n\n\n\n\n\nA spatial pattern\n\n\n\n\n\n\n\nSame idea but pretty\n\n\n\n\nWhat if we used fancier patterns?"
+    "text": "Sampling spatial patterns\n\n\n\n\n\n\nA spatial pattern expressed as a matrix of zeros, with one column and one row set to 1\n\n\n\n\n\n\n\nSame idea as an image\n\n\n\n\nWhat if we want fancier patterns? Use ambient!"
   },
   {
     "objectID": "slides/index.html#our-first-ambient-artwork",
