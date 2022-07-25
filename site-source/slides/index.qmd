@@ -1,6 +1,6 @@
 ---
 title: "ART FROM CODE"
-author: "Danielle Navarro"
+author: "Danielle Navarro<br><br>Wifi: &nbsp; Username: conf22 &nbsp; Password: together!"
 execute:
   echo: true
   fig-width: 6
@@ -41,11 +41,6 @@ library(dplyr)
 library(ggthemes)
 library(scales)
 ```
-
-## WiFi
-	
-- Username: conf22
-- Password: together!
 
 ## Facilities
 	
