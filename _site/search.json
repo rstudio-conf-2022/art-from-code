@@ -935,14 +935,14 @@
     "href": "slides/index.html#animated-perlin-hearts",
     "title": "ART FROM CODE",
     "section": "Animated Perlin hearts",
-    "text": "Animated Perlin hearts"
+    "text": "Animated Perlin hearts\n\n\n\n\nThe “gifski” recipe:\n\nWrite a function to generate one plot (“frame”)\nCall it repeatedly in save_gif()"
   },
   {
     "objectID": "slides/index.html#textured-lines",
     "href": "slides/index.html#textured-lines",
     "title": "ART FROM CODE",
     "section": "Textured lines",
-    "text": "Textured lines"
+    "text": "Textured lines\n\n\n\n\nBasic recipe:\n\nDots not lines\nBut have many noisy copies\n\n\n\n\n\n\n\noriginal\n\n\n\n\n\n\n\ntextured"
   },
   {
     "objectID": "slides/index.html#semi-transparent-polygons-1",
@@ -964,5 +964,26 @@
     "title": "ART FROM CODE",
     "section": "Example: Smudged hexagons",
     "text": "Example: Smudged hexagons"
+  },
+  {
+    "objectID": "slides/index.html#slightly-misshapen-objects",
+    "href": "slides/index.html#slightly-misshapen-objects",
+    "title": "ART FROM CODE",
+    "section": "Slightly misshapen objects",
+    "text": "Slightly misshapen objects"
+  },
+  {
+    "objectID": "slides/index.html#perlin-blobs",
+    "href": "slides/index.html#perlin-blobs",
+    "title": "ART FROM CODE",
+    "section": "Perlin blobs",
+    "text": "Perlin blobs\n\n\n\n  tibble(\n    angle = seq(0, 2*pi, length.out = n),\n    x_base = cos(angle),\n    y_base = sin(angle),\n    radius = fracture(\n      x = x_base, \n      y = y_base, \n      freq_init = freq_init,\n      noise = gen_perlin, \n      fractal = fbm, \n      octaves = octaves\n    ) |>\n      normalise_radius(r_min, r_max),\n    x = radius * x_base,\n    y = radius * y_base\n  )"
+  },
+  {
+    "objectID": "slides/index.html#perlin-hearts",
+    "href": "slides/index.html#perlin-hearts",
+    "title": "ART FROM CODE",
+    "section": "Perlin hearts",
+    "text": "Perlin hearts\n\n\n\nheart_x <- function(angle) {\n  x <- (16 * sin(angle) ^ 3) / 17\n  return(x - mean(x))\n}\n\nheart_y <- function(angle) {\n  y <- (13 * cos(angle) - \n      5 * cos(2 * angle) - \n      2 * cos(3 * angle) -\n          cos(4 * angle)) / 17\n  return(y - mean(y))\n}"
   }
 ]

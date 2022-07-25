@@ -942,18 +942,112 @@
 <h2>Example: <a href="https://art-from-code.netlify.app/day-1/session-3/#using-the-method-smudged-hexagons">Smudged hexagons</a></h2>
 
 <img data-src="../day-1/session-3/index_files/figure-html/layered-smudged-hexagon-1.png" class="r-stretch"></section>
-<section id="slighly-misshapen-objects" class="slide level2">
-<h2><a href="https://art-from-code.netlify.app/day-1/session-3/#slightly-misshapen-objects">Slighly misshapen objects</a></h2>
+<section id="slightly-misshapen-objects" class="slide level2">
+<h2><a href="https://art-from-code.netlify.app/day-1/session-3/#slightly-misshapen-objects">Slightly misshapen objects</a></h2>
 
 <img data-src="../day-1/session-3/hand-drawn-hearts.jpg" class="r-stretch"></section>
-<section id="perlin-blobs-and-perlin-hearts" class="slide level2">
-<h2><a href="https://art-from-code.netlify.app/day-1/session-3/#perlin-blobs">Perlin blobs</a> and <a href="https://art-from-code.netlify.app/day-1/session-3/#perlin-hearts">Perlin hearts</a></h2>
+<section id="perlin-blobs" class="slide level2">
+<h2><a href="https://art-from-code.netlify.app/day-1/session-3/#perlin-blobs">Perlin blobs</a></h2>
+<div class="quarto-layout-panel">
+<div class="quarto-layout-row quarto-layout-valign-top">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<div class="sourceCode" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a>  <span class="fu">tibble</span>(</span>
+<span id="cb7-2"><a href="#cb7-2"></a>    <span class="at">angle =</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">2</span><span class="sc">*</span>pi, <span class="at">length.out =</span> n),</span>
+<span id="cb7-3"><a href="#cb7-3"></a>    <span class="at">x_base =</span> <span class="fu">cos</span>(angle),</span>
+<span id="cb7-4"><a href="#cb7-4"></a>    <span class="at">y_base =</span> <span class="fu">sin</span>(angle),</span>
+<span id="cb7-5"><a href="#cb7-5"></a>    <span class="at">radius =</span> <span class="fu">fracture</span>(</span>
+<span id="cb7-6"><a href="#cb7-6"></a>      <span class="at">x =</span> x_base, </span>
+<span id="cb7-7"><a href="#cb7-7"></a>      <span class="at">y =</span> y_base, </span>
+<span id="cb7-8"><a href="#cb7-8"></a>      <span class="at">freq_init =</span> freq_init,</span>
+<span id="cb7-9"><a href="#cb7-9"></a>      <span class="at">noise =</span> gen_perlin, </span>
+<span id="cb7-10"><a href="#cb7-10"></a>      <span class="at">fractal =</span> fbm, </span>
+<span id="cb7-11"><a href="#cb7-11"></a>      <span class="at">octaves =</span> octaves</span>
+<span id="cb7-12"><a href="#cb7-12"></a>    ) <span class="sc">|&gt;</span></span>
+<span id="cb7-13"><a href="#cb7-13"></a>      <span class="fu">normalise_radius</span>(r_min, r_max),</span>
+<span id="cb7-14"><a href="#cb7-14"></a>    <span class="at">x =</span> radius <span class="sc">*</span> x_base,</span>
+<span id="cb7-15"><a href="#cb7-15"></a>    <span class="at">y =</span> radius <span class="sc">*</span> y_base</span>
+<span id="cb7-16"><a href="#cb7-16"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<p><img data-src="../day-1/session-3/index_files/figure-html/show-perlin-blobs-2.png"></p>
+</div>
+</div>
+</div>
+</section>
+<section id="perlin-hearts" class="slide level2">
+<h2><a href="https://art-from-code.netlify.app/day-1/session-3/#perlin-hearts">Perlin hearts</a></h2>
+<div class="quarto-layout-panel">
+<div class="quarto-layout-row quarto-layout-valign-top">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<div class="sourceCode" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a>heart_x <span class="ot">&lt;-</span> <span class="cf">function</span>(angle) {</span>
+<span id="cb8-2"><a href="#cb8-2"></a>  x <span class="ot">&lt;-</span> (<span class="dv">16</span> <span class="sc">*</span> <span class="fu">sin</span>(angle) <span class="sc">^</span> <span class="dv">3</span>) <span class="sc">/</span> <span class="dv">17</span></span>
+<span id="cb8-3"><a href="#cb8-3"></a>  <span class="fu">return</span>(x <span class="sc">-</span> <span class="fu">mean</span>(x))</span>
+<span id="cb8-4"><a href="#cb8-4"></a>}</span>
+<span id="cb8-5"><a href="#cb8-5"></a></span>
+<span id="cb8-6"><a href="#cb8-6"></a>heart_y <span class="ot">&lt;-</span> <span class="cf">function</span>(angle) {</span>
+<span id="cb8-7"><a href="#cb8-7"></a>  y <span class="ot">&lt;-</span> (<span class="dv">13</span> <span class="sc">*</span> <span class="fu">cos</span>(angle) <span class="sc">-</span> </span>
+<span id="cb8-8"><a href="#cb8-8"></a>      <span class="dv">5</span> <span class="sc">*</span> <span class="fu">cos</span>(<span class="dv">2</span> <span class="sc">*</span> angle) <span class="sc">-</span> </span>
+<span id="cb8-9"><a href="#cb8-9"></a>      <span class="dv">2</span> <span class="sc">*</span> <span class="fu">cos</span>(<span class="dv">3</span> <span class="sc">*</span> angle) <span class="sc">-</span></span>
+<span id="cb8-10"><a href="#cb8-10"></a>          <span class="fu">cos</span>(<span class="dv">4</span> <span class="sc">*</span> angle)) <span class="sc">/</span> <span class="dv">17</span></span>
+<span id="cb8-11"><a href="#cb8-11"></a>  <span class="fu">return</span>(y <span class="sc">-</span> <span class="fu">mean</span>(y))</span>
+<span id="cb8-12"><a href="#cb8-12"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<p><img data-src="../day-1/session-3/index_files/figure-html/show-perlin-hearts-2.png"></p>
+</div>
+</div>
+</div>
 </section>
 <section id="animated-perlin-hearts" class="slide level2">
 <h2><a href="https://art-from-code.netlify.app/day-1/session-3/#animated-perlin-hearts">Animated Perlin hearts</a></h2>
+<div class="quarto-layout-panel">
+<div class="quarto-layout-row quarto-layout-valign-top">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<ul>
+<li>The “gifski” recipe:
+<ul>
+<li>Write a function to generate one plot (“frame”)</li>
+<li>Call it repeatedly in <code>save_gif()</code></li>
+</ul></li>
+</ul>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<p><img data-src="../day-1/session-3/animated-perlin-heart-100.gif"></p>
+</div>
+</div>
+</div>
 </section>
 <section id="textured-lines" class="slide level2">
 <h2><a href="https://art-from-code.netlify.app/day-1/session-3/#textured-lines">Textured lines</a></h2>
+<div class="quarto-layout-panel">
+<div class="quarto-layout-row quarto-layout-valign-top">
+<div class="quarto-layout-cell" style="flex-basis: 33.3%;justify-content: center;">
+<ul>
+<li>Basic recipe:
+<ul>
+<li>Dots not lines</li>
+<li>But have many noisy copies</li>
+</ul></li>
+</ul>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 33.3%;justify-content: center;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="../day-1/session-3/index_files/figure-html/smooth-path-1.png"></p>
+<p></p><figcaption aria-hidden="true">original</figcaption><p></p>
+</figure>
+</div>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 33.3%;justify-content: center;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="../day-1/session-3/index_files/figure-html/smooth-path-textured-1.png"></p>
+<p></p><figcaption aria-hidden="true">textured</figcaption><p></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
 </section></section>
 <section>
 <section id="shading-tricks" class="title-slide slide level1 center">

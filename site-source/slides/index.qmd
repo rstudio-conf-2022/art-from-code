@@ -402,16 +402,93 @@ show_multipolygon(splotch_4, "#81b622", alpha = .2)
 ![](../day-1/session-3/index_files/figure-html/layered-smudged-hexagon-1.png)
 
 
-## [Slighly misshapen objects](https://art-from-code.netlify.app/day-1/session-3/#slightly-misshapen-objects)
+## [Slightly misshapen objects](https://art-from-code.netlify.app/day-1/session-3/#slightly-misshapen-objects)
 
 ![](../day-1/session-3/hand-drawn-hearts.jpg)
 
-## [Perlin blobs](https://art-from-code.netlify.app/day-1/session-3/#perlin-blobs) and [Perlin hearts](https://art-from-code.netlify.app/day-1/session-3/#perlin-hearts)
+## [Perlin blobs](https://art-from-code.netlify.app/day-1/session-3/#perlin-blobs)
+
+::: {layout-ncol=2}
+
+``` r
+  tibble(
+    angle = seq(0, 2*pi, length.out = n),
+    x_base = cos(angle),
+    y_base = sin(angle),
+    radius = fracture(
+      x = x_base, 
+      y = y_base, 
+      freq_init = freq_init,
+      noise = gen_perlin, 
+      fractal = fbm, 
+      octaves = octaves
+    ) |>
+      normalise_radius(r_min, r_max),
+    x = radius * x_base,
+    y = radius * y_base
+  )
+```
+
+
+![](../day-1/session-3/index_files/figure-html/show-perlin-blobs-2.png)
+
+:::
+
+## [Perlin hearts](https://art-from-code.netlify.app/day-1/session-3/#perlin-hearts)
+
+::: {layout-ncol=2}
+
+``` r
+heart_x <- function(angle) {
+  x <- (16 * sin(angle) ^ 3) / 17
+  return(x - mean(x))
+}
+
+heart_y <- function(angle) {
+  y <- (13 * cos(angle) - 
+      5 * cos(2 * angle) - 
+      2 * cos(3 * angle) -
+          cos(4 * angle)) / 17
+  return(y - mean(y))
+}
+```
+
+![](../day-1/session-3/index_files/figure-html/show-perlin-hearts-2.png)
+
+:::
+
 
 ## [Animated Perlin hearts](https://art-from-code.netlify.app/day-1/session-3/#animated-perlin-hearts)
 
+::: {layout-ncol=2}
+
+- The "gifski" recipe:
+  - Write a function to generate one plot ("frame")
+  - Call it repeatedly in `save_gif()`
+  
+![](../day-1/session-3/animated-perlin-heart-100.gif)
+:::
+
+
+
+
 ## [Textured lines](https://art-from-code.netlify.app/day-1/session-3/#textured-lines)
 
+
+
+
+::: {layout-ncol=3}
+
+- Basic recipe:
+  - Dots not lines
+  - But have many noisy copies
+  
+  
+![original](../day-1/session-3/index_files/figure-html/smooth-path-1.png)
+
+![textured](../day-1/session-3/index_files/figure-html/smooth-path-textured-1.png)
+
+:::
 
 
 
