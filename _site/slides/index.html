@@ -1062,6 +1062,82 @@
 <li><a href="https://art-from-code.netlify.app/day-1/session-4/#fractured-terrain">Fractured terrain</a></li>
 <li>(Optional) <a href="https://art-from-code.netlify.app/day-1/session-4/#three-dimensional-art">Three dimensional art</a></li>
 </ul>
+</section>
+<section id="rayshader-art" class="slide level2">
+<h2><a href="https://art-from-code.netlify.app/day-1/session-4/#rayshader-art">Rayshader art</a></h2>
+<div class="quarto-layout-panel">
+<div class="quarto-layout-row quarto-layout-valign-top">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<div class="sourceCode" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a>circle_shadow <span class="ot">&lt;-</span> <span class="fu">ray_shade</span>(</span>
+<span id="cb9-2"><a href="#cb9-2"></a>  <span class="at">heightmap =</span> circle_array,</span>
+<span id="cb9-3"><a href="#cb9-3"></a>  <span class="at">sunaltitude =</span> <span class="dv">15</span>, </span>
+<span id="cb9-4"><a href="#cb9-4"></a>  <span class="at">sunangle =</span> <span class="dv">135</span>,</span>
+<span id="cb9-5"><a href="#cb9-5"></a>  <span class="at">zscale =</span> .<span class="dv">01</span>,</span>
+<span id="cb9-6"><a href="#cb9-6"></a>  <span class="at">multicore =</span> <span class="cn">TRUE</span></span>
+<span id="cb9-7"><a href="#cb9-7"></a>)</span>
+<span id="cb9-8"><a href="#cb9-8"></a></span>
+<span id="cb9-9"><a href="#cb9-9"></a><span class="fu">plot_map</span>(circle_shadow, <span class="at">rotate =</span> <span class="dv">270</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<p><img data-src="../day-1/session-4/index_files/figure-html/circle-shadow-map-1.png"></p>
+</div>
+</div>
+</div>
+</section>
+<section id="rayshader-art-1" class="slide level2">
+<h2><a href="https://art-from-code.netlify.app/day-1/session-4/#rayshader-art">Rayshader art</a></h2>
+<div class="quarto-layout-panel">
+<div class="quarto-layout-row quarto-layout-valign-top">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<div class="sourceCode" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a>circle_scape <span class="ot">&lt;-</span> circle_array <span class="sc">|&gt;</span> </span>
+<span id="cb10-2"><a href="#cb10-2"></a>  <span class="fu">height_shade</span>() <span class="sc">|&gt;</span></span>
+<span id="cb10-3"><a href="#cb10-3"></a>  <span class="fu">add_shadow</span>(</span>
+<span id="cb10-4"><a href="#cb10-4"></a>    <span class="at">shadowmap =</span> circle_shadow,</span>
+<span id="cb10-5"><a href="#cb10-5"></a>    <span class="at">max_darken =</span> .<span class="dv">1</span></span>
+<span id="cb10-6"><a href="#cb10-6"></a>  )</span>
+<span id="cb10-7"><a href="#cb10-7"></a></span>
+<span id="cb10-8"><a href="#cb10-8"></a><span class="fu">plot_map</span>(circle_scape, <span class="at">rotate =</span> <span class="dv">270</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<p><img data-src="../day-1/session-4/index_files/figure-html/circle-render-1.png"></p>
+</div>
+</div>
+</div>
+</section>
+<section id="spatial-noise-with-shadows" class="slide level2">
+<h2><a href="https://art-from-code.netlify.app/day-1/session-4/#shadowed-noise-fields">Spatial noise with shadows</a></h2>
+<div class="quarto-layout-panel">
+<div class="quarto-layout-row quarto-layout-valign-top">
+<div class="quarto-layout-cell" style="flex-basis: 33.3%;justify-content: center;">
+<p><img data-src="../day-1/session-4/index_files/figure-html/more-rayshade-art-1.png"></p>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 33.3%;justify-content: center;">
+<p><img data-src="../day-1/session-4/index_files/figure-html/more-rayshade-art-2.png"></p>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 33.3%;justify-content: center;">
+<p><img data-src="../day-1/session-4/index_files/figure-html/more-rayshade-art-3.png"></p>
+</div>
+</div>
+</div>
+</section>
+<section id="fractured-terrain" class="slide level2">
+<h2><a href="https://art-from-code.netlify.app/day-1/session-4/#fractured-terrain">Fractured terrain</a></h2>
+<div class="quarto-layout-panel">
+<div class="quarto-layout-row quarto-layout-valign-top">
+<div class="quarto-layout-cell" style="flex-basis: 33.3%;justify-content: center;">
+<p><img data-src="../day-1/session-4/index_files/figure-html/abstract-ice-floes-1.png"></p>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 33.3%;justify-content: center;">
+<p><img data-src="../day-1/session-4/index_files/figure-html/abstract-ice-floes-2.png"></p>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 33.3%;justify-content: center;">
+<p><img data-src="../day-1/session-4/index_files/figure-html/abstract-ice-floes-3.png"></p>
+</div>
+</div>
+</div>
+</section>
+<section id="optional-three-dimensional-art" class="slide level2" data-background-image="../day-1/session-4/ice_3d.png">
+<h2>(Optional) <a href="https://art-from-code.netlify.app/day-1/session-4/#three-dimensional-art">Three dimensional art</a></h2>
 </section></section>
 <section id="welcome-to-day-2" class="title-slide slide level1 center">
 <h1>Welcome to Day 2</h1>

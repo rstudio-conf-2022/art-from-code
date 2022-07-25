@@ -506,6 +506,79 @@ Session 4: Use rayshader to add depth to 2D plots, and generate 3D graphics from
 - (Optional) [Three dimensional art](https://art-from-code.netlify.app/day-1/session-4/#three-dimensional-art)
 
 
+## [Rayshader art](https://art-from-code.netlify.app/day-1/session-4/#rayshader-art)
+
+::: {layout-ncol=2}
+
+``` r
+circle_shadow <- ray_shade(
+  heightmap = circle_array,
+  sunaltitude = 15, 
+  sunangle = 135,
+  zscale = .01,
+  multicore = TRUE
+)
+
+plot_map(circle_shadow, rotate = 270)
+```
+
+![](../day-1/session-4/index_files/figure-html/circle-shadow-map-1.png)
+
+:::
+
+
+
+
+## [Rayshader art](https://art-from-code.netlify.app/day-1/session-4/#rayshader-art)
+
+::: {layout-ncol=2}
+
+``` r
+circle_scape <- circle_array |> 
+  height_shade() |>
+  add_shadow(
+    shadowmap = circle_shadow,
+    max_darken = .1
+  )
+
+plot_map(circle_scape, rotate = 270)
+```
+
+![](../day-1/session-4/index_files/figure-html/circle-render-1.png)
+
+:::
+
+
+## [Spatial noise with shadows](https://art-from-code.netlify.app/day-1/session-4/#shadowed-noise-fields)
+
+::: {layout-ncol=3}
+
+
+![](../day-1/session-4/index_files/figure-html/more-rayshade-art-1.png)
+
+![](../day-1/session-4/index_files/figure-html/more-rayshade-art-2.png)
+
+![](../day-1/session-4/index_files/figure-html/more-rayshade-art-3.png)
+
+:::
+
+
+## [Fractured terrain](https://art-from-code.netlify.app/day-1/session-4/#fractured-terrain)
+
+::: {layout-ncol=3}
+
+![](../day-1/session-4/index_files/figure-html/abstract-ice-floes-1.png)
+
+![](../day-1/session-4/index_files/figure-html/abstract-ice-floes-2.png)
+
+![](../day-1/session-4/index_files/figure-html/abstract-ice-floes-3.png)
+
+:::
+
+## (Optional) [Three dimensional art](https://art-from-code.netlify.app/day-1/session-4/#three-dimensional-art) {background-image="../day-1/session-4/ice_3d.png"}
+
+
+
 
 # Welcome to Day 2
 

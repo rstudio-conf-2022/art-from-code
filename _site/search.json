@@ -985,5 +985,40 @@
     "title": "ART FROM CODE",
     "section": "Perlin hearts",
     "text": "Perlin hearts\n\n\n\nheart_x <- function(angle) {\n  x <- (16 * sin(angle) ^ 3) / 17\n  return(x - mean(x))\n}\n\nheart_y <- function(angle) {\n  y <- (13 * cos(angle) - \n      5 * cos(2 * angle) - \n      2 * cos(3 * angle) -\n          cos(4 * angle)) / 17\n  return(y - mean(y))\n}"
+  },
+  {
+    "objectID": "slides/index.html#rayshader-art",
+    "href": "slides/index.html#rayshader-art",
+    "title": "ART FROM CODE",
+    "section": "Rayshader art",
+    "text": "Rayshader art\n\n\n\ncircle_shadow <- ray_shade(\n  heightmap = circle_array,\n  sunaltitude = 15, \n  sunangle = 135,\n  zscale = .01,\n  multicore = TRUE\n)\n\nplot_map(circle_shadow, rotate = 270)"
+  },
+  {
+    "objectID": "slides/index.html#spatial-noise-with-shadows",
+    "href": "slides/index.html#spatial-noise-with-shadows",
+    "title": "ART FROM CODE",
+    "section": "Spatial noise with shadows",
+    "text": "Spatial noise with shadows"
+  },
+  {
+    "objectID": "slides/index.html#fractured-terrain",
+    "href": "slides/index.html#fractured-terrain",
+    "title": "ART FROM CODE",
+    "section": "Fractured terrain",
+    "text": "Fractured terrain"
+  },
+  {
+    "objectID": "slides/index.html#optional-three-dimensional-art",
+    "href": "slides/index.html#optional-three-dimensional-art",
+    "title": "ART FROM CODE",
+    "section": "(Optional) Three dimensional art",
+    "text": "(Optional) Three dimensional art"
+  },
+  {
+    "objectID": "slides/index.html#rayshader-art-1",
+    "href": "slides/index.html#rayshader-art-1",
+    "title": "ART FROM CODE",
+    "section": "Rayshader art",
+    "text": "Rayshader art\n\n\n\ncircle_scape <- circle_array |> \n  height_shade() |>\n  add_shadow(\n    shadowmap = circle_shadow,\n    max_darken = .1\n  )\n\nplot_map(circle_scape, rotate = 270)"
   }
 ]
