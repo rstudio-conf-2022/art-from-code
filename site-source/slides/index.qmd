@@ -635,6 +635,31 @@ Session 2: Make lovely things by subdividing a rectangle, explore Voronoi tessel
 - (Optional) [Voronoi baroque, part 2](https://art-from-code.netlify.app/day-2/session-2/#studies-in-voronoi-baroque-part-ii)
 - (Optional) [Truchet tiles](https://art-from-code.netlify.app/day-2/session-2/#truchet-tiles)
 
+
+## [Rectangle subdivision](https://art-from-code.netlify.app/day-2/session-2/#rectangle-subdivision)
+
+![](../day-2/session-2/index_files/figure-html/subdivision-extras-3.png)
+
+
+## [Mosaica](https://art-from-code.netlify.app/day-2/session-2/#mosaica)
+
+![](../day-2/session-2/index_files/figure-html/mosaica-1.png)
+
+## [Voronoi tesselation](https://art-from-code.netlify.app/day-2/session-2/#voronoi-tesselation)
+
+![](../day-2/session-2/index_files/figure-html/voronoi-tiles-double-1.png)
+
+
+## [Voronoi baroque](https://art-from-code.netlify.app/day-2/session-2/#studies-in-voronoi-baroque-part-i)
+
+![](../day-2/session-2/index_files/figure-html/voronoi-boxy-2-1.png)
+
+
+## [Truchet tiles](https://art-from-code.netlify.app/day-2/session-2/#truchet-tiles)
+
+![](../day-2/session-2/index_files/figure-html/second-truchet-1.png)
+
+
 # [Pixel filters](https://art-from-code.netlify.com/day-2/session-3) 
 
 Session 3: Manipulate ggplot objects as if they were raster graphics using ggfx: learn to dither, mask, displace, blend, and more. The flametree package makes as special guest appearance

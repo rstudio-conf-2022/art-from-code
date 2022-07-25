@@ -1041,5 +1041,40 @@
     "title": "ART FROM CODE",
     "section": "Let’s just chat about…",
     "text": "Let’s just chat about…\n\nThe tiresome formalism\n“Happy accidents”\nThe Rcpp stuff and the other Rcpp stuff"
+  },
+  {
+    "objectID": "slides/index.html#rectangle-subdivision",
+    "href": "slides/index.html#rectangle-subdivision",
+    "title": "ART FROM CODE",
+    "section": "Rectangle subdivision",
+    "text": "Rectangle subdivision"
+  },
+  {
+    "objectID": "slides/index.html#mosaica",
+    "href": "slides/index.html#mosaica",
+    "title": "ART FROM CODE",
+    "section": "Mosaica",
+    "text": "Mosaica"
+  },
+  {
+    "objectID": "slides/index.html#voronoi-tesselation",
+    "href": "slides/index.html#voronoi-tesselation",
+    "title": "ART FROM CODE",
+    "section": "Voronoi tesselation",
+    "text": "Voronoi tesselation"
+  },
+  {
+    "objectID": "slides/index.html#voronoi-baroque",
+    "href": "slides/index.html#voronoi-baroque",
+    "title": "ART FROM CODE",
+    "section": "Voronoi baroque",
+    "text": "Voronoi baroque"
+  },
+  {
+    "objectID": "slides/index.html#truchet-tiles",
+    "href": "slides/index.html#truchet-tiles",
+    "title": "ART FROM CODE",
+    "section": "Truchet tiles",
+    "text": "Truchet tiles"
   }
 ]
