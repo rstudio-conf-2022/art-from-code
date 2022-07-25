@@ -217,6 +217,116 @@ Session 2: Multidimensional noise generators. Flow fields, fractals, and more us
 - [Curl fields](https://art-from-code.netlify.app/day-1/session-2/#curl-of-a-spatial-noise-pattern)
 - [Curl of fractal patterns](https://art-from-code.netlify.app/day-1/session-2/#curl-of-a-fractal-pattern)
 
+##  [Sampling spatial patterns](https://art-from-code.netlify.app/day-1/session-2/#sampling-spatial-patterns)
+
+
+::: {layout-ncol=3}
+![A spatial pattern](../img/ascii-cross.png)
+
+![Same idea but pretty](../day-1/session-2/index_files/figure-html/random-crosses-1.png)
+
+<br><br>What if we used fancier patterns?
+
+:::
+
+## [Our first ambient artwork](https://art-from-code.netlify.app/day-1/session-2/#our-first-ambient-artwork)
+
+
+::: {layout-ncol=2}
+
+- The recipe:
+  - Create blank "canvas" with `long_grid()`
+  - Add "paint" with `gen_perlin()`
+  - Plot image with `geom_raster()`
+
+![](../day-1/session-2/index_files/figure-html/simple-perlin-art-3.png)
+
+:::
+
+## [Our first system](https://art-from-code.netlify.app/day-1/session-2/#our-first-system)
+
+::: {layout-ncol=2}
+
+- Writing art functions:
+  - First, play!
+  - Then: what varies?
+  - Variable things are arguments
+
+![](../day-1/session-2/index_files/figure-html/example-art-frequency-1.png)
+
+:::
+
+
+## [Using dplyr with ambient](https://art-from-code.netlify.app/day-1/session-2/#why-dplyr-is-a-girls-best-friend)
+
+``` r
+blank_canvas |> 
+  mutate(
+    lf_noise = gen_simplex(x, y, frequency = 1, seed = 1234),
+    mf_noise = gen_simplex(x, y, frequency = 20, seed = 1234),
+    hf_noise = gen_simplex(x, y, frequency = 99, seed = 1234),
+    paint = lf_noise + mf_noise + hf_noise
+  )
+```
+
+::: {layout-ncol=3}
+
+![](../day-1/session-2/index_files/figure-html/dplyr-art-example-1-1.png)
+
+![](../day-1/session-2/index_files/figure-html/dplyr-art-example-2-1.png)
+
+![](../day-1/session-2/index_files/figure-html/dplyr-art-example-3-1.png)
+
+:::
+
+## [Fractals in ambient](https://art-from-code.netlify.app/day-1/session-2/#fractals)
+
+``` r
+fractal_art(ridged, gen_simplex, seed = 2, octaves = 1)
+fractal_art(ridged, gen_simplex, seed = 2, octaves = 2)
+fractal_art(ridged, gen_simplex, seed = 2, octaves = 20)
+```
+
+::: {layout-ncol=3}
+
+![](../day-1/session-2/index_files/figure-html/fractal-art-ridged-octaves-1.png)
+
+![](../day-1/session-2/index_files/figure-html/fractal-art-ridged-octaves-2.png)
+
+![](../day-1/session-2/index_files/figure-html/fractal-art-ridged-octaves-3.png)
+
+:::
+
+
+
+## [Curl fields](https://art-from-code.netlify.app/day-1/session-2/#curl-of-a-spatial-noise-pattern)
+
+
+::: {layout-ncol=3}
+
+![Simplex noise as surface](../day-1/session-2/index_files/figure-html/smol-simplex-2.png)
+
+![Slope of the surface](../day-1/session-2/index_files/figure-html/smol-slope-1.png)
+
+![Curl of the surface](../day-1/session-2/index_files/figure-html/smol-curl-1.png)
+
+:::
+
+
+## [Curl of fractal patterns](https://art-from-code.netlify.app/day-1/session-2/#curl-of-a-fractal-pattern)
+
+
+::: {layout-ncol=3}
+
+![](../day-1/session-2/index_files/figure-html/curl-art-examples-1.png)
+
+![](../day-1/session-2/index_files/figure-html/curl-art-octaves-3.png)
+
+![](../day-1/session-2/index_files/figure-html/curl-art-examples-2-1.png)
+
+:::
+
+
 # [Polygon tricks](https://art-from-code.netlify.com/day-1/session-3)
 
 Session 3: Create textures with recursive polygon deformation, draw wonky hearts as animated gifs, and convert boring lines to textured strokes

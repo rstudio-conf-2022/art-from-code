@@ -710,6 +710,161 @@
 <li><a href="https://art-from-code.netlify.app/day-1/session-2/#curl-of-a-spatial-noise-pattern">Curl fields</a></li>
 <li><a href="https://art-from-code.netlify.app/day-1/session-2/#curl-of-a-fractal-pattern">Curl of fractal patterns</a></li>
 </ul>
+</section>
+<section id="sampling-spatial-patterns" class="slide level2">
+<h2><a href="https://art-from-code.netlify.app/day-1/session-2/#sampling-spatial-patterns">Sampling spatial patterns</a></h2>
+<div class="quarto-layout-panel">
+<div class="quarto-layout-row quarto-layout-valign-top">
+<div class="quarto-layout-cell" style="flex-basis: 33.3%;justify-content: center;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="../img/ascii-cross.png"></p>
+<p></p><figcaption aria-hidden="true">A spatial pattern</figcaption><p></p>
+</figure>
+</div>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 33.3%;justify-content: center;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="../day-1/session-2/index_files/figure-html/random-crosses-1.png"></p>
+<p></p><figcaption aria-hidden="true">Same idea but pretty</figcaption><p></p>
+</figure>
+</div>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 33.3%;justify-content: center;">
+<p><br><br>What if we used fancier patterns?</p>
+</div>
+</div>
+</div>
+</section>
+<section id="our-first-ambient-artwork" class="slide level2">
+<h2><a href="https://art-from-code.netlify.app/day-1/session-2/#our-first-ambient-artwork">Our first ambient artwork</a></h2>
+<div class="quarto-layout-panel">
+<div class="quarto-layout-row quarto-layout-valign-top">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<ul>
+<li>The recipe:
+<ul>
+<li>Create blank “canvas” with <code>long_grid()</code></li>
+<li>Add “paint” with <code>gen_perlin()</code></li>
+<li>Plot image with <code>geom_raster()</code></li>
+</ul></li>
+</ul>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<p><img data-src="../day-1/session-2/index_files/figure-html/simple-perlin-art-3.png"></p>
+</div>
+</div>
+</div>
+</section>
+<section id="our-first-system" class="slide level2">
+<h2><a href="https://art-from-code.netlify.app/day-1/session-2/#our-first-system">Our first system</a></h2>
+<div class="quarto-layout-panel">
+<div class="quarto-layout-row quarto-layout-valign-top">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<ul>
+<li>Writing art functions:
+<ul>
+<li>First, play!</li>
+<li>Then: what varies?</li>
+<li>Variable things are arguments</li>
+</ul></li>
+</ul>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<p><img data-src="../day-1/session-2/index_files/figure-html/example-art-frequency-1.png"></p>
+</div>
+</div>
+</div>
+</section>
+<section id="using-dplyr-with-ambient" class="slide level2">
+<h2><a href="https://art-from-code.netlify.app/day-1/session-2/#why-dplyr-is-a-girls-best-friend">Using dplyr with ambient</a></h2>
+<div class="sourceCode" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a>blank_canvas <span class="sc">|&gt;</span> </span>
+<span id="cb4-2"><a href="#cb4-2"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb4-3"><a href="#cb4-3"></a>    <span class="at">lf_noise =</span> <span class="fu">gen_simplex</span>(x, y, <span class="at">frequency =</span> <span class="dv">1</span>, <span class="at">seed =</span> <span class="dv">1234</span>),</span>
+<span id="cb4-4"><a href="#cb4-4"></a>    <span class="at">mf_noise =</span> <span class="fu">gen_simplex</span>(x, y, <span class="at">frequency =</span> <span class="dv">20</span>, <span class="at">seed =</span> <span class="dv">1234</span>),</span>
+<span id="cb4-5"><a href="#cb4-5"></a>    <span class="at">hf_noise =</span> <span class="fu">gen_simplex</span>(x, y, <span class="at">frequency =</span> <span class="dv">99</span>, <span class="at">seed =</span> <span class="dv">1234</span>),</span>
+<span id="cb4-6"><a href="#cb4-6"></a>    <span class="at">paint =</span> lf_noise <span class="sc">+</span> mf_noise <span class="sc">+</span> hf_noise</span>
+<span id="cb4-7"><a href="#cb4-7"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="quarto-layout-panel">
+<div class="quarto-layout-row quarto-layout-valign-top">
+<div class="quarto-layout-cell" style="flex-basis: 33.3%;justify-content: center;">
+<p><img data-src="../day-1/session-2/index_files/figure-html/dplyr-art-example-1-1.png"></p>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 33.3%;justify-content: center;">
+<p><img data-src="../day-1/session-2/index_files/figure-html/dplyr-art-example-2-1.png"></p>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 33.3%;justify-content: center;">
+<p><img data-src="../day-1/session-2/index_files/figure-html/dplyr-art-example-3-1.png"></p>
+</div>
+</div>
+</div>
+</section>
+<section id="fractals-in-ambient" class="slide level2">
+<h2><a href="https://art-from-code.netlify.app/day-1/session-2/#fractals">Fractals in ambient</a></h2>
+<div class="sourceCode" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a><span class="fu">fractal_art</span>(ridged, gen_simplex, <span class="at">seed =</span> <span class="dv">2</span>, <span class="at">octaves =</span> <span class="dv">1</span>)</span>
+<span id="cb5-2"><a href="#cb5-2"></a><span class="fu">fractal_art</span>(ridged, gen_simplex, <span class="at">seed =</span> <span class="dv">2</span>, <span class="at">octaves =</span> <span class="dv">2</span>)</span>
+<span id="cb5-3"><a href="#cb5-3"></a><span class="fu">fractal_art</span>(ridged, gen_simplex, <span class="at">seed =</span> <span class="dv">2</span>, <span class="at">octaves =</span> <span class="dv">20</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="quarto-layout-panel">
+<div class="quarto-layout-row quarto-layout-valign-top">
+<div class="quarto-layout-cell" style="flex-basis: 33.3%;justify-content: center;">
+<p><img data-src="../day-1/session-2/index_files/figure-html/fractal-art-ridged-octaves-1.png"></p>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 33.3%;justify-content: center;">
+<p><img data-src="../day-1/session-2/index_files/figure-html/fractal-art-ridged-octaves-2.png"></p>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 33.3%;justify-content: center;">
+<p><img data-src="../day-1/session-2/index_files/figure-html/fractal-art-ridged-octaves-3.png"></p>
+</div>
+</div>
+</div>
+</section>
+<section id="curl-fields" class="slide level2">
+<h2><a href="https://art-from-code.netlify.app/day-1/session-2/#curl-of-a-spatial-noise-pattern">Curl fields</a></h2>
+<div class="quarto-layout-panel">
+<div class="quarto-layout-row quarto-layout-valign-top">
+<div class="quarto-layout-cell" style="flex-basis: 33.3%;justify-content: center;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="../day-1/session-2/index_files/figure-html/smol-simplex-2.png"></p>
+<p></p><figcaption aria-hidden="true">Simplex noise as surface</figcaption><p></p>
+</figure>
+</div>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 33.3%;justify-content: center;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="../day-1/session-2/index_files/figure-html/smol-slope-1.png"></p>
+<p></p><figcaption aria-hidden="true">Slope of the surface</figcaption><p></p>
+</figure>
+</div>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 33.3%;justify-content: center;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="../day-1/session-2/index_files/figure-html/smol-curl-1.png"></p>
+<p></p><figcaption aria-hidden="true">Curl of the surface</figcaption><p></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="curl-of-fractal-patterns" class="slide level2">
+<h2><a href="https://art-from-code.netlify.app/day-1/session-2/#curl-of-a-fractal-pattern">Curl of fractal patterns</a></h2>
+<div class="quarto-layout-panel">
+<div class="quarto-layout-row quarto-layout-valign-top">
+<div class="quarto-layout-cell" style="flex-basis: 33.3%;justify-content: center;">
+<p><img data-src="../day-1/session-2/index_files/figure-html/curl-art-examples-1.png"></p>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 33.3%;justify-content: center;">
+<p><img data-src="../day-1/session-2/index_files/figure-html/curl-art-octaves-3.png"></p>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 33.3%;justify-content: center;">
+<p><img data-src="../day-1/session-2/index_files/figure-html/curl-art-examples-2-1.png"></p>
+</div>
+</div>
+</div>
 </section></section>
 <section>
 <section id="polygon-tricks" class="title-slide slide level1 center">

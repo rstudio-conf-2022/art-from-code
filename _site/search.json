@@ -578,7 +578,7 @@
     "href": "slides/index.html#our-first-system",
     "title": "ART FROM CODE",
     "section": "Our first system",
-    "text": "Our first system\n\npolar_art <- function(seed, n, palette) {\n  \n  set.seed(seed)\n  \n  dat <- tibble(\n    x0 = runif(n),\n    y0 = runif(n),\n    x1 = x0 + runif(n, min = -.2, max = .2),\n    y1 = y0 + runif(n, min = -.2, max = .2),\n    shade = runif(n), \n    size = runif(n)\n  )\n  \n  dat |> \n    ggplot(aes(\n      x = x0,\n      y = y0,\n      xend = x1,\n      yend = y1,\n      colour = shade,\n      size = size\n    )) +\n    geom_segment(show.legend = FALSE) +\n    coord_polar() +\n    scale_y_continuous(expand = c(0, 0)) +\n    scale_x_continuous(expand = c(0, 0)) + \n    scale_colour_gradientn(colours = palette) + \n    scale_size(range = c(0, 10)) + \n    theme_void()\n}"
+    "text": "Our first system\n\n\n\n\nWriting art functions:\n\nFirst, play!\nThen: what varies?\nVariable things are arguments"
   },
   {
     "objectID": "slides/index.html#an-output",
@@ -852,5 +852,47 @@
     "title": "ART FROM CODE",
     "section": "Composition and grammar",
     "text": "Composition and grammar\n\n\n\n\n\n\nMultiple data\n\n\n\n\n\n\n\nMultiple copies\n\n\n\n\n\n\n\nTrickery with linetypes"
+  },
+  {
+    "objectID": "slides/index.html#sampling-spatial-patterns",
+    "href": "slides/index.html#sampling-spatial-patterns",
+    "title": "ART FROM CODE",
+    "section": "Sampling spatial patterns",
+    "text": "Sampling spatial patterns\n\n\n\n\n\n\nA spatial pattern\n\n\n\n\n\n\n\nSame idea but pretty\n\n\n\n\nWhat if we used fancier patterns?"
+  },
+  {
+    "objectID": "slides/index.html#our-first-ambient-artwork",
+    "href": "slides/index.html#our-first-ambient-artwork",
+    "title": "ART FROM CODE",
+    "section": "Our first ambient artwork",
+    "text": "Our first ambient artwork\n\n\n\n\nThe recipe:\n\nCreate blank “canvas” with long_grid()\nAdd “paint” with gen_perlin()\nPlot image with geom_raster()"
+  },
+  {
+    "objectID": "slides/index.html#using-dplyr-with-ambient",
+    "href": "slides/index.html#using-dplyr-with-ambient",
+    "title": "ART FROM CODE",
+    "section": "Using dplyr with ambient",
+    "text": "Using dplyr with ambient\nblank_canvas |> \n  mutate(\n    lf_noise = gen_simplex(x, y, frequency = 1, seed = 1234),\n    mf_noise = gen_simplex(x, y, frequency = 20, seed = 1234),\n    hf_noise = gen_simplex(x, y, frequency = 99, seed = 1234),\n    paint = lf_noise + mf_noise + hf_noise\n  )"
+  },
+  {
+    "objectID": "slides/index.html#fractals-in-ambient",
+    "href": "slides/index.html#fractals-in-ambient",
+    "title": "ART FROM CODE",
+    "section": "Fractals in ambient",
+    "text": "Fractals in ambient\nfractal_art(ridged, gen_simplex, seed = 2, octaves = 1)\nfractal_art(ridged, gen_simplex, seed = 2, octaves = 2)\nfractal_art(ridged, gen_simplex, seed = 2, octaves = 20)"
+  },
+  {
+    "objectID": "slides/index.html#curl-fields",
+    "href": "slides/index.html#curl-fields",
+    "title": "ART FROM CODE",
+    "section": "Curl fields",
+    "text": "Curl fields\n\n\n\n\n\n\nSimplex noise as surface\n\n\n\n\n\n\n\nSlope of the surface\n\n\n\n\n\n\n\nCurl of the surface"
+  },
+  {
+    "objectID": "slides/index.html#curl-of-fractal-patterns",
+    "href": "slides/index.html#curl-of-fractal-patterns",
+    "title": "ART FROM CODE",
+    "section": "Curl of fractal patterns",
+    "text": "Curl of fractal patterns"
   }
 ]
