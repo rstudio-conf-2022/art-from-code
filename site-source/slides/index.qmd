@@ -401,9 +401,8 @@ show_multipolygon(splotch_4, "#81b622", alpha = .2)
 
 
 
-## Example: [Smudged hexagons](https://art-from-code.netlify.app/day-1/session-3/#using-the-method-smudged-hexagons)
+## Example: [Smudged hexagons](https://art-from-code.netlify.app/day-1/session-3/#using-the-method-smudged-hexagons) {background-image="../day-1/session-3/index_files/figure-html/layered-smudged-hexagon-1.png"}
 
-![](../day-1/session-3/index_files/figure-html/layered-smudged-hexagon-1.png)
 
 
 ## [Slightly misshapen objects](https://art-from-code.netlify.app/day-1/session-3/#slightly-misshapen-objects)
