@@ -143,7 +143,9 @@ In the final line I called `plot_map()` to draw the final image, using the `rota
 ::: {.callout-important icon=false #exercise-circle-scape}
 ## Exercise
 
-Code for this system is included in the `circle-scape.R` script.
+At this point in the workshop, I hope that you're starting to get a sense for *how* to go about tweaking a generative system and how to create new things using it. So from this point the "exercises" are going to be a bit less structured. What I'll do is point you to the scripts that implement each system, and in each case the exercise is going to be the same: play with the system, see what it can do, modify it as you see fit, and see where your own intuitions take you!
+
+Code for this system is included in the `circle-scape.R` script. Enjoy! Explore!
 
 :::
 
