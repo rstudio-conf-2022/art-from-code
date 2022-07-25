@@ -490,6 +490,12 @@ This one makes me happy :-)
 
 Code for these two systems is included in the `splotch.R` and `smudged-hexagon.R` scripts.
 
+1. Explore the effect of the `layers` argument in the `splotch()` system, and how it interacts with the `alpha` argument to `show_multipolygon()`
+
+2. Create a modified version of the `smudged_hexagon()` system that creates a smudged triangle, or, if you're feeling more ambitious and want to read slightly further down the page to look for the code you need, a smudged heart shape!
+
+3. In the "layered" smudged hexagon example (the one with three hexagons of different colours), why did I include the calls to `mutate()` and `arrange()`? What would have happened without that code?
+
 :::
 
 
@@ -649,6 +655,10 @@ At these parameter settings the output of `perlin_blob()` reminds me more of a c
 
 Code for this system is included in the `perlin-blob.R` script. You can also find analogous code for the Perlin heart system describe in in the next section in the `perlin-heart.R` script.
 
+1. Try playing around with these two systems. See if you can reproduce the same "qualitative variations" with `perlin_heart()` that I showed above with `perlin_blob()`
+
+2. Explore the effect of modifying the arguments. It should be possible to produce some very wild looking shapes!
+
 :::
 
 
@@ -745,6 +755,20 @@ perlin_heart_grid <- function(nx = 10, ny = 6, seed = NULL) {
 
 perlin_heart_grid(seed = 451)
 ```
+
+::: {.callout-important icon=false #exercise-perlin-heard-grid}
+## Exercise
+
+Code for this system is included as the `perlin-heart-grid.R` script. To check that you understand it, try modifying it in the following ways:
+
+1. Only show 50% of the hearts
+
+2. Add a small amount of random noise to the position of each heart
+
+3. Give all the hearts the "rough edged biscuit" look
+
+:::
+
 
 We can elaborate on this idea in various ways. For example, the `perlin_heart2()` function shown below modifies the original idea by adding a additional `width` variable computed in a similar way to `radius`:
 
@@ -864,10 +888,10 @@ perlin_heart_grid2(seed = 666)
 ```
 
 
-::: {.callout-important icon=false #exercise-splotch-hexagon}
+::: {.callout-important icon=false #exercise-perlin-heard-grid-2}
 ## Exercise
 
-Code for these two systems is included in the `perlin-heart-grid.R` and `perlin-heart-grid-2.R` scripts.
+Code for this system is included as the `perlin-heart-grid-2.R` script. Can you modify it so that each heart is plotted in a single colour rather than in the banded pattern? With different hearts having different colours?
 
 :::
 
@@ -990,7 +1014,7 @@ knitr::include_graphics("animated-perlin-heart-789.gif")
 ::: {.callout-important icon=false #exercise-perlin-animated}
 ## Exercise
 
-Code for this system is included in the `perlin-heart-animated.R` script.
+Code for this system is included in the `perlin-heart-animated.R` script. Personally I just find this one fun to play with, so instead of setting an exercise I'll let you take a look! 
 
 :::
 
@@ -1133,6 +1157,6 @@ perlin_heart(n = 500, seed = 123) |>
 ::: {.callout-important icon=false #exercise-textured-lines}
 ## Exercise
 
-Code for this system is included in the `textured-lines.R` script.
+Code for this system is included in the `textured-lines.R` script. Try to use this a jumping-off point for designing your own system for generating textured lines. There's no real reason why you should do it my way. How would you do this yourself?
 
 :::
