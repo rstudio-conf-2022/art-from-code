@@ -673,6 +673,79 @@ Session 3: Manipulate ggplot objects as if they were raster graphics using ggfx:
 - [Displacement filters](https://art-from-code.netlify.app/day-2/session-3/#displace)
 - [Image blends](https://art-from-code.netlify.app/day-2/session-3/#blend)
 
+
+
+## [Prelude with flametree](https://art-from-code.netlify.app/day-2/session-3/#prelude)
+
+::: {layout-ncol=2}
+
+``` r
+tree <- flametree_grow(
+  seed = 1, 
+  time = 9, 
+  angle = c(-15, 15, 30)
+)
+tree |> 
+  flametree_plot(
+    background = "#222222", 
+    palette = c("#ffffff", "#f652a0")
+  )
+```
+![](../day-2/session-3/index_files/figure-html/flametree-plot-origin-1.png)
+
+:::
+
+## [Adding glow](https://art-from-code.netlify.app/day-2/session-3/#glow)
+
+::: {layout-ncol=3}
+
+
+![](../day-2/session-3/index_files/figure-html/outer-glow-1.png)
+
+![](../day-2/session-3/index_files/figure-html/outer-glow-2.png)
+
+![](../day-2/session-3/index_files/figure-html/outer-glow-3.png)
+
+:::
+
+## [Dithering an image](https://art-from-code.netlify.app/day-2/session-3/#dither)
+
+::: {layout-ncol=2}
+
+![](../day-2/session-3/index_files/figure-html/dither-1.png)
+
+![](../day-2/session-3/index_files/figure-html/dither-2.png)
+
+:::
+
+## [Applying a mask](https://art-from-code.netlify.app/day-2/session-3/#mask)
+
+::: {layout-ncol=2}
+
+![](../day-2/session-3/index_files/figure-html/mask-1.png)
+
+![](../day-2/session-3/index_files/figure-html/mask-2.png)
+
+:::
+
+
+
+## [Displacement filters](https://art-from-code.netlify.app/day-2/session-3/#displace)
+
+::: {layout-ncol=2}
+
+![](../day-2/session-3/index_files/figure-html/displace-1.png)
+
+![](../day-2/session-3/index_files/figure-html/displace-2.png)
+
+:::
+
+## [Image blends](https://art-from-code.netlify.app/day-2/session-3/#blend)
+
+
+![](../day-2/session-3/index_files/figure-html/blend-1.png)
+
+
 # [Wrap up](https://art-from-code.netlify.com/day-2/session-4)
 
 Session 4: In which we end things by making things up as we go along, because this is, after all, an art workshop!

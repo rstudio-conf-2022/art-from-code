@@ -1076,5 +1076,47 @@
     "title": "ART FROM CODE",
     "section": "Truchet tiles",
     "text": "Truchet tiles"
+  },
+  {
+    "objectID": "slides/index.html#prelude-with-flametree",
+    "href": "slides/index.html#prelude-with-flametree",
+    "title": "ART FROM CODE",
+    "section": "Prelude with flametree",
+    "text": "Prelude with flametree\n\n\n\ntree <- flametree_grow(\n  seed = 1, \n  time = 9, \n  angle = c(-15, 15, 30)\n)\ntree |> \n  flametree_plot(\n    background = \"#222222\", \n    palette = c(\"#ffffff\", \"#f652a0\")\n  )"
+  },
+  {
+    "objectID": "slides/index.html#adding-glow",
+    "href": "slides/index.html#adding-glow",
+    "title": "ART FROM CODE",
+    "section": "Adding glow",
+    "text": "Adding glow"
+  },
+  {
+    "objectID": "slides/index.html#dithering-an-image",
+    "href": "slides/index.html#dithering-an-image",
+    "title": "ART FROM CODE",
+    "section": "Dithering an image",
+    "text": "Dithering an image"
+  },
+  {
+    "objectID": "slides/index.html#applying-a-mask",
+    "href": "slides/index.html#applying-a-mask",
+    "title": "ART FROM CODE",
+    "section": "Applying a mask",
+    "text": "Applying a mask"
+  },
+  {
+    "objectID": "slides/index.html#displacement-filters",
+    "href": "slides/index.html#displacement-filters",
+    "title": "ART FROM CODE",
+    "section": "Displacement filters",
+    "text": "Displacement filters"
+  },
+  {
+    "objectID": "slides/index.html#image-blends",
+    "href": "slides/index.html#image-blends",
+    "title": "ART FROM CODE",
+    "section": "Image blends",
+    "text": "Image blends"
   }
 ]

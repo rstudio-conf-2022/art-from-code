@@ -1239,7 +1239,88 @@
 <li><a href="https://art-from-code.netlify.app/day-2/session-3/#displace">Displacement filters</a></li>
 <li><a href="https://art-from-code.netlify.app/day-2/session-3/#blend">Image blends</a></li>
 </ul>
-</section></section>
+</section>
+<section id="prelude-with-flametree" class="slide level2">
+<h2><a href="https://art-from-code.netlify.app/day-2/session-3/#prelude">Prelude with flametree</a></h2>
+<div class="quarto-layout-panel">
+<div class="quarto-layout-row quarto-layout-valign-top">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<div class="sourceCode" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a>tree <span class="ot">&lt;-</span> <span class="fu">flametree_grow</span>(</span>
+<span id="cb11-2"><a href="#cb11-2"></a>  <span class="at">seed =</span> <span class="dv">1</span>, </span>
+<span id="cb11-3"><a href="#cb11-3"></a>  <span class="at">time =</span> <span class="dv">9</span>, </span>
+<span id="cb11-4"><a href="#cb11-4"></a>  <span class="at">angle =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">15</span>, <span class="dv">15</span>, <span class="dv">30</span>)</span>
+<span id="cb11-5"><a href="#cb11-5"></a>)</span>
+<span id="cb11-6"><a href="#cb11-6"></a>tree <span class="sc">|&gt;</span> </span>
+<span id="cb11-7"><a href="#cb11-7"></a>  <span class="fu">flametree_plot</span>(</span>
+<span id="cb11-8"><a href="#cb11-8"></a>    <span class="at">background =</span> <span class="st">"#222222"</span>, </span>
+<span id="cb11-9"><a href="#cb11-9"></a>    <span class="at">palette =</span> <span class="fu">c</span>(<span class="st">"#ffffff"</span>, <span class="st">"#f652a0"</span>)</span>
+<span id="cb11-10"><a href="#cb11-10"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<p><img data-src="../day-2/session-3/index_files/figure-html/flametree-plot-origin-1.png"></p>
+</div>
+</div>
+</div>
+</section>
+<section id="adding-glow" class="slide level2">
+<h2><a href="https://art-from-code.netlify.app/day-2/session-3/#glow">Adding glow</a></h2>
+<div class="quarto-layout-panel">
+<div class="quarto-layout-row quarto-layout-valign-top">
+<div class="quarto-layout-cell" style="flex-basis: 33.3%;justify-content: center;">
+<p><img data-src="../day-2/session-3/index_files/figure-html/outer-glow-1.png"></p>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 33.3%;justify-content: center;">
+<p><img data-src="../day-2/session-3/index_files/figure-html/outer-glow-2.png"></p>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 33.3%;justify-content: center;">
+<p><img data-src="../day-2/session-3/index_files/figure-html/outer-glow-3.png"></p>
+</div>
+</div>
+</div>
+</section>
+<section id="dithering-an-image" class="slide level2">
+<h2><a href="https://art-from-code.netlify.app/day-2/session-3/#dither">Dithering an image</a></h2>
+<div class="quarto-layout-panel">
+<div class="quarto-layout-row quarto-layout-valign-top">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<p><img data-src="../day-2/session-3/index_files/figure-html/dither-1.png"></p>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<p><img data-src="../day-2/session-3/index_files/figure-html/dither-2.png"></p>
+</div>
+</div>
+</div>
+</section>
+<section id="applying-a-mask" class="slide level2">
+<h2><a href="https://art-from-code.netlify.app/day-2/session-3/#mask">Applying a mask</a></h2>
+<div class="quarto-layout-panel">
+<div class="quarto-layout-row quarto-layout-valign-top">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<p><img data-src="../day-2/session-3/index_files/figure-html/mask-1.png"></p>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<p><img data-src="../day-2/session-3/index_files/figure-html/mask-2.png"></p>
+</div>
+</div>
+</div>
+</section>
+<section id="displacement-filters" class="slide level2">
+<h2><a href="https://art-from-code.netlify.app/day-2/session-3/#displace">Displacement filters</a></h2>
+<div class="quarto-layout-panel">
+<div class="quarto-layout-row quarto-layout-valign-top">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<p><img data-src="../day-2/session-3/index_files/figure-html/displace-1.png"></p>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<p><img data-src="../day-2/session-3/index_files/figure-html/displace-2.png"></p>
+</div>
+</div>
+</div>
+</section>
+<section id="image-blends" class="slide level2">
+<h2><a href="https://art-from-code.netlify.app/day-2/session-3/#blend">Image blends</a></h2>
+
+<img data-src="../day-2/session-3/index_files/figure-html/blend-1.png" class="r-stretch"></section></section>
 <section id="wrap-up" class="title-slide slide level1 center">
 <h1><a href="https://art-from-code.netlify.com/day-2/session-4">Wrap up</a></h1>
 <p>Session 4: In which we end things by making things up as we go along, because this is, after all, an art workshop!</p>
