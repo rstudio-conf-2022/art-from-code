@@ -777,6 +777,11 @@ Exercise
 </div>
 <div id="exercise-splotch-hexagon" class="callout-body-container callout-body">
 <p>Code for these two systems is included in the <code>splotch.R</code> and <code>smudged-hexagon.R</code> scripts.</p>
+<ol type="1">
+<li><p>Explore the effect of the <code>layers</code> argument in the <code>splotch()</code> system, and how it interacts with the <code>alpha</code> argument to <code>show_multipolygon()</code></p></li>
+<li><p>Create a modified version of the <code>smudged_hexagon()</code> system that creates a smudged triangle, or, if you’re feeling more ambitious and want to read slightly further down the page to look for the code you need, a smudged heart shape!</p></li>
+<li><p>In the “layered” smudged hexagon example (the one with three hexagons of different colours), why did I include the calls to <code>mutate()</code> and <code>arrange()</code>? What would have happened without that code?</p></li>
+</ol>
 </div>
 </div>
 </section>
@@ -969,6 +974,10 @@ Exercise
 </div>
 <div id="exercise-perlin-blob" class="callout-body-container callout-body">
 <p>Code for this system is included in the <code>perlin-blob.R</code> script. You can also find analogous code for the Perlin heart system describe in in the next section in the <code>perlin-heart.R</code> script.</p>
+<ol type="1">
+<li><p>Try playing around with these two systems. See if you can reproduce the same “qualitative variations” with <code>perlin_heart()</code> that I showed above with <code>perlin_blob()</code></p></li>
+<li><p>Explore the effect of modifying the arguments. It should be possible to produce some very wild looking shapes!</p></li>
+</ol>
 </div>
 </div>
 </section>
@@ -1077,6 +1086,24 @@ Exercise
 </div>
 </div>
 </div>
+</div>
+</div>
+<div id="exercise-perlin-heard-grid" class="callout-important callout callout-style-default no-icon callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Exercise
+</div>
+</div>
+<div id="exercise-perlin-heard-grid" class="callout-body-container callout-body">
+<p>Code for this system is included as the <code>perlin-heart-grid.R</code> script. To check that you understand it, try modifying it in the following ways:</p>
+<ol type="1">
+<li><p>Only show 50% of the hearts</p></li>
+<li><p>Add a small amount of random noise to the position of each heart</p></li>
+<li><p>Give all the hearts the “rough edged biscuit” look</p></li>
+</ol>
 </div>
 </div>
 <p>We can elaborate on this idea in various ways. For example, the <code>perlin_heart2()</code> function shown below modifies the original idea by adding a additional <code>width</code> variable computed in a similar way to <code>radius</code>:</p>
@@ -1210,7 +1237,7 @@ Exercise
 </div>
 </div>
 </div>
-<div id="exercise-splotch-hexagon" class="callout-important callout callout-style-default no-icon callout-captioned">
+<div id="exercise-perlin-heard-grid-2" class="callout-important callout callout-style-default no-icon callout-captioned">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon no-icon"></i>
@@ -1219,8 +1246,8 @@ Exercise
 Exercise
 </div>
 </div>
-<div id="exercise-splotch-hexagon" class="callout-body-container callout-body">
-<p>Code for these two systems is included in the <code>perlin-heart-grid.R</code> and <code>perlin-heart-grid-2.R</code> scripts.</p>
+<div id="exercise-perlin-heard-grid-2" class="callout-body-container callout-body">
+<p>Code for this system is included as the <code>perlin-heart-grid-2.R</code> script. Can you modify it so that each heart is plotted in a single colour rather than in the banded pattern? With different hearts having different colours?</p>
 </div>
 </div>
 </section>
@@ -1363,7 +1390,7 @@ Exercise
 </div>
 </div>
 <div id="exercise-perlin-animated" class="callout-body-container callout-body">
-<p>Code for this system is included in the <code>perlin-heart-animated.R</code> script.</p>
+<p>Code for this system is included in the <code>perlin-heart-animated.R</code> script. Personally I just find this one fun to play with, so instead of setting an exercise I’ll let you take a look!</p>
 </div>
 </div>
 </section>
@@ -1509,7 +1536,7 @@ Exercise
 </div>
 </div>
 <div id="exercise-textured-lines" class="callout-body-container callout-body">
-<p>Code for this system is included in the <code>textured-lines.R</code> script.</p>
+<p>Code for this system is included in the <code>textured-lines.R</code> script. Try to use this a jumping-off point for designing your own system for generating textured lines. There’s no real reason why you should do it my way. How would you do this yourself?</p>
 </div>
 </div>
 
