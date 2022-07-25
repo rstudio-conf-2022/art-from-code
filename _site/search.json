@@ -1020,5 +1020,26 @@
     "title": "ART FROM CODE",
     "section": "Rayshader art",
     "text": "Rayshader art\n\n\n\ncircle_scape <- circle_array |> \n  height_shade() |>\n  add_shadow(\n    shadowmap = circle_shadow,\n    max_darken = .1\n  )\n\nplot_map(circle_scape, rotate = 270)"
+  },
+  {
+    "objectID": "slides/index.html#the-barnsley-fern",
+    "href": "slides/index.html#the-barnsley-fern",
+    "title": "ART FROM CODE",
+    "section": "The Barnsley fern",
+    "text": "The Barnsley fern"
+  },
+  {
+    "objectID": "slides/index.html#chaos-game-for-unboxing",
+    "href": "slides/index.html#chaos-game-for-unboxing",
+    "title": "ART FROM CODE",
+    "section": "Chaos game for unboxing",
+    "text": "Chaos game for unboxing"
+  },
+  {
+    "objectID": "slides/index.html#lets-just-chat-about",
+    "href": "slides/index.html#lets-just-chat-about",
+    "title": "ART FROM CODE",
+    "section": "Let’s just chat about…",
+    "text": "Let’s just chat about…\n\nThe tiresome formalism\n“Happy accidents”\nThe Rcpp stuff and the other Rcpp stuff"
   }
 ]

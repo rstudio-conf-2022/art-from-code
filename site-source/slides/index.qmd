@@ -595,6 +595,33 @@ Session 1: Embrace the chaotic joy of the fractal flame and render quickly with 
 - (Optional) [Faster chaos with Rcpp](https://art-from-code.netlify.app/day-2/session-1/#faster-chaos-with-rcpp)
 - (Optional) [Even faster chaos with raster representation](https://art-from-code.netlify.app/day-2/session-1/#even-faster-chaos-with-raster-representation)
 
+
+
+
+## [The Barnsley fern](https://art-from-code.netlify.app/day-2/session-1/#chaos-game-for-the-barnsley-fern)
+
+![](../day-2/session-1/index_files/figure-html/transform-shaded-barnsley-fern-1.png)
+
+
+## [Chaos game for unboxing](https://art-from-code.netlify.app/day-2/session-1/#chaos-game-for-unboxing)
+
+::: {layout-ncol=3}
+
+![](../day-2/session-1/index_files/figure-html/first-unboxing-art-1.png)
+
+![](../day-2/session-1/index_files/figure-html/first-unboxing-art-2.png)
+
+![](../day-2/session-1/index_files/figure-html/first-unboxing-art-3.png)
+
+:::
+
+## Let's just chat about...
+
+- [The tiresome formalism](https://art-from-code.netlify.app/day-2/session-1/#some-tiresome-formalism)
+- ["Happy accidents"](https://art-from-code.netlify.app/day-2/session-1/#happy-accidents)
+- [The Rcpp stuff](https://art-from-code.netlify.app/day-2/session-1/#faster-chaos-with-rcpp) and the [other Rcpp stuff](https://art-from-code.netlify.app/day-2/session-1/#even-faster-chaos-with-raster-representation)
+
+
 # [Tiles and tesselations](https://art-from-code.netlify.com/day-2/session-2) 
 
 Session 2: Make lovely things by subdividing a rectangle, explore Voronoi tesselations, and have a passing encounter with Truchet tiles
