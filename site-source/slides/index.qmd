@@ -132,6 +132,10 @@ remotes::install_deps()
 [rstudio.cloud/spaces/250954](https://rstudio.cloud/spaces/250954)
 
 
+# Preemptive apology {background-image="../img/ash_14_006.png"}
+
+I may not be at my best during the teaching period due to an incident during my travel. Some patience may be needed!
+
 # [Get started](https://art-from-code.netlify.com/day-1/session-1)
 
 Session 1: Hands on introduction to generative art. Make your own pieces using ggplot2 and dplyr
