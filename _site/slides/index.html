@@ -882,6 +882,78 @@
 <li><a href="https://art-from-code.netlify.app/day-1/session-3/#animated-perlin-hearts">Animated Perlin hearts</a></li>
 <li><a href="https://art-from-code.netlify.app/day-1/session-3/#textured-lines">Textured lines</a></li>
 </ul>
+</section>
+<section id="semi-transparent-polygons" class="slide level2">
+<h2><a href="https://art-from-code.netlify.app/day-1/session-3/#semi-transparent-polygons">Semi-transparent polygons</a></h2>
+<h3 id="part-1-growing-polygons-by-edge-insertion">Part 1: Growing polygons by edge insertion</h3>
+<div class="quarto-layout-panel">
+<div class="quarto-layout-row quarto-layout-valign-top">
+<div class="quarto-layout-cell" style="flex-basis: 33.3%;justify-content: center;">
+<p><img data-src="../day-1/session-3/index_files/figure-html/polygon-generation-1.png"></p>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 33.3%;justify-content: center;">
+<p><img data-src="../day-1/session-3/index_files/figure-html/polygon-generation-2.png"></p>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 33.3%;justify-content: center;">
+<p><img data-src="../day-1/session-3/index_files/figure-html/polygon-generation-3.png"></p>
+</div>
+</div>
+</div>
+</section>
+<section id="semi-transparent-polygons-1" class="slide level2">
+<h2><a href="https://art-from-code.netlify.app/day-1/session-3/#semi-transparent-polygons">Semi-transparent polygons</a></h2>
+<h3 id="part-2-overlaying-many-nearly-transparent-polygons">Part 2: Overlaying many nearly-transparent polygons</h3>
+
+<img data-src="../day-1/session-3/index_files/figure-html/fast-polygon-layering-1.png" class="r-stretch"></section>
+<section id="optional-growing-polygons-a-bit-faster" class="slide level2">
+<h2>Optional: <a href="https://art-from-code.netlify.app/day-1/session-3/#growing-polygons-faster">Growing polygons a bit faster</a></h2>
+<ul>
+<li>The TL;DR to a lot of code:
+<ul>
+<li>Growing vectors in a loop is very slow</li>
+<li>Adding to lists in a loop is less slow</li>
+</ul></li>
+</ul>
+</section>
+<section id="example-splotches" class="slide level2">
+<h2>Example: <a href="https://art-from-code.netlify.app/day-1/session-3/#using-the-method-splotches">Splotches</a></h2>
+<div class="sourceCode" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a><span class="fu">show_multipolygon</span>(splotch_1, <span class="st">"#f51720"</span>, <span class="at">alpha =</span> .<span class="dv">2</span>)</span>
+<span id="cb6-2"><a href="#cb6-2"></a><span class="fu">show_multipolygon</span>(splotch_2, <span class="st">"#f8d210"</span>, <span class="at">alpha =</span> .<span class="dv">2</span>)</span>
+<span id="cb6-3"><a href="#cb6-3"></a><span class="fu">show_multipolygon</span>(splotch_3, <span class="st">"#059dc0"</span>, <span class="at">alpha =</span> .<span class="dv">2</span>)</span>
+<span id="cb6-4"><a href="#cb6-4"></a><span class="fu">show_multipolygon</span>(splotch_4, <span class="st">"#81b622"</span>, <span class="at">alpha =</span> .<span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="quarto-layout-panel">
+<div class="quarto-layout-row quarto-layout-valign-top">
+<div class="quarto-layout-cell" style="flex-basis: 25.0%;justify-content: center;">
+<p><img data-src="../day-1/session-3/index_files/figure-html/splotch-1.png"></p>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 25.0%;justify-content: center;">
+<p><img data-src="../day-1/session-3/index_files/figure-html/splotch-2.png"></p>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 25.0%;justify-content: center;">
+<p><img data-src="../day-1/session-3/index_files/figure-html/splotch-3.png"></p>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 25.0%;justify-content: center;">
+<p><img data-src="../day-1/session-3/index_files/figure-html/splotch-4.png"></p>
+</div>
+</div>
+</div>
+</section>
+<section id="example-smudged-hexagons" class="slide level2">
+<h2>Example: <a href="https://art-from-code.netlify.app/day-1/session-3/#using-the-method-smudged-hexagons">Smudged hexagons</a></h2>
+
+<img data-src="../day-1/session-3/index_files/figure-html/layered-smudged-hexagon-1.png" class="r-stretch"></section>
+<section id="slighly-misshapen-objects" class="slide level2">
+<h2><a href="https://art-from-code.netlify.app/day-1/session-3/#slightly-misshapen-objects">Slighly misshapen objects</a></h2>
+
+<img data-src="../day-1/session-3/hand-drawn-hearts.jpg" class="r-stretch"></section>
+<section id="perlin-blobs-and-perlin-hearts" class="slide level2">
+<h2><a href="https://art-from-code.netlify.app/day-1/session-3/#perlin-blobs">Perlin blobs</a> and <a href="https://art-from-code.netlify.app/day-1/session-3/#perlin-hearts">Perlin hearts</a></h2>
+</section>
+<section id="animated-perlin-hearts" class="slide level2">
+<h2><a href="https://art-from-code.netlify.app/day-1/session-3/#animated-perlin-hearts">Animated Perlin hearts</a></h2>
+</section>
+<section id="textured-lines" class="slide level2">
+<h2><a href="https://art-from-code.netlify.app/day-1/session-3/#textured-lines">Textured lines</a></h2>
 </section></section>
 <section>
 <section id="shading-tricks" class="title-slide slide level1 center">

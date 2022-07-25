@@ -894,5 +894,75 @@
     "title": "ART FROM CODE",
     "section": "Curl of fractal patterns",
     "text": "Curl of fractal patterns"
+  },
+  {
+    "objectID": "slides/index.html#semi-transparent-polygons",
+    "href": "slides/index.html#semi-transparent-polygons",
+    "title": "ART FROM CODE",
+    "section": "Semi-transparent polygons",
+    "text": "Semi-transparent polygons\nPart 1: Growing polygons by edge insertion"
+  },
+  {
+    "objectID": "slides/index.html#optional-growing-polygons-a-bit-faster",
+    "href": "slides/index.html#optional-growing-polygons-a-bit-faster",
+    "title": "ART FROM CODE",
+    "section": "Optional: Growing polygons a bit faster",
+    "text": "Optional: Growing polygons a bit faster\n\nThe TL;DR to a lot of code:\n\nGrowing vectors in a loop is very slow\nAdding to lists in a loop is less slow"
+  },
+  {
+    "objectID": "slides/index.html#examples-splotches-and-smudged-hexagons",
+    "href": "slides/index.html#examples-splotches-and-smudged-hexagons",
+    "title": "ART FROM CODE",
+    "section": "Examples: Splotches and smudged hexagons",
+    "text": "Examples: Splotches and smudged hexagons"
+  },
+  {
+    "objectID": "slides/index.html#slighly-misshapen-objects",
+    "href": "slides/index.html#slighly-misshapen-objects",
+    "title": "ART FROM CODE",
+    "section": "Slighly misshapen objects",
+    "text": "Slighly misshapen objects"
+  },
+  {
+    "objectID": "slides/index.html#perlin-blobs-and-perlin-hearts",
+    "href": "slides/index.html#perlin-blobs-and-perlin-hearts",
+    "title": "ART FROM CODE",
+    "section": "Perlin blobs and Perlin hearts",
+    "text": "Perlin blobs and Perlin hearts"
+  },
+  {
+    "objectID": "slides/index.html#animated-perlin-hearts",
+    "href": "slides/index.html#animated-perlin-hearts",
+    "title": "ART FROM CODE",
+    "section": "Animated Perlin hearts",
+    "text": "Animated Perlin hearts"
+  },
+  {
+    "objectID": "slides/index.html#textured-lines",
+    "href": "slides/index.html#textured-lines",
+    "title": "ART FROM CODE",
+    "section": "Textured lines",
+    "text": "Textured lines"
+  },
+  {
+    "objectID": "slides/index.html#semi-transparent-polygons-1",
+    "href": "slides/index.html#semi-transparent-polygons-1",
+    "title": "ART FROM CODE",
+    "section": "Semi-transparent polygons",
+    "text": "Semi-transparent polygons\nPart 2: Overlaying many nearly-transparent polygons"
+  },
+  {
+    "objectID": "slides/index.html#example-splotches",
+    "href": "slides/index.html#example-splotches",
+    "title": "ART FROM CODE",
+    "section": "Example: Splotches",
+    "text": "Example: Splotches\nshow_multipolygon(splotch_1, \"#f51720\", alpha = .2)\nshow_multipolygon(splotch_2, \"#f8d210\", alpha = .2)\nshow_multipolygon(splotch_3, \"#059dc0\", alpha = .2)\nshow_multipolygon(splotch_4, \"#81b622\", alpha = .2)"
+  },
+  {
+    "objectID": "slides/index.html#example-smudged-hexagons",
+    "href": "slides/index.html#example-smudged-hexagons",
+    "title": "ART FROM CODE",
+    "section": "Example: Smudged hexagons",
+    "text": "Example: Smudged hexagons"
   }
 ]

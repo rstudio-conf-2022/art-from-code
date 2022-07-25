@@ -341,6 +341,82 @@ Session 3: Create textures with recursive polygon deformation, draw wonky hearts
 - [Animated Perlin hearts](https://art-from-code.netlify.app/day-1/session-3/#animated-perlin-hearts)
 - [Textured lines](https://art-from-code.netlify.app/day-1/session-3/#textured-lines)
 
+
+## [Semi-transparent polygons](https://art-from-code.netlify.app/day-1/session-3/#semi-transparent-polygons)
+
+### Part 1: Growing polygons by edge insertion
+
+::: {layout-ncol=3}
+
+![](../day-1/session-3/index_files/figure-html/polygon-generation-1.png)
+
+![](../day-1/session-3/index_files/figure-html/polygon-generation-2.png)
+
+![](../day-1/session-3/index_files/figure-html/polygon-generation-3.png)
+
+:::
+
+
+
+## [Semi-transparent polygons](https://art-from-code.netlify.app/day-1/session-3/#semi-transparent-polygons)
+
+### Part 2: Overlaying many nearly-transparent polygons
+
+![](../day-1/session-3/index_files/figure-html/fast-polygon-layering-1.png)
+
+
+
+## Optional: [Growing polygons a bit faster](https://art-from-code.netlify.app/day-1/session-3/#growing-polygons-faster)
+
+- The TL;DR to a lot of code:
+  - Growing vectors in a loop is very slow
+  - Adding to lists in a loop is less slow
+
+## Example: [Splotches](https://art-from-code.netlify.app/day-1/session-3/#using-the-method-splotches) 
+
+``` r
+show_multipolygon(splotch_1, "#f51720", alpha = .2)
+show_multipolygon(splotch_2, "#f8d210", alpha = .2)
+show_multipolygon(splotch_3, "#059dc0", alpha = .2)
+show_multipolygon(splotch_4, "#81b622", alpha = .2)
+```
+
+::: {layout-ncol=4}
+
+![](../day-1/session-3/index_files/figure-html/splotch-1.png)
+
+![](../day-1/session-3/index_files/figure-html/splotch-2.png)
+
+![](../day-1/session-3/index_files/figure-html/splotch-3.png)
+
+![](../day-1/session-3/index_files/figure-html/splotch-4.png)
+
+
+:::
+
+
+
+
+## Example: [Smudged hexagons](https://art-from-code.netlify.app/day-1/session-3/#using-the-method-smudged-hexagons)
+
+![](../day-1/session-3/index_files/figure-html/layered-smudged-hexagon-1.png)
+
+
+## [Slighly misshapen objects](https://art-from-code.netlify.app/day-1/session-3/#slightly-misshapen-objects)
+
+![](../day-1/session-3/hand-drawn-hearts.jpg)
+
+## [Perlin blobs](https://art-from-code.netlify.app/day-1/session-3/#perlin-blobs) and [Perlin hearts](https://art-from-code.netlify.app/day-1/session-3/#perlin-hearts)
+
+## [Animated Perlin hearts](https://art-from-code.netlify.app/day-1/session-3/#animated-perlin-hearts)
+
+## [Textured lines](https://art-from-code.netlify.app/day-1/session-3/#textured-lines)
+
+
+
+
+
+
 # [Shading tricks](https://art-from-code.netlify.com/day-1/session-4) 
 
 Session 4: Use rayshader to add depth to 2D plots, and generate 3D graphics from generative art
