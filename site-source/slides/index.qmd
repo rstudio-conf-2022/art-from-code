@@ -77,9 +77,9 @@ library(scales)
 ## Workshop housekeeping
 
 - Written tutorial, data sets, exercises
-    - Slides: Intentionally minimal! We'll work from the notes :)
     - Website: [art-from-code.netlify.app](https://art-from-code.netlify.app)
     - GitHub: [github.com/rstudio-conf-2022/art-from-code](https://github.com/rstudio-conf-2022/art-from-code)
+    - Sticky notes: <span style="color: orange">orange = "all good"</span>, <span style="color: purple">purple = "please assist"</span>
 - Instructors: 
     - Danielle Navarro
     - Meghan Harris
@@ -135,6 +135,11 @@ remotes::install_deps()
 # Preemptive apology {background-image="../img/ash_14_006.png"}
 
 I may not be at my best during the teaching period due to an incident during my travel. Some patience may be needed!
+
+
+# Say hello! {background-image="../img/nebula_04_153_5000.jpg"}
+
+Some introductions might be a good idea, yes? :)
 
 # [Get started](https://art-from-code.netlify.com/day-1/session-1)
 
