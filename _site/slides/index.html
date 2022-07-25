@@ -578,6 +578,121 @@
 <li><a href="https://art-from-code.netlify.app/day-1/session-1/#colour">Colour and palettes</a></li>
 <li><a href="https://art-from-code.netlify.app/day-1/session-1/#composition">Composition and grammar</a></li>
 </ul>
+</section>
+<section id="art-is-theft" class="slide level2">
+<h2><a href="https://art-from-code.netlify.app/day-1/session-1/#art-is-theft">Art is theft</a></h2>
+<div class="quarto-layout-panel">
+<div class="quarto-layout-row quarto-layout-valign-top">
+<div class="quarto-layout-cell" style="flex-basis: 33.3%;justify-content: center;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="../day-1/session-1/index_files/figure-html/familiar-ggplot-1.png"></p>
+<p></p><figcaption aria-hidden="true">Typical ggplot2 output</figcaption><p></p>
+</figure>
+</div>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 33.3%;justify-content: center;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="../day-1/session-1/index_files/figure-html/tweak-ggplot-1.png"></p>
+<p></p><figcaption aria-hidden="true">Slightly styled output</figcaption><p></p>
+</figure>
+</div>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 33.3%;justify-content: center;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="../day-1/session-1/index_files/figure-html/tweak-ggplot-more-1.png"></p>
+<p></p><figcaption aria-hidden="true">Now is it art?</figcaption><p></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="technique-and-art-functions" class="slide level2">
+<h2><a href="https://art-from-code.netlify.app/day-1/session-1/#technique">Technique and art functions</a></h2>
+<div class="sourceCode" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a><span class="fu">polar_art</span>(<span class="at">seed =</span> <span class="dv">1</span>, <span class="at">n =</span> <span class="dv">500</span>, <span class="at">palette =</span> <span class="fu">c</span>(<span class="st">"antiquewhite"</span>, <span class="st">"orange"</span>, <span class="st">"bisque"</span>))</span>
+<span id="cb2-2"><a href="#cb2-2"></a><span class="fu">polar_art</span>(<span class="at">seed =</span> <span class="dv">1</span>, <span class="at">n =</span> <span class="dv">500</span>, <span class="at">palette =</span> <span class="fu">c</span>(<span class="st">"red"</span>, <span class="st">"black"</span>, <span class="st">"white"</span>))</span>
+<span id="cb2-3"><a href="#cb2-3"></a><span class="fu">polar_art</span>(<span class="at">seed =</span> <span class="dv">2</span>, <span class="at">n =</span> <span class="dv">50</span>, <span class="at">palette =</span> <span class="fu">c</span>(<span class="st">"red"</span>, <span class="st">"black"</span>, <span class="st">"white"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="quarto-layout-panel">
+<div class="quarto-layout-row quarto-layout-valign-top">
+<div class="quarto-layout-cell" style="flex-basis: 33.3%;justify-content: center;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="../day-1/session-1/index_files/figure-html/art-functions-1.png"></p>
+<p></p><figcaption aria-hidden="true">Output 1</figcaption><p></p>
+</figure>
+</div>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 33.3%;justify-content: center;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="../day-1/session-1/index_files/figure-html/art-functions-2.png"></p>
+<p></p><figcaption aria-hidden="true">Output 2</figcaption><p></p>
+</figure>
+</div>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 33.3%;justify-content: center;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="../day-1/session-1/index_files/figure-html/art-functions-3.png"></p>
+<p></p><figcaption aria-hidden="true">Output 3</figcaption><p></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="colour-and-palettes" class="slide level2">
+<h2><a href="https://art-from-code.netlify.app/day-1/session-1/#colour">Colour and palettes</a></h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a>sample_canva <span class="ot">&lt;-</span> <span class="cf">function</span>(<span class="at">seed =</span> <span class="cn">NULL</span>) {</span>
+<span id="cb3-2"><a href="#cb3-2"></a>  <span class="cf">if</span>(<span class="sc">!</span><span class="fu">is.null</span>(seed)) <span class="fu">set.seed</span>(seed)</span>
+<span id="cb3-3"><a href="#cb3-3"></a>  <span class="fu">sample</span>(ggthemes<span class="sc">::</span>canva_palettes, <span class="dv">1</span>)[[<span class="dv">1</span>]]</span>
+<span id="cb3-4"><a href="#cb3-4"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell quarto-layout-panel">
+<div class="quarto-layout-row quarto-layout-valign-top">
+<div class="cell-output-display quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<p><img data-src="index_files/figure-revealjs/unnamed-chunk-4-1.png" width="576"></p>
+</div>
+<div class="cell-output-display quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<p><img data-src="index_files/figure-revealjs/unnamed-chunk-4-2.png" width="576"></p>
+</div>
+</div>
+</div>
+</section>
+<section id="composition-and-grammar" class="slide level2">
+<h2><a href="https://art-from-code.netlify.app/day-1/session-1/#composition">Composition and grammar</a></h2>
+<div class="quarto-layout-panel">
+<div class="quarto-layout-row quarto-layout-valign-top">
+<div class="quarto-layout-cell" style="flex-basis: 33.3%;justify-content: center;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="../day-1/session-1/index_files/figure-html/compositionality-1.png"></p>
+<p></p><figcaption aria-hidden="true">Multiple data</figcaption><p></p>
+</figure>
+</div>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 33.3%;justify-content: center;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="../day-1/session-1/index_files/figure-html/compositionality-2-1.png"></p>
+<p></p><figcaption aria-hidden="true">Multiple copies</figcaption><p></p>
+</figure>
+</div>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 33.3%;justify-content: center;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="../day-1/session-1/index_files/figure-html/compositionality-3-1.png"></p>
+<p></p><figcaption aria-hidden="true">Trickery with linetypes</figcaption><p></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
 </section></section>
 <section>
 <section id="spatial-noise-tricks" class="title-slide slide level1 center">

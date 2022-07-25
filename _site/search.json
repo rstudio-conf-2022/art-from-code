@@ -824,5 +824,33 @@
     "title": "ART FROM CODE",
     "section": "Pixel filters: topics",
     "text": "Pixel filters: topics\n\nPrelude with flametree\nAdding glow\nDithering an image\nApplying a mask\nDisplacement filters\nImage blends"
+  },
+  {
+    "objectID": "slides/index.html#art-is-theft",
+    "href": "slides/index.html#art-is-theft",
+    "title": "ART FROM CODE",
+    "section": "Art is theft",
+    "text": "Art is theft\n\n\n\n\n\n\nTypical ggplot2 output\n\n\n\n\n\n\n\nSlightly styled output\n\n\n\n\n\n\n\nNow is it art?"
+  },
+  {
+    "objectID": "slides/index.html#technique-and-art-functions",
+    "href": "slides/index.html#technique-and-art-functions",
+    "title": "ART FROM CODE",
+    "section": "Technique and art functions",
+    "text": "Technique and art functions\npolar_art(seed = 1, n = 500, palette = c(\"antiquewhite\", \"orange\", \"bisque\"))\npolar_art(seed = 1, n = 500, palette = c(\"red\", \"black\", \"white\"))\npolar_art(seed = 2, n = 50, palette = c(\"red\", \"black\", \"white\"))\n\n\n\n\n\n\nOutput 1\n\n\n\n\n\n\n\nOutput 2\n\n\n\n\n\n\n\nOutput 3"
+  },
+  {
+    "objectID": "slides/index.html#colour-and-palettes",
+    "href": "slides/index.html#colour-and-palettes",
+    "title": "ART FROM CODE",
+    "section": "Colour and palettes",
+    "text": "Colour and palettes\n\nsample_canva <- function(seed = NULL) {\n  if(!is.null(seed)) set.seed(seed)\n  sample(ggthemes::canva_palettes, 1)[[1]]\n}"
+  },
+  {
+    "objectID": "slides/index.html#composition-and-grammar",
+    "href": "slides/index.html#composition-and-grammar",
+    "title": "ART FROM CODE",
+    "section": "Composition and grammar",
+    "text": "Composition and grammar\n\n\n\n\n\n\nMultiple data\n\n\n\n\n\n\n\nMultiple copies\n\n\n\n\n\n\n\nTrickery with linetypes"
   }
 ]

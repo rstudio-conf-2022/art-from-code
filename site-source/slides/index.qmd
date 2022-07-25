@@ -147,6 +147,62 @@ Session 1: Hands on introduction to generative art. Make your own pieces using g
 - [Colour and palettes](https://art-from-code.netlify.app/day-1/session-1/#colour)
 - [Composition and grammar](https://art-from-code.netlify.app/day-1/session-1/#composition)
 
+## [Art is theft](https://art-from-code.netlify.app/day-1/session-1/#art-is-theft)
+
+::: {layout-ncol=3}
+![Typical ggplot2 output](../day-1/session-1/index_files/figure-html/familiar-ggplot-1.png)
+
+![Slightly styled output](../day-1/session-1/index_files/figure-html/tweak-ggplot-1.png)
+
+![Now is it art?](../day-1/session-1/index_files/figure-html/tweak-ggplot-more-1.png)
+
+:::
+
+## [Technique and art functions](https://art-from-code.netlify.app/day-1/session-1/#technique)
+
+``` r
+polar_art(seed = 1, n = 500, palette = c("antiquewhite", "orange", "bisque"))
+polar_art(seed = 1, n = 500, palette = c("red", "black", "white"))
+polar_art(seed = 2, n = 50, palette = c("red", "black", "white"))
+```
+
+::: {layout-ncol=3}
+![Output 1](../day-1/session-1/index_files/figure-html/art-functions-1.png)
+
+![Output 2](../day-1/session-1/index_files/figure-html/art-functions-2.png)
+
+![Output 3](../day-1/session-1/index_files/figure-html/art-functions-3.png)
+:::
+
+## [Colour and palettes](https://art-from-code.netlify.app/day-1/session-1/#colour)
+
+```{r}
+sample_canva <- function(seed = NULL) {
+  if(!is.null(seed)) set.seed(seed)
+  sample(ggthemes::canva_palettes, 1)[[1]]
+}
+```
+
+```{r, echo=FALSE}
+#| layout-ncol: 2
+show_col(sample_canva(1))
+show_col(sample_canva(2))
+```
+
+
+## [Composition and grammar](https://art-from-code.netlify.app/day-1/session-1/#composition)
+
+
+::: {layout-ncol=3}
+![Multiple data](../day-1/session-1/index_files/figure-html/compositionality-1.png)
+
+![Multiple copies](../day-1/session-1/index_files/figure-html/compositionality-2-1.png)
+
+![Trickery with linetypes](../day-1/session-1/index_files/figure-html/compositionality-3-1.png)
+
+:::
+
+
 # [Spatial noise tricks](https://art-from-code.netlify.com/day-1/session-2)
 
 Session 2: Multidimensional noise generators. Flow fields, fractals, and more using the ambient package
