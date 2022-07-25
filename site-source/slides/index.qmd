@@ -1,6 +1,9 @@
 ---
-title: "ART FROM CODE"
-author: "Danielle Navarro<br><br>Wifi: &nbsp; Username: conf22 &nbsp; Password: together!"
+title: "<br>ART FROM CODE"
+author: "Danielle Navarro<br><br><br><br>Wifi: &nbsp; Username: conf22 &nbsp; Password: together!"
+title-slide-attributes:
+    data-background-image: "../img/image4.jpg"
+    data-background-size: cover
 execute:
   echo: true
   fig-width: 6
