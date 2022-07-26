@@ -757,3 +757,7 @@ tree |>
 Session 4: In which we end things by making things up as we go along, because this is, after all, an art workshop!
 
 
+## Post-workshop survey!
+
+[rstd.io/conf-workshop-survey](https://rstd.io/conf-workshop-survey)
+
