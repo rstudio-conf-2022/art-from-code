@@ -7,12 +7,12 @@ website:
   site-url: https://art-from-code.netlify.app
   repo-url: https://github.com/rstudio-conf-2022/art-from-code
   open-graph: 
-    image: "http://art-from-code.netlify.app/img/banner.png"
+    image: "http://art-from-code.netlify.app/img/banner-3.png"
     description: "An rstudio::conf workshop on generative art with R"
   twitter-card:
     creator: "@djnavarro"
     card-style: summary_large_image
-    image: "http://art-from-code.netlify.app/img/banner.png"
+    image: "http://art-from-code.netlify.app/img/banner-3.png"
     description: "An rstudio::conf workshop on generative art with R"
 
   navbar:

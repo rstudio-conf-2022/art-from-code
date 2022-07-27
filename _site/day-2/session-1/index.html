@@ -122,11 +122,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <link rel="stylesheet" href="../../styles.css">
 <meta property="og:title" content="ART FROM CODE - ITERATED FUNCTION SYSTEMS">
 <meta property="og:description" content="An rstudio::conf workshop on generative art with R">
-<meta property="og:image" content="http://art-from-code.netlify.app/img/banner.png">
+<meta property="og:image" content="http://art-from-code.netlify.app/img/banner-3.png">
 <meta property="og:site-name" content="ART FROM CODE">
 <meta name="twitter:title" content="ART FROM CODE - ITERATED FUNCTION SYSTEMS">
 <meta name="twitter:description" content="An rstudio::conf workshop on generative art with R">
-<meta name="twitter:image" content="http://art-from-code.netlify.app/img/banner.png">
+<meta name="twitter:image" content="http://art-from-code.netlify.app/img/banner-3.png">
 <meta name="twitter:creator" content="@djnavarro">
 <meta name="twitter:card" content="summary_large_image">
 </head>
@@ -889,7 +889,7 @@ Exercise
 <span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">420</span>); dat3 <span class="ot">&lt;-</span> <span class="fu">unboxer_rcpp</span>(<span class="dv">10</span> <span class="sc">*</span> mil, <span class="at">layers =</span> <span class="dv">9</span>) </span>
 <span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a><span class="fu">toc</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>1.408 sec elapsed</code></pre>
+<pre><code>1.445 sec elapsed</code></pre>
 </div>
 </div>
 <div id="exercise-unboxing-rcpp" class="callout-important callout callout-style-default no-icon callout-captioned">
@@ -1034,7 +1034,7 @@ Exercise
 <span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">420</span>); mat3 <span class="ot">&lt;-</span> <span class="fu">unboxer_grid</span>(<span class="dv">10</span> <span class="sc">*</span> mil, <span class="dv">9</span>, <span class="dv">1000</span>, <span class="dv">4</span>)</span>
 <span id="cb33-5"><a href="#cb33-5" aria-hidden="true" tabindex="-1"></a><span class="fu">toc</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>1.127 sec elapsed</code></pre>
+<pre><code>1.135 sec elapsed</code></pre>
 </div>
 </div>
 <p>Ah, but now look what happens when we generate an image from the data. Originally we were working with ggplot2, and we were forcing it to convert a large data frame to an image in a very very painful way. This time around, the data is already in the right format. It’s a bitmap that we can pass to <code>image()</code>. No heavy lifting required!</p>
