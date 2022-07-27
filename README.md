@@ -28,22 +28,39 @@ Everything you need for the workshop is (or will be!) posted online at [art-from
 
 ## Getting set up 
 
-### Option 1: Local
+### Option 1: Local install
+
+If you want to run the workshop locally, the easiest way to get set up is as follows. First, create project from GitHub, e.g., with the command
 
 ``` r
-# create, download, and open project...
 usethis::create_from_github(
   repo_spec = "rstudio-conf-2022/art-from-code", 
   destdir = "wherever/you/would/like"
 )
+```
 
-# within the project...
+Then, within the project, install dependencies:
+
+``` r
 remotes::install_deps()
 ```
 
-### Option 2: RStudio cloud 
 
-[rstudio.cloud/spaces/250954](https://rstudio.cloud/spaces/250954)
+## Option 2: RStudio Cloud 
+
+An alternative option is to use RStudio Cloud. To do this, go to [rstudio.cloud](https://rstudio.cloud) and create a project from this GitHub repository [rstudio-conf-2022/art-from-code](https://github.com/rstudio-conf-2022/art-from-code).
+
+From there it's a two-step process. First, the cloud machine won't have the remotes package so you'll need to install that:
+
+``` r
+install.packages("remotes")
+```
+
+Then you can install all the dependencies listed in the DESCRIPTION file with:
+
+``` r
+remotes::install_deps()
+```
 
 
 ## Schedule
