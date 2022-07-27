@@ -1,8 +1,8 @@
 ---
-title: "<br>ART FROM CODE"
-author: "Danielle Navarro<br><br><br><br>Wifi: &nbsp; Username: conf22 &nbsp; Password: together!"
+title: "ART FROM CODE"
+author: "Danielle Navarro"
 title-slide-attributes:
-    data-background-image: "../img/image4.jpg"
+    data-background-image: "../img/banner-2.png"
     data-background-size: cover
 execute:
   echo: true
@@ -45,32 +45,6 @@ library(ggthemes)
 library(scales)
 ```
 
-## Facilities
-	
-- Gender neutral bathroom: 
-    - river side of Potomac Ballroom
-- Meditation room: 
-    - National Harbor 9. (8am - 5pm, Mon - Thurs)
-- Lactation room: 
-    - Potomac Dressing Room. (8am - 5pm, Mon - Thurs) 
-    - The hotel also has a dedicated room behind reception
-
-## Code of conduct
-
-- The Code of Conduct and COVID policies can be found at [www.rstudio.com/conference/2022/2022-conf-code-of-conduct](https://www.rstudio.com/conference/2022/2022-conf-code-of-conduct/). Please review them carefully
-- You can report Code of Conduct violations in person, by email, or by phone. Please see the policy linked above for contact information
-
-## Mask policy
-
-- RStudio requires that you wear a mask that fully covers your mouth and nose at all times in all public spaces 
-- We strongly recommend that you use a correctly fitted N95, KN95, or similar particulate filtering mask
-- We will have a limited supply available upon request
-
-## Photography
-
-- Red lanyard = Does not wish to be photographed 
-- Please note lanyard colors before taking a photo
-- Respect their choices
 
 ## Workshop housekeeping
 
@@ -107,32 +81,38 @@ library(scales)
 | 15:00 - 15:30 | *Coffee break*                                                                            |
 | 15:30 - 17:00 | Session 4: [Wrap up](https://art-from-code.netlify.com/day-2/session-4)                   |
 
-## Set up
+## Set up, option 1: Local install
 
-### Option 1: Local
+- Create project from Github, e.g.:
 
 ```{r, eval=FALSE}
-# create, download, and open project...
 usethis::create_from_github(
   repo_spec = "rstudio-conf-2022/art-from-code", 
   destdir = "wherever/you/would/like"
 )
+```
 
-# within the project...
+- Within the project, install dependencies:
+
+```{r, eval=FALSE}
 remotes::install_deps()
 ```
 
 
-<br>
 
-### Option 2: RStudio cloud 
+## Set up, option 2: RStudio cloud 
 
-[rstudio.cloud/spaces/250954](https://rstudio.cloud/spaces/250954)
+- Go to [rstudio.cloud](https://rstudio.cloud)
+- Create project from the [rstudio-conf-2022/art-from-code](https://github.com/rstudio-conf-2022/art-from-code) GitHub repo
+- Install dependencies:
+
+```{r, eval=FALSE}
+remotes::install_deps()
+```
 
 
-# Preemptive apology {background-image="../img/ash_14_006.png"}
 
-I may not be at my best during the teaching period due to an incident during my travel. Some patience may be needed!
+
 
 
 # Say hello! {background-image="../img/nebula_04_153_5000.jpg"}
@@ -755,9 +735,4 @@ tree |>
 # [Wrap up](https://art-from-code.netlify.com/day-2/session-4)
 
 Session 4: In which we end things by making things up as we go along, because this is, after all, an art workshop!
-
-
-## Post-workshop survey!
-
-[rstd.io/conf-workshop-survey](https://rstd.io/conf-workshop-survey)
 

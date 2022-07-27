@@ -774,7 +774,7 @@
     "href": "slides/index.html#set-up",
     "title": "ART FROM CODE",
     "section": "Set up",
-    "text": "Set up\nOption 1: Local\n\n# create, download, and open project...\nusethis::create_from_github(\n  repo_spec = \"rstudio-conf-2022/art-from-code\", \n  destdir = \"wherever/you/would/like\"\n)\n\n# within the project...\nremotes::install_deps()\n\n\nOption 2: RStudio cloud\nrstudio.cloud/spaces/250954"
+    "text": "Set up\n\n# create, download, and open project...\nusethis::create_from_github(\n  repo_spec = \"rstudio-conf-2022/art-from-code\", \n  destdir = \"wherever/you/would/like\"\n)\n\n# within the project, install dependencies...\ninstall.packages(\"remotes\")\nremotes::install_deps()\n\n\nOption 2: RStudio cloud\n\nGo to rstudio.cloud\nCreate project from the rstudio-conf-2022/art-from-code GitHub repo\nInstall dependencies as above"
   },
   {
     "objectID": "slides/index.html#get-started-topics",
@@ -1125,5 +1125,19 @@
     "title": "ART FROM CODE",
     "section": "Post-workshop survey!",
     "text": "Post-workshop survey!\nrstd.io/conf-workshop-survey\n\n\nart-from-code.netlify.app"
+  },
+  {
+    "objectID": "slides/index.html#set-up-option-1-local-install",
+    "href": "slides/index.html#set-up-option-1-local-install",
+    "title": "ART FROM CODE",
+    "section": "Set up, option 1: Local install",
+    "text": "Set up, option 1: Local install\n\nCreate project from Github, e.g.:\n\n\nusethis::create_from_github(\n  repo_spec = \"rstudio-conf-2022/art-from-code\", \n  destdir = \"wherever/you/would/like\"\n)\n\n\nWithin the project, install dependencies:\n\n\nremotes::install_deps()"
+  },
+  {
+    "objectID": "slides/index.html#set-up-option-2-rstudio-cloud",
+    "href": "slides/index.html#set-up-option-2-rstudio-cloud",
+    "title": "ART FROM CODE",
+    "section": "Set up, option 2: RStudio cloud",
+    "text": "Set up, option 2: RStudio cloud\n\nGo to rstudio.cloud\nCreate project from the rstudio-conf-2022/art-from-code GitHub repo\nInstall dependencies:\n\n\nremotes::install_deps()"
   }
 ]

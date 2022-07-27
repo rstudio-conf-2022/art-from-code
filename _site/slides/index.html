@@ -9,8 +9,8 @@
 <link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
   <meta name="generator" content="quarto-0.9.613">
 
-  <meta name="author" content="Danielle Navarro    Wifi: &nbsp; Username: conf22 &nbsp; Password: together!">
-  <title>ART FROM CODE - ART FROM CODE</title>
+  <meta name="author" content="Danielle Navarro">
+  <title>ART FROM CODE</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
@@ -377,11 +377,11 @@
       margin-right: 0; 
     }
   </style>
-<meta property="og:title" content="ART FROM CODE - ART FROM CODE">
+<meta property="og:title" content="ART FROM CODE">
 <meta property="og:description" content="An rstudio::conf workshop on generative art with R">
 <meta property="og:image" content="http://art-from-code.netlify.app/img/banner.png">
 <meta property="og:site-name" content="ART FROM CODE">
-<meta name="twitter:title" content="ART FROM CODE - ART FROM CODE">
+<meta name="twitter:title" content="ART FROM CODE">
 <meta name="twitter:description" content="An rstudio::conf workshop on generative art with R">
 <meta name="twitter:image" content="http://art-from-code.netlify.app/img/banner.png">
 <meta name="twitter:creator" content="@djnavarro">
@@ -391,52 +391,11 @@
   <div class="reveal">
     <div class="slides">
 
-<section id="title-slide" data-background-image="../img/image4.jpg" data-background-size="cover" class="center">
-  <h1 class="title"><br>ART FROM CODE</h1>
-  <p class="author">Danielle Navarro<br><br><br><br>Wifi: &nbsp; Username: conf22 &nbsp; Password: together!</p>
+<section id="title-slide" data-background-image="../img/banner-2.png" data-background-size="cover" class="center">
+  <h1 class="title">ART FROM CODE</h1>
+  <p class="author">Danielle Navarro</p>
 </section>
 
-<section id="facilities" class="slide level2">
-<h2>Facilities</h2>
-<ul>
-<li>Gender neutral bathroom:
-<ul>
-<li>river side of Potomac Ballroom</li>
-</ul></li>
-<li>Meditation room:
-<ul>
-<li>National Harbor 9. (8am - 5pm, Mon - Thurs)</li>
-</ul></li>
-<li>Lactation room:
-<ul>
-<li>Potomac Dressing Room. (8am - 5pm, Mon - Thurs)</li>
-<li>The hotel also has a dedicated room behind reception</li>
-</ul></li>
-</ul>
-</section>
-<section id="code-of-conduct" class="slide level2">
-<h2>Code of conduct</h2>
-<ul>
-<li>The Code of Conduct and COVID policies can be found at <a href="https://www.rstudio.com/conference/2022/2022-conf-code-of-conduct/">www.rstudio.com/conference/2022/2022-conf-code-of-conduct</a>. Please review them carefully</li>
-<li>You can report Code of Conduct violations in person, by email, or by phone. Please see the policy linked above for contact information</li>
-</ul>
-</section>
-<section id="mask-policy" class="slide level2">
-<h2>Mask policy</h2>
-<ul>
-<li>RStudio requires that you wear a mask that fully covers your mouth and nose at all times in all public spaces</li>
-<li>We strongly recommend that you use a correctly fitted N95, KN95, or similar particulate filtering mask</li>
-<li>We will have a limited supply available upon request</li>
-</ul>
-</section>
-<section id="photography" class="slide level2">
-<h2>Photography</h2>
-<ul>
-<li>Red lanyard = Does not wish to be photographed</li>
-<li>Please note lanyard colors before taking a photo</li>
-<li>Respect their choices</li>
-</ul>
-</section>
 <section id="workshop-housekeeping" class="slide level2">
 <h2>Workshop housekeeping</h2>
 <ul>
@@ -536,28 +495,35 @@
 </tbody>
 </table>
 </section>
-<section id="set-up" class="slide level2">
-<h2>Set up</h2>
-<h3 id="option-1-local">Option 1: Local</h3>
+<section id="set-up-option-1-local-install" class="slide level2">
+<h2>Set up, option 1: Local install</h2>
+<ul>
+<li>Create project from Github, e.g.:</li>
+</ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="co"># create, download, and open project...</span></span>
-<span id="cb1-2"><a href="#cb1-2"></a>usethis<span class="sc">::</span><span class="fu">create_from_github</span>(</span>
-<span id="cb1-3"><a href="#cb1-3"></a>  <span class="at">repo_spec =</span> <span class="st">"rstudio-conf-2022/art-from-code"</span>, </span>
-<span id="cb1-4"><a href="#cb1-4"></a>  <span class="at">destdir =</span> <span class="st">"wherever/you/would/like"</span></span>
-<span id="cb1-5"><a href="#cb1-5"></a>)</span>
-<span id="cb1-6"><a href="#cb1-6"></a></span>
-<span id="cb1-7"><a href="#cb1-7"></a><span class="co"># within the project...</span></span>
-<span id="cb1-8"><a href="#cb1-8"></a>remotes<span class="sc">::</span><span class="fu">install_deps</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a>usethis<span class="sc">::</span><span class="fu">create_from_github</span>(</span>
+<span id="cb1-2"><a href="#cb1-2"></a>  <span class="at">repo_spec =</span> <span class="st">"rstudio-conf-2022/art-from-code"</span>, </span>
+<span id="cb1-3"><a href="#cb1-3"></a>  <span class="at">destdir =</span> <span class="st">"wherever/you/would/like"</span></span>
+<span id="cb1-4"><a href="#cb1-4"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p><br></p>
-<h3 id="option-2-rstudio-cloud">Option 2: RStudio cloud</h3>
-<p><a href="https://rstudio.cloud/spaces/250954">rstudio.cloud/spaces/250954</a></p>
+<ul>
+<li>Within the project, install dependencies:</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a>remotes<span class="sc">::</span><span class="fu">install_deps</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 </section>
-<section id="preemptive-apology" class="title-slide slide level1 center" data-background-image="../img/ash_14_006.png">
-<h1>Preemptive apology</h1>
-<p>I may not be at my best during the teaching period due to an incident during my travel. Some patience may be needed!</p>
+<section id="set-up-option-2-rstudio-cloud" class="slide level2">
+<h2>Set up, option 2: RStudio cloud</h2>
+<ul>
+<li>Go to <a href="https://rstudio.cloud">rstudio.cloud</a></li>
+<li>Create project from the <a href="https://github.com/rstudio-conf-2022/art-from-code">rstudio-conf-2022/art-from-code</a> GitHub repo</li>
+<li>Install dependencies:</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a>remotes<span class="sc">::</span><span class="fu">install_deps</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 </section>
-
 <section id="say-hello" class="title-slide slide level1 center" data-background-image="../img/nebula_04_153_5000.jpg">
 <h1>Say hello!</h1>
 
@@ -615,9 +581,9 @@
 </section>
 <section id="technique-and-art-functions" class="slide level2">
 <h2><a href="https://art-from-code.netlify.app/day-1/session-1/#technique">Technique and art functions</a></h2>
-<div class="sourceCode" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a><span class="fu">polar_art</span>(<span class="at">seed =</span> <span class="dv">1</span>, <span class="at">n =</span> <span class="dv">500</span>, <span class="at">palette =</span> <span class="fu">c</span>(<span class="st">"antiquewhite"</span>, <span class="st">"orange"</span>, <span class="st">"bisque"</span>))</span>
-<span id="cb2-2"><a href="#cb2-2"></a><span class="fu">polar_art</span>(<span class="at">seed =</span> <span class="dv">1</span>, <span class="at">n =</span> <span class="dv">500</span>, <span class="at">palette =</span> <span class="fu">c</span>(<span class="st">"red"</span>, <span class="st">"black"</span>, <span class="st">"white"</span>))</span>
-<span id="cb2-3"><a href="#cb2-3"></a><span class="fu">polar_art</span>(<span class="at">seed =</span> <span class="dv">2</span>, <span class="at">n =</span> <span class="dv">50</span>, <span class="at">palette =</span> <span class="fu">c</span>(<span class="st">"red"</span>, <span class="st">"black"</span>, <span class="st">"white"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a><span class="fu">polar_art</span>(<span class="at">seed =</span> <span class="dv">1</span>, <span class="at">n =</span> <span class="dv">500</span>, <span class="at">palette =</span> <span class="fu">c</span>(<span class="st">"antiquewhite"</span>, <span class="st">"orange"</span>, <span class="st">"bisque"</span>))</span>
+<span id="cb4-2"><a href="#cb4-2"></a><span class="fu">polar_art</span>(<span class="at">seed =</span> <span class="dv">1</span>, <span class="at">n =</span> <span class="dv">500</span>, <span class="at">palette =</span> <span class="fu">c</span>(<span class="st">"red"</span>, <span class="st">"black"</span>, <span class="st">"white"</span>))</span>
+<span id="cb4-3"><a href="#cb4-3"></a><span class="fu">polar_art</span>(<span class="at">seed =</span> <span class="dv">2</span>, <span class="at">n =</span> <span class="dv">50</span>, <span class="at">palette =</span> <span class="fu">c</span>(<span class="st">"red"</span>, <span class="st">"black"</span>, <span class="st">"white"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="quarto-layout-panel">
 <div class="quarto-layout-row quarto-layout-valign-top">
 <div class="quarto-layout-cell" style="flex-basis: 33.3%;justify-content: center;">
@@ -650,18 +616,18 @@
 <section id="colour-and-palettes" class="slide level2">
 <h2><a href="https://art-from-code.netlify.app/day-1/session-1/#colour">Colour and palettes</a></h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a>sample_canva <span class="ot">&lt;-</span> <span class="cf">function</span>(<span class="at">seed =</span> <span class="cn">NULL</span>) {</span>
-<span id="cb3-2"><a href="#cb3-2"></a>  <span class="cf">if</span>(<span class="sc">!</span><span class="fu">is.null</span>(seed)) <span class="fu">set.seed</span>(seed)</span>
-<span id="cb3-3"><a href="#cb3-3"></a>  <span class="fu">sample</span>(ggthemes<span class="sc">::</span>canva_palettes, <span class="dv">1</span>)[[<span class="dv">1</span>]]</span>
-<span id="cb3-4"><a href="#cb3-4"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a>sample_canva <span class="ot">&lt;-</span> <span class="cf">function</span>(<span class="at">seed =</span> <span class="cn">NULL</span>) {</span>
+<span id="cb5-2"><a href="#cb5-2"></a>  <span class="cf">if</span>(<span class="sc">!</span><span class="fu">is.null</span>(seed)) <span class="fu">set.seed</span>(seed)</span>
+<span id="cb5-3"><a href="#cb5-3"></a>  <span class="fu">sample</span>(ggthemes<span class="sc">::</span>canva_palettes, <span class="dv">1</span>)[[<span class="dv">1</span>]]</span>
+<span id="cb5-4"><a href="#cb5-4"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell quarto-layout-panel">
 <div class="quarto-layout-row quarto-layout-valign-top">
 <div class="cell-output-display quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
-<p><img data-src="index_files/figure-revealjs/unnamed-chunk-4-1.png" width="576"></p>
+<p><img data-src="index_files/figure-revealjs/unnamed-chunk-6-1.png" width="576"></p>
 </div>
 <div class="cell-output-display quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
-<p><img data-src="index_files/figure-revealjs/unnamed-chunk-4-2.png" width="576"></p>
+<p><img data-src="index_files/figure-revealjs/unnamed-chunk-6-2.png" width="576"></p>
 </div>
 </div>
 </div>
@@ -782,13 +748,13 @@
 </section>
 <section id="using-dplyr-with-ambient" class="slide level2">
 <h2><a href="https://art-from-code.netlify.app/day-1/session-2/#why-dplyr-is-a-girls-best-friend">Using dplyr with ambient</a></h2>
-<div class="sourceCode" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a>blank_canvas <span class="sc">|&gt;</span> </span>
-<span id="cb4-2"><a href="#cb4-2"></a>  <span class="fu">mutate</span>(</span>
-<span id="cb4-3"><a href="#cb4-3"></a>    <span class="at">lf_noise =</span> <span class="fu">gen_simplex</span>(x, y, <span class="at">frequency =</span> <span class="dv">1</span>, <span class="at">seed =</span> <span class="dv">1234</span>),</span>
-<span id="cb4-4"><a href="#cb4-4"></a>    <span class="at">mf_noise =</span> <span class="fu">gen_simplex</span>(x, y, <span class="at">frequency =</span> <span class="dv">20</span>, <span class="at">seed =</span> <span class="dv">1234</span>),</span>
-<span id="cb4-5"><a href="#cb4-5"></a>    <span class="at">hf_noise =</span> <span class="fu">gen_simplex</span>(x, y, <span class="at">frequency =</span> <span class="dv">99</span>, <span class="at">seed =</span> <span class="dv">1234</span>),</span>
-<span id="cb4-6"><a href="#cb4-6"></a>    <span class="at">paint =</span> lf_noise <span class="sc">+</span> mf_noise <span class="sc">+</span> hf_noise</span>
-<span id="cb4-7"><a href="#cb4-7"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a>blank_canvas <span class="sc">|&gt;</span> </span>
+<span id="cb6-2"><a href="#cb6-2"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb6-3"><a href="#cb6-3"></a>    <span class="at">lf_noise =</span> <span class="fu">gen_simplex</span>(x, y, <span class="at">frequency =</span> <span class="dv">1</span>, <span class="at">seed =</span> <span class="dv">1234</span>),</span>
+<span id="cb6-4"><a href="#cb6-4"></a>    <span class="at">mf_noise =</span> <span class="fu">gen_simplex</span>(x, y, <span class="at">frequency =</span> <span class="dv">20</span>, <span class="at">seed =</span> <span class="dv">1234</span>),</span>
+<span id="cb6-5"><a href="#cb6-5"></a>    <span class="at">hf_noise =</span> <span class="fu">gen_simplex</span>(x, y, <span class="at">frequency =</span> <span class="dv">99</span>, <span class="at">seed =</span> <span class="dv">1234</span>),</span>
+<span id="cb6-6"><a href="#cb6-6"></a>    <span class="at">paint =</span> lf_noise <span class="sc">+</span> mf_noise <span class="sc">+</span> hf_noise</span>
+<span id="cb6-7"><a href="#cb6-7"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="quarto-layout-panel">
 <div class="quarto-layout-row quarto-layout-valign-top">
 <div class="quarto-layout-cell" style="flex-basis: 33.3%;justify-content: center;">
@@ -805,9 +771,9 @@
 </section>
 <section id="fractals-in-ambient" class="slide level2">
 <h2><a href="https://art-from-code.netlify.app/day-1/session-2/#fractals">Fractals in ambient</a></h2>
-<div class="sourceCode" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a><span class="fu">fractal_art</span>(ridged, gen_simplex, <span class="at">seed =</span> <span class="dv">2</span>, <span class="at">octaves =</span> <span class="dv">1</span>)</span>
-<span id="cb5-2"><a href="#cb5-2"></a><span class="fu">fractal_art</span>(ridged, gen_simplex, <span class="at">seed =</span> <span class="dv">2</span>, <span class="at">octaves =</span> <span class="dv">2</span>)</span>
-<span id="cb5-3"><a href="#cb5-3"></a><span class="fu">fractal_art</span>(ridged, gen_simplex, <span class="at">seed =</span> <span class="dv">2</span>, <span class="at">octaves =</span> <span class="dv">20</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a><span class="fu">fractal_art</span>(ridged, gen_simplex, <span class="at">seed =</span> <span class="dv">2</span>, <span class="at">octaves =</span> <span class="dv">1</span>)</span>
+<span id="cb7-2"><a href="#cb7-2"></a><span class="fu">fractal_art</span>(ridged, gen_simplex, <span class="at">seed =</span> <span class="dv">2</span>, <span class="at">octaves =</span> <span class="dv">2</span>)</span>
+<span id="cb7-3"><a href="#cb7-3"></a><span class="fu">fractal_art</span>(ridged, gen_simplex, <span class="at">seed =</span> <span class="dv">2</span>, <span class="at">octaves =</span> <span class="dv">20</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="quarto-layout-panel">
 <div class="quarto-layout-row quarto-layout-valign-top">
 <div class="quarto-layout-cell" style="flex-basis: 33.3%;justify-content: center;">
@@ -920,10 +886,10 @@
 </section>
 <section id="example-splotches" class="slide level2">
 <h2>Example: <a href="https://art-from-code.netlify.app/day-1/session-3/#using-the-method-splotches">Splotches</a></h2>
-<div class="sourceCode" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a><span class="fu">show_multipolygon</span>(splotch_1, <span class="st">"#f51720"</span>, <span class="at">alpha =</span> .<span class="dv">2</span>)</span>
-<span id="cb6-2"><a href="#cb6-2"></a><span class="fu">show_multipolygon</span>(splotch_2, <span class="st">"#f8d210"</span>, <span class="at">alpha =</span> .<span class="dv">2</span>)</span>
-<span id="cb6-3"><a href="#cb6-3"></a><span class="fu">show_multipolygon</span>(splotch_3, <span class="st">"#059dc0"</span>, <span class="at">alpha =</span> .<span class="dv">2</span>)</span>
-<span id="cb6-4"><a href="#cb6-4"></a><span class="fu">show_multipolygon</span>(splotch_4, <span class="st">"#81b622"</span>, <span class="at">alpha =</span> .<span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a><span class="fu">show_multipolygon</span>(splotch_1, <span class="st">"#f51720"</span>, <span class="at">alpha =</span> .<span class="dv">2</span>)</span>
+<span id="cb8-2"><a href="#cb8-2"></a><span class="fu">show_multipolygon</span>(splotch_2, <span class="st">"#f8d210"</span>, <span class="at">alpha =</span> .<span class="dv">2</span>)</span>
+<span id="cb8-3"><a href="#cb8-3"></a><span class="fu">show_multipolygon</span>(splotch_3, <span class="st">"#059dc0"</span>, <span class="at">alpha =</span> .<span class="dv">2</span>)</span>
+<span id="cb8-4"><a href="#cb8-4"></a><span class="fu">show_multipolygon</span>(splotch_4, <span class="st">"#81b622"</span>, <span class="at">alpha =</span> .<span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="quarto-layout-panel">
 <div class="quarto-layout-row quarto-layout-valign-top">
 <div class="quarto-layout-cell" style="flex-basis: 25.0%;justify-content: center;">
@@ -953,22 +919,22 @@
 <div class="quarto-layout-panel">
 <div class="quarto-layout-row quarto-layout-valign-top">
 <div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
-<div class="sourceCode" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a>  <span class="fu">tibble</span>(</span>
-<span id="cb7-2"><a href="#cb7-2"></a>    <span class="at">angle =</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">2</span><span class="sc">*</span>pi, <span class="at">length.out =</span> n),</span>
-<span id="cb7-3"><a href="#cb7-3"></a>    <span class="at">x_base =</span> <span class="fu">cos</span>(angle),</span>
-<span id="cb7-4"><a href="#cb7-4"></a>    <span class="at">y_base =</span> <span class="fu">sin</span>(angle),</span>
-<span id="cb7-5"><a href="#cb7-5"></a>    <span class="at">radius =</span> <span class="fu">fracture</span>(</span>
-<span id="cb7-6"><a href="#cb7-6"></a>      <span class="at">x =</span> x_base, </span>
-<span id="cb7-7"><a href="#cb7-7"></a>      <span class="at">y =</span> y_base, </span>
-<span id="cb7-8"><a href="#cb7-8"></a>      <span class="at">freq_init =</span> freq_init,</span>
-<span id="cb7-9"><a href="#cb7-9"></a>      <span class="at">noise =</span> gen_perlin, </span>
-<span id="cb7-10"><a href="#cb7-10"></a>      <span class="at">fractal =</span> fbm, </span>
-<span id="cb7-11"><a href="#cb7-11"></a>      <span class="at">octaves =</span> octaves</span>
-<span id="cb7-12"><a href="#cb7-12"></a>    ) <span class="sc">|&gt;</span></span>
-<span id="cb7-13"><a href="#cb7-13"></a>      <span class="fu">normalise_radius</span>(r_min, r_max),</span>
-<span id="cb7-14"><a href="#cb7-14"></a>    <span class="at">x =</span> radius <span class="sc">*</span> x_base,</span>
-<span id="cb7-15"><a href="#cb7-15"></a>    <span class="at">y =</span> radius <span class="sc">*</span> y_base</span>
-<span id="cb7-16"><a href="#cb7-16"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a>  <span class="fu">tibble</span>(</span>
+<span id="cb9-2"><a href="#cb9-2"></a>    <span class="at">angle =</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">2</span><span class="sc">*</span>pi, <span class="at">length.out =</span> n),</span>
+<span id="cb9-3"><a href="#cb9-3"></a>    <span class="at">x_base =</span> <span class="fu">cos</span>(angle),</span>
+<span id="cb9-4"><a href="#cb9-4"></a>    <span class="at">y_base =</span> <span class="fu">sin</span>(angle),</span>
+<span id="cb9-5"><a href="#cb9-5"></a>    <span class="at">radius =</span> <span class="fu">fracture</span>(</span>
+<span id="cb9-6"><a href="#cb9-6"></a>      <span class="at">x =</span> x_base, </span>
+<span id="cb9-7"><a href="#cb9-7"></a>      <span class="at">y =</span> y_base, </span>
+<span id="cb9-8"><a href="#cb9-8"></a>      <span class="at">freq_init =</span> freq_init,</span>
+<span id="cb9-9"><a href="#cb9-9"></a>      <span class="at">noise =</span> gen_perlin, </span>
+<span id="cb9-10"><a href="#cb9-10"></a>      <span class="at">fractal =</span> fbm, </span>
+<span id="cb9-11"><a href="#cb9-11"></a>      <span class="at">octaves =</span> octaves</span>
+<span id="cb9-12"><a href="#cb9-12"></a>    ) <span class="sc">|&gt;</span></span>
+<span id="cb9-13"><a href="#cb9-13"></a>      <span class="fu">normalise_radius</span>(r_min, r_max),</span>
+<span id="cb9-14"><a href="#cb9-14"></a>    <span class="at">x =</span> radius <span class="sc">*</span> x_base,</span>
+<span id="cb9-15"><a href="#cb9-15"></a>    <span class="at">y =</span> radius <span class="sc">*</span> y_base</span>
+<span id="cb9-16"><a href="#cb9-16"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
 <p><img data-src="../day-1/session-3/index_files/figure-html/show-perlin-blobs-2.png"></p>
@@ -981,18 +947,18 @@
 <div class="quarto-layout-panel">
 <div class="quarto-layout-row quarto-layout-valign-top">
 <div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
-<div class="sourceCode" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a>heart_x <span class="ot">&lt;-</span> <span class="cf">function</span>(angle) {</span>
-<span id="cb8-2"><a href="#cb8-2"></a>  x <span class="ot">&lt;-</span> (<span class="dv">16</span> <span class="sc">*</span> <span class="fu">sin</span>(angle) <span class="sc">^</span> <span class="dv">3</span>) <span class="sc">/</span> <span class="dv">17</span></span>
-<span id="cb8-3"><a href="#cb8-3"></a>  <span class="fu">return</span>(x <span class="sc">-</span> <span class="fu">mean</span>(x))</span>
-<span id="cb8-4"><a href="#cb8-4"></a>}</span>
-<span id="cb8-5"><a href="#cb8-5"></a></span>
-<span id="cb8-6"><a href="#cb8-6"></a>heart_y <span class="ot">&lt;-</span> <span class="cf">function</span>(angle) {</span>
-<span id="cb8-7"><a href="#cb8-7"></a>  y <span class="ot">&lt;-</span> (<span class="dv">13</span> <span class="sc">*</span> <span class="fu">cos</span>(angle) <span class="sc">-</span> </span>
-<span id="cb8-8"><a href="#cb8-8"></a>      <span class="dv">5</span> <span class="sc">*</span> <span class="fu">cos</span>(<span class="dv">2</span> <span class="sc">*</span> angle) <span class="sc">-</span> </span>
-<span id="cb8-9"><a href="#cb8-9"></a>      <span class="dv">2</span> <span class="sc">*</span> <span class="fu">cos</span>(<span class="dv">3</span> <span class="sc">*</span> angle) <span class="sc">-</span></span>
-<span id="cb8-10"><a href="#cb8-10"></a>          <span class="fu">cos</span>(<span class="dv">4</span> <span class="sc">*</span> angle)) <span class="sc">/</span> <span class="dv">17</span></span>
-<span id="cb8-11"><a href="#cb8-11"></a>  <span class="fu">return</span>(y <span class="sc">-</span> <span class="fu">mean</span>(y))</span>
-<span id="cb8-12"><a href="#cb8-12"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a>heart_x <span class="ot">&lt;-</span> <span class="cf">function</span>(angle) {</span>
+<span id="cb10-2"><a href="#cb10-2"></a>  x <span class="ot">&lt;-</span> (<span class="dv">16</span> <span class="sc">*</span> <span class="fu">sin</span>(angle) <span class="sc">^</span> <span class="dv">3</span>) <span class="sc">/</span> <span class="dv">17</span></span>
+<span id="cb10-3"><a href="#cb10-3"></a>  <span class="fu">return</span>(x <span class="sc">-</span> <span class="fu">mean</span>(x))</span>
+<span id="cb10-4"><a href="#cb10-4"></a>}</span>
+<span id="cb10-5"><a href="#cb10-5"></a></span>
+<span id="cb10-6"><a href="#cb10-6"></a>heart_y <span class="ot">&lt;-</span> <span class="cf">function</span>(angle) {</span>
+<span id="cb10-7"><a href="#cb10-7"></a>  y <span class="ot">&lt;-</span> (<span class="dv">13</span> <span class="sc">*</span> <span class="fu">cos</span>(angle) <span class="sc">-</span> </span>
+<span id="cb10-8"><a href="#cb10-8"></a>      <span class="dv">5</span> <span class="sc">*</span> <span class="fu">cos</span>(<span class="dv">2</span> <span class="sc">*</span> angle) <span class="sc">-</span> </span>
+<span id="cb10-9"><a href="#cb10-9"></a>      <span class="dv">2</span> <span class="sc">*</span> <span class="fu">cos</span>(<span class="dv">3</span> <span class="sc">*</span> angle) <span class="sc">-</span></span>
+<span id="cb10-10"><a href="#cb10-10"></a>          <span class="fu">cos</span>(<span class="dv">4</span> <span class="sc">*</span> angle)) <span class="sc">/</span> <span class="dv">17</span></span>
+<span id="cb10-11"><a href="#cb10-11"></a>  <span class="fu">return</span>(y <span class="sc">-</span> <span class="fu">mean</span>(y))</span>
+<span id="cb10-12"><a href="#cb10-12"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
 <p><img data-src="../day-1/session-3/index_files/figure-html/show-perlin-hearts-2.png"></p>
@@ -1070,15 +1036,15 @@
 <div class="quarto-layout-panel">
 <div class="quarto-layout-row quarto-layout-valign-top">
 <div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
-<div class="sourceCode" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a>circle_shadow <span class="ot">&lt;-</span> <span class="fu">ray_shade</span>(</span>
-<span id="cb9-2"><a href="#cb9-2"></a>  <span class="at">heightmap =</span> circle_array,</span>
-<span id="cb9-3"><a href="#cb9-3"></a>  <span class="at">sunaltitude =</span> <span class="dv">15</span>, </span>
-<span id="cb9-4"><a href="#cb9-4"></a>  <span class="at">sunangle =</span> <span class="dv">135</span>,</span>
-<span id="cb9-5"><a href="#cb9-5"></a>  <span class="at">zscale =</span> .<span class="dv">01</span>,</span>
-<span id="cb9-6"><a href="#cb9-6"></a>  <span class="at">multicore =</span> <span class="cn">TRUE</span></span>
-<span id="cb9-7"><a href="#cb9-7"></a>)</span>
-<span id="cb9-8"><a href="#cb9-8"></a></span>
-<span id="cb9-9"><a href="#cb9-9"></a><span class="fu">plot_map</span>(circle_shadow, <span class="at">rotate =</span> <span class="dv">270</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a>circle_shadow <span class="ot">&lt;-</span> <span class="fu">ray_shade</span>(</span>
+<span id="cb11-2"><a href="#cb11-2"></a>  <span class="at">heightmap =</span> circle_array,</span>
+<span id="cb11-3"><a href="#cb11-3"></a>  <span class="at">sunaltitude =</span> <span class="dv">15</span>, </span>
+<span id="cb11-4"><a href="#cb11-4"></a>  <span class="at">sunangle =</span> <span class="dv">135</span>,</span>
+<span id="cb11-5"><a href="#cb11-5"></a>  <span class="at">zscale =</span> .<span class="dv">01</span>,</span>
+<span id="cb11-6"><a href="#cb11-6"></a>  <span class="at">multicore =</span> <span class="cn">TRUE</span></span>
+<span id="cb11-7"><a href="#cb11-7"></a>)</span>
+<span id="cb11-8"><a href="#cb11-8"></a></span>
+<span id="cb11-9"><a href="#cb11-9"></a><span class="fu">plot_map</span>(circle_shadow, <span class="at">rotate =</span> <span class="dv">270</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
 <p><img data-src="../day-1/session-4/index_files/figure-html/circle-shadow-map-1.png"></p>
@@ -1091,14 +1057,14 @@
 <div class="quarto-layout-panel">
 <div class="quarto-layout-row quarto-layout-valign-top">
 <div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
-<div class="sourceCode" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a>circle_scape <span class="ot">&lt;-</span> circle_array <span class="sc">|&gt;</span> </span>
-<span id="cb10-2"><a href="#cb10-2"></a>  <span class="fu">height_shade</span>() <span class="sc">|&gt;</span></span>
-<span id="cb10-3"><a href="#cb10-3"></a>  <span class="fu">add_shadow</span>(</span>
-<span id="cb10-4"><a href="#cb10-4"></a>    <span class="at">shadowmap =</span> circle_shadow,</span>
-<span id="cb10-5"><a href="#cb10-5"></a>    <span class="at">max_darken =</span> .<span class="dv">1</span></span>
-<span id="cb10-6"><a href="#cb10-6"></a>  )</span>
-<span id="cb10-7"><a href="#cb10-7"></a></span>
-<span id="cb10-8"><a href="#cb10-8"></a><span class="fu">plot_map</span>(circle_scape, <span class="at">rotate =</span> <span class="dv">270</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1"></a>circle_scape <span class="ot">&lt;-</span> circle_array <span class="sc">|&gt;</span> </span>
+<span id="cb12-2"><a href="#cb12-2"></a>  <span class="fu">height_shade</span>() <span class="sc">|&gt;</span></span>
+<span id="cb12-3"><a href="#cb12-3"></a>  <span class="fu">add_shadow</span>(</span>
+<span id="cb12-4"><a href="#cb12-4"></a>    <span class="at">shadowmap =</span> circle_shadow,</span>
+<span id="cb12-5"><a href="#cb12-5"></a>    <span class="at">max_darken =</span> .<span class="dv">1</span></span>
+<span id="cb12-6"><a href="#cb12-6"></a>  )</span>
+<span id="cb12-7"><a href="#cb12-7"></a></span>
+<span id="cb12-8"><a href="#cb12-8"></a><span class="fu">plot_map</span>(circle_scape, <span class="at">rotate =</span> <span class="dv">270</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
 <p><img data-src="../day-1/session-4/index_files/figure-html/circle-render-1.png"></p>
@@ -1247,16 +1213,16 @@
 <div class="quarto-layout-panel">
 <div class="quarto-layout-row quarto-layout-valign-top">
 <div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
-<div class="sourceCode" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a>tree <span class="ot">&lt;-</span> <span class="fu">flametree_grow</span>(</span>
-<span id="cb11-2"><a href="#cb11-2"></a>  <span class="at">seed =</span> <span class="dv">1</span>, </span>
-<span id="cb11-3"><a href="#cb11-3"></a>  <span class="at">time =</span> <span class="dv">9</span>, </span>
-<span id="cb11-4"><a href="#cb11-4"></a>  <span class="at">angle =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">15</span>, <span class="dv">15</span>, <span class="dv">30</span>)</span>
-<span id="cb11-5"><a href="#cb11-5"></a>)</span>
-<span id="cb11-6"><a href="#cb11-6"></a>tree <span class="sc">|&gt;</span> </span>
-<span id="cb11-7"><a href="#cb11-7"></a>  <span class="fu">flametree_plot</span>(</span>
-<span id="cb11-8"><a href="#cb11-8"></a>    <span class="at">background =</span> <span class="st">"#222222"</span>, </span>
-<span id="cb11-9"><a href="#cb11-9"></a>    <span class="at">palette =</span> <span class="fu">c</span>(<span class="st">"#ffffff"</span>, <span class="st">"#f652a0"</span>)</span>
-<span id="cb11-10"><a href="#cb11-10"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1"></a>tree <span class="ot">&lt;-</span> <span class="fu">flametree_grow</span>(</span>
+<span id="cb13-2"><a href="#cb13-2"></a>  <span class="at">seed =</span> <span class="dv">1</span>, </span>
+<span id="cb13-3"><a href="#cb13-3"></a>  <span class="at">time =</span> <span class="dv">9</span>, </span>
+<span id="cb13-4"><a href="#cb13-4"></a>  <span class="at">angle =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">15</span>, <span class="dv">15</span>, <span class="dv">30</span>)</span>
+<span id="cb13-5"><a href="#cb13-5"></a>)</span>
+<span id="cb13-6"><a href="#cb13-6"></a>tree <span class="sc">|&gt;</span> </span>
+<span id="cb13-7"><a href="#cb13-7"></a>  <span class="fu">flametree_plot</span>(</span>
+<span id="cb13-8"><a href="#cb13-8"></a>    <span class="at">background =</span> <span class="st">"#222222"</span>, </span>
+<span id="cb13-9"><a href="#cb13-9"></a>    <span class="at">palette =</span> <span class="fu">c</span>(<span class="st">"#ffffff"</span>, <span class="st">"#f652a0"</span>)</span>
+<span id="cb13-10"><a href="#cb13-10"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
 <p><img data-src="../day-2/session-3/index_files/figure-html/flametree-plot-origin-1.png"></p>
@@ -1323,19 +1289,14 @@
 <h2><a href="https://art-from-code.netlify.app/day-2/session-3/#blend">Image blends</a></h2>
 
 <img data-src="../day-2/session-3/index_files/figure-html/blend-1.png" class="r-stretch"></section></section>
-<section>
 <section id="wrap-up" class="title-slide slide level1 center">
 <h1><a href="https://art-from-code.netlify.com/day-2/session-4">Wrap up</a></h1>
 <p>Session 4: In which we end things by making things up as we go along, because this is, after all, an art workshop!</p>
-</section>
-<section id="post-workshop-survey" class="slide level2">
-<h2>Post-workshop survey!</h2>
-<p><a href="https://rstd.io/conf-workshop-survey">rstd.io/conf-workshop-survey</a></p>
 
 <div class="footer footer-default">
 <p><a href="https://art-from-code.netlify.app">art-from-code.netlify.app</a></p>
 </div>
-</section></section>
+</section>
     </div>
   </div>
 
