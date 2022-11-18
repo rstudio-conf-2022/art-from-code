@@ -5,9 +5,9 @@
 <script src="../site_libs/quarto-html/popper.min.js"></script>
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
 <link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../site_libs/quarto-html/quarto-html.min.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
 <link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
-  <meta name="generator" content="quarto-0.9.613">
+  <meta name="generator" content="quarto-1.1.149">
 
   <meta name="author" content="Danielle Navarro">
   <title>ART FROM CODE</title>
@@ -19,10 +19,15 @@
   <style>
     code{white-space: pre-wrap;}
     span.smallcaps{font-variant: small-caps;}
-    span.underline{text-decoration: underline;}
-    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
     div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
     ul.task-list{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
     pre > code.sourceCode { white-space: pre; position: relative; }
     pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
     pre > code.sourceCode > span:empty { height: 1.2em; }
@@ -387,7 +392,7 @@
 <meta name="twitter:creator" content="@djnavarro">
 <meta name="twitter:card" content="summary_large_image">
 </head>
-<body>
+<body class="quarto-dark">
   <div class="reveal">
     <div class="slides">
 
@@ -556,7 +561,7 @@
 <div class="quarto-figure quarto-figure-center">
 <figure>
 <p><img data-src="../day-1/session-1/index_files/figure-html/familiar-ggplot-1.png"></p>
-<p></p><figcaption aria-hidden="true">Typical ggplot2 output</figcaption><p></p>
+<p></p><figcaption>Typical ggplot2 output</figcaption><p></p>
 </figure>
 </div>
 </div>
@@ -564,7 +569,7 @@
 <div class="quarto-figure quarto-figure-center">
 <figure>
 <p><img data-src="../day-1/session-1/index_files/figure-html/tweak-ggplot-1.png"></p>
-<p></p><figcaption aria-hidden="true">Slightly styled output</figcaption><p></p>
+<p></p><figcaption>Slightly styled output</figcaption><p></p>
 </figure>
 </div>
 </div>
@@ -572,7 +577,7 @@
 <div class="quarto-figure quarto-figure-center">
 <figure>
 <p><img data-src="../day-1/session-1/index_files/figure-html/tweak-ggplot-more-1.png"></p>
-<p></p><figcaption aria-hidden="true">Now is it art?</figcaption><p></p>
+<p></p><figcaption>Now is it art?</figcaption><p></p>
 </figure>
 </div>
 </div>
@@ -590,7 +595,7 @@
 <div class="quarto-figure quarto-figure-center">
 <figure>
 <p><img data-src="../day-1/session-1/index_files/figure-html/art-functions-1.png"></p>
-<p></p><figcaption aria-hidden="true">Output 1</figcaption><p></p>
+<p></p><figcaption>Output 1</figcaption><p></p>
 </figure>
 </div>
 </div>
@@ -598,7 +603,7 @@
 <div class="quarto-figure quarto-figure-center">
 <figure>
 <p><img data-src="../day-1/session-1/index_files/figure-html/art-functions-2.png"></p>
-<p></p><figcaption aria-hidden="true">Output 2</figcaption><p></p>
+<p></p><figcaption>Output 2</figcaption><p></p>
 </figure>
 </div>
 </div>
@@ -606,7 +611,7 @@
 <div class="quarto-figure quarto-figure-center">
 <figure>
 <p><img data-src="../day-1/session-1/index_files/figure-html/art-functions-3.png"></p>
-<p></p><figcaption aria-hidden="true">Output 3</figcaption><p></p>
+<p></p><figcaption>Output 3</figcaption><p></p>
 </figure>
 </div>
 </div>
@@ -640,7 +645,7 @@
 <div class="quarto-figure quarto-figure-center">
 <figure>
 <p><img data-src="../day-1/session-1/index_files/figure-html/compositionality-1.png"></p>
-<p></p><figcaption aria-hidden="true">Multiple data</figcaption><p></p>
+<p></p><figcaption>Multiple data</figcaption><p></p>
 </figure>
 </div>
 </div>
@@ -648,7 +653,7 @@
 <div class="quarto-figure quarto-figure-center">
 <figure>
 <p><img data-src="../day-1/session-1/index_files/figure-html/compositionality-2-1.png"></p>
-<p></p><figcaption aria-hidden="true">Multiple copies</figcaption><p></p>
+<p></p><figcaption>Multiple copies</figcaption><p></p>
 </figure>
 </div>
 </div>
@@ -656,7 +661,7 @@
 <div class="quarto-figure quarto-figure-center">
 <figure>
 <p><img data-src="../day-1/session-1/index_files/figure-html/compositionality-3-1.png"></p>
-<p></p><figcaption aria-hidden="true">Trickery with linetypes</figcaption><p></p>
+<p></p><figcaption>Trickery with linetypes</figcaption><p></p>
 </figure>
 </div>
 </div>
@@ -688,7 +693,7 @@
 <div class="quarto-figure quarto-figure-center">
 <figure>
 <p><img data-src="../img/ascii-cross.png"></p>
-<p></p><figcaption aria-hidden="true">A spatial pattern expressed as a matrix of zeros, with one column and one row set to 1</figcaption><p></p>
+<p></p><figcaption>A spatial pattern expressed as a matrix of zeros, with one column and one row set to 1</figcaption><p></p>
 </figure>
 </div>
 </div>
@@ -696,7 +701,7 @@
 <div class="quarto-figure quarto-figure-center">
 <figure>
 <p><img data-src="../day-1/session-2/index_files/figure-html/random-crosses-1.png"></p>
-<p></p><figcaption aria-hidden="true">Same idea as an image</figcaption><p></p>
+<p></p><figcaption>Same idea as an image</figcaption><p></p>
 </figure>
 </div>
 </div>
@@ -796,7 +801,7 @@
 <div class="quarto-figure quarto-figure-center">
 <figure>
 <p><img data-src="../day-1/session-2/index_files/figure-html/smol-simplex-2.png"></p>
-<p></p><figcaption aria-hidden="true">Simplex noise as surface</figcaption><p></p>
+<p></p><figcaption>Simplex noise as surface</figcaption><p></p>
 </figure>
 </div>
 </div>
@@ -804,7 +809,7 @@
 <div class="quarto-figure quarto-figure-center">
 <figure>
 <p><img data-src="../day-1/session-2/index_files/figure-html/smol-slope-1.png"></p>
-<p></p><figcaption aria-hidden="true">Slope of the surface</figcaption><p></p>
+<p></p><figcaption>Slope of the surface</figcaption><p></p>
 </figure>
 </div>
 </div>
@@ -812,7 +817,7 @@
 <div class="quarto-figure quarto-figure-center">
 <figure>
 <p><img data-src="../day-1/session-2/index_files/figure-html/smol-curl-1.png"></p>
-<p></p><figcaption aria-hidden="true">Curl of the surface</figcaption><p></p>
+<p></p><figcaption>Curl of the surface</figcaption><p></p>
 </figure>
 </div>
 </div>
@@ -1002,7 +1007,7 @@
 <div class="quarto-figure quarto-figure-center">
 <figure>
 <p><img data-src="../day-1/session-3/index_files/figure-html/smooth-path-1.png"></p>
-<p></p><figcaption aria-hidden="true">original</figcaption><p></p>
+<p></p><figcaption>original</figcaption><p></p>
 </figure>
 </div>
 </div>
@@ -1010,7 +1015,7 @@
 <div class="quarto-figure quarto-figure-center">
 <figure>
 <p><img data-src="../day-1/session-3/index_files/figure-html/smooth-path-textured-1.png"></p>
-<p></p><figcaption aria-hidden="true">textured</figcaption><p></p>
+<p></p><figcaption>textured</figcaption><p></p>
 </figure>
 </div>
 </div>
@@ -1552,6 +1557,24 @@
 
     <script id="quarto-html-after-body" type="application/javascript">
     window.document.addEventListener("DOMContentLoaded", function (event) {
+      const toggleBodyColorMode = (bsSheetEl) => {
+        const mode = bsSheetEl.getAttribute("data-mode");
+        const bodyEl = window.document.querySelector("body");
+        if (mode === "dark") {
+          bodyEl.classList.add("quarto-dark");
+          bodyEl.classList.remove("quarto-light");
+        } else {
+          bodyEl.classList.add("quarto-light");
+          bodyEl.classList.remove("quarto-dark");
+        }
+      }
+      const toggleBodyColorPrimary = () => {
+        const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+        if (bsSheetEl) {
+          toggleBodyColorMode(bsSheetEl);
+        }
+      }
+      toggleBodyColorPrimary();  
       const tabsets =  window.document.querySelectorAll(".panel-tabset-tabby")
       tabsets.forEach(function(tabset) {
         const tabby = new Tabby('#' + tabset.id);
@@ -1600,7 +1623,8 @@
       for (var i=0; i<noterefs.length; i++) {
         const ref = noterefs[i];
         tippyHover(ref, function() {
-          let href = ref.getAttribute('href');
+          // use id or data attribute instead here
+          let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
           try { href = new URL(href).hash; } catch {}
           const id = href.replace(/^#\/?/, "");
           const note = window.document.getElementById(id);

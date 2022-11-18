@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-0.9.613">
+<meta name="generator" content="quarto-1.1.149">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -12,10 +12,15 @@
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
-span.underline{text-decoration: underline;}
-div.column{display: inline-block; vertical-align: top; width: 50%;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
 div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
 </style>
 
 
@@ -34,7 +39,7 @@ ul.task-list{list-style: none;}
 <link href="site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="dark">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -59,11 +64,11 @@ ul.task-list{list-style: none;}
 <link rel="stylesheet" href="styles.css">
 <meta property="og:title" content="ART FROM CODE">
 <meta property="og:description" content="An rstudio::conf workshop on generative art with R">
-<meta property="og:image" content="http://art-from-code.netlify.app/img/banner.png">
+<meta property="og:image" content="http://art-from-code.netlify.app/img/banner-3.png">
 <meta property="og:site-name" content="ART FROM CODE">
 <meta name="twitter:title" content="ART FROM CODE">
 <meta name="twitter:description" content="An rstudio::conf workshop on generative art with R">
-<meta name="twitter:image" content="http://art-from-code.netlify.app/img/banner.png">
+<meta name="twitter:image" content="http://art-from-code.netlify.app/img/banner-3.png">
 <meta name="twitter:creator" content="@djnavarro">
 <meta name="twitter:card" content="summary_large_image">
 </head>
@@ -74,9 +79,11 @@ ul.task-list{list-style: none;}
   <header id="quarto-header" class="headroom fixed-top">
     <nav class="navbar navbar-expand-lg navbar-dark ">
       <div class="navbar-container container-fluid">
-      <a class="navbar-brand" href="./index.html">
+      <div class="navbar-brand-container">
+    <a class="navbar-brand" href="./index.html">
     <span class="navbar-title">ART FROM CODE</span>
-  </a>
+    </a>
+  </div>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
   <span class="navbar-toggler-icon"></span>
 </button>
@@ -136,7 +143,7 @@ ul.task-list{list-style: none;}
 <!-- sidebar -->
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc">
+        <nav id="TOC" role="doc-toc" class="toc-active">
     <h2 id="toc-title">On this page</h2>
    
   <ul>
@@ -147,17 +154,17 @@ ul.task-list{list-style: none;}
   </ul></li>
   <li><a href="#day-1-july-25" id="toc-day-1-july-25" class="nav-link" data-scroll-target="#day-1-july-25">Day 1: July 25</a>
   <ul class="collapse">
-  <li><a href="#get-started" id="toc-get-started" class="nav-link" data-scroll-target="#get-started"><span>Get started</span></a></li>
-  <li><a href="#spatial-noise-tricks" id="toc-spatial-noise-tricks" class="nav-link" data-scroll-target="#spatial-noise-tricks"><span>Spatial noise tricks</span></a></li>
-  <li><a href="#polygon-tricks" id="toc-polygon-tricks" class="nav-link" data-scroll-target="#polygon-tricks"><span>Polygon tricks</span></a></li>
-  <li><a href="#shading-tricks" id="toc-shading-tricks" class="nav-link" data-scroll-target="#shading-tricks"><span>Shading tricks</span></a></li>
+  <li><a href="#get-started" id="toc-get-started" class="nav-link" data-scroll-target="#get-started">Get started</a></li>
+  <li><a href="#spatial-noise-tricks" id="toc-spatial-noise-tricks" class="nav-link" data-scroll-target="#spatial-noise-tricks">Spatial noise tricks</a></li>
+  <li><a href="#polygon-tricks" id="toc-polygon-tricks" class="nav-link" data-scroll-target="#polygon-tricks">Polygon tricks</a></li>
+  <li><a href="#shading-tricks" id="toc-shading-tricks" class="nav-link" data-scroll-target="#shading-tricks">Shading tricks</a></li>
   </ul></li>
   <li><a href="#day-2-july-26" id="toc-day-2-july-26" class="nav-link" data-scroll-target="#day-2-july-26">Day 2: July 26</a>
   <ul class="collapse">
-  <li><a href="#iterated-function-systems" id="toc-iterated-function-systems" class="nav-link" data-scroll-target="#iterated-function-systems"><span>Iterated function systems</span></a></li>
-  <li><a href="#tiles-and-tesselations" id="toc-tiles-and-tesselations" class="nav-link" data-scroll-target="#tiles-and-tesselations"><span>Tiles and tesselations</span></a></li>
-  <li><a href="#pixel-filters" id="toc-pixel-filters" class="nav-link" data-scroll-target="#pixel-filters"><span>Pixel filters</span></a></li>
-  <li><a href="#wrapping-up" id="toc-wrapping-up" class="nav-link" data-scroll-target="#wrapping-up"><span>Wrapping up</span></a></li>
+  <li><a href="#iterated-function-systems" id="toc-iterated-function-systems" class="nav-link" data-scroll-target="#iterated-function-systems">Iterated function systems</a></li>
+  <li><a href="#tiles-and-tesselations" id="toc-tiles-and-tesselations" class="nav-link" data-scroll-target="#tiles-and-tesselations">Tiles and tesselations</a></li>
+  <li><a href="#pixel-filters" id="toc-pixel-filters" class="nav-link" data-scroll-target="#pixel-filters">Pixel filters</a></li>
+  <li><a href="#wrapping-up" id="toc-wrapping-up" class="nav-link" data-scroll-target="#wrapping-up">Wrapping up</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -371,6 +378,7 @@ ul.task-list{list-style: none;}
 </ul>
 </div>
 </div>
+<p><a rel="me" href="https://genart.social/@djnavarro"></a></p>
 <!-- ### Day 1 -->
 <!-- | Time          | Activity         | -->
 <!-- | :------------ | :--------------- | -->
@@ -400,6 +408,24 @@ ul.task-list{list-style: none;}
 <script defer="" data-domain="art-from-code.netlify.app" src="https://plausible.io/js/plausible.js"></script>
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
   const icon = "";
   const anchorJS = new window.AnchorJS();
   anchorJS.options = {
@@ -449,7 +475,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   for (var i=0; i<noterefs.length; i++) {
     const ref = noterefs[i];
     tippyHover(ref, function() {
-      let href = ref.getAttribute('href');
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
       try { href = new URL(href).hash; } catch {}
       const id = href.replace(/^#\/?/, "");
       const note = window.document.getElementById(id);

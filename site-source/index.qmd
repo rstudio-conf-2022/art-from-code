@@ -170,7 +170,7 @@ Danielle Navarro is a generative artist, data scientist, professional educator, 
 :::
 
 
-
+<a rel="me" href="https://genart.social/@djnavarro"></a>
 
 
 <!-- ### Day 1 -->
